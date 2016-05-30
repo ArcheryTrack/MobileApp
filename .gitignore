@@ -1,0 +1,6 @@
+src/bin
+src/Droid/obj
+src/iOS/bin
+src/iOS/obj
+src/obj
+src/packages
