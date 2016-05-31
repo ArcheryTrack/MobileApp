@@ -7,14 +7,18 @@ namespace ATMobile
 {
 	public partial class LoginForm : ContentPage
 	{
-		public LoginForm ()
+		private App m_App;
+
+		public LoginForm (App _app)
 		{
 			InitializeComponent ();
+
+			m_App = _app;
 		}
 
 		async void OnLogin(object sender, EventArgs e)
 		{
-			Navigation.PushAsync (new HomeForm ());
+			m_App.ShowMainPage ();
 		}
 	}
 }

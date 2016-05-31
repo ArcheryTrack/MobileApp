@@ -9,7 +9,12 @@ namespace ATMobile
 		public App ()
 		{
 			// The root page of your application
-			MainPage = new NavigationPage (new LoginForm());
+			MainPage = new LoginForm(this);
+		}
+
+		public void ShowMainPage()
+		{
+			MainPage = new NavigationPage (new HomeForm());
 		}
 
 		protected override void OnStart ()
