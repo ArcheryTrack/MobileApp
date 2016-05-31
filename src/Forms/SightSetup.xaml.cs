@@ -10,6 +10,8 @@ namespace ATMobile
 		public SightSetup ()
 		{
 			InitializeComponent ();
+
+			Title = "Sight Setup";
 		}
 	}
 }

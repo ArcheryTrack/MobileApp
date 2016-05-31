@@ -14,7 +14,7 @@ namespace ATMobile
 
 		public void ShowMainPage()
 		{
-			MainPage = new NavigationPage (new HomeForm());
+			MainPage = new HomeForm();
 		}
 
 		protected override void OnStart ()

@@ -16,7 +16,7 @@ namespace ATMobile
 			m_App = _app;
 		}
 
-		async void OnLogin(object sender, EventArgs e)
+		void OnLogin(object sender, EventArgs e)
 		{
 			m_App.ShowMainPage ();
 		}

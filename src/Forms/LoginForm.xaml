@@ -13,9 +13,18 @@
 		<StackLayout VerticalOptions="FillAndExpand"
                      HorizontalOptions="FillAndExpand"
                      Orientation="Vertical"
-                     Spacing="15">
-             <Button x:Name="login" Text="Login" IsEnabled="true" Clicked="OnLogin" />
+                     Spacing="50">
 
+			<Label x:Name="lblHeader" Text="ArcheryTrack" FontAttributes="Bold" FontSize="40" FontFamily="sans-serif" />
+
+			<StackLayout VerticalOptions="FillAndExpand"
+             HorizontalOptions="FillAndExpand"
+             Orientation="Vertical"
+             Spacing="15">
+	            <Entry x:Name="txtUserName" Placeholder="Username"/>
+	            <Entry x:Name="txtPassword" Placeholder="Password" IsPassword="true"/>
+	            <Button x:Name="btnLogin" Text="Login" IsEnabled="true" Clicked="OnLogin" />
+            </StackLayout>
         </StackLayout>
 	</ContentPage.Content>
 </ContentPage>
