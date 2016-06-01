@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace ATMobile
+namespace ATMobile.Forms
 {
 	public partial class LoginForm : ContentPage
 	{

@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	x:Class="ATMobile.Forms.LoginForm">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ATMobile.Forms.SightSettingForm">
 	<ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="20, 40, 20, 20"
@@ -21,9 +18,9 @@
              HorizontalOptions="FillAndExpand"
              Orientation="Vertical"
              Spacing="15">
-	            <Entry x:Name="txtUserName" Placeholder="Username"/>
-	            <Entry x:Name="txtPassword" Placeholder="Password" IsPassword="true"/>
-	            <Button x:Name="btnLogin" Text="Login" IsEnabled="true" Clicked="OnLogin" />
+	            <Entry x:Name="txtDistance" Placeholder="Distance" Keyboard="Numeric"/>
+	            <Picker x:Name="pickUnits" />
+	            <Entry x:Name="txtSetting" Placeholder="Sight Setting" Keyboard="Numeric"/>
             </StackLayout>
         </StackLayout>
 	</ContentPage.Content>
