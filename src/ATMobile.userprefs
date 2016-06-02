@@ -1,24 +1,26 @@
 ﻿<Properties StartupItem="iOS/ATMobile.iOS.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone5.9.3" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Daos/AbstractDao.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Objects/PracticeEnd.cs">
     <Files>
-      <File FileName="Objects/SightSetting.cs" Line="5" Column="44" />
-      <File FileName="Daos/AbstractDao.cs" Line="26" Column="46" />
+      <File FileName="Forms/DefaultForm.xaml" Line="1" Column="1" />
+      <File FileName="Forms/HomeForm.xaml" Line="1" Column="1" />
+      <File FileName="Forms/LoginForm.xaml" Line="28" Column="23" />
+      <File FileName="Forms/SightSettingForm.xaml" Line="17" Column="1" />
+      <File FileName="Forms/MenuPage.xaml" Line="1" Column="1" />
       <File FileName="Managers/ATManager.cs" Line="1" Column="1" />
-      <File FileName="Forms/SightSettingForm.xaml" Line="23" Column="67" />
-      <File FileName="Forms/LoginForm.xaml" Line="26" Column="90" />
-      <File FileName="Forms/SightSetupForm.xaml" Line="7" Column="69" />
-      <File FileName="Forms/SightSettingForm.xaml.cs" Line="1" Column="1" />
-      <File FileName="Forms/LoginForm.xaml.cs" Line="19" Column="1" />
-      <File FileName="Forms/SightSetupForm.xaml.cs" Line="18" Column="4" />
-      <File FileName="Enums/DistanceUnits.cs" Line="8" Column="13" />
-      <File FileName="Data/MenuListData.cs" Line="14" Column="31" />
-      <File FileName="Daos/SightSettingDao.cs" Line="7" Column="37" />
-      <File FileName="Controls/MenuListView.cs" Line="12" Column="42" />
-      <File FileName="Controls/MenuItem.cs" Line="3" Column="28" />
-      <File FileName="Objects/AbstractObject.cs" Line="9" Column="2" />
-      <File FileName="Forms/MenuPage.xaml" Line="5" Column="25" />
-      <File FileName="Forms/MenuPage.xaml.cs" Line="18" Column="25" />
+      <File FileName="Data/MenuListData.cs" Line="14" Column="43" />
+      <File FileName="Forms/SightEstimate.xaml.cs" Line="10" Column="27" />
+      <File FileName="Forms/SightEstimateForm.xaml" Line="13" Column="15" />
+      <File FileName="Forms/ScoreEndForm.xaml" Line="1" Column="1" />
+      <File FileName="Forms/ScoreEndForm.xaml.cs" Line="1" Column="1" />
+      <File FileName="Forms/PracticeHistoryForm.xaml" Line="1" Column="1" />
+      <File FileName="Forms/PracticeHistoryForm.xaml.cs" Line="1" Column="1" />
+      <File FileName="Objects/Practice.cs" Line="14" Column="48" />
+      <File FileName="Objects/Archer.cs" Line="5" Column="38" />
+      <File FileName="Daos/PracticeDao.cs" Line="10" Column="4" />
+      <File FileName="Daos/SightSettingDao.cs" Line="7" Column="58" />
+      <File FileName="Interfaces/IHasParent.cs" Line="7" Column="3" />
+      <File FileName="Objects/PracticeEnd.cs" Line="12" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
