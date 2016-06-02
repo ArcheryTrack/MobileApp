@@ -12,6 +12,9 @@ namespace ATMobile.Objects
 		public int ArrowsPerEnd { get; set; }
 		public string Notes { get; set; }
 		public int AdditionalArrowsShot { get; set; }
+
+        public bool TrackArrow {get;set;}
+
 	}
 }
 

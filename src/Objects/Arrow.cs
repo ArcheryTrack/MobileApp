@@ -7,6 +7,8 @@ namespace ATMobile.Objects
         public Arrow()
         {
         }
+
+        public string Number { get; set; }
     }
 }
 

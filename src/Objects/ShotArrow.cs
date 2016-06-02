@@ -2,11 +2,15 @@
 
 namespace ATMobile.Objects
 {
-    public class Arrow
+    public class ShotArrow
     {
-        public Arrow()
+        public ShotArrow()
         {
         }
+
+        public string ArrowNumber { get; set; }
+        public int Score { get; set; }
+
     }
 }
 
