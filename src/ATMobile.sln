@@ -30,7 +30,6 @@ Global
 		{48109BFE-7660-4ACC-92DB-19EB06701748}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{48109BFE-7660-4ACC-92DB-19EB06701748}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{4A8A0B17-2CB8-4640-9F39-22C680BFEA0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A8A0B17-2CB8-4640-9F39-22C680BFEA0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A8A0B17-2CB8-4640-9F39-22C680BFEA0E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{4A8A0B17-2CB8-4640-9F39-22C680BFEA0E}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{4A8A0B17-2CB8-4640-9F39-22C680BFEA0E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
@@ -78,5 +77,8 @@ Global
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
+		$0.DotNetNamingPolicy = $3
+		$3.DirectoryNamespaceAssociation = None
+		$3.ResourceNamePolicy = FileFormatDefault
 	EndGlobalSection
 EndGlobal
