@@ -61,6 +61,32 @@
     <Compile Include="Daos\AbstractDao.cs" />
     <Compile Include="Managers\ATManager.cs" />
     <Compile Include="Objects\AbstractObject.cs" />
+    <Compile Include="Forms\SightEstimate.xaml.cs">
+      <DependentUpon>SightEstimateForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ScoreEndForm.xaml.cs">
+      <DependentUpon>ScoreEndForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PracticeHistoryForm.xaml.cs">
+      <DependentUpon>PracticeHistoryForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\Practice.cs" />
+    <Compile Include="Objects\Archer.cs" />
+    <Compile Include="Daos\PracticeDao.cs" />
+    <Compile Include="Interfaces\IHasParent.cs" />
+    <Compile Include="Objects\PracticeEnd.cs" />
+    <Compile Include="Objects\ShotArrow.cs" />
+    <Compile Include="Objects\Arrow.cs" />
+    <Compile Include="Forms\PracticeForm.xaml.cs">
+      <DependentUpon>PracticeForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\PracticeType.cs" />
+    <Compile Include="Objects\Tournament.cs" />
+    <Compile Include="Objects\TournamentType.cs" />
+    <Compile Include="Objects\RoundType.cs" />
+    <Compile Include="Daos\TournamentDao.cs" />
+    <Compile Include="Daos\TournamentTypeDao.cs" />
+    <Compile Include="Daos\PracticeEndDao.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -73,6 +99,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Daos\" />
     <Folder Include="Managers\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\LoginForm.xaml">
@@ -91,6 +118,18 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SightSettingForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SightEstimateForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScoreEndForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PracticeHistoryForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PracticeForm.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

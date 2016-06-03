@@ -9,6 +9,10 @@ namespace ATMobile.Data
 	{
 		public MenuListData ()
 		{
+			this.Add(new MenuItem() {
+				Title = "Sight Estimate",
+				TargetType = typeof(SightEstimateForm)
+			});
 			this.Add (new MenuItem () { 
 				Title = "Sight Setup", 
 				TargetType = typeof(SightSetupForm)
