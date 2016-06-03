@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMobile", "ATMobile.csproj", "{48109BFE-7660-4ACC-92DB-19EB06701748}"
@@ -78,7 +78,7 @@ Global
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
 		$0.DotNetNamingPolicy = $3
-		$3.DirectoryNamespaceAssociation = None
+		$3.DirectoryNamespaceAssociation = PrefixedHierarchical
 		$3.ResourceNamePolicy = FileFormatDefault
 		$0.XmlFormattingPolicy = $4
 		$4.inheritsSet = null

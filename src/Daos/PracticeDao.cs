@@ -1,11 +1,12 @@
 ﻿using System;
 using ATMobile.Objects;
+using LiteDB;
 
 namespace ATMobile.Daos
 {
 	public class PracticeDao : AbstractDao<Practice>
 	{
-		public PracticeDao(LiteDB _db): base(_db)
+		public PracticeDao(LiteDatabase _db): base(_db)
 		{
 		}
 

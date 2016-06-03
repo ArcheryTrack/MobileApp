@@ -87,6 +87,31 @@
     <Compile Include="Daos\TournamentDao.cs" />
     <Compile Include="Daos\TournamentTypeDao.cs" />
     <Compile Include="Daos\PracticeEndDao.cs" />
+    <Compile Include="Forms\TournamentHistoryForm.xaml.cs">
+      <DependentUpon>TournamentHistoryForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TournamentTypeSetupForm.xaml.cs">
+      <DependentUpon>TournamentTypeSetupForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ArcherForm.xaml.cs">
+      <DependentUpon>ArcherForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RoundForm.xaml.cs">
+      <DependentUpon>RoundForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EndForm.xaml.cs">
+      <DependentUpon>EndForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ArchersForm.xaml.cs">
+      <DependentUpon>ArchersForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PracticeTypeSetupForm.xaml.cs">
+      <DependentUpon>PracticeTypeSetupForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daos\ArcherDao.cs" />
+    <Compile Include="Daos\PracticeTypeDao.cs" />
+    <Compile Include="Daos\RoundDao.cs" />
+    <Compile Include="Objects\Round.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -130,6 +155,27 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PracticeForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TournamentHistoryForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TournamentTypeSetupForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ArcherForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RoundForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EndForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ArchersForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PracticeTypeSetupForm.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
