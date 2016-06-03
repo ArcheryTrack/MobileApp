@@ -75,7 +75,6 @@ namespace ATMobile.Daos
 			m_Collection = null;
 			m_Database = null;
 		}
-
 	}
 }
 
