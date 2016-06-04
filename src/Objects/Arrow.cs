@@ -2,7 +2,7 @@
 
 namespace ATMobile.Objects
 {
-    public class Arrow
+    public class Arrow : AbstractObject
     {
         public Arrow()
         {

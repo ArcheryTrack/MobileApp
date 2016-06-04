@@ -4,23 +4,22 @@ using LiteDB;
 
 namespace ATMobile.Daos
 {
-    public class PracticeDao : AbstractDao<Practice>
+    public class RoundEndDao : AbstractDao<RoundEnd>
     {
-        public PracticeDao(LiteDatabase _db) 
+        public RoundEndDao(LiteDatabase _db) 
             : base(_db)
         {
         }
 
         public override void BuildIndexes()
         {
-            throw new NotImplementedException();
         }
 
         public override string CollectionName
         {
             get
             {
-                throw new NotImplementedException();
+                return "RoundEnds";
             }
         }
     }

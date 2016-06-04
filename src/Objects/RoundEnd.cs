@@ -4,17 +4,16 @@ using System.Collections.Generic;
 
 namespace ATMobile.Objects
 {
-    public class PracticeEnd : AbstractObject, IHasParent
+    public class RoundEnd : AbstractObject, IHasParent
     {
-        public PracticeEnd()
+        public RoundEnd()
         {
-            Results = new List<ShotArrow>();
+            Arrows = new List<ShotArrow>();
         }
 
         public Guid ParentGuid { get; set; }
 
-        public List<ShotArrow> Results { get; set; }
-
+        public List<ShotArrow> Arrows { get; set;}
     }
 }
 

@@ -9,6 +9,7 @@ namespace ATMobile.Objects
         }
 
         public string ArrowNumber { get; set; }
+
         public int Score { get; set; }
 
     }

@@ -4,19 +4,19 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-	public partial class SightSetupForm : ContentPage
-	{
-		public SightSetupForm ()
-		{
-			InitializeComponent ();
+    public partial class SightSetupForm : ContentPage
+    {
+        public SightSetupForm()
+        {
+            InitializeComponent();
 
-			Title = "Sight Setup";
-		}
+            Title = "Sight Setup";
+        }
 
-		void OnAdd(object sender, EventArgs e)
-		{
+        void OnAdd(object sender, EventArgs e)
+        {
 			
-		}
-	}
+        }
+    }
 }
 

@@ -5,12 +5,14 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-	public partial class SightEstimateForm : ContentPage
-	{
-		public SightEstimateForm()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class SightEstimateForm : ContentPage
+    {
+        public SightEstimateForm()
+        {
+            InitializeComponent();
+
+            Title = "Sight Estimate";
+        }
+    }
 }
 

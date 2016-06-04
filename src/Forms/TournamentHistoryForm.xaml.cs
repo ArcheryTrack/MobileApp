@@ -10,6 +10,8 @@ namespace ATMobile.Forms
         public TournamentHistoryForm()
         {
             InitializeComponent();
+
+            Title = "Tournaments";
         }
     }
 }

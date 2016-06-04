@@ -2,9 +2,9 @@
 
 namespace ATMobile.Interfaces
 {
-	public interface IHasParent
-	{
-		Guid ParentGuid { get; set; }
-	}
+    public interface IHasParent
+    {
+        Guid ParentGuid { get; set; }
+    }
 }
 

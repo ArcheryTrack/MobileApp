@@ -6,75 +6,75 @@ using System.Linq;
 
 namespace ATMobile.Daos
 {
-	public abstract class AbstractDao<T> : IDisposable where T:AbstractObject, new()
-	{
-		private LiteDatabase m_Database;
-		protected LiteCollection<T> m_Collection;
+    public abstract class AbstractDao<T> : IDisposable where T:AbstractObject, new()
+    {
+        private LiteDatabase m_Database;
+        protected LiteCollection<T> m_Collection;
 
-		public abstract string CollectionName { get; }
-		public abstract void BuildIndexes();
+        public abstract string CollectionName { get; }
 
-		protected AbstractDao (LiteDatabase _database)
-		{
-			m_Database = _database;
+        public abstract void BuildIndexes();
 
-			BuildCollection ();
-		}
+        protected AbstractDao(LiteDatabase _database)
+        {
+            m_Database = _database;
 
-		private void BuildCollection()
-		{
-			m_Collection = m_Database.GetCollection<T>(CollectionName);
-			m_Collection.EnsureIndex("Guid", true);
-			BuildIndexes();
-		}
+            BuildCollection();
+        }
 
-		private void Insert(T _item)
-		{
-			m_Collection.Insert (_item);
-		}
+        private void BuildCollection()
+        {
+            m_Collection = m_Database.GetCollection<T>(CollectionName);
+            m_Collection.EnsureIndex("Guid", true);
+            BuildIndexes();
+        }
 
-		private void Update(T _item)
-		{
-			m_Collection.Update (_item);
-		}
+        private void Insert(T _item)
+        {
+            m_Collection.Insert(_item);
+        }
 
-		public void Persist(T _item)
-		{
-			T existing = Get(_item.Guid);
+        private void Update(T _item)
+        {
+            m_Collection.Update(_item);
+        }
 
-			if (existing == null)
-			{
-				Insert (_item);
-			}
-			else
-			{
-				Update (_item);
-			}
-		}
+        public void Persist(T _item)
+        {
+            T existing = Get(_item.Guid);
 
-		public T Get(Guid _guid)
-		{
-			Query query = Query.EQ ("Guid", _guid.ToString ());
-			return m_Collection.FindOne (query);
-		}
+            if (existing == null)
+            {
+                Insert(_item);
+            } else
+            {
+                Update(_item);
+            }
+        }
 
-		public List<T> GetAll()
-		{
-			IEnumerable<T> items = m_Collection.FindAll ();
-			return items.ToList();
-		}
+        public T Get(Guid _guid)
+        {
+            Query query = Query.EQ("Guid", _guid.ToString());
+            return m_Collection.FindOne(query);
+        }
 
-		public void Delete(Guid _guid)
-		{
-			Query query = Query.EQ ("Guid", _guid.ToString ());
-			m_Collection.Delete (query);
-		}
+        public List<T> GetAll()
+        {
+            IEnumerable<T> items = m_Collection.FindAll();
+            return items.ToList();
+        }
 
-		public void Dispose ()
-		{
-			m_Collection = null;
-			m_Database = null;
-		}
-	}
+        public void Delete(Guid _guid)
+        {
+            Query query = Query.EQ("Guid", _guid.ToString());
+            m_Collection.Delete(query);
+        }
+
+        public void Dispose()
+        {
+            m_Collection = null;
+            m_Database = null;
+        }
+    }
 }
 

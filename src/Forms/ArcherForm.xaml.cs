@@ -10,6 +10,8 @@ namespace ATMobile.Forms
         public ArcherForm()
         {
             InitializeComponent();
+
+            Title = "Archer";
         }
     }
 }

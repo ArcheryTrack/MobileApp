@@ -5,11 +5,13 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class PracticeType : ContentPage
+    public partial class PracticeTypeSetupForm : ContentPage
     {
-        public PracticeType()
+        public PracticeTypeSetupForm()
         {
             InitializeComponent();
+
+            Title = "Practice Type";
         }
     }
 }
