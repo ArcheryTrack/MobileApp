@@ -5,30 +5,30 @@ using ATMobile.Forms;
 
 namespace ATMobile.Forms
 {
-	public partial class HomeForm : MasterDetailPage
-	{
-		public HomeForm ()
-		{
-			InitializeComponent ();
+    public partial class HomeForm : MasterDetailPage
+    {
+        public HomeForm()
+        {
+            InitializeComponent();
 
-			Title = "ArcheryTrack";
+            Title = "ArcheryTrack";
 
-			var menuPage = new MenuPage ();
+            var menuPage = new MenuPage();
 
-			menuPage.Menu.ItemSelected += (sender, e) => NavigateTo (e.SelectedItem as ATMobile.Controls.MenuItem);
+            menuPage.Menu.ItemSelected += (sender, e) => NavigateTo(e.SelectedItem as ATMobile.Controls.MenuItem);
 
-			Master = menuPage;
-			Detail = new NavigationPage (new DefaultForm());
-		}
+            Master = menuPage;
+            Detail = new NavigationPage(new DefaultForm());
+        }
 
-		void NavigateTo (ATMobile.Controls.MenuItem menu)
-		{
-			Page displayPage = (Page)Activator.CreateInstance (menu.TargetType);
+        void NavigateTo(ATMobile.Controls.MenuItem menu)
+        {
+            Page displayPage = (Page)Activator.CreateInstance(menu.TargetType);
 
-			Detail = new NavigationPage (displayPage);
+            Detail = new NavigationPage(displayPage);
 
-			IsPresented = false;
-		}
-	}
+            IsPresented = false;
+        }
+    }
 }
 

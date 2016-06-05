@@ -2,7 +2,7 @@
 
 namespace ATMobile.Objects
 {
-    public class Tournament
+    public class Tournament : AbstractObject
     {
         public Tournament()
         {

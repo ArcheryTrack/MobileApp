@@ -4,5 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="ATMobile.Forms.ArchersForm">
     <ContentPage.Content>
+        <Button x:Name="btnLogin" Text="Add Archer" IsEnabled="true" Clicked="OnAdd" />
     </ContentPage.Content>
 </ContentPage>

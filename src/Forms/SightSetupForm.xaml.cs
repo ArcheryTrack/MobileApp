@@ -15,7 +15,6 @@ namespace ATMobile.Forms
 
         void OnAdd(object sender, EventArgs e)
         {
-			
         }
     }
 }

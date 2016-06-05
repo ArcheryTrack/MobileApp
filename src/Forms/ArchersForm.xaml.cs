@@ -13,6 +13,12 @@ namespace ATMobile.Forms
 
             Title = "Archers";
         }
+
+        void OnAdd(object sender, EventArgs e)
+        {
+            Page addArcher = new ArcherForm();
+            new NavigationPage(addArcher);
+        }
     }
 }
 

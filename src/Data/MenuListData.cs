@@ -26,7 +26,7 @@ namespace ATMobile.Data
 
             this.Add(new MenuItem() {
                 Title = "Archers",
-                TargetType = typeof(ArcherForm)
+                TargetType = typeof(ArchersForm)
             });
 
             this.Add(new MenuItem() { 
