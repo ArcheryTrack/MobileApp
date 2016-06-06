@@ -17,7 +17,14 @@ namespace ATMobile.Forms
         void OnAdd(object sender, EventArgs e)
         {
             Page addArcher = new ArcherForm();
-            new NavigationPage(addArcher);
+            Navigation.PushAsync(addArcher);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            //Load list
         }
     }
 }

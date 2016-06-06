@@ -7,8 +7,8 @@
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="50">
             <Label x:Name="lblHeader" Text="ArcheryTrack" FontAttributes="Bold" FontSize="40" FontFamily="sans-serif" />
             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15">
-                <Entry x:Name="txtUserName" Placeholder="Username" />
-                <Entry x:Name="txtPassword" Placeholder="Password" IsPassword="true" />
+                <Entry x:Name="txtUserName" Placeholder="Username" Keyboard="Email"  />
+                <Entry x:Name="txtPassword" Placeholder="Password" IsPassword="true" Keyboard="Default" />
                 <Button x:Name="btnLogin" Text="Login" IsEnabled="true" Clicked="OnLogin" />
             </StackLayout>
         </StackLayout>

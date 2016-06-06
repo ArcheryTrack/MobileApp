@@ -20,6 +20,7 @@ namespace ATMobile.Forms
         {
             m_App.ShowMainPage();
         }
+
     }
 }
 

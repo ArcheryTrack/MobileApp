@@ -13,6 +13,13 @@ namespace ATMobile.Forms
 
             Title = "Archer";
         }
+
+        void OnSave(object sender, EventArgs e)
+        {
+            //TODO save
+
+            Navigation.PopAsync();
+        }
     }
 }
 

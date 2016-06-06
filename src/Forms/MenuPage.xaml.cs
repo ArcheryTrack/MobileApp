@@ -15,8 +15,8 @@ namespace ATMobile.Forms
             InitializeComponent();
 
             //Icon = "settings.png";
-            Title = "ArcheryTrack"; // The Title property must be set.
-            BackgroundColor = Color.FromHex("333333");
+            Title = "Menu"; // The Title property must be set.
+            BackgroundColor = Color.FromHex("EEEEEE");
 
             Menu = new MenuListView();
 
