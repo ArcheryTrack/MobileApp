@@ -4,33 +4,37 @@ using ATMobile.Forms;
 
 namespace ATMobile
 {
-	public class App : Application
-	{
-		public App ()
-		{
-			// The root page of your application
-			MainPage = new LoginForm(this);
-		}
+    public class App : Application
+    {
+        public static string DataFolder;
 
-		public void ShowMainPage()
-		{
-			MainPage = new HomeForm();
-		}
+        public App(string _dataFolder)
+        {
+            DataFolder = _dataFolder;
 
-		protected override void OnStart ()
-		{
-			// Handle when your app starts
-		}
+            // The root page of your application
+            MainPage = new LoginForm(this);
+        }
 
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
+        public void ShowMainPage()
+        {
+            MainPage = new HomeForm();
+        }
 
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
-		}
-	}
+        protected override void OnStart()
+        {
+            // Handle when your app starts
+        }
+
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
+        }
+
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
+        }
+    }
 }
 
