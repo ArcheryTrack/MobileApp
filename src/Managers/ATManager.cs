@@ -33,12 +33,19 @@ namespace ATMobile.Managers
         }
 
         #region Archers
+
         public List<Archer> GetArchers()
         {
             ArcherDao dao = new ArcherDao(m_Database);
             return dao.GetAll();
         }
 
+        public void Persist(Archer archer) 
+        {
+            ArcherDao dao = new ArcherDao(m_Database);
+
+            dao.Persist(archer);
+        }
 
 
         #endregion

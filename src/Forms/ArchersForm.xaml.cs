@@ -3,12 +3,15 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 using ATMobile.Controls;
+using ATMobile.Objects;
 
 namespace ATMobile.Forms
 {
     public partial class ArchersForm : ContentPage
     {
-        public ListView ArcherList { get; set; }
+        private StackLayout m_OutsideLayout;
+        private Button m_Add;
+        private ArcherListView m_ArcheryList;
 
         public ArchersForm()
         {
@@ -19,20 +22,38 @@ namespace ATMobile.Forms
             //Icon = "settings.png";
             BackgroundColor = Color.FromHex("EEEEEE");
 
-            ArcherList = new ArcherListView();
-
-            var layout = new StackLayout { 
-                Spacing = 0, 
-                VerticalOptions = LayoutOptions.FillAndExpand
+            m_OutsideLayout = new StackLayout {
+                Spacing = 15,
+                VerticalOptions = LayoutOptions.Fill,
+                Padding = 5
             };
-            layout.Children.Add(ArcherList);
 
-            Content = layout;
+            m_Add = new Button {
+                Text = "Add Archer"
+            };
+            m_Add.Clicked += OnAdd;
+            m_OutsideLayout.Children.Add(m_Add);
+
+            m_ArcheryList = new ArcherListView();
+            m_ArcheryList.ItemSelected += OnSelected;
+            m_OutsideLayout.Children.Add(m_ArcheryList);
+
+            Content = m_OutsideLayout;
+        }
+
+        void OnSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Archer archer = (Archer) e.SelectedItem;
+
+            ArcherForm addArcher = new ArcherForm();
+            addArcher.SetArcher(archer);
+
+            Navigation.PushAsync(addArcher);
         }
 
         void OnAdd(object sender, EventArgs e)
         {
-            Page addArcher = new ArcherForm();
+            ArcherForm addArcher = new ArcherForm();
             Navigation.PushAsync(addArcher);
         }
 
@@ -40,7 +61,7 @@ namespace ATMobile.Forms
         {
             base.OnAppearing();
 
-            //Load list
+            m_ArcheryList.RefreshList();
         }
     }
 }

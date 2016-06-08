@@ -12,10 +12,6 @@ namespace ATMobile.Controls
 
         public ArcherListView()
         {
-            ATManager manager = ATManager.GetInstance();
-            m_Archers = manager.GetArchers();
-
-            ItemsSource = m_Archers;
             VerticalOptions = LayoutOptions.FillAndExpand;
             BackgroundColor = Color.Transparent;
 
@@ -24,8 +20,14 @@ namespace ATMobile.Controls
             cell.SetBinding(TextCell.TextProperty, "LastName");
 
             ItemTemplate = cell;
+        }
 
+        public void RefreshList() 
+        {
+            ATManager manager = ATManager.GetInstance();
+            m_Archers = manager.GetArchers();
 
+            ItemsSource = m_Archers;
         }
     }
 }
