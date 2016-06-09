@@ -16,8 +16,7 @@ namespace ATMobile.Controls
             BackgroundColor = Color.Transparent;
 
             var cell = new DataTemplate(typeof(ImageCell));
-            cell.SetBinding(TextCell.TextProperty, "FirstName");
-            cell.SetBinding(TextCell.TextProperty, "LastName");
+            cell.SetBinding(TextCell.TextProperty, "FullName");
 
             ItemTemplate = cell;
         }
