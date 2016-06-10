@@ -16,48 +16,50 @@ namespace ATMobile.Managers
         private string m_DatabaseFile;
         private LiteDatabase m_Database;
 
-        private ATManager() {
+        private ATManager ()
+        {
             m_DataFolder = App.DataFolder;
-            m_DatabaseFile = Path.Combine(m_DataFolder, "ATMobile.db");
-            m_Database = new LiteDatabase(m_DatabaseFile);
+            m_DatabaseFile = Path.Combine (m_DataFolder, "ATMobile.db");
+            m_Database = new LiteDatabase (m_DatabaseFile);
         }
 
-        public static ATManager GetInstance() 
+        public static ATManager GetInstance ()
         {
-            if (m_Instance == null)
-            {
-                m_Instance = new ATManager();
+            if (m_Instance == null) {
+                m_Instance = new ATManager ();
             }
-        
+
             return m_Instance;
         }
 
         #region Archers
 
-        public List<Archer> GetArchers()
+        public List<Archer> GetArchers ()
         {
-            ArcherDao dao = new ArcherDao(m_Database);
-            return dao.GetAll();
+            ArcherDao dao = new ArcherDao (m_Database);
+            return dao.GetAll ();
         }
 
-        public void Persist(Archer archer) 
+        public void Persist (Archer archer)
         {
-            ArcherDao dao = new ArcherDao(m_Database);
+            ArcherDao dao = new ArcherDao (m_Database);
 
-            dao.Persist(archer);
+            dao.Persist (archer);
         }
 
 
         #endregion
 
 
+        #region Sight Settings
 
-        public List<SightSetting> GetSiteSettings()
+        public List<SightSetting> GetSightSettings (Guid _archerGuid)
         {
-            SightSettingDao dao = new SightSettingDao(m_Database);
-            return dao.GetAll();
+            SightSettingDao dao = new SightSettingDao (m_Database);
+            return dao.GetSightSettings (_archerGuid);
         }
 
+        #endregion
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using LiteDB;
 using ATMobile.Objects;
+using System.Collections.Generic;
 
 namespace ATMobile.Daos
 {
@@ -21,6 +22,11 @@ namespace ATMobile.Daos
             {
                 return "SightSettings";
             }
+        }
+
+        public List<SightSetting> GetSightSettings(Guid _archerGuid)
+        {
+            return GetChildren (_archerGuid);
         }
     }
 }

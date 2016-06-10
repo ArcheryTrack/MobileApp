@@ -4,10 +4,6 @@ namespace ATMobile.Objects
 {
     public class Practice : AbstractObject
     {
-        public Practice()
-        {
-        }
-
         public DateTime DateTime { get; set; }
 
         public int ArrowsPerEnd { get; set; }

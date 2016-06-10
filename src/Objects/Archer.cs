@@ -5,10 +5,6 @@ namespace ATMobile.Objects
 {
     public class Archer : AbstractObject
     {
-        public Archer()
-        {
-        }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

@@ -75,6 +75,12 @@ namespace ATMobile.Daos
             m_Collection = null;
             m_Database = null;
         }
+
+        protected List<T> GetChildren (Guid _parentGuid)
+        {
+            Query query = Query.EQ ("ParentGuid", _parentGuid.ToString ());
+            return m_Collection.Find(query).ToList();
+        }
     }
 }
 

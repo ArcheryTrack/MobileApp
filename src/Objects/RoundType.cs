@@ -5,10 +5,6 @@ namespace ATMobile.Objects
 {
     public class RoundType : AbstractObject, IHasParent
     {
-        public RoundType()
-        {
-        }
-
         public string Name { get; set; }
 
         public string Description { get; set; }

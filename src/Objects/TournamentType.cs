@@ -4,10 +4,6 @@ namespace ATMobile.Objects
 {
     public class TournamentType : AbstractObject
     {
-        public TournamentType()
-        {
-        }
-
         public string Name { get; set; }
 
         public int Rounds { get; set; }

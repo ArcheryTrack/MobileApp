@@ -13,14 +13,14 @@ namespace ATMobile.Daos
 
         public override void BuildIndexes()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override string CollectionName
         {
             get
             {
-                throw new NotImplementedException();
+                return "Practices";
             }
         }
     }
