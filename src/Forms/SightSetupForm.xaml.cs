@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ATMobile.Constants;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -13,7 +14,6 @@ namespace ATMobile.Forms
         private Button m_Add;
         private Picker m_ArcherPicker;
         private SightSettingListView m_SightSettings;
-
         private List<Archer> m_Archers;
 
         public SightSetupForm ()
@@ -52,10 +52,64 @@ namespace ATMobile.Forms
             m_SightSettings.ItemSelected += OnSelected;
             m_OutsideLayout.Children.Add (m_SightSettings);
 
+            GetCurrentArcher ();
+
             Content = m_OutsideLayout;
         }
 
+        void GetCurrentArcher ()
+        {
+            Guid? currentArcher = ATManager.GetInstance ().GetGuidSetting (SettingConstants.CurrentArcher);
+
+            if (currentArcher != null) {
+                for (int i = 0; i < m_Archers.Count; i++) {
+                    Archer archer = m_Archers [i];
+
+                    if (archer.Guid == currentArcher.Value) {
+                        m_ArcherPicker.SelectedIndex = i;
+                        break;
+                    }
+                }
+            } else {
+                if (m_Archers.Count > 0) {
+                    m_ArcherPicker.SelectedIndex = 0;
+                }
+            }
+        }
+
         void OnArcherPicked (object sender, EventArgs e)
+        {
+            if (m_ArcherPicker.SelectedIndex != -1) {
+                Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
+                ATManager.GetInstance ().SetSetting (
+                    SettingConstants.CurrentArcher,
+                    archer.Guid);
+            }
+
+            RefreshList ();
+        }
+
+        void OnAdd (object sender, EventArgs e)
+        {
+            SightSettingForm addSetting = new SightSettingForm ();
+            Navigation.PushAsync (addSetting);
+        }
+
+        void OnSelected (object sender, SelectedItemChangedEventArgs e)
+        {
+            SightSetting setting = (SightSetting)e.SelectedItem;
+
+            SightSettingForm addSetting = new SightSettingForm ();
+            addSetting.SetSightSetting (setting);
+            Navigation.PushAsync (addSetting);
+        }
+
+        protected override void OnAppearing ()
+        {
+            RefreshList ();
+        }
+
+        private void RefreshList ()
         {
             if (m_ArcherPicker.SelectedIndex == -1) {
                 m_SightSettings.ClearList ();
@@ -63,15 +117,6 @@ namespace ATMobile.Forms
                 Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
                 m_SightSettings.RefreshList (archer.Guid);
             }
-        }
-
-        void OnAdd (object sender, EventArgs e)
-        {
-        }
-
-        void OnSelected (object sender, SelectedItemChangedEventArgs e)
-        {
-
         }
     }
 }

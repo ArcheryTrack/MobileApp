@@ -61,6 +61,61 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region Setting
+
+        public List<Setting> GetSettings ()
+        {
+            SettingDao dao = new SettingDao (m_Database);
+            return dao.GetAll ();
+        }
+
+        public void Persist (Setting _setting)
+        {
+            SettingDao dao = new SettingDao (m_Database);
+            dao.Persist (_setting);
+        }
+
+        public Setting GetSetting (string _name)
+        {
+            SettingDao dao = new SettingDao (m_Database);
+            return dao.GetSetting (_name);
+        }
+
+        public void SetSetting (string _name, string _value)
+        {
+            SettingDao dao = new SettingDao (m_Database);
+            Setting setting = dao.GetSetting (_name);
+
+            if (setting == null) {
+                setting = new Setting ();
+                setting.Name = _name;
+            }
+
+            setting.Value = _value;
+            dao.Persist (setting);
+        }
+
+        public void SetSetting (string _name, Guid _value)
+        {
+            SetSetting (_name, _value.ToString ());
+        }
+
+        public Guid? GetGuidSetting (string _name)
+        {
+            Setting setting = GetSetting (_name);
+
+            if (setting == null) return null;
+
+            Guid output;
+            if (Guid.TryParse (setting.Value, out output)) {
+                return output;
+            }
+
+            return null;
+        }
+
+        #endregion
+
     }
 }
 
