@@ -11,7 +11,7 @@ namespace ATMobile.Objects
 
         public double Setting { get; set; }
 
-        public Guid ParentGuid { get; set; }
+        public Guid ParentId { get; set; }
     }
 }
 

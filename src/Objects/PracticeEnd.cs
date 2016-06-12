@@ -6,12 +6,12 @@ namespace ATMobile.Objects
 {
     public class PracticeEnd : AbstractObject, IHasParent
     {
-        public PracticeEnd()
+        public PracticeEnd ()
         {
-            Results = new List<ShotArrow>();
+            Results = new List<ShotArrow> ();
         }
 
-        public Guid ParentGuid { get; set; }
+        public Guid ParentId { get; set; }
 
         public List<ShotArrow> Results { get; set; }
 

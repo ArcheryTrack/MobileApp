@@ -6,14 +6,14 @@ namespace ATMobile.Objects
 {
     public class RoundEnd : AbstractObject, IHasParent
     {
-        public RoundEnd()
+        public RoundEnd ()
         {
-            Arrows = new List<ShotArrow>();
+            Arrows = new List<ShotArrow> ();
         }
 
-        public Guid ParentGuid { get; set; }
+        public Guid ParentId { get; set; }
 
-        public List<ShotArrow> Arrows { get; set;}
+        public List<ShotArrow> Arrows { get; set; }
     }
 }
 

@@ -52,7 +52,7 @@ namespace ATMobile.Forms
             m_SightSettings.ItemSelected += OnSelected;
             m_OutsideLayout.Children.Add (m_SightSettings);
 
-            GetCurrentArcher ();
+            //GetCurrentArcher ();
 
             Content = m_OutsideLayout;
         }
@@ -65,7 +65,7 @@ namespace ATMobile.Forms
                 for (int i = 0; i < m_Archers.Count; i++) {
                     Archer archer = m_Archers [i];
 
-                    if (archer.Guid == currentArcher.Value) {
+                    if (archer.Id == currentArcher.Value) {
                         m_ArcherPicker.SelectedIndex = i;
                         break;
                     }
@@ -83,7 +83,7 @@ namespace ATMobile.Forms
                 Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
                 ATManager.GetInstance ().SetSetting (
                     SettingConstants.CurrentArcher,
-                    archer.Guid);
+                    archer.Id);
             }
 
             RefreshList ();
@@ -115,7 +115,7 @@ namespace ATMobile.Forms
                 m_SightSettings.ClearList ();
             } else {
                 Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
-                m_SightSettings.RefreshList (archer.Guid);
+                m_SightSettings.RefreshList (archer.Id);
             }
         }
     }

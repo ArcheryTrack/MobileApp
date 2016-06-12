@@ -5,11 +5,11 @@ namespace ATMobile.Objects
 {
     public class Round : AbstractObject, IHasParent
     {
-        public Round()
+        public Round ()
         {
         }
 
-        public Guid ParentGuid { get; set; }
+        public Guid ParentId { get; set; }
     }
 }
 
