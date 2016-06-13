@@ -1,50 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ATMobile.Forms.ArcherForm" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-    <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15" Padding="5">
-            <Button x:Name="btnSave" Text="Save" IsEnabled="true" Clicked="OnSave" />
-            <Entry x:Name="txtFirstName" Placeholder="First Name" />
-            <Entry x:Name="txtLastName" Placeholder="Last Name" />
-            <StackLayout VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="5">
-                <Label x:Name="lblBirthdate" Text="Birthdate" />
-                <DatePicker x:Name="datBirthdate" Date="{x:Static sys:DateTime.Now}">
-                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
-                    <DatePicker.MinimumDate>
-                        <sys:DateTime x:FactoryMethod="Parse">
-                            <x:Arguments>
-                                <x:String>Jan 1 1900</x:String>
-                            </x:Arguments>
-                        </sys:DateTime>
-                    </DatePicker.MinimumDate>
-                    <DatePicker.MaximumDate>
-                        <sys:DateTime x:FactoryMethod="Parse">
-                            <x:Arguments>
-                                <x:String>Jan 1 2100</x:String>
-                            </x:Arguments>
-                        </sys:DateTime>
-                    </DatePicker.MaximumDate>
-                </DatePicker>
-            </StackLayout>
-            <StackLayout VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="5">
-                <Label x:Name="lblStartedArchery" Text="Started Archery" />
-                <DatePicker x:Name="datStartedArchery" Date="{x:Static sys:DateTime.Now}">
-                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
-                    <DatePicker.MinimumDate>
-                        <sys:DateTime x:FactoryMethod="Parse">
-                            <x:Arguments>
-                                <x:String>Jan 1 1900</x:String>
-                            </x:Arguments>
-                        </sys:DateTime>
-                    </DatePicker.MinimumDate>
-                    <DatePicker.MaximumDate>
-                        <sys:DateTime x:FactoryMethod="Parse">
-                            <x:Arguments>
-                                <x:String>Jan 1 2100</x:String>
-                            </x:Arguments>
-                        </sys:DateTime>
-                    </DatePicker.MaximumDate>
-                </DatePicker>
-            </StackLayout>
-        </StackLayout>
-    </ContentPage.Content>
+	<ContentPage.Content>
+	</ContentPage.Content>
 </ContentPage>

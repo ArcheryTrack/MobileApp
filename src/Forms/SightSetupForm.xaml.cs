@@ -15,10 +15,13 @@ namespace ATMobile.Forms
         private Picker m_ArcherPicker;
         private SightSettingListView m_SightSettings;
         private List<Archer> m_Archers;
+        private bool m_Loading;
 
         public SightSetupForm ()
         {
             InitializeComponent ();
+
+            m_Loading = true;
 
             Title = "Sight Setup";
 
@@ -52,9 +55,11 @@ namespace ATMobile.Forms
             m_SightSettings.ItemSelected += OnSelected;
             m_OutsideLayout.Children.Add (m_SightSettings);
 
-            //GetCurrentArcher ();
+            GetCurrentArcher ();
 
             Content = m_OutsideLayout;
+
+            m_Loading = false;
         }
 
         void GetCurrentArcher ()
@@ -79,11 +84,13 @@ namespace ATMobile.Forms
 
         void OnArcherPicked (object sender, EventArgs e)
         {
-            if (m_ArcherPicker.SelectedIndex != -1) {
-                Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
-                ATManager.GetInstance ().SetSetting (
-                    SettingConstants.CurrentArcher,
-                    archer.Id);
+            if (!m_Loading) {
+                if (m_ArcherPicker.SelectedIndex != -1) {
+                    Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
+                    ATManager.GetInstance ().SetSetting (
+                        SettingConstants.CurrentArcher,
+                        archer.Id);
+                }
             }
 
             RefreshList ();

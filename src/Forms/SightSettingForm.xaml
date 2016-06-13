@@ -1,27 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ATMobile.Forms.SightSettingForm">
-	<ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness"
-                    iOS="20, 40, 20, 20"
-                    Android="20, 20, 20, 20"
-                    WinPhone="20, 20, 20, 20" />
-    </ContentPage.Padding>
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="FillAndExpand"
-                     HorizontalOptions="FillAndExpand"
-                     Orientation="Vertical"
-                     Spacing="50">
-
-			<Label x:Name="lblHeader" Text="ArcheryTrack" FontAttributes="Bold" FontSize="40" FontFamily="sans-serif" />
-
-			<StackLayout VerticalOptions="FillAndExpand"
-             HorizontalOptions="FillAndExpand"
-             Orientation="Vertical"
-             Spacing="15">
-	            <Entry x:Name="txtDistance" Placeholder="Distance" Keyboard="Numeric"/>
-	            <Picker x:Name="pickUnits" />
-	            <Entry x:Name="txtSetting" Placeholder="Sight Setting" Keyboard="Numeric"/>
-            </StackLayout>
-        </StackLayout>
 	</ContentPage.Content>
 </ContentPage>

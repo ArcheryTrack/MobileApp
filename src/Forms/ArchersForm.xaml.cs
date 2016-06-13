@@ -13,14 +13,14 @@ namespace ATMobile.Forms
         private Button m_Add;
         private ArcherListView m_ArcheryList;
 
-        public ArchersForm()
+        public ArchersForm ()
         {
-            InitializeComponent();
+            InitializeComponent ();
 
             Title = "Archers";
 
             //Icon = "settings.png";
-            BackgroundColor = Color.FromHex("EEEEEE");
+            BackgroundColor = Color.FromHex ("EEEEEE");
 
             m_OutsideLayout = new StackLayout {
                 Spacing = 15,
@@ -32,36 +32,36 @@ namespace ATMobile.Forms
                 Text = "Add Archer"
             };
             m_Add.Clicked += OnAdd;
-            m_OutsideLayout.Children.Add(m_Add);
+            m_OutsideLayout.Children.Add (m_Add);
 
-            m_ArcheryList = new ArcherListView();
+            m_ArcheryList = new ArcherListView ();
             m_ArcheryList.ItemSelected += OnSelected;
-            m_OutsideLayout.Children.Add(m_ArcheryList);
+            m_OutsideLayout.Children.Add (m_ArcheryList);
 
             Content = m_OutsideLayout;
         }
 
-        void OnSelected(object sender, SelectedItemChangedEventArgs e)
+        void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
-            Archer archer = (Archer) e.SelectedItem;
+            Archer archer = (Archer)e.SelectedItem;
 
-            ArcherForm addArcher = new ArcherForm();
-            addArcher.SetArcher(archer);
+            ArcherForm addArcher = new ArcherForm ();
+            addArcher.SetArcher (archer);
 
-            Navigation.PushAsync(addArcher);
+            Navigation.PushAsync (addArcher);
         }
 
-        void OnAdd(object sender, EventArgs e)
+        void OnAdd (object sender, EventArgs e)
         {
-            ArcherForm addArcher = new ArcherForm();
-            Navigation.PushAsync(addArcher);
+            ArcherForm addArcher = new ArcherForm ();
+            Navigation.PushAsync (addArcher);
         }
 
-        protected override void OnAppearing()
+        protected override void OnAppearing ()
         {
-            base.OnAppearing();
+            base.OnAppearing ();
 
-            m_ArcheryList.RefreshList();
+            m_ArcheryList.RefreshList ();
         }
     }
 }
