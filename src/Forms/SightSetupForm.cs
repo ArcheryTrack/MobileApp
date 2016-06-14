@@ -19,8 +19,6 @@ namespace ATMobile.Forms
 
         public SightSetupForm ()
         {
-            InitializeComponent ();
-
             m_Loading = true;
 
             Title = "Sight Setup";

@@ -5,11 +5,11 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class ScoreEndForm : ContentPage
+    public partial class RoundForm : ContentPage
     {
-        public ScoreEndForm()
+        public RoundForm ()
         {
-            InitializeComponent();
+
         }
     }
 }

@@ -7,10 +7,8 @@ namespace ATMobile.Forms
 {
     public partial class TournamentTypeSetupForm : ContentPage
     {
-        public TournamentTypeSetupForm()
+        public TournamentTypeSetupForm ()
         {
-            InitializeComponent();
-
             Title = "Tournament Type";
         }
     }

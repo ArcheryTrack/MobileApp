@@ -7,10 +7,8 @@ namespace ATMobile.Forms
 {
     public partial class PracticeTypeSetupForm : ContentPage
     {
-        public PracticeTypeSetupForm()
+        public PracticeTypeSetupForm ()
         {
-            InitializeComponent();
-
             Title = "Practice Type";
         }
     }

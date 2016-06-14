@@ -7,10 +7,8 @@ namespace ATMobile.Forms
 {
     public partial class SightEstimateForm : ContentPage
     {
-        public SightEstimateForm()
+        public SightEstimateForm ()
         {
-            InitializeComponent();
-
             Title = "Sight Estimate";
         }
     }

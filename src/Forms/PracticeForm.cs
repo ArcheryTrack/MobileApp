@@ -5,11 +5,11 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class DefaultForm : ContentPage
+    public partial class PracticeForm : ContentPage
     {
-        public DefaultForm()
+        public PracticeForm ()
         {
-            InitializeComponent();
+
         }
     }
 }

@@ -22,8 +22,6 @@ namespace ATMobile.Forms
 
         public ArcherForm ()
         {
-            InitializeComponent ();
-
             Title = "Archer";
 
             m_OutsideLayout = new StackLayout {

@@ -7,10 +7,8 @@ namespace ATMobile.Forms
 {
     public partial class PracticeHistoryForm : ContentPage
     {
-        public PracticeHistoryForm()
+        public PracticeHistoryForm ()
         {
-            InitializeComponent();
-
             Title = "Practice History";
         }
     }

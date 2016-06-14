@@ -11,7 +11,7 @@ namespace ATMobile.Forms
 
         public SightSettingForm ()
         {
-            InitializeComponent ();
+
 
 
         }
