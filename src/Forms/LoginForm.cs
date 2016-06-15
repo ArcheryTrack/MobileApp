@@ -39,6 +39,7 @@ namespace ATMobile.Forms
 
             m_txtUsername = new Entry ();
             m_txtUsername.Placeholder = "Username";
+            m_txtUsername.Keyboard = Keyboard.Email;
             m_InsideLayout.Children.Add (m_txtUsername);
 
             m_txtPassword = new Entry ();

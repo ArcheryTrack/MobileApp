@@ -59,6 +59,12 @@ namespace ATMobile.Managers
             return dao.GetSightSettings (_archerGuid);
         }
 
+        public void Persist (SightSetting _sightSetting)
+        {
+            SightSettingDao dao = new SightSettingDao (m_Database);
+            dao.Persist (_sightSetting);
+        }
+
         #endregion
 
         #region Setting

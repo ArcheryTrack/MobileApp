@@ -11,7 +11,7 @@ namespace ATMobile.Forms
     public partial class SightSetupForm : ContentPage
     {
         private StackLayout m_OutsideLayout;
-        private Button m_Add;
+        private Button m_btnAdd;
         private Picker m_ArcherPicker;
         private SightSettingListView m_SightSettings;
         private List<Archer> m_Archers;
@@ -32,11 +32,11 @@ namespace ATMobile.Forms
                 Padding = 5
             };
 
-            m_Add = new Button {
+            m_btnAdd = new Button {
                 Text = "Add Setting"
             };
-            m_Add.Clicked += OnAdd;
-            m_OutsideLayout.Children.Add (m_Add);
+            m_btnAdd.Clicked += OnAdd;
+            m_OutsideLayout.Children.Add (m_btnAdd);
 
             //Load Archers and setup picker
             m_Archers = ATManager.GetInstance ().GetArchers ();
@@ -80,6 +80,15 @@ namespace ATMobile.Forms
             }
         }
 
+        Archer GetSelectedArcher ()
+        {
+            if (m_ArcherPicker.SelectedIndex >= 0) {
+                return m_Archers [m_ArcherPicker.SelectedIndex];
+            }
+
+            return null;
+        }
+
         void OnArcherPicked (object sender, EventArgs e)
         {
             if (!m_Loading) {
@@ -91,22 +100,38 @@ namespace ATMobile.Forms
                 }
             }
 
+            if (m_ArcherPicker.SelectedIndex >= 0) {
+                m_btnAdd.IsEnabled = true;
+            } else {
+                m_btnAdd.IsEnabled = false;
+            }
+
             RefreshList ();
         }
 
         void OnAdd (object sender, EventArgs e)
         {
-            SightSettingForm addSetting = new SightSettingForm ();
-            Navigation.PushAsync (addSetting);
+            Archer selected = GetSelectedArcher ();
+
+            if (selected != null) {
+                SightSettingForm addSetting = new SightSettingForm ();
+                addSetting.SetSightSetting (selected, null);
+
+                Navigation.PushAsync (addSetting);
+            }
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
             SightSetting setting = (SightSetting)e.SelectedItem;
 
-            SightSettingForm addSetting = new SightSettingForm ();
-            addSetting.SetSightSetting (setting);
-            Navigation.PushAsync (addSetting);
+            Archer selected = GetSelectedArcher ();
+
+            if (selected != null) {
+                SightSettingForm addSetting = new SightSettingForm ();
+                addSetting.SetSightSetting (selected, setting);
+                Navigation.PushAsync (addSetting);
+            }
         }
 
         protected override void OnAppearing ()
