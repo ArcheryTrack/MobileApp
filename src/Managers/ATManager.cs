@@ -37,7 +37,7 @@ namespace ATMobile.Managers
         public List<Archer> GetArchers ()
         {
             ArcherDao dao = new ArcherDao (m_Database);
-            return dao.GetAll ();
+            return dao.GetArchers ();
         }
 
         public void Persist (Archer archer)
@@ -56,7 +56,8 @@ namespace ATMobile.Managers
         public List<SightSetting> GetSightSettings (Guid _archerGuid)
         {
             SightSettingDao dao = new SightSettingDao (m_Database);
-            return dao.GetSightSettings (_archerGuid);
+            var settings = dao.GetSightSettings (_archerGuid);
+            return settings;
         }
 
         public void Persist (SightSetting _sightSetting)

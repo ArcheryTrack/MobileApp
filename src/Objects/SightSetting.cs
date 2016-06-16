@@ -12,6 +12,16 @@ namespace ATMobile.Objects
         public double Setting { get; set; }
 
         public Guid ParentId { get; set; }
+
+        public string DistanceText {
+            get {
+                if (Distance != null) {
+                    return Distance.ToString ();
+                }
+
+                return null;
+            }
+        }
     }
 }
 

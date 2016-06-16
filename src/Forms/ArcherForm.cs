@@ -94,8 +94,6 @@ namespace ATMobile.Forms
 
             Navigation.PopAsync ();
         }
-
-
     }
 }
 

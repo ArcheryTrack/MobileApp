@@ -77,6 +77,8 @@ namespace ATMobile.Forms
             m_SightSetting = _setting;
 
             if (m_SightSetting != null) {
+                m_datSettingDate.Date = m_SightSetting.DateTime;
+
                 if (m_SightSetting.Distance != null) {
                     if (m_SightSetting.Distance.Units == Enums.DistanceUnits.Yards) {
                         m_pickUnits.SelectedIndex = 0;
@@ -107,7 +109,8 @@ namespace ATMobile.Forms
                 m_SightSetting.Distance = new Distance () { Units = Enums.DistanceUnits.Meters };
             }
 
-            m_SightSetting.Distance.Measurement = Convert.ToDouble (m_txtSetting.Text);
+            m_SightSetting.Distance.Measurement = Convert.ToDouble (m_txtDistance.Text);
+            m_SightSetting.Setting = Convert.ToDouble (m_txtSetting.Text);
 
             ATManager.GetInstance ().Persist (m_SightSetting);
 

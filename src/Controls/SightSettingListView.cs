@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ATMobile.Cells;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
@@ -15,10 +16,10 @@ namespace ATMobile.Controls
             VerticalOptions = LayoutOptions.FillAndExpand;
             BackgroundColor = Color.Transparent;
 
-            var cell = new DataTemplate (typeof (ImageCell));
-            cell.SetBinding (TextCell.TextProperty, "FullName");
-
+            var cell = new DataTemplate (typeof (SightSettingCell));
             ItemTemplate = cell;
+
+            RowHeight = 60;
         }
 
         public void RefreshList (Guid _archerGuid)

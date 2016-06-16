@@ -25,7 +25,6 @@ namespace ATMobile.Daos
         private void BuildCollection ()
         {
             m_Collection = m_Database.GetCollection<T> (CollectionName);
-            m_Collection.EnsureIndex ("Guid", true);
             BuildIndexes ();
         }
 
@@ -56,7 +55,7 @@ namespace ATMobile.Daos
 
         public T Get (Guid _id)
         {
-            Query query = Query.EQ ("Id", _id);
+            Query query = Query.EQ ("_id", _id);
             return m_Collection.FindOne (query);
         }
 
@@ -68,7 +67,7 @@ namespace ATMobile.Daos
 
         public void Delete (Guid _id)
         {
-            Query query = Query.EQ ("Id", _id);
+            Query query = Query.EQ ("_id", _id);
             m_Collection.Delete (query);
         }
 
