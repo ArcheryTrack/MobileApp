@@ -14,6 +14,11 @@ namespace ATMobile.Objects
 
         public bool TrackArrow { get; set; }
 
+        public string DateTimeString {
+            get {
+                return DateTime.ToString ("d");
+            }
+        }
     }
 }
 

@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class PracticeForm : ContentPage
+    public class PracticeEndsForm : ContentPage
     {
         private Archer m_Archer;
         private Practice m_Practice;
 
-        public PracticeForm ()
+        public PracticeEndsForm ()
         {
-
         }
 
         public void SetupForm (Archer _archer, Practice _practice)
@@ -26,3 +24,4 @@ namespace ATMobile.Forms
         }
     }
 }
+
