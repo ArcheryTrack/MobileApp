@@ -3,28 +3,23 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using ATMobile.Objects;
 using ATMobile.Managers;
+using ATMobile.Cells;
 
 namespace ATMobile.Controls
 {
-    public class ArcherListView : ListView
+    public class ArcherListView : AbstractListView
     {
         private List<Archer> m_Archers;
 
-        public ArcherListView()
+        public ArcherListView ()
         {
-            VerticalOptions = LayoutOptions.FillAndExpand;
-            BackgroundColor = Color.Transparent;
-
-            var cell = new DataTemplate(typeof(ImageCell));
-            cell.SetBinding(TextCell.TextProperty, "FullName");
-
-            ItemTemplate = cell;
+            ItemTemplate = new DataTemplate (typeof (ArcherCell)); ;
         }
 
-        public void RefreshList() 
+        public void RefreshList ()
         {
-            ATManager manager = ATManager.GetInstance();
-            m_Archers = manager.GetArchers();
+            ATManager manager = ATManager.GetInstance ();
+            m_Archers = manager.GetArchers ();
 
             ItemsSource = m_Archers;
         }

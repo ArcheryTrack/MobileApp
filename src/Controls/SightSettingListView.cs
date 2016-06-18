@@ -7,18 +7,13 @@ using Xamarin.Forms;
 
 namespace ATMobile.Controls
 {
-    public class SightSettingListView : ListView
+    public class SightSettingListView : AbstractListView
     {
         private List<SightSetting> m_SightSettings;
 
         public SightSettingListView ()
         {
-            VerticalOptions = LayoutOptions.FillAndExpand;
-            BackgroundColor = Color.Transparent;
-
-            var cell = new DataTemplate (typeof (SightSettingCell));
-            ItemTemplate = cell;
-
+            ItemTemplate = new DataTemplate (typeof (SightSettingCell));
             RowHeight = 60;
         }
 

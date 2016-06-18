@@ -7,18 +7,13 @@ using Xamarin.Forms;
 
 namespace ATMobile.Controls
 {
-    public class PracticeHistoryListView : ListView
+    public class PracticeHistoryListView : AbstractListView
     {
         private List<Practice> m_Practices;
 
         public PracticeHistoryListView ()
         {
-            VerticalOptions = LayoutOptions.FillAndExpand;
-            BackgroundColor = Color.Transparent;
-
-            var cell = new DataTemplate (typeof (PracticeHistoryCell));
-            ItemTemplate = cell;
-
+            ItemTemplate = new DataTemplate (typeof (PracticeHistoryCell));
             RowHeight = 60;
         }
 

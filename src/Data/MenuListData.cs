@@ -5,33 +5,38 @@ using ATMobile.Forms;
 
 namespace ATMobile.Data
 {
-    public class MenuListData: List<MenuItem>
+    public class MenuListData : List<MenuItem>
     {
-        public MenuListData()
+        public MenuListData ()
         {
-            this.Add(new MenuItem() {
+            this.Add (new MenuItem () {
                 Title = "Practice",
-                TargetType = typeof(PracticeHistoryForm)
+                TargetType = typeof (PracticeHistoryForm)
             });
 
-            this.Add(new MenuItem() {
+            this.Add (new MenuItem () {
                 Title = "Tournaments",
-                TargetType = typeof(TournamentHistoryForm)
+                TargetType = typeof (TournamentHistoryForm)
             });
 
-            this.Add(new MenuItem() {
+            this.Add (new MenuItem () {
                 Title = "Estimate Distance",
-                TargetType = typeof(SightEstimateForm)
+                TargetType = typeof (SightEstimateForm)
             });
 
-            this.Add(new MenuItem() {
+            this.Add (new MenuItem () {
                 Title = "Archers",
-                TargetType = typeof(ArchersForm)
+                TargetType = typeof (ArchersForm)
             });
 
-            this.Add(new MenuItem() { 
-                Title = "Sight Setup", 
-                TargetType = typeof(SightSetupForm)
+            this.Add (new MenuItem () {
+                Title = "Ranges",
+                TargetType = typeof (RangesForm)
+            });
+
+            this.Add (new MenuItem () {
+                Title = "Sight Setup",
+                TargetType = typeof (SightSetupForm)
             });
 
         }

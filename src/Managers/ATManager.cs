@@ -65,6 +65,21 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region Ranges
+
+        public List<Range> GetRanges ()
+        {
+            RangeDao dao = new RangeDao (m_Database);
+            return dao.GetRanges ();
+        }
+
+        public void Persist (Range _range)
+        {
+            RangeDao dao = new RangeDao (m_Database);
+            dao.Persist (_range);
+        }
+
+        #endregion
 
         #region Sight Settings
 
