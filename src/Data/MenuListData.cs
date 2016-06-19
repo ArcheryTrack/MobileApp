@@ -25,6 +25,11 @@ namespace ATMobile.Data
             });
 
             this.Add (new MenuItem () {
+                Title = "Sight Setup",
+                TargetType = typeof (SightSetupForm)
+            });
+
+            this.Add (new MenuItem () {
                 Title = "Archers",
                 TargetType = typeof (ArchersForm)
             });
@@ -35,8 +40,8 @@ namespace ATMobile.Data
             });
 
             this.Add (new MenuItem () {
-                Title = "Sight Setup",
-                TargetType = typeof (SightSetupForm)
+                Title = "Settings",
+                TargetType = typeof (SettingsForm)
             });
 
         }
