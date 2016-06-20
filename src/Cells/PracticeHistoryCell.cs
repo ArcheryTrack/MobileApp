@@ -7,6 +7,7 @@ namespace ATMobile.Cells
     {
         private StackLayout m_Layout;
         private Label m_lblDateTime;
+        private Label m_lblLocation;
 
         public PracticeHistoryCell ()
         {
@@ -16,6 +17,10 @@ namespace ATMobile.Cells
             m_lblDateTime = new Label ();
             m_lblDateTime.SetBinding (Label.TextProperty, "DateTimeString");
             m_Layout.Children.Add (m_lblDateTime);
+
+            m_lblLocation = new Label ();
+            m_lblLocation.SetBinding (Label.TextProperty, "RangeName");
+            m_Layout.Children.Add (m_lblLocation);
 
             View = m_Layout;
         }

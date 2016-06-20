@@ -1,10 +1,15 @@
 ﻿using System;
+using ATMobile.Interfaces;
 
 namespace ATMobile.Objects
 {
-    public class Practice : AbstractObject
+    public class Practice : AbstractObject, IHasParent
     {
         public DateTime DateTime { get; set; }
+
+        public Guid? RangeId { get; set; }
+
+        public string RangeName { get; set; }
 
         public int ArrowsPerEnd { get; set; }
 
@@ -19,6 +24,8 @@ namespace ATMobile.Objects
                 return DateTime.ToString ("d");
             }
         }
+
+        public Guid ParentId { get; set; }
     }
 }
 

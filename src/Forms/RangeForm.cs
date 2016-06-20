@@ -15,8 +15,8 @@ namespace ATMobile.Forms
         private Entry m_txtAddress1;
         private Entry m_txtAddress2;
         private Entry m_txtCity;
-        private Picker m_pickState;
-        private Picker m_pickCountry;
+        private Entry m_txtState;
+        private Entry m_txtCountry;
 
         private Button m_btnSave;
 
@@ -59,19 +59,13 @@ namespace ATMobile.Forms
             m_txtCity.Placeholder = "City";
             m_InsideLayout.Children.Add (m_txtCity);
 
-            m_pickState = new Picker ();
-            foreach (var state in LocationConstants.USA_States) {
-                m_pickState.Items.Add (state);
-            }
-            m_InsideLayout.Children.Add (m_pickState);
+            m_txtState = new Entry ();
+            m_txtState.Placeholder = "State";
+            m_InsideLayout.Children.Add (m_txtState);
 
-            m_pickCountry = new Picker ();
-            foreach (var country in LocationConstants.Countries) {
-                m_pickCountry.Items.Add (country);
-            }
-            m_pickCountry.SelectedIndex = 0;
-
-            m_InsideLayout.Children.Add (m_pickCountry);
+            m_txtCountry = new Entry ();
+            m_txtCountry.Placeholder = "Country";
+            m_InsideLayout.Children.Add (m_txtCountry);
 
             Content = m_OutsideLayout;
         }
@@ -85,7 +79,8 @@ namespace ATMobile.Forms
                 m_txtAddress1.Text = m_Range.Address1;
                 m_txtAddress2.Text = m_Range.Address2;
                 m_txtCity.Text = m_Range.City;
-
+                m_txtState.Text = m_Range.State;
+                m_txtCountry.Text = m_Range.Country;
             }
         }
 
@@ -100,8 +95,8 @@ namespace ATMobile.Forms
             m_Range.Address1 = m_txtAddress1.Text;
             m_Range.Address2 = m_txtAddress2.Text;
             m_Range.City = m_txtCity.Text;
-
-
+            m_Range.State = m_txtState.Text;
+            m_Range.Country = m_txtCountry.Text;
 
             ATManager.GetInstance ().Persist (m_Range);
 
