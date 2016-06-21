@@ -11,6 +11,8 @@ namespace ATMobile.Objects
 
         public string RangeName { get; set; }
 
+        public Guid? TargetFaceId { get; set; }
+
         public int ArrowsPerEnd { get; set; }
 
         public string Notes { get; set; }
