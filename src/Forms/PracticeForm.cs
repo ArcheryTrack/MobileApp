@@ -88,7 +88,7 @@ namespace ATMobile.Forms
 
             m_TargetFaces = TargetFaceData.GetData ();
             foreach (var item in m_TargetFaces) {
-                m_pickLocation.Items.Add (item.Name);
+                m_pickTargetFace.Items.Add (item.Name);
             }
 
             Content = m_OutsideLayout;
