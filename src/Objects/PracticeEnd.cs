@@ -1,6 +1,7 @@
 ﻿using System;
 using ATMobile.Interfaces;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ATMobile.Objects
 {
@@ -13,8 +14,28 @@ namespace ATMobile.Objects
 
         public Guid ParentId { get; set; }
 
+        public int EndNumber { get; set; }
+
+        public DateTime CreatedDateTime { get; set; }
+
         public List<ShotArrow> Results { get; set; }
 
+        public string ResultsString {
+            get {
+                StringBuilder sb = new StringBuilder ();
+
+                foreach (var item in Results) {
+                    sb.Append (item.Score);
+                    sb.Append (", ");
+                }
+
+                if (sb.Length > 0) {
+                    sb.Remove (sb.Length - 2, 2);
+                }
+
+                return sb.ToString ();
+            }
+        }
     }
 }
 

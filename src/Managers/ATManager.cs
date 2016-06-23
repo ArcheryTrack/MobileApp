@@ -49,6 +49,22 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region PracticeEnds
+
+        public List<PracticeEnd> GetPracticeEnds (Guid _practiceId)
+        {
+            PracticeEndDao dao = new PracticeEndDao (m_Database);
+            return dao.GetPracticeEnds (_practiceId);
+        }
+
+        public void Persist (PracticeEnd _end)
+        {
+            PracticeEndDao dao = new PracticeEndDao (m_Database);
+            dao.Persist (_end);
+        }
+
+        #endregion
+
         #region PracticeHistory
 
         public List<Practice> GetPractices (Guid _archerId)
