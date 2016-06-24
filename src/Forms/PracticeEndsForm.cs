@@ -29,7 +29,6 @@ namespace ATMobile.Forms
             };
 
             m_lblArcher = new Label ();
-            m_lblArcher.HorizontalTextAlignment = TextAlignment.Center;
             m_OutsideLayout.Children.Add (m_lblArcher);
 
             m_btnAdd = new Button {
