@@ -23,7 +23,7 @@ namespace ATMobile.Objects
 
         public string DateTimeString {
             get {
-                return DateTime.ToString ("d");
+                return DateTime.ToString ("g");
             }
         }
 

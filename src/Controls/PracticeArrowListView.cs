@@ -20,7 +20,6 @@ namespace ATMobile.Controls
         public void RefreshList ()
         {
             ItemsSource = Arrows;
-
         }
 
         public void ClearList ()

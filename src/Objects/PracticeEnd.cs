@@ -36,6 +36,20 @@ namespace ATMobile.Objects
                 return sb.ToString ();
             }
         }
+
+        public int TotalScore {
+            get {
+                int total = 0;
+
+                foreach (var item in Results) {
+                    if (item.ScoreValue > 0) {
+                        total += item.ScoreValue;
+                    }
+                }
+
+                return total;
+            }
+        }
     }
 }
 

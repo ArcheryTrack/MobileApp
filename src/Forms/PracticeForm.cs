@@ -136,7 +136,7 @@ namespace ATMobile.Forms
             }
 
             DateTime date = m_datDate.Date;
-            date.AddTicks (m_timTime.Time.Ticks);
+            date = date.AddTicks (m_timTime.Time.Ticks);
             m_Practice.DateTime = date;
 
             if (m_pickLocation.SelectedIndex >= 0) {

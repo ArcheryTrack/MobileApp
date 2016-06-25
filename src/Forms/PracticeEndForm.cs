@@ -126,6 +126,62 @@ namespace ATMobile.Forms
             Content = m_OutsideLayout;
         }
 
+        private void DisableControls ()
+        {
+            if (m_TargetFace != null) {
+
+                if (m_TargetFace.MinimumPoints > 10
+                    || m_TargetFace.MaximumPoints < 10) {
+                    m_btn10.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 9
+                    || m_TargetFace.MaximumPoints < 9) {
+                    m_btn9.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 8
+                    || m_TargetFace.MaximumPoints < 8) {
+                    m_btn8.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 7
+                    || m_TargetFace.MaximumPoints < 7) {
+                    m_btn7.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 6
+                    || m_TargetFace.MaximumPoints < 6) {
+                    m_btn6.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 5
+                    || m_TargetFace.MaximumPoints < 5) {
+                    m_btn5.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 4
+                    || m_TargetFace.MaximumPoints < 4) {
+                    m_btn4.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 3
+                    || m_TargetFace.MaximumPoints < 3) {
+                    m_btn3.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 2
+                    || m_TargetFace.MaximumPoints < 2) {
+                    m_btn2.IsEnabled = false;
+                }
+
+                if (m_TargetFace.MinimumPoints > 1
+                    || m_TargetFace.MaximumPoints < 1) {
+                    m_btn1.IsEnabled = false;
+                }
+            }
+        }
+
         private void Clicked (string value)
         {
             ShotArrow arrow = new ShotArrow ();
@@ -177,7 +233,11 @@ namespace ATMobile.Forms
             }
 
             m_ArrowsListView.Arrows = m_PracticeEnd.Results;
+
+            DisableControls ();
         }
+
+
 
         private void OnSave (object sender, EventArgs e)
         {

@@ -14,7 +14,7 @@ namespace ATMobile.Controls
         public PracticeEndsListView ()
         {
             ItemTemplate = new DataTemplate (typeof (PracticeEndCell));
-            RowHeight = 60;
+            RowHeight = 30;
         }
 
         public void RefreshList (Guid _practiceId)
