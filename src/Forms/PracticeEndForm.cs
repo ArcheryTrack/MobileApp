@@ -1,5 +1,6 @@
 ﻿using System;
 using ATMobile.Controls;
+using ATMobile.Helpers;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
@@ -8,10 +9,11 @@ namespace ATMobile.Forms
 {
     public class PracticeEndForm : ContentPage
     {
-        public Archer m_Archer;
-        public Practice m_Practice;
-        public PracticeEnd m_PracticeEnd;
-        public int m_EndCount;
+        private Archer m_Archer;
+        private Practice m_Practice;
+        private PracticeEnd m_PracticeEnd;
+        private int m_EndCount;
+        private TargetFace m_TargetFace;
 
         private StackLayout m_OutsideLayout;
         private StackLayout m_InsideLayout;
@@ -19,18 +21,18 @@ namespace ATMobile.Forms
         private PracticeArrowListView m_ArrowsListView;
         private Grid m_EntryGrid;
 
-        private Button m_btnX;
-        private Button m_btn10;
-        private Button m_btn9;
-        private Button m_btn8;
-        private Button m_btn7;
-        private Button m_btn6;
-        private Button m_btn5;
-        private Button m_btn4;
-        private Button m_btn3;
-        private Button m_btn2;
-        private Button m_btn1;
-        private Button m_btnM;
+        private ArrowButton m_btnX;
+        private ArrowButton m_btn10;
+        private ArrowButton m_btn9;
+        private ArrowButton m_btn8;
+        private ArrowButton m_btn7;
+        private ArrowButton m_btn6;
+        private ArrowButton m_btn5;
+        private ArrowButton m_btn4;
+        private ArrowButton m_btn3;
+        private ArrowButton m_btn2;
+        private ArrowButton m_btn1;
+        private ArrowButton m_btnM;
 
         public PracticeEndForm ()
         {
@@ -71,45 +73,83 @@ namespace ATMobile.Forms
             m_EntryGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = GridLength.Auto });
             m_EntryGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = GridLength.Auto });
 
-            m_btnX = new Button { Text = "X", BorderWidth = 1, BorderRadius = 5 };
+            m_btnX = new ArrowButton ("X");
+            m_btnX.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btnX, 0, 0);
 
-            m_btn10 = new Button { Text = "10", BorderWidth = 1, BorderRadius = 5 };
+            m_btn10 = new ArrowButton ("10");
+            m_btn10.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn10, 1, 0);
 
-            m_btn9 = new Button { Text = "9", BorderWidth = 1, BorderRadius = 5 };
+            m_btn9 = new ArrowButton ("9");
+            m_btn9.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn9, 2, 0);
 
-            m_btn8 = new Button { Text = "8", BorderWidth = 1, BorderRadius = 5 };
+            m_btn8 = new ArrowButton ("8");
+            m_btn8.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn8, 0, 1);
 
-            m_btn7 = new Button { Text = "7", BorderWidth = 1, BorderRadius = 5 };
+            m_btn7 = new ArrowButton ("7");
+            m_btn7.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn7, 1, 1);
 
-            m_btn6 = new Button { Text = "6", BorderWidth = 1, BorderRadius = 5 };
+            m_btn6 = new ArrowButton ("6");
+            m_btn6.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn6, 2, 1);
 
-            m_btn5 = new Button { Text = "5", BorderWidth = 1, BorderRadius = 5 };
+            m_btn5 = new ArrowButton ("5");
+            m_btn5.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn5, 0, 2);
 
-            m_btn4 = new Button { Text = "4", BorderWidth = 1, BorderRadius = 5 };
+            m_btn4 = new ArrowButton ("4");
+            m_btn4.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn4, 1, 2);
 
-            m_btn3 = new Button { Text = "3", BorderWidth = 1, BorderRadius = 5 };
+            m_btn3 = new ArrowButton ("3");
+            m_btn3.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn3, 2, 2);
 
-            m_btn2 = new Button { Text = "2", BorderWidth = 1, BorderRadius = 5 };
+            m_btn2 = new ArrowButton ("2");
+            m_btn2.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn2, 0, 3);
 
-            m_btn1 = new Button { Text = "1", BorderWidth = 1, BorderRadius = 5 };
+            m_btn1 = new ArrowButton ("1");
+            m_btn1.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn1, 1, 3);
 
-            m_btnM = new Button { Text = "M", BorderWidth = 1, BorderRadius = 5 };
+            m_btnM = new ArrowButton ("M");
+            m_btnM.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btnM, 2, 3);
 
             m_InsideLayout.Children.Add (m_EntryGrid);
 
             Content = m_OutsideLayout;
+        }
+
+        private void Clicked (string value)
+        {
+            ShotArrow arrow = new ShotArrow ();
+
+            arrow.ArrowNumber = m_PracticeEnd.Results.Count + 1;
+
+            arrow.Score = value;
+            if (value == "X") {
+                if (m_TargetFace != null) {
+                    arrow.ScoreValue = m_TargetFace.MaximumPoints;
+                } else {
+                    arrow.ScoreValue = -1;
+                }
+            } else if (value == "M") {
+                arrow.ScoreValue = 0;
+            } else {
+                arrow.ScoreValue = Convert.ToInt32 (value);
+            }
+
+            m_PracticeEnd.Results.Add (arrow);
+
+            m_ArrowsListView.ClearList ();
+            m_ArrowsListView.Arrows = m_PracticeEnd.Results;
+            m_ArrowsListView.RefreshList ();
         }
 
         public void SetupForm (
@@ -122,6 +162,12 @@ namespace ATMobile.Forms
             m_Practice = _practice;
             m_PracticeEnd = _end;
             m_EndCount = _endCount;
+
+            if (m_Practice.TargetFaceId != null) {
+                m_TargetFace = TargetHelper.FindTarget (m_Practice.TargetFaceId.Value);
+            } else {
+                m_TargetFace = null;
+            }
 
             if (m_PracticeEnd == null) {
                 m_PracticeEnd = new PracticeEnd ();

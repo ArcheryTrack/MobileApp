@@ -19,8 +19,8 @@ namespace ATMobile.Controls
 
         public void RefreshList ()
         {
-            ATManager manager = ATManager.GetInstance ();
             ItemsSource = Arrows;
+
         }
 
         public void ClearList ()
