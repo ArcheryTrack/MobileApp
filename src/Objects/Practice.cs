@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using ATMobile.Interfaces;
+using ATMobile.Managers;
 
 namespace ATMobile.Objects
 {
@@ -24,6 +26,20 @@ namespace ATMobile.Objects
         public string DateTimeString {
             get {
                 return DateTime.ToString ("g");
+            }
+        }
+
+        public int TotalArrowsShot {
+            get {
+                int total = AdditionalArrowsShot;
+
+                List<PracticeEnd> ends = ATManager.GetInstance ().GetPracticeEnds (Id);
+
+                foreach (var item in ends) {
+                    total += item.Results.Count;
+                }
+
+                return total;
             }
         }
 
