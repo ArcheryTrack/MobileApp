@@ -134,6 +134,18 @@ namespace ATMobile.Managers
             return dao.GetSetting (_name);
         }
 
+        public string GetSettingValue (string _name)
+        {
+            SettingDao dao = new SettingDao (m_Database);
+            Setting setting = dao.GetSetting (_name);
+
+            if (setting != null) {
+                return setting.Value;
+            }
+
+            return null;
+        }
+
         public void SetSetting (string _name, string _value)
         {
             SettingDao dao = new SettingDao (m_Database);

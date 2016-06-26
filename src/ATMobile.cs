@@ -8,30 +8,25 @@ namespace ATMobile
     {
         public static string DataFolder;
 
-        public App(string _dataFolder)
+        public App (string _dataFolder)
         {
             DataFolder = _dataFolder;
 
             // The root page of your application
-            MainPage = new LoginForm(this);
+            MainPage = new HomeForm (this);
         }
 
-        public void ShowMainPage()
-        {
-            MainPage = new HomeForm();
-        }
-
-        protected override void OnStart()
+        protected override void OnStart ()
         {
             // Handle when your app starts
         }
 
-        protected override void OnSleep()
+        protected override void OnSleep ()
         {
             // Handle when your app sleeps
         }
 
-        protected override void OnResume()
+        protected override void OnResume ()
         {
             // Handle when your app resumes
         }

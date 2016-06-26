@@ -7,7 +7,6 @@ namespace ATMobile.Forms
 {
     public partial class LoginForm : ContentPage
     {
-        private App m_App;
         private StackLayout m_OutsideLayout;
         private StackLayout m_InsideLayout;
         private Entry m_txtUsername;
@@ -15,7 +14,7 @@ namespace ATMobile.Forms
         private Button m_btnLogin;
         private Label m_lblTitle;
 
-        public LoginForm (App _app)
+        public LoginForm ()
         {
             m_OutsideLayout = new StackLayout {
                 Spacing = 15,
@@ -54,13 +53,11 @@ namespace ATMobile.Forms
             m_InsideLayout.Children.Add (m_btnLogin);
 
             Content = m_OutsideLayout;
-
-            m_App = _app;
         }
 
         void OnLogin (object sender, EventArgs e)
         {
-            m_App.ShowMainPage ();
+            Navigation.PopAsync (true);
         }
     }
 }

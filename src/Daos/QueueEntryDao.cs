@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ATMobile.Objects;
 using LiteDB;
+using System.Linq;
 
 namespace ATMobile.Daos
 {
@@ -23,12 +24,15 @@ namespace ATMobile.Daos
 
         public void Delete (Guid _id)
         {
-
+            Query query = Query.EQ ("_id", _id);
+            m_Collection.Delete (query);
         }
 
         public List<QueueEntry> QueueEntries ()
         {
-            return null;
+            var result = m_Collection.FindAll ().OrderBy (r => r.DateTime).ToList ();
+
+            return result;
         }
     }
 }

@@ -192,13 +192,17 @@ namespace ATMobile.Forms
             if (value == "X") {
                 if (m_TargetFace != null) {
                     arrow.ScoreValue = m_TargetFace.MaximumPoints;
+                    arrow.SortValue = arrow.ScoreValue + 1;
                 } else {
                     arrow.ScoreValue = -1;
+                    arrow.SortValue = arrow.ScoreValue + 1;
                 }
             } else if (value == "M") {
                 arrow.ScoreValue = 0;
+                arrow.SortValue = 0;
             } else {
                 arrow.ScoreValue = Convert.ToInt32 (value);
+                arrow.SortValue = arrow.ScoreValue;
             }
 
             m_PracticeEnd.Results.Add (arrow);

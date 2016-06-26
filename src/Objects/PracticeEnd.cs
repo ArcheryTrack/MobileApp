@@ -2,6 +2,7 @@
 using ATMobile.Interfaces;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ATMobile.Objects
 {
@@ -20,11 +21,21 @@ namespace ATMobile.Objects
 
         public List<ShotArrow> Results { get; set; }
 
+        public List<ShotArrow> SortedResults {
+            get {
+                List<ShotArrow> sorted = Results.OrderByDescending (r => r.SortValue).ToList ();
+
+                return sorted;
+            }
+        }
+
         public string ResultsString {
             get {
                 StringBuilder sb = new StringBuilder ();
 
-                foreach (var item in Results) {
+                var sorted = SortedResults;
+
+                foreach (var item in sorted) {
                     sb.Append (item.Score);
                     sb.Append (", ");
                 }

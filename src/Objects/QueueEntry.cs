@@ -10,6 +10,8 @@ namespace ATMobile.Objects
 
         public DateTime DateTime { get; set; }
 
+        public string Action { get; set; }
+
         public string ObjectType { get; set; }
 
         public string Json { get; set; }

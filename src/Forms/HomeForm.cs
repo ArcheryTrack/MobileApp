@@ -7,8 +7,12 @@ namespace ATMobile.Forms
 {
     public partial class HomeForm : MasterDetailPage
     {
-        public HomeForm ()
+        private App m_App;
+
+        public HomeForm (App _app)
         {
+            m_App = _app;
+
             Title = "ArcheryTrack";
 
             var menuPage = new MenuPage ();

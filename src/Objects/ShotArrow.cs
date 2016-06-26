@@ -10,6 +10,7 @@ namespace ATMobile.Objects
 
         public int ScoreValue { get; set; }
 
+        public int SortValue { get; set; }
     }
 }
 

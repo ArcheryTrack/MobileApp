@@ -29,7 +29,6 @@ namespace ATMobile.Cells
 
             m_Layout.Children.Add (topRowLayout);
 
-
             m_lblLocation = new Label ();
             m_lblLocation.SetBinding (Label.TextProperty, "RangeName");
             m_Layout.Children.Add (m_lblLocation);
