@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using ATMobile.Controls;
 using ATMobile.Helpers;
 using ATMobile.Managers;
@@ -59,6 +61,7 @@ namespace ATMobile.Forms
 
             m_ArrowsListView = new PracticeArrowListView ();
             m_ArrowsListView.HeightRequest = 300;
+            m_ArrowsListView.DeletePracticeArrowClicked += ArrowDeleted;
             m_InsideLayout.Children.Add (m_ArrowsListView);
 
             m_EntryGrid = new Grid ();
@@ -182,11 +185,28 @@ namespace ATMobile.Forms
             }
         }
 
+        private int FindNextArrowNumber ()
+        {
+            List<ShotArrow> sorted = m_PracticeEnd.SortedByArrowNumber;
+
+            int count = sorted.Count;
+
+            for (int i = 0; i < count; i++) {
+                ShotArrow arrow = sorted [i];
+
+                if (arrow.ArrowNumber != i + 1) {
+                    return i + 1;
+                }
+            }
+
+            return count + 1;
+        }
+
         private void Clicked (string value)
         {
             ShotArrow arrow = new ShotArrow ();
 
-            arrow.ArrowNumber = m_PracticeEnd.Results.Count + 1;
+            arrow.ArrowNumber = FindNextArrowNumber ();
 
             arrow.Score = value;
             if (value == "X") {
@@ -206,9 +226,12 @@ namespace ATMobile.Forms
             }
 
             m_PracticeEnd.Results.Add (arrow);
+        }
 
+        public void RefeshList ()
+        {
             m_ArrowsListView.ClearList ();
-            m_ArrowsListView.Arrows = m_PracticeEnd.Results;
+            m_ArrowsListView.Arrows = m_PracticeEnd.SortedByArrowNumber;
             m_ArrowsListView.RefreshList ();
         }
 
@@ -236,12 +259,29 @@ namespace ATMobile.Forms
                 m_PracticeEnd.EndNumber = m_EndCount + 1;
             }
 
-            m_ArrowsListView.Arrows = m_PracticeEnd.Results;
+            RefeshList ();
 
             DisableControls ();
         }
 
+        public void ArrowDeleted (int arrowNumber)
+        {
+            int arrayItem = -1;
 
+            for (int i = 0; i < m_PracticeEnd.Results.Count; i++) {
+                ShotArrow arrow = m_PracticeEnd.Results [i];
+                if (arrow.ArrowNumber == arrowNumber) {
+                    arrayItem = i;
+                    break;
+                }
+            }
+
+            if (arrayItem >= 0) {
+                m_PracticeEnd.Results.RemoveAt (arrayItem);
+            }
+
+            Task.Run (() => { RefeshList (); });
+        }
 
         private void OnSave (object sender, EventArgs e)
         {

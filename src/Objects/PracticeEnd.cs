@@ -29,6 +29,14 @@ namespace ATMobile.Objects
             }
         }
 
+        public List<ShotArrow> SortedByArrowNumber {
+            get {
+                List<ShotArrow> sorted = Results.OrderBy (r => r.ArrowNumber).ToList ();
+
+                return sorted;
+            }
+        }
+
         public string ResultsString {
             get {
                 StringBuilder sb = new StringBuilder ();
