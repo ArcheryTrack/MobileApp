@@ -24,17 +24,21 @@ namespace ATMobile.Cells
 
             var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true }; // red background
             deleteAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
-            deleteAction.Clicked += (sender, e) => {
-                var deleteClicked = DeletePracticeArrowClicked;
-
-                if (deleteClicked != null) {
-                    ShotArrow arrow = (ShotArrow)((MenuItem)sender).CommandParameter;
-                    deleteClicked (arrow.ArrowNumber);
-                }
-            };
+            deleteAction.Clicked += DeleteClicked;
             ContextActions.Add (deleteAction);
 
             View = m_Layout;
+        }
+
+        void DeleteClicked (object sender, EventArgs e)
+        {
+            var deleteClicked = DeletePracticeArrowClicked;
+
+            if (deleteClicked != null) {
+                ShotArrow arrow = (ShotArrow)((MenuItem)sender).CommandParameter;
+                deleteClicked (arrow.ArrowNumber);
+            }
+
         }
     }
 }

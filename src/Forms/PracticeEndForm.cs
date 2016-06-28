@@ -226,13 +226,12 @@ namespace ATMobile.Forms
             }
 
             m_PracticeEnd.Results.Add (arrow);
+            RefeshList ();
         }
 
         public void RefeshList ()
         {
-            m_ArrowsListView.ClearList ();
             m_ArrowsListView.Arrows = m_PracticeEnd.SortedByArrowNumber;
-            m_ArrowsListView.RefreshList ();
         }
 
         public void SetupForm (
@@ -279,8 +278,6 @@ namespace ATMobile.Forms
             if (arrayItem >= 0) {
                 m_PracticeEnd.Results.RemoveAt (arrayItem);
             }
-
-            Task.Run (() => { RefeshList (); });
         }
 
         private void OnSave (object sender, EventArgs e)
@@ -288,6 +285,14 @@ namespace ATMobile.Forms
             ATManager.GetInstance ().Persist (m_PracticeEnd);
 
             Navigation.PopAsync ();
+        }
+
+        protected override void OnDisappearing ()
+        {
+            base.OnDisappearing ();
+
+            m_ArrowsListView.DeletePracticeArrowClicked -= ArrowDeleted;
+            m_ArrowsListView.Dispose ();
         }
     }
 }
