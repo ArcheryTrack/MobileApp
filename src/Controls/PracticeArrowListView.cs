@@ -14,20 +14,15 @@ namespace ATMobile.Controls
     {
         private ObservableCollection<ShotArrow> m_Arrows;
 
-        public DeletePracticeArrowClickedDelegate DeletePracticeArrowClicked;
-        public List<ShotArrow> Arrows {
+        public ObservableCollection<ShotArrow> Arrows {
             get {
-                return m_Arrows.ToList ();
+                return m_Arrows;
             }
             set {
-                m_Arrows.Clear ();
-
-                foreach (var item in value) {
-                    m_Arrows.Add (item);
-                }
+                m_Arrows = value;
+                ItemsSource = m_Arrows;
             }
         }
-
 
         public PracticeArrowListView ()
         {
@@ -46,10 +41,7 @@ namespace ATMobile.Controls
 
         public void ArrowDeleted (int arrowNumber)
         {
-            var deleteClicked = DeletePracticeArrowClicked;
-            if (deleteClicked != null) {
-                deleteClicked (arrowNumber);
-            }
+            SelectedItem = null;
 
             int arrayItem = -1;
 
@@ -64,6 +56,8 @@ namespace ATMobile.Controls
             if (arrayItem >= 0) {
                 m_Arrows.RemoveAt (arrayItem);
             }
+
+            this.Focus ();
         }
 
         public void Dispose ()

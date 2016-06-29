@@ -32,13 +32,13 @@ namespace ATMobile.Cells
 
         void DeleteClicked (object sender, EventArgs e)
         {
+            var menuItem = (MenuItem)sender;
             var deleteClicked = DeletePracticeArrowClicked;
 
             if (deleteClicked != null) {
-                ShotArrow arrow = (ShotArrow)((MenuItem)sender).CommandParameter;
+                ShotArrow arrow = (ShotArrow)menuItem.CommandParameter;
                 deleteClicked (arrow.ArrowNumber);
             }
-
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using ATMobile.Controls;
 using ATMobile.Helpers;
@@ -61,7 +63,6 @@ namespace ATMobile.Forms
 
             m_ArrowsListView = new PracticeArrowListView ();
             m_ArrowsListView.HeightRequest = 300;
-            m_ArrowsListView.DeletePracticeArrowClicked += ArrowDeleted;
             m_InsideLayout.Children.Add (m_ArrowsListView);
 
             m_EntryGrid = new Grid ();
@@ -187,7 +188,7 @@ namespace ATMobile.Forms
 
         private int FindNextArrowNumber ()
         {
-            List<ShotArrow> sorted = m_PracticeEnd.SortedByArrowNumber;
+            var sorted = m_ArrowsListView.Arrows;
 
             int count = sorted.Count;
 
@@ -225,13 +226,19 @@ namespace ATMobile.Forms
                 arrow.SortValue = arrow.ScoreValue;
             }
 
-            m_PracticeEnd.Results.Add (arrow);
-            RefeshList ();
+            m_ArrowsListView.Arrows.Insert (arrow.ArrowNumber - 1, arrow);
         }
 
-        public void RefeshList ()
+        public void FillList ()
         {
-            m_ArrowsListView.Arrows = m_PracticeEnd.SortedByArrowNumber;
+            ObservableCollection<ShotArrow> arrows = m_ArrowsListView.Arrows;
+            arrows.Clear ();
+
+            foreach (var item in m_PracticeEnd.SortedByArrowNumber) {
+                arrows.Add (item);
+            }
+
+            m_ArrowsListView.Arrows = arrows;
         }
 
         public void SetupForm (
@@ -258,30 +265,15 @@ namespace ATMobile.Forms
                 m_PracticeEnd.EndNumber = m_EndCount + 1;
             }
 
-            RefeshList ();
+            FillList ();
 
             DisableControls ();
         }
 
-        public void ArrowDeleted (int arrowNumber)
-        {
-            int arrayItem = -1;
-
-            for (int i = 0; i < m_PracticeEnd.Results.Count; i++) {
-                ShotArrow arrow = m_PracticeEnd.Results [i];
-                if (arrow.ArrowNumber == arrowNumber) {
-                    arrayItem = i;
-                    break;
-                }
-            }
-
-            if (arrayItem >= 0) {
-                m_PracticeEnd.Results.RemoveAt (arrayItem);
-            }
-        }
-
         private void OnSave (object sender, EventArgs e)
         {
+            m_PracticeEnd.Results = m_ArrowsListView.Arrows.ToList ();
+
             ATManager.GetInstance ().Persist (m_PracticeEnd);
 
             Navigation.PopAsync ();
@@ -291,7 +283,6 @@ namespace ATMobile.Forms
         {
             base.OnDisappearing ();
 
-            m_ArrowsListView.DeletePracticeArrowClicked -= ArrowDeleted;
             m_ArrowsListView.Dispose ();
         }
     }
