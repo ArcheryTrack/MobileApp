@@ -49,6 +49,22 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region Countries
+
+        public List<Country> GetCountries ()
+        {
+            CountryDao dao = new CountryDao (m_Database);
+            return dao.GetCountries ();
+        }
+
+        public void Persist (Country _country)
+        {
+            CountryDao dao = new CountryDao (m_Database);
+            dao.Persist (_country);
+        }
+
+        #endregion
+
         #region PracticeEnds
 
         public List<PracticeEnd> GetPracticeEnds (Guid _practiceId)
@@ -177,6 +193,38 @@ namespace ATMobile.Managers
             }
 
             return null;
+        }
+
+        #endregion
+
+        #region States
+
+        public List<State> GetStates (Guid _countryId)
+        {
+            StateDao dao = new StateDao (m_Database);
+            return dao.GetStates (_countryId);
+        }
+
+        public void Persist (State _state)
+        {
+            StateDao dao = new StateDao (m_Database);
+            dao.Persist (_state);
+        }
+
+        #endregion
+
+        #region Tournament
+
+        public List<Tournament> GetTournaments (Guid _archerId)
+        {
+            TournamentDao dao = new TournamentDao (m_Database);
+            return dao.GetTournaments (_archerId);
+        }
+
+        public void Persist (Tournament _tournament)
+        {
+            TournamentDao dao = new TournamentDao (m_Database);
+            dao.Persist (_tournament);
         }
 
         #endregion
