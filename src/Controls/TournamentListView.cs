@@ -17,10 +17,10 @@ namespace ATMobile.Controls
             RowHeight = 60;
         }
 
-        public void RefreshList (Guid _archerGuid)
+        public void RefreshList ()
         {
             ATManager manager = ATManager.GetInstance ();
-            m_Tournaments = manager.GetTournaments (_archerGuid);
+            m_Tournaments = manager.GetTournaments ();
             ItemsSource = m_Tournaments;
         }
 

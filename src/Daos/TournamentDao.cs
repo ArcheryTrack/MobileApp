@@ -25,9 +25,12 @@ namespace ATMobile.Daos
 
         public List<Tournament> GetTournaments (Guid _archerGuid)
         {
-            var tournaments = GetChildren (_archerGuid);
+            //TODO rewrite
+            //var tournaments = GetChildren (_archerGuid);
 
-            return tournaments.OrderByDescending ((Tournament arg) => arg.StartDateTime).ToList ();
+            //return tournaments.OrderByDescending ((Tournament arg) => arg.StartDateTime).ToList ();
+
+            return null;
         }
     }
 }

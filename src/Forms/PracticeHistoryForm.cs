@@ -24,7 +24,7 @@ namespace ATMobile.Forms
             Title = "Practice History";
 
             //Icon = "settings.png";
-            BackgroundColor = Color.FromHex ("EEEEEE");
+            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
 
             m_OutsideLayout = new StackLayout {
                 Spacing = 15,
