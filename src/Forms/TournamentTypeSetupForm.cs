@@ -9,7 +9,7 @@ namespace ATMobile.Forms
     {
         public TournamentTypeSetupForm ()
         {
-            Title = "Tournament Type";
+            Title = "Tournament Type Setup";
         }
     }
 }
