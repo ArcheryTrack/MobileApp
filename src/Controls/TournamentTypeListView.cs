@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ATMobile.Cells;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
@@ -28,6 +29,5 @@ namespace ATMobile.Controls
             ItemsSource = null;
         }
     }
-}
 }
 
