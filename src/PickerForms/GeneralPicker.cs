@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using ATMobile.Cells;
 using ATMobile.Constants;
 using ATMobile.Controls;
 using ATMobile.Delegates;
@@ -7,18 +9,21 @@ using Xamarin.Forms;
 
 namespace ATMobile.PickerForms
 {
-    public class ArcherPicker : ContentPage
+    public class GeneralPicker<T, U> : ContentPage where U : AbstractBaseCell
     {
         private StackLayout m_OutsideLayout;
         private Label m_lblTitle;
-        private ArcherPickerListView m_ArcheryList;
+        private GenericListView<U> m_ArcheryList;
         private Button m_btnCancel;
 
-        public event ArcherPickedDelegate ArcherPicked;
+        public event GenericPickedDelegate<T> ItemPicked;
 
-        public ArcherPicker ()
+        public GeneralPicker (
+            string _title,
+            string _listCellField,
+            List<T> items)
         {
-            Title = "Select Archer";
+            Title = _title;
 
             //Icon = "settings.png";
             BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
@@ -30,10 +35,10 @@ namespace ATMobile.PickerForms
             };
 
             m_lblTitle = new Label ();
-            m_lblTitle.Text = "Select an Archer";
+            m_lblTitle.Text = _title;
             m_OutsideLayout.Children.Add (m_lblTitle);
 
-            m_ArcheryList = new ArcherPickerListView ();
+            m_ArcheryList = new GenericListView<U> ();
             m_ArcheryList.ItemSelected += OnSelected;
             m_OutsideLayout.Children.Add (m_ArcheryList);
 
@@ -53,17 +58,15 @@ namespace ATMobile.PickerForms
 
         async void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
-            Archer archer = (Archer)e.SelectedItem;
+            T item = (T)e.SelectedItem;
 
-            var picked = ArcherPicked;
+            var picked = ItemPicked;
             if (picked != null) {
-                picked (archer);
+                picked (item);
             }
 
             await Navigation.PopModalAsync ();
         }
-
-
     }
 }
 

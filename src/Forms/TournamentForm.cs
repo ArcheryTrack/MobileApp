@@ -46,8 +46,14 @@ namespace ATMobile.Forms
         async private void AddArcher (object sender, EventArgs e)
         {
             ArcherPicker picker = new ArcherPicker ();
+            picker.ArcherPicked += ArcherPicked;
 
             await Navigation.PushModalAsync (picker);
+        }
+
+        private void ArcherPicked (Archer _archer)
+        {
+
         }
 
         public void SetupForm (Tournament _tournament)

@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace ATMobile.Cells
 {
-    public class ArcherCell : AbstractBaseCell
+    public class TournamentTypeRoundCell : ViewCell
     {
-        public ArcherCell () : base ("FullName")
+        public TournamentTypeRoundCell ()
         {
         }
     }
