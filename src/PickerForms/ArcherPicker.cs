@@ -1,69 +1,16 @@
 ﻿using System;
-using ATMobile.Constants;
-using ATMobile.Controls;
-using ATMobile.Delegates;
+using ATMobile.Cells;
+using ATMobile.Managers;
 using ATMobile.Objects;
-using Xamarin.Forms;
 
 namespace ATMobile.PickerForms
 {
-    public class ArcherPicker : ContentPage
+    public class ArcherPicker : GenericPicker<Archer, ArcherCell>
     {
-        private StackLayout m_OutsideLayout;
-        private Label m_lblTitle;
-        private ArcherPickerListView m_ArcheryList;
-        private Button m_btnCancel;
-
-        public event ArcherPickedDelegate ArcherPicked;
-
-        public ArcherPicker ()
+        public ArcherPicker () : base ("Pick Archer", "FullName")
         {
-            Title = "Select Archer";
-
-            //Icon = "settings.png";
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_lblTitle = new Label ();
-            m_lblTitle.Text = "Select an Archer";
-            m_OutsideLayout.Children.Add (m_lblTitle);
-
-            m_ArcheryList = new ArcherPickerListView ();
-            m_ArcheryList.ItemSelected += OnSelected;
-            m_OutsideLayout.Children.Add (m_ArcheryList);
-
-            m_btnCancel = new Button ();
-            m_btnCancel.Text = "Cancel";
-            m_btnCancel.Clicked += OnCancel;
-            m_OutsideLayout.Children.Add (m_btnCancel);
-
-            Content = m_OutsideLayout;
+            List.ItemsSource = ATManager.GetInstance ().GetArchers ();
         }
-
-        async void OnCancel (object sender, EventArgs e)
-        {
-
-            await Navigation.PopModalAsync ();
-        }
-
-        async void OnSelected (object sender, SelectedItemChangedEventArgs e)
-        {
-            Archer archer = (Archer)e.SelectedItem;
-
-            var picked = ArcherPicked;
-            if (picked != null) {
-                picked (archer);
-            }
-
-            await Navigation.PopModalAsync ();
-        }
-
-
     }
 }
 

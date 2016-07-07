@@ -9,19 +9,18 @@ using Xamarin.Forms;
 
 namespace ATMobile.PickerForms
 {
-    public class GeneralPicker<T, U> : ContentPage where U : AbstractBaseCell
+    public class GenericPicker<T, U> : ContentPage where U : AbstractBaseCell
     {
         private StackLayout m_OutsideLayout;
         private Label m_lblTitle;
-        private GenericListView<U> m_ArcheryList;
+        public GenericListView<U> List;
         private Button m_btnCancel;
 
         public event GenericPickedDelegate<T> ItemPicked;
 
-        public GeneralPicker (
+        public GenericPicker (
             string _title,
-            string _listCellField,
-            List<T> items)
+            string _listCellField)
         {
             Title = _title;
 
@@ -38,9 +37,9 @@ namespace ATMobile.PickerForms
             m_lblTitle.Text = _title;
             m_OutsideLayout.Children.Add (m_lblTitle);
 
-            m_ArcheryList = new GenericListView<U> ();
-            m_ArcheryList.ItemSelected += OnSelected;
-            m_OutsideLayout.Children.Add (m_ArcheryList);
+            List = new GenericListView<U> ();
+            List.ItemSelected += OnSelected;
+            m_OutsideLayout.Children.Add (List);
 
             m_btnCancel = new Button ();
             m_btnCancel.Text = "Cancel";

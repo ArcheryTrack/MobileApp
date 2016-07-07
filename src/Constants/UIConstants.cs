@@ -1,10 +1,8 @@
-﻿using System;
-namespace ATMobile.Constants
+﻿namespace ATMobile.Constants
 {
     public static class UIConstants
     {
         public const string FormBackgroundColor = "EEEEEE";
-
     }
 }
 

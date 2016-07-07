@@ -34,6 +34,12 @@ namespace ATMobile.Managers
 
         #region Archers
 
+        public Archer GetArcher (Guid _archerGuid)
+        {
+            ArcherDao dao = new ArcherDao (m_Database);
+            return dao.Get (_archerGuid);
+        }
+
         public List<Archer> GetArchers ()
         {
             ArcherDao dao = new ArcherDao (m_Database);
