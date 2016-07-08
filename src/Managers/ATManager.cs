@@ -119,6 +119,22 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region RoundTypes
+
+        public List<RoundType> GetRoundTypes (Guid _tournamentTypeId)
+        {
+            RoundTypeDao dao = new RoundTypeDao (m_Database);
+            return dao.GetRoundTypes (_tournamentTypeId);
+        }
+
+        public void Persist (RoundType roundType)
+        {
+            RoundTypeDao dao = new RoundTypeDao (m_Database);
+            dao.Persist (roundType);
+        }
+
+        #endregion
+
         #region Sight Settings
 
         public List<SightSetting> GetSightSettings (Guid _archerGuid)

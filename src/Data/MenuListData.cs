@@ -41,7 +41,7 @@ namespace ATMobile.Data
 
             this.Add (new MenuItem () {
                 Title = "Tournament Types",
-                TargetType = typeof (TournamentTypeSetupForm)
+                TargetType = typeof (TournamentTypesForm)
             });
 
             this.Add (new MenuItem () {

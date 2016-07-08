@@ -8,7 +8,7 @@ namespace ATMobile.Forms
 {
     public partial class MenuPage : ContentPage
     {
-        public ListView Menu { get; set; }
+        public MenuListView Menu { get; set; }
 
         public MenuPage ()
         {

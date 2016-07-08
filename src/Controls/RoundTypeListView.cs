@@ -7,21 +7,21 @@ using Xamarin.Forms;
 
 namespace ATMobile.Controls
 {
-    public class TournamentTypeListView : AbstractListView
+    public class RoundTypeListView : AbstractListView
     {
-        private List<TournamentType> m_TournamentTypes;
+        private List<RoundType> m_RoundTypes;
 
-        public TournamentTypeListView ()
+        public RoundTypeListView ()
         {
-            ItemTemplate = new DataTemplate (typeof (TournamentTypeCell));
+            ItemTemplate = new DataTemplate (typeof (RoundTypeCell));
             RowHeight = 60;
         }
 
-        public void RefreshList ()
+        public void RefreshList (Guid _tournamentTypeId)
         {
             ATManager manager = ATManager.GetInstance ();
-            m_TournamentTypes = manager.GetTournamentTypes ();
-            ItemsSource = m_TournamentTypes;
+            m_RoundTypes = manager.GetRoundTypes (_tournamentTypeId);
+            ItemsSource = m_RoundTypes;
         }
 
         public void ClearList ()

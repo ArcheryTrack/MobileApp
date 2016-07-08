@@ -3,6 +3,7 @@ using LiteDB;
 using ATMobile.Objects;
 using System.Collections.Generic;
 using System.Linq;
+using ATMobile.Interfaces;
 
 namespace ATMobile.Daos
 {
