@@ -40,7 +40,7 @@ namespace ATMobile.Forms
 
             m_InsideLayout = new StackLayout {
                 Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.FillAndExpand,
                 Padding = 5
             };
             m_OutsideLayout.Children.Add (m_InsideLayout);
@@ -64,7 +64,9 @@ namespace ATMobile.Forms
             m_RoundTypes = new RoundTypeListView ();
             m_RoundTypes.ItemSelected += OnSelectedRound;
             Frame frame = new Frame {
-                HasShadow = false
+                HasShadow = false,
+                MinimumHeightRequest = 240,
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
             frame.Content = m_RoundTypes;
             m_InsideLayout.Children.Add (frame);
@@ -88,14 +90,19 @@ namespace ATMobile.Forms
 
         void OnSelectedRound (object sender, SelectedItemChangedEventArgs e)
         {
+            SaveTournamentType ();
 
+            RoundType roundType = (RoundType)m_RoundTypes.SelectedItem;
+
+            RoundTypeForm form = new RoundTypeForm ();
+            form.SetupForm (roundType);
+            Navigation.PushAsync (form);
         }
 
         private void SaveTournamentType ()
         {
             m_TournamentType.Name = m_txtName.Text;
             m_TournamentType.Description = m_txtDescription.Text;
-
             ATManager.GetInstance ().Persist (m_TournamentType);
         }
 

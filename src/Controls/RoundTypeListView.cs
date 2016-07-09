@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using ATMobile.Cells;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -9,7 +10,7 @@ namespace ATMobile.Controls
 {
     public class RoundTypeListView : AbstractListView
     {
-        private List<RoundType> m_RoundTypes;
+        private ObservableCollection<RoundType> m_RoundTypes;
 
         public RoundTypeListView ()
         {
@@ -20,7 +21,9 @@ namespace ATMobile.Controls
         public void RefreshList (Guid _tournamentTypeId)
         {
             ATManager manager = ATManager.GetInstance ();
-            m_RoundTypes = manager.GetRoundTypes (_tournamentTypeId);
+            var roundTypes = manager.GetRoundTypes (_tournamentTypeId);
+
+            m_RoundTypes = new ObservableCollection<RoundType> (roundTypes);
             ItemsSource = m_RoundTypes;
         }
 

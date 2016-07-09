@@ -80,6 +80,7 @@ namespace ATMobile.Forms
             m_pickUnits.Items.Add ("Yards");
             m_pickUnits.Items.Add ("Meters");
             m_InsideLayout.Children.Add (m_pickUnits);
+            m_pickUnits.SelectedIndex = 0;
 
             Content = m_OutsideLayout;
         }
@@ -101,6 +102,12 @@ namespace ATMobile.Forms
 
             if (m_RoundType.Distance != null) {
                 m_txtDistance.Text = Convert.ToString (m_RoundType.Distance.Measurement);
+
+                if (m_RoundType.Distance.Units == DistanceUnits.Yards) {
+                    m_pickUnits.SelectedIndex = 0;
+                } else {
+                    m_pickUnits.SelectedIndex = 1;
+                }
             }
         }
 

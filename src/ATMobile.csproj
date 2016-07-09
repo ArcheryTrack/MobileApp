@@ -131,7 +131,6 @@
     <Compile Include="Cells\AbstractBaseCell.cs" />
     <Compile Include="Delegates\ArcherPicked.cs" />
     <Compile Include="Cells\TournamentTypeRoundCell.cs" />
-    <Compile Include="Controls\TournamentTypeRoundsListView.cs" />
     <Compile Include="Cells\TargetFaceCell.cs" />
     <Compile Include="PickerForms\GenericPicker.cs" />
     <Compile Include="Delegates\GenericPickedDelegate.cs" />
