@@ -1,71 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using Xamarin.Forms;
 using ATMobile.Objects;
 using ATMobile.Managers;
 
 namespace ATMobile.Forms
 {
-    public partial class ArcherForm : ContentPage
+    public class ArcherForm : AbstractEntryForm
     {
         private Archer m_Archer;
-        private StackLayout m_OutsideLayout;
-        private StackLayout m_InsideLayout;
         private Entry m_txtFirstName;
         private Entry m_txtLastName;
         private Label m_lblBirthDate;
         private Label m_lblStartedArchery;
         private DatePicker m_datBirthdate;
         private DatePicker m_datStartedArchery;
-        private Button m_btnSave;
 
-        public ArcherForm ()
+        public ArcherForm () : base ("Archer")
         {
-            Title = "Archer";
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_btnSave = new Button {
-                Text = "Save"
-            };
-            m_btnSave.Clicked += OnSave;
-            m_OutsideLayout.Children.Add (m_btnSave);
-
-            m_InsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-            m_OutsideLayout.Children.Add (m_InsideLayout);
-
             m_txtFirstName = new Entry ();
             m_txtFirstName.Placeholder = "First Name";
-            m_InsideLayout.Children.Add (m_txtFirstName);
+            InsideLayout.Children.Add (m_txtFirstName);
 
             m_txtLastName = new Entry ();
             m_txtLastName.Placeholder = "Last Name";
-            m_InsideLayout.Children.Add (m_txtLastName);
+            InsideLayout.Children.Add (m_txtLastName);
 
             m_lblBirthDate = new Label ();
             m_lblBirthDate.Text = "Birth Date";
-            m_InsideLayout.Children.Add (m_lblBirthDate);
+            InsideLayout.Children.Add (m_lblBirthDate);
 
             m_datBirthdate = new DatePicker ();
-            m_InsideLayout.Children.Add (m_datBirthdate);
+            InsideLayout.Children.Add (m_datBirthdate);
 
             m_lblStartedArchery = new Label ();
             m_lblStartedArchery.Text = "Started Archery On";
-            m_InsideLayout.Children.Add (m_lblStartedArchery);
+            InsideLayout.Children.Add (m_lblStartedArchery);
 
             m_datStartedArchery = new DatePicker ();
-            m_InsideLayout.Children.Add (m_datStartedArchery);
-
-            Content = m_OutsideLayout;
+            InsideLayout.Children.Add (m_datStartedArchery);
         }
 
         public void SetArcher (Archer _archer)
@@ -78,7 +50,7 @@ namespace ATMobile.Forms
             m_datStartedArchery.Date = _archer.StartedArchery;
         }
 
-        private void OnSave (object sender, EventArgs e)
+        public override void Save ()
         {
             if (m_Archer == null) {
                 m_Archer = new Archer ();

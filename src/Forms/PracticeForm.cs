@@ -7,15 +7,12 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class PracticeForm : ContentPage
+    public class PracticeForm : AbstractEntryForm
     {
         private Archer m_Archer;
         private Practice m_Practice;
         private List<Range> m_Ranges;
         private List<TargetFace> m_TargetFaces;
-
-        private StackLayout m_OutsideLayout;
-        private StackLayout m_InsideLayout;
 
         private Button m_btnSave;
         private Label m_lblDate;
@@ -28,52 +25,31 @@ namespace ATMobile.Forms
         private Picker m_pickTargetFace;
 
 
-        public PracticeForm ()
+        public PracticeForm () : base ("Practice")
         {
-            Title = "Practice";
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_btnSave = new Button {
-                Text = "Save"
-            };
-            m_btnSave.Clicked += OnSave;
-            m_OutsideLayout.Children.Add (m_btnSave);
-
-            m_InsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-            m_OutsideLayout.Children.Add (m_InsideLayout);
-
             DateTime now = DateTime.Now;
 
             m_lblDate = new Label ();
             m_lblDate.Text = "Date";
-            m_InsideLayout.Children.Add (m_lblDate);
+            InsideLayout.Children.Add (m_lblDate);
 
             m_datDate = new DatePicker ();
             m_datDate.Date = now.Date;
-            m_InsideLayout.Children.Add (m_datDate);
+            InsideLayout.Children.Add (m_datDate);
 
             m_lblTime = new Label ();
             m_lblTime.Text = "Time";
-            m_InsideLayout.Children.Add (m_lblTime);
+            InsideLayout.Children.Add (m_lblTime);
 
             m_timTime = new TimePicker ();
             m_timTime.Time = now.TimeOfDay;
-            m_InsideLayout.Children.Add (m_timTime);
+            InsideLayout.Children.Add (m_timTime);
 
             m_lblLocation = new Label ();
             m_lblLocation.Text = "Location";
 
             m_pickLocation = new Picker ();
-            m_InsideLayout.Children.Add (m_pickLocation);
+            InsideLayout.Children.Add (m_pickLocation);
 
             m_Ranges = ATManager.GetInstance ().GetRanges ();
             foreach (var item in m_Ranges) {
@@ -84,14 +60,12 @@ namespace ATMobile.Forms
             m_lblTargetFace.Text = "Target";
 
             m_pickTargetFace = new Picker ();
-            m_InsideLayout.Children.Add (m_pickTargetFace);
+            InsideLayout.Children.Add (m_pickTargetFace);
 
             m_TargetFaces = TargetFaceData.GetData ();
             foreach (var item in m_TargetFaces) {
                 m_pickTargetFace.Items.Add (item.Name);
             }
-
-            Content = m_OutsideLayout;
         }
 
         public void SetupForm (Archer _archer, Practice _practice)
@@ -127,7 +101,7 @@ namespace ATMobile.Forms
             }
         }
 
-        private void OnSave (object sender, EventArgs e)
+        public override void Save ()
         {
             if (m_Practice == null) {
                 m_Practice = new Practice ();

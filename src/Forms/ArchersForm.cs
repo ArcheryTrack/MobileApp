@@ -1,42 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using ATMobile.Controls;
 using ATMobile.Objects;
 
 namespace ATMobile.Forms
 {
-    public partial class ArchersForm : ContentPage
+    public class ArchersForm : AbstractListForm
     {
-        private StackLayout m_OutsideLayout;
-        private Button m_Add;
-        private ArcherListView m_ArcheryList;
+        private ArcherListView m_ArcherList;
 
-        public ArchersForm ()
+        public ArchersForm () : base ("Archers")
         {
-            Title = "Archers";
-
-            //Icon = "settings.png";
-            BackgroundColor = Color.FromHex ("EEEEEE");
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_Add = new Button {
-                Text = "Add Archer"
-            };
-            m_Add.Clicked += OnAdd;
-            m_OutsideLayout.Children.Add (m_Add);
-
-            m_ArcheryList = new ArcherListView ();
-            m_ArcheryList.ItemSelected += OnSelected;
-            m_OutsideLayout.Children.Add (m_ArcheryList);
-
-            Content = m_OutsideLayout;
+            m_ArcherList = new ArcherListView ();
+            m_ArcherList.ItemSelected += OnSelected;
+            ListFrame.Content = m_ArcherList;
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
@@ -49,7 +25,7 @@ namespace ATMobile.Forms
             Navigation.PushAsync (addArcher);
         }
 
-        void OnAdd (object sender, EventArgs e)
+        public override void Add ()
         {
             ArcherForm addArcher = new ArcherForm ();
             Navigation.PushAsync (addArcher);
@@ -59,7 +35,7 @@ namespace ATMobile.Forms
         {
             base.OnAppearing ();
 
-            m_ArcheryList.RefreshList ();
+            m_ArcherList.RefreshList ();
         }
     }
 }

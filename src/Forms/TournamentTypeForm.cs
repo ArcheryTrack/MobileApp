@@ -1,5 +1,4 @@
 ﻿using System;
-using ATMobile.Constants;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -7,59 +6,32 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class TournamentTypeForm : ContentPage
+    public class TournamentTypeForm : AbstractEntryForm
     {
         private TournamentType m_TournamentType;
-
-        private StackLayout m_OutsideLayout;
-        private StackLayout m_InsideLayout;
-
-        private Button m_btnSave;
 
         private Entry m_txtName;
         private Entry m_txtDescription;
         private RoundTypeListView m_RoundTypes;
         private Button m_btnAddRound;
 
-        public TournamentTypeForm ()
+        public TournamentTypeForm () : base ("Tournament Type Setup")
         {
-            Title = "Tournament Type Setup";
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_btnSave = new Button {
-                Text = "Save"
-            };
-            m_btnSave.Clicked += OnSave;
-            m_OutsideLayout.Children.Add (m_btnSave);
-
-            m_InsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                Padding = 5
-            };
-            m_OutsideLayout.Children.Add (m_InsideLayout);
-
             m_txtName = new Entry {
                 Placeholder = "Name"
             };
-            m_InsideLayout.Children.Add (m_txtName);
+            InsideLayout.Children.Add (m_txtName);
 
             m_txtDescription = new Entry {
                 Placeholder = "Description"
             };
-            m_InsideLayout.Children.Add (m_txtDescription);
+            InsideLayout.Children.Add (m_txtDescription);
 
             m_btnAddRound = new Button {
                 Text = "Add Round"
             };
             m_btnAddRound.Clicked += OnAddRound;
-            m_InsideLayout.Children.Add (m_btnAddRound);
+            InsideLayout.Children.Add (m_btnAddRound);
 
             m_RoundTypes = new RoundTypeListView ();
             m_RoundTypes.ItemSelected += OnSelectedRound;
@@ -69,9 +41,7 @@ namespace ATMobile.Forms
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             frame.Content = m_RoundTypes;
-            m_InsideLayout.Children.Add (frame);
-
-            Content = m_OutsideLayout;
+            InsideLayout.Children.Add (frame);
         }
 
         public void SetupForm (TournamentType _tournamentType)
@@ -118,7 +88,7 @@ namespace ATMobile.Forms
             Navigation.PushAsync (form);
         }
 
-        void OnSave (object sender, EventArgs e)
+        public override void Save ()
         {
             SaveTournamentType ();
 

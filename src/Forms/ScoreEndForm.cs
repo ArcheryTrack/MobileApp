@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class ScoreEndForm : ContentPage
+    public class ScoreEndForm : ContentPage
     {
         public ScoreEndForm ()
         {

@@ -1,48 +1,24 @@
-﻿using System;
-using ATMobile.Controls;
+﻿using ATMobile.Controls;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class PracticeEndsForm : ContentPage
+    public class PracticeEndsForm : AbstractListForm
     {
         private Archer m_Archer;
         private Practice m_Practice;
-
-        private StackLayout m_OutsideLayout;
-        private Button m_btnAdd;
         private Label m_lblArcher;
         private PracticeEndsListView m_PracticeEnds;
 
-        public PracticeEndsForm ()
+        public PracticeEndsForm () : base ("Practice")
         {
-            Title = "Practice";
-
-            //Icon = "settings.png";
-            BackgroundColor = Color.FromHex ("EEEEEE");
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
             m_lblArcher = new Label ();
-            m_OutsideLayout.Children.Add (m_lblArcher);
+            OutsideLayout.Children.Insert (0, m_lblArcher);
 
-            m_btnAdd = new Button {
-                Text = "Add End"
-            };
-            m_btnAdd.Clicked += OnAdd;
-            m_OutsideLayout.Children.Add (m_btnAdd);
-
-            //Add the sight settings listview
             m_PracticeEnds = new PracticeEndsListView ();
             m_PracticeEnds.ItemSelected += OnSelected;
-            m_OutsideLayout.Children.Add (m_PracticeEnds);
-
-            Content = m_OutsideLayout;
+            ListFrame.Content = m_PracticeEnds;
         }
 
         public void SetupForm (Archer _archer, Practice _practice)
@@ -57,7 +33,7 @@ namespace ATMobile.Forms
             }
         }
 
-        void OnAdd (object sender, EventArgs e)
+        public override void Add ()
         {
             PracticeEndForm practiceEnd = new PracticeEndForm ();
             practiceEnd.SetupForm (m_Archer, m_Practice, null, m_PracticeEnds.Ends.Count);

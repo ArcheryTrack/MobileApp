@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 using ATMobile.Controls;
+using ATMobile.Constants;
 
 namespace ATMobile.Forms
 {
-    public partial class MenuPage : ContentPage
+    public class MenuPage : ContentPage
     {
         public MenuListView Menu { get; set; }
 
@@ -14,14 +15,14 @@ namespace ATMobile.Forms
         {
             //Icon = "settings.png";
             Title = "Menu"; // The Title property must be set.
-            BackgroundColor = Color.FromHex ("EEEEEE");
+            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
 
             Menu = new MenuListView ();
 
             var menuLabel = new ContentView {
                 Padding = new Thickness (10, 36, 0, 5),
                 Content = new Label {
-                    TextColor = Color.FromHex ("AAAAAA"),
+                    TextColor = Color.FromHex (UIConstants.MenuTextColor),
                     Text = "MENU",
                 }
             };

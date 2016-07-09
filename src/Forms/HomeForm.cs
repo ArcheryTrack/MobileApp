@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
-using ATMobile.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class HomeForm : MasterDetailPage
+    public class HomeForm : MasterDetailPage
     {
         private App m_App;
 

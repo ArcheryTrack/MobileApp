@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class DefaultForm : ContentPage
+    public class DefaultForm : ContentPage
     {
         public DefaultForm ()
         {

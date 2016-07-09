@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ATMobile.Cells;
-using ATMobile.Constants;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -11,14 +9,9 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class TournamentForm : ContentPage
+    public class TournamentForm : AbstractEntryForm
     {
         private Tournament m_Tournament;
-
-        private StackLayout m_OutsideLayout;
-        private StackLayout m_InsideLayout;
-
-        private Button m_btnSave;
 
         private StackLayout m_ArchersLayout;
         private TournamentArcherListView m_Archers;
@@ -26,33 +19,8 @@ namespace ATMobile.Forms
         private ObservableCollection<Archer> m_ArchersList;
 
 
-        public TournamentForm ()
+        public TournamentForm () : base ("Tournament")
         {
-            Title = "Tournament";
-
-            //Icon = "settings.png";
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_btnSave = new Button {
-                Text = "Save"
-            };
-            m_btnSave.Clicked += OnSave;
-            m_OutsideLayout.Children.Add (m_btnSave);
-
-
-            m_InsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-            m_OutsideLayout.Children.Add (m_InsideLayout);
-
             m_ArchersLayout = new StackLayout {
                 Spacing = 15,
                 Orientation = StackOrientation.Horizontal,
@@ -77,15 +45,13 @@ namespace ATMobile.Forms
             m_btnAddArcher.Clicked += AddArcher;
             m_ArchersLayout.Children.Add (m_btnAddArcher);
 
-            m_InsideLayout.Children.Add (m_ArchersLayout);
-
-            Content = m_OutsideLayout;
+            InsideLayout.Children.Add (m_ArchersLayout);
         }
 
-        async private void OnSave (object sender, EventArgs e)
+        public override void Save ()
         {
 
-            await Navigation.PopAsync (true);
+            Navigation.PopAsync (true);
         }
 
         async private void AddArcher (object sender, EventArgs e)

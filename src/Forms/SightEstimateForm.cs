@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class SightEstimateForm : ContentPage
+    public class SightEstimateForm : ContentPage
     {
         public SightEstimateForm ()
         {

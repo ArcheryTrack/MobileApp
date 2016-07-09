@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class SightSettingForm : ContentPage
+    public class SightSettingForm : AbstractEntryForm
     {
         private Archer m_Archer;
         private SightSetting m_SightSetting;
-        private StackLayout m_OutsideLayout;
-        private StackLayout m_InsideLayout;
-        private Button m_btnSave;
+
         private DatePicker m_datSettingDate;
         private Label m_lblSettingDate;
         private Entry m_txtDistance;
@@ -21,54 +18,31 @@ namespace ATMobile.Forms
 
         //TODO - Default the units to last used.
 
-        public SightSettingForm ()
+        public SightSettingForm () : base ("Sight Setting")
         {
-            Title = "Sight Setting";
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_btnSave = new Button {
-                Text = "Save"
-            };
-            m_btnSave.Clicked += OnSave;
-            m_OutsideLayout.Children.Add (m_btnSave);
-
-            m_InsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-            m_OutsideLayout.Children.Add (m_InsideLayout);
-
             m_lblSettingDate = new Label ();
             m_lblSettingDate.Text = "Setting Date";
-            m_InsideLayout.Children.Add (m_lblSettingDate);
+            InsideLayout.Children.Add (m_lblSettingDate);
 
             m_datSettingDate = new DatePicker ();
             m_datSettingDate.Date = DateTime.Now.Date;
-            m_InsideLayout.Children.Add (m_datSettingDate);
+            InsideLayout.Children.Add (m_datSettingDate);
 
             m_txtDistance = new Entry ();
             m_txtDistance.Keyboard = Keyboard.Numeric;
             m_txtDistance.Placeholder = "Distance";
-            m_InsideLayout.Children.Add (m_txtDistance);
+            InsideLayout.Children.Add (m_txtDistance);
 
             m_pickUnits = new Picker ();
             m_pickUnits.Items.Add ("Yards");
             m_pickUnits.Items.Add ("Meters");
             m_pickUnits.SelectedIndex = 0;
-            m_InsideLayout.Children.Add (m_pickUnits);
+            InsideLayout.Children.Add (m_pickUnits);
 
             m_txtSetting = new Entry ();
             m_txtSetting.Keyboard = Keyboard.Numeric;
             m_txtSetting.Placeholder = "Setting";
-            m_InsideLayout.Children.Add (m_txtSetting);
-
-            Content = m_OutsideLayout;
+            InsideLayout.Children.Add (m_txtSetting);
         }
 
         public void SetSightSetting (Archer _archer, SightSetting _setting)
@@ -93,7 +67,7 @@ namespace ATMobile.Forms
             }
         }
 
-        private void OnSave (object sender, EventArgs e)
+        public override void Save ()
         {
             if (m_SightSetting == null) {
                 m_SightSetting = new SightSetting ();

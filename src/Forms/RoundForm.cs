@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class RoundForm : ContentPage
+    public class RoundForm : ContentPage
     {
         public RoundForm ()
         {

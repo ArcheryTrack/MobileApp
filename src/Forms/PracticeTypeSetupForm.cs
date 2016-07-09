@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public partial class PracticeTypeSetupForm : ContentPage
+    public class PracticeTypeSetupForm : ContentPage
     {
         public PracticeTypeSetupForm ()
         {

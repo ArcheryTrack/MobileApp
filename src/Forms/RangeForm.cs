@@ -1,16 +1,13 @@
 ﻿using System;
-using ATMobile.Constants;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class RangeForm : ContentPage
+    public class RangeForm : AbstractEntryForm
     {
         private Range m_Range;
-        private StackLayout m_OutsideLayout;
-        private StackLayout m_InsideLayout;
         private Entry m_txtName;
         private Entry m_txtAddress1;
         private Entry m_txtAddress2;
@@ -18,56 +15,31 @@ namespace ATMobile.Forms
         private Entry m_txtState;
         private Entry m_txtCountry;
 
-        private Button m_btnSave;
-
-        public RangeForm ()
+        public RangeForm () : base ("Range")
         {
-            Title = "Range";
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_btnSave = new Button {
-                Text = "Save"
-            };
-            m_btnSave.Clicked += OnSave;
-            m_OutsideLayout.Children.Add (m_btnSave);
-
-            m_InsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-            m_OutsideLayout.Children.Add (m_InsideLayout);
-
             m_txtName = new Entry ();
             m_txtName.Placeholder = "Name";
-            m_InsideLayout.Children.Add (m_txtName);
+            InsideLayout.Children.Add (m_txtName);
 
             m_txtAddress1 = new Entry ();
             m_txtAddress1.Placeholder = "Address 1";
-            m_InsideLayout.Children.Add (m_txtAddress1);
+            InsideLayout.Children.Add (m_txtAddress1);
 
             m_txtAddress2 = new Entry ();
             m_txtAddress2.Placeholder = "Address 2";
-            m_InsideLayout.Children.Add (m_txtAddress2);
+            InsideLayout.Children.Add (m_txtAddress2);
 
             m_txtCity = new Entry ();
             m_txtCity.Placeholder = "City";
-            m_InsideLayout.Children.Add (m_txtCity);
+            InsideLayout.Children.Add (m_txtCity);
 
             m_txtState = new Entry ();
             m_txtState.Placeholder = "State";
-            m_InsideLayout.Children.Add (m_txtState);
+            InsideLayout.Children.Add (m_txtState);
 
             m_txtCountry = new Entry ();
             m_txtCountry.Placeholder = "Country";
-            m_InsideLayout.Children.Add (m_txtCountry);
-
-            Content = m_OutsideLayout;
+            InsideLayout.Children.Add (m_txtCountry);
         }
 
         public void SetupForm (Range _range)
@@ -84,7 +56,7 @@ namespace ATMobile.Forms
             }
         }
 
-        private void OnSave (object sender, EventArgs e)
+        public override void Save ()
         {
             if (m_Range == null) {
                 m_Range = new Range ();

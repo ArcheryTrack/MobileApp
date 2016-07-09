@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using ATMobile.Constants;
 using ATMobile.Enums;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -8,14 +6,10 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class RoundTypeForm : ContentPage
+    public class RoundTypeForm : AbstractEntryForm
     {
         private RoundType m_RoundType;
 
-        private StackLayout m_OutsideLayout;
-        private Button m_btnSave;
-
-        private StackLayout m_InsideLayout;
         private Entry m_txtName;
         private Entry m_txtDescription;
         private Entry m_txtNumberOfEnds;
@@ -23,66 +17,41 @@ namespace ATMobile.Forms
         private Entry m_txtDistance;
         private Picker m_pickUnits;
 
-        public RoundTypeForm ()
+        public RoundTypeForm () : base ("Round Types")
         {
-            Title = "Round Types";
-
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_btnSave = new Button {
-                Text = "Save"
-            };
-            m_btnSave.Clicked += OnSave;
-            m_OutsideLayout.Children.Add (m_btnSave);
-
-            m_InsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-            m_OutsideLayout.Children.Add (m_InsideLayout);
-
             m_txtName = new Entry {
                 Placeholder = "Name"
             };
-            m_InsideLayout.Children.Add (m_txtName);
+            InsideLayout.Children.Add (m_txtName);
 
             m_txtDescription = new Entry {
                 Placeholder = "Description"
             };
-            m_InsideLayout.Children.Add (m_txtDescription);
+            InsideLayout.Children.Add (m_txtDescription);
 
             m_txtNumberOfEnds = new Entry {
                 Placeholder = "Number of Ends",
                 Keyboard = Keyboard.Numeric
             };
-            m_InsideLayout.Children.Add (m_txtNumberOfEnds);
+            InsideLayout.Children.Add (m_txtNumberOfEnds);
 
             m_txtArrowsPerEnd = new Entry {
                 Placeholder = "Arrows per End",
                 Keyboard = Keyboard.Numeric
             };
-            m_InsideLayout.Children.Add (m_txtArrowsPerEnd);
+            InsideLayout.Children.Add (m_txtArrowsPerEnd);
 
             m_txtDistance = new Entry {
                 Placeholder = "Distance",
                 Keyboard = Keyboard.Numeric
             };
-            m_InsideLayout.Children.Add (m_txtDistance);
+            InsideLayout.Children.Add (m_txtDistance);
 
             m_pickUnits = new Picker ();
             m_pickUnits.Items.Add ("Yards");
             m_pickUnits.Items.Add ("Meters");
-            m_InsideLayout.Children.Add (m_pickUnits);
+            InsideLayout.Children.Add (m_pickUnits);
             m_pickUnits.SelectedIndex = 0;
-
-            Content = m_OutsideLayout;
         }
 
         public void SetupForm (RoundType _roundType)
@@ -111,7 +80,7 @@ namespace ATMobile.Forms
             }
         }
 
-        async private void OnSave (object sender, EventArgs e)
+        public override void Save ()
         {
             m_RoundType.Name = m_txtName.Text;
             m_RoundType.Description = m_txtDescription.Text;
@@ -137,7 +106,7 @@ namespace ATMobile.Forms
 
             ATManager.GetInstance ().Persist (m_RoundType);
 
-            await Navigation.PopAsync (true);
+            Navigation.PopAsync (true);
         }
     }
 }

@@ -8,35 +8,16 @@ using ATMobile.Constants;
 
 namespace ATMobile.Forms
 {
-    public partial class PracticeHistoryForm : ContentPage
+    public class PracticeHistoryForm : AbstractListForm
     {
-        private StackLayout m_OutsideLayout;
-        private Button m_btnAdd;
         private Picker m_ArcherPicker;
         private PracticeHistoryListView m_PracticeHistory;
         private List<Archer> m_Archers;
         private bool m_Loading;
 
-        public PracticeHistoryForm ()
+        public PracticeHistoryForm () : base ("Practice History")
         {
             m_Loading = true;
-
-            Title = "Practice History";
-
-            //Icon = "settings.png";
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-
-            m_btnAdd = new Button {
-                Text = "Add Practice"
-            };
-            m_btnAdd.Clicked += OnAdd;
-            m_OutsideLayout.Children.Add (m_btnAdd);
 
             //Load Archers and setup picker
             m_Archers = ATManager.GetInstance ().GetArchers ();
@@ -46,16 +27,13 @@ namespace ATMobile.Forms
                 m_ArcherPicker.Items.Add (archer.FullName);
             }
             m_ArcherPicker.SelectedIndexChanged += OnArcherPicked;
-            m_OutsideLayout.Children.Add (m_ArcherPicker);
+            OutsideLayout.Children.Insert (1, m_ArcherPicker);
 
-            //Add the sight settings listview
             m_PracticeHistory = new PracticeHistoryListView ();
             m_PracticeHistory.ItemSelected += OnSelected;
-            m_OutsideLayout.Children.Add (m_PracticeHistory);
+            ListFrame.Content = m_PracticeHistory;
 
             GetCurrentArcher ();
-
-            Content = m_OutsideLayout;
 
             m_Loading = false;
         }
@@ -101,15 +79,15 @@ namespace ATMobile.Forms
             }
 
             if (m_ArcherPicker.SelectedIndex >= 0) {
-                m_btnAdd.IsEnabled = true;
+                AddButton.IsEnabled = true;
             } else {
-                m_btnAdd.IsEnabled = false;
+                AddButton.IsEnabled = false;
             }
 
             RefreshList ();
         }
 
-        void OnAdd (object sender, EventArgs e)
+        public override void Add ()
         {
             Archer selected = GetSelectedArcher ();
 

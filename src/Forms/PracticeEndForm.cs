@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using ATMobile.Controls;
 using ATMobile.Helpers;
 using ATMobile.Managers;
@@ -11,7 +9,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class PracticeEndForm : ContentPage
+    public class PracticeEndForm : AbstractEntryForm
     {
         private Archer m_Archer;
         private Practice m_Practice;
@@ -19,9 +17,6 @@ namespace ATMobile.Forms
         private int m_EndCount;
         private TargetFace m_TargetFace;
 
-        private StackLayout m_OutsideLayout;
-        private StackLayout m_InsideLayout;
-        private Button m_btnSave;
         private PracticeArrowListView m_ArrowsListView;
         private Grid m_EntryGrid;
 
@@ -38,32 +33,16 @@ namespace ATMobile.Forms
         private ArrowButton m_btn1;
         private ArrowButton m_btnM;
 
-        public PracticeEndForm ()
+        public PracticeEndForm () : base ("End")
         {
-            Title = "End";
-
-            m_OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
+            Frame frame = new Frame {
+                HasShadow = false,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HeightRequest = 300
             };
-
-            m_btnSave = new Button {
-                Text = "Save"
-            };
-            m_btnSave.Clicked += OnSave;
-            m_OutsideLayout.Children.Add (m_btnSave);
-
-            m_InsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
-            };
-            m_OutsideLayout.Children.Add (m_InsideLayout);
-
             m_ArrowsListView = new PracticeArrowListView ();
-            m_ArrowsListView.HeightRequest = 300;
-            m_InsideLayout.Children.Add (m_ArrowsListView);
+            frame.Content = m_ArrowsListView;
+            InsideLayout.Children.Add (frame);
 
             m_EntryGrid = new Grid ();
             m_EntryGrid.VerticalOptions = LayoutOptions.FillAndExpand;
@@ -125,9 +104,7 @@ namespace ATMobile.Forms
             m_btnM.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btnM, 2, 3);
 
-            m_InsideLayout.Children.Add (m_EntryGrid);
-
-            Content = m_OutsideLayout;
+            InsideLayout.Children.Add (m_EntryGrid);
         }
 
         private void DisableControls ()
@@ -270,7 +247,7 @@ namespace ATMobile.Forms
             DisableControls ();
         }
 
-        private void OnSave (object sender, EventArgs e)
+        public override void Save ()
         {
             m_PracticeEnd.Results = m_ArrowsListView.Arrows.ToList ();
 
