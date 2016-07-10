@@ -9,12 +9,22 @@ namespace ATMobile.Forms
         private Archer m_Archer;
         private Practice m_Practice;
         private Label m_lblArcher;
+        private Label m_lblSummary;
         private PracticeEndsListView m_PracticeEnds;
 
         public PracticeEndsForm () : base ("Practice")
         {
-            m_lblArcher = new Label ();
+            m_lblArcher = new Label {
+                HorizontalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold
+            };
             OutsideLayout.Children.Insert (0, m_lblArcher);
+
+            m_lblSummary = new Label {
+                HorizontalTextAlignment = TextAlignment.Center,
+                Text = "Arrows: 0, Score: 0"
+            };
+            OutsideLayout.Children.Insert (1, m_lblSummary);
 
             m_PracticeEnds = new PracticeEndsListView ();
             m_PracticeEnds.ItemSelected += OnSelected;
@@ -31,6 +41,21 @@ namespace ATMobile.Forms
             if (m_Practice != null) {
                 m_PracticeEnds.RefreshList (m_Practice.Id);
             }
+        }
+
+        private void SetSummary ()
+        {
+            int arrows = 0;
+            int score = 0;
+
+            foreach (var end in m_PracticeEnds.Ends) {
+                foreach (var arrow in end.Results) {
+                    arrows += 1;
+                    score += arrow.ScoreValue;
+                }
+            }
+
+            m_lblSummary.Text = string.Format ("Arrows:{0}, Score:{1}", arrows, score);
         }
 
         public override void Add ()
@@ -57,6 +82,7 @@ namespace ATMobile.Forms
         private void RefreshList ()
         {
             m_PracticeEnds.RefreshList (m_Practice.Id);
+            SetSummary ();
         }
     }
 }

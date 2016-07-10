@@ -17,6 +17,8 @@ namespace ATMobile.Forms
         private int m_EndCount;
         private TargetFace m_TargetFace;
 
+        private Label m_lblPoints;
+
         private PracticeArrowListView m_ArrowsListView;
         private Grid m_EntryGrid;
 
@@ -35,14 +37,28 @@ namespace ATMobile.Forms
 
         public PracticeEndForm () : base ("End")
         {
+
+            m_lblPoints = new Label {
+                Text = "Points: "
+            };
+            InsideLayout.Children.Add (m_lblPoints);
+
+            StackLayout layout = new StackLayout {
+                Orientation = StackOrientation.Horizontal,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Padding = 5,
+                Spacing = 15
+            };
+            InsideLayout.Children.Add (layout);
+
             Frame frame = new Frame {
                 HasShadow = false,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                HeightRequest = 300
             };
             m_ArrowsListView = new PracticeArrowListView ();
             frame.Content = m_ArrowsListView;
-            InsideLayout.Children.Add (frame);
+            layout.Children.Add (frame);
 
             m_EntryGrid = new Grid ();
             m_EntryGrid.VerticalOptions = LayoutOptions.FillAndExpand;
@@ -104,7 +120,12 @@ namespace ATMobile.Forms
             m_btnM.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btnM, 2, 3);
 
-            InsideLayout.Children.Add (m_EntryGrid);
+            Frame frame2 = new Frame {
+                HasShadow = false,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+            };
+            frame2.Content = m_EntryGrid;
+            layout.Children.Add (frame2);
         }
 
         private void DisableControls ()
@@ -204,6 +225,17 @@ namespace ATMobile.Forms
             }
 
             m_ArrowsListView.Arrows.Insert (arrow.ArrowNumber - 1, arrow);
+
+            SetPoints ();
+        }
+
+        private void SetPoints ()
+        {
+            int points = 0;
+            foreach (var item in m_ArrowsListView.Arrows) {
+                points += item.ScoreValue;
+            }
+            m_lblPoints.Text = string.Format ("Points: {0}", points);
         }
 
         public void FillList ()
@@ -245,6 +277,8 @@ namespace ATMobile.Forms
             FillList ();
 
             DisableControls ();
+
+            SetPoints ();
         }
 
         public override void Save ()
