@@ -15,7 +15,8 @@ namespace ATMobile.Controls
         public RoundTypeListView ()
         {
             ItemTemplate = new DataTemplate (typeof (RoundTypeCell));
-            RowHeight = 60;
+            //RowHeight = 60;
+            HasUnevenRows = true;
         }
 
         public void RefreshList (Guid _tournamentTypeId)

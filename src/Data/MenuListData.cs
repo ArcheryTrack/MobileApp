@@ -30,21 +30,6 @@ namespace ATMobile.Data
             });
 
             this.Add (new MenuItem () {
-                Title = "Archers",
-                TargetType = typeof (ArchersForm)
-            });
-
-            this.Add (new MenuItem () {
-                Title = "Ranges",
-                TargetType = typeof (RangesForm)
-            });
-
-            this.Add (new MenuItem () {
-                Title = "Tournament Types",
-                TargetType = typeof (TournamentTypesForm)
-            });
-
-            this.Add (new MenuItem () {
                 Title = "Settings",
                 TargetType = typeof (SettingsForm)
             });

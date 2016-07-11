@@ -14,7 +14,8 @@ namespace ATMobile.Controls
         public PracticeHistoryListView ()
         {
             ItemTemplate = new DataTemplate (typeof (PracticeHistoryCell));
-            RowHeight = 60;
+            //RowHeight = 60;
+            HasUnevenRows = true;
         }
 
         public void RefreshList (Guid _archerGuid)

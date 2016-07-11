@@ -14,7 +14,8 @@ namespace ATMobile.Controls
         public TournamentListView ()
         {
             ItemTemplate = new DataTemplate (typeof (TournamentHistoryCell));
-            RowHeight = 60;
+            //RowHeight = 60;
+            HasUnevenRows = true;
         }
 
         public void RefreshList ()

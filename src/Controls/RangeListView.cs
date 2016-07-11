@@ -14,7 +14,8 @@ namespace ATMobile.Controls
         public RangeListView ()
         {
             ItemTemplate = new DataTemplate (typeof (RangeCell));
-            RowHeight = 60;
+            //RowHeight = 60;
+            HasUnevenRows = true;
         }
 
         public void RefreshList ()

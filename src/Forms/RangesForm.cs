@@ -10,7 +10,10 @@ namespace ATMobile.Forms
 
         public RangesForm () : base ("Ranges")
         {
-            m_RangeList = new RangeListView ();
+            m_RangeList = new RangeListView {
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+
             m_RangeList.ItemSelected += OnSelected;
             ListFrame.Content = m_RangeList;
         }

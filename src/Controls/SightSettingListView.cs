@@ -14,7 +14,8 @@ namespace ATMobile.Controls
         public SightSettingListView ()
         {
             ItemTemplate = new DataTemplate (typeof (SightSettingCell));
-            RowHeight = 60;
+            //RowHeight = 60;
+            HasUnevenRows = true;
         }
 
         public void RefreshList (Guid _archerGuid)

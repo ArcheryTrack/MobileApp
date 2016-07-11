@@ -9,6 +9,7 @@ namespace ATMobile.Controls
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
             BackgroundColor = Color.Transparent;
+            HasUnevenRows = false;
         }
     }
 }

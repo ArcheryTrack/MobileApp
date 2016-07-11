@@ -21,7 +21,7 @@ namespace ATMobile.Forms
 
             OutsideLayout = new StackLayout {
                 Spacing = 15,
-                VerticalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.FillAndExpand,
                 Padding = 5
             };
 
