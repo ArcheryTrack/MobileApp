@@ -55,7 +55,7 @@ namespace ATMobile.Forms
                 }
             }
 
-            m_lblSummary.Text = string.Format ("Arrows:{0}, Score:{1}", arrows, score);
+            m_lblSummary.Text = string.Format ("Arrows: {0}, Score: {1}", arrows, score);
         }
 
         public override void Add ()

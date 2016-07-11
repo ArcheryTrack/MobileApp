@@ -23,14 +23,17 @@ namespace ATMobile.Daos
             }
         }
 
-        public List<Tournament> GetTournaments (Guid _archerGuid)
+        public List<Tournament> GetTournamentsByType (Guid _tournamentTypeId)
         {
-            //TODO rewrite
-            //var tournaments = GetChildren (_archerGuid);
+            Query query = Query.EQ ("TournamentTypeId", _tournamentTypeId);
+            return m_Collection.Find (query).OrderByDescending ((Tournament arg) => arg.StartDateTime).ToList ();
+        }
 
-            //return tournaments.OrderByDescending ((Tournament arg) => arg.StartDateTime).ToList ();
-
-            return null;
+        public int GetTournamentsByTypeCount (Guid _tournamentTypeId)
+        {
+            Query query = Query.EQ ("TournamentTypeId", _tournamentTypeId);
+            int count = m_Collection.Count (query);
+            return count;
         }
     }
 }

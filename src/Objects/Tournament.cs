@@ -14,7 +14,7 @@ namespace ATMobile.Objects
 
         public Guid RangeId { get; set; }
 
-        public Guid TournamentType { get; set; }
+        public Guid TournamentTypeId { get; set; }
 
         public DateTime StartDateTime { get; set; }
 

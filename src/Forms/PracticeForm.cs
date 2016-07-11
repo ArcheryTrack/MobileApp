@@ -14,7 +14,6 @@ namespace ATMobile.Forms
         private List<Range> m_Ranges;
         private List<TargetFace> m_TargetFaces;
 
-        private Button m_btnSave;
         private Label m_lblDate;
         private DatePicker m_datDate;
         private Label m_lblTime;
@@ -29,24 +28,29 @@ namespace ATMobile.Forms
         {
             DateTime now = DateTime.Now;
 
-            m_lblDate = new Label ();
-            m_lblDate.Text = "Date";
+            m_lblDate = new Label {
+                Text = "Date"
+            };
             InsideLayout.Children.Add (m_lblDate);
 
             m_datDate = new DatePicker ();
             m_datDate.Date = now.Date;
             InsideLayout.Children.Add (m_datDate);
 
-            m_lblTime = new Label ();
-            m_lblTime.Text = "Time";
+            m_lblTime = new Label {
+                Text = "Time"
+            };
             InsideLayout.Children.Add (m_lblTime);
 
             m_timTime = new TimePicker ();
             m_timTime.Time = now.TimeOfDay;
             InsideLayout.Children.Add (m_timTime);
 
-            m_lblLocation = new Label ();
-            m_lblLocation.Text = "Location";
+            m_lblLocation = new Label {
+                Text = "Location"
+            };
+            InsideLayout.Children.Add (m_lblLocation);
+
 
             m_pickLocation = new Picker ();
             InsideLayout.Children.Add (m_pickLocation);
@@ -56,8 +60,10 @@ namespace ATMobile.Forms
                 m_pickLocation.Items.Add (item.Name);
             }
 
-            m_lblTargetFace = new Label ();
-            m_lblTargetFace.Text = "Target";
+            m_lblTargetFace = new Label {
+                Text = "Target"
+            };
+            InsideLayout.Children.Add (m_lblTargetFace);
 
             m_pickTargetFace = new Picker ();
             InsideLayout.Children.Add (m_pickTargetFace);

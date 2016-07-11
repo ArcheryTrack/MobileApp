@@ -8,17 +8,11 @@ namespace ATMobile.Forms
     {
         private TournamentListView m_Tournaments;
 
-        private bool m_Loading;
-
         public TournamentHistoryForm () : base ("Tournaments")
         {
-            m_Loading = true;
-
             m_Tournaments = new TournamentListView ();
             m_Tournaments.ItemSelected += OnSelected;
             ListFrame.Content = m_Tournaments;
-
-            m_Loading = false;
         }
 
         public override void Add ()
