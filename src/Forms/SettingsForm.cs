@@ -41,12 +41,8 @@ namespace ATMobile.Forms
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
             var menuItem = e.SelectedItem as Controls.MenuItem;
-
             Page displayPage = (Page)Activator.CreateInstance (menuItem.TargetType);
-
-            var npage = new NavigationPage (displayPage);
-
-            Navigation.PushAsync (npage, true);
+            Navigation.PushAsync (displayPage, true);
         }
     }
 }
