@@ -16,12 +16,24 @@ namespace ATMobile.Forms
         private Entry m_txtName;
 
         private Grid m_Layout;
+
+        private Label m_lblLocation;
+        private Button m_btnPickLocation;
+        private Range m_Location;
+
         private Label m_lblTournamentType;
-        private TournamentType m_TournamentType;
         private Button m_btnPickTournamentType;
+        private TournamentType m_TournamentType;
+
+        private Label m_lblStartDate;
+        private Button m_btnPickStart;
+        private bool m_bolStartPicked;
+
+        private Label m_lblEndDate;
+        private Button m_btnPickEnd;
+        private bool m_bolEndPicked;
 
         private Label m_lblArchers;
-        private StackLayout m_ArchersLayout;
         private TournamentArcherListView m_Archers;
         private Button m_btnAddArcher;
         private ObservableCollection<Archer> m_ArchersList;
@@ -36,16 +48,28 @@ namespace ATMobile.Forms
             };
             InsideLayout.Children.Add (m_txtName);
 
-            //Add the controls for the Tournament Type
+            //Setup grid to hold the controls
             m_Layout = new Grid {
                 Padding = 5,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 RowDefinitions = {
                     new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute)
+                        Height = new GridLength(40, GridUnitType.Absolute) //Location
                     },
                     new RowDefinition {
-                        Height = new GridLength(140, GridUnitType.Absolute)
+                        Height = new GridLength(40, GridUnitType.Absolute) //Type
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Start Date
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //End Date
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(25, GridUnitType.Absolute) //Archers Label
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(140, GridUnitType.Absolute) //Archers List and button
                     }
                 },
                 ColumnDefinitions = {
@@ -58,11 +82,33 @@ namespace ATMobile.Forms
                 }
             };
 
-            m_lblTournamentType = new Label {
-                Text = "Select the type of tournament.",
+            //Setup Location
+            m_lblLocation = new Label {
+                Text = "Select location",
+                HeightRequest = 40,
+                VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
-            m_Layout.Children.Add (m_lblTournamentType, 0, 0);
+            m_Layout.Children.Add (m_lblLocation, 0, 0);
+
+            m_btnPickLocation = new Button {
+                Text = "Pick",
+                WidthRequest = 80,
+                HeightRequest = 40,
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnPickLocation.Clicked += PickLocation;
+            m_Layout.Children.Add (m_btnPickLocation, 1, 0);
+
+            //Setup the Tournament Type
+            m_lblTournamentType = new Label {
+                Text = "Select tournament type",
+                HeightRequest = 40,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.StartAndExpand
+            };
+            m_Layout.Children.Add (m_lblTournamentType, 0, 1);
 
             m_btnPickTournamentType = new Button {
                 Text = "Pick",
@@ -72,26 +118,62 @@ namespace ATMobile.Forms
                 HorizontalOptions = LayoutOptions.End
             };
             m_btnPickTournamentType.Clicked += PickTournamentType;
-            m_Layout.Children.Add (m_btnPickTournamentType, 1, 0);
+            m_Layout.Children.Add (m_btnPickTournamentType, 1, 1);
 
-            StackLayout m_ArchersLayout = new StackLayout {
-                Orientation = StackOrientation.Vertical
+            //Setup the StartDate
+            m_lblStartDate = new Label {
+                Text = "Start Date:",
+                HeightRequest = 40,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.StartAndExpand
             };
+            m_Layout.Children.Add (m_lblStartDate, 0, 2);
+
+            m_btnPickStart = new Button {
+                Text = "Pick",
+                WidthRequest = 80,
+                HeightRequest = 40,
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnPickTournamentType.Clicked += PickStart;
+            m_Layout.Children.Add (m_btnPickStart, 1, 2);
+
+            //Setup the EndDate
+            m_lblEndDate = new Label {
+                Text = "End Date:",
+                HeightRequest = 40,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.StartAndExpand
+            };
+            m_Layout.Children.Add (m_lblEndDate, 0, 3);
+
+            m_btnPickEnd = new Button {
+                Text = "Pick",
+                WidthRequest = 80,
+                HeightRequest = 40,
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnPickTournamentType.Clicked += PickEnd;
+            m_Layout.Children.Add (m_btnPickEnd, 1, 3);
+
+
+            //Add the archers label
             m_lblArchers = new Label {
-                Text = "Archers"
+                Text = "Selected Archers",
+                VerticalTextAlignment = TextAlignment.End
             };
-            m_ArchersLayout.Children.Add (m_lblArchers);
+            m_Layout.Children.Add (m_lblArchers, 0, 4);
 
+            //Add the Archers list and button
             Frame archersFrame = new Frame {
                 HasShadow = false
             };
-
             m_Archers = new TournamentArcherListView ();
             m_Archers.HeightRequest = 100;
             archersFrame.Content = m_Archers;
-            m_ArchersLayout.Children.Add (archersFrame);
-
-            m_Layout.Children.Add (m_ArchersLayout, 0, 1);
+            m_Layout.Children.Add (archersFrame, 0, 5);
 
             m_btnAddArcher = new Button {
                 Text = "Add",
@@ -101,7 +183,7 @@ namespace ATMobile.Forms
                 VerticalOptions = LayoutOptions.Start
             };
             m_btnAddArcher.Clicked += AddArcher;
-            m_Layout.Children.Add (m_btnAddArcher, 1, 1);
+            m_Layout.Children.Add (m_btnAddArcher, 1, 5);
 
             InsideLayout.Children.Add (m_Layout);
         }
@@ -111,6 +193,22 @@ namespace ATMobile.Forms
 
 
             Navigation.PopAsync (true);
+        }
+
+        async private void PickStart (object sender, EventArgs e)
+        {
+        }
+
+        async private void PickEnd (object sender, EventArgs e)
+        {
+        }
+
+        async private void PickLocation (object sender, EventArgs e)
+        {
+            RangePicker picker = new RangePicker ();
+            picker.ItemPicked += RangePicked;
+
+            await Navigation.PushModalAsync (picker);
         }
 
         async private void PickTournamentType (object sender, EventArgs e)
@@ -127,6 +225,12 @@ namespace ATMobile.Forms
             picker.ItemPicked += ArcherPicked;
 
             await Navigation.PushModalAsync (picker);
+        }
+
+        private void RangePicked (Range _range)
+        {
+            m_Location = _range;
+            m_lblLocation.Text = m_Location.Name;
         }
 
         private void TournamentTypePicked (TournamentType _tournamentType)
