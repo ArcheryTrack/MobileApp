@@ -136,7 +136,7 @@ namespace ATMobile.Forms
                 BorderWidth = 1,
                 HorizontalOptions = LayoutOptions.End
             };
-            m_btnPickTournamentType.Clicked += PickStart;
+            m_btnPickStart.Clicked += PickStart;
             m_Layout.Children.Add (m_btnPickStart, 1, 2);
 
             //Setup the EndDate
@@ -155,7 +155,7 @@ namespace ATMobile.Forms
                 BorderWidth = 1,
                 HorizontalOptions = LayoutOptions.End
             };
-            m_btnPickTournamentType.Clicked += PickEnd;
+            m_btnPickEnd.Clicked += PickEnd;
             m_Layout.Children.Add (m_btnPickEnd, 1, 3);
 
 
@@ -197,10 +197,14 @@ namespace ATMobile.Forms
 
         async private void PickStart (object sender, EventArgs e)
         {
+            DatePickerForm picker = new DatePickerForm ("Select Tournament Start");
+            await Navigation.PushModalAsync (picker);
         }
 
         async private void PickEnd (object sender, EventArgs e)
         {
+            DatePickerForm picker = new DatePickerForm ("Select Tournament End");
+            await Navigation.PushModalAsync (picker);
         }
 
         async private void PickLocation (object sender, EventArgs e)
