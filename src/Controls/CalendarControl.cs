@@ -1,9 +1,10 @@
 ﻿using System;
+using ATMobile.Delegates;
 using Xamarin.Forms;
 
 namespace ATMobile.Controls
 {
-    public class CalendarControl : ContentView
+    public class CalendarControl : ContentView, IDisposable
     {
         private DateTime m_MinDate;
         private DateTime m_MaxDate;
@@ -19,12 +20,15 @@ namespace ATMobile.Controls
         private Button m_btnPreviousYear;
         private Button m_btnNextYear;
         private Label m_lblTitle;
+        private IntButton [] m_btnDates;
 
         //Calendar Grid
         private Grid m_gridCal;
 
         //Footer Container
         private StackLayout m_Footer;
+
+        public OnDateSelectedDelegate OnDateSelected;
 
         public CalendarControl ()
         {
@@ -85,9 +89,46 @@ namespace ATMobile.Controls
 
             //Setup the day grid
             m_gridCal = new Grid {
-
-
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                RowDefinitions = {
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }
+                },
+                ColumnDefinitions = {
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+                }
             };
+            m_gridCal.Children.Add (new Label { Text = "S", HorizontalTextAlignment = TextAlignment.Center }, 0, 0);
+            m_gridCal.Children.Add (new Label { Text = "M", HorizontalTextAlignment = TextAlignment.Center }, 1, 0);
+            m_gridCal.Children.Add (new Label { Text = "T", HorizontalTextAlignment = TextAlignment.Center }, 2, 0);
+            m_gridCal.Children.Add (new Label { Text = "W", HorizontalTextAlignment = TextAlignment.Center }, 3, 0);
+            m_gridCal.Children.Add (new Label { Text = "T", HorizontalTextAlignment = TextAlignment.Center }, 4, 0);
+            m_gridCal.Children.Add (new Label { Text = "F", HorizontalTextAlignment = TextAlignment.Center }, 5, 0);
+            m_gridCal.Children.Add (new Label { Text = "S", HorizontalTextAlignment = TextAlignment.Center }, 6, 0);
+
+            m_btnDates = new IntButton [42];
+            for (int i = 0; i < 42; i++) {
+                m_btnDates [i] = new IntButton (0);
+                m_btnDates [i].OnClicked += DatePressed;
+
+                int y = (i / 7) + 1; //Add one for header row
+                int x = i % 7;
+
+                m_gridCal.Children.Add (m_btnDates [i], x, y);
+            }
+
             m_Outside.Children.Add (m_gridCal);
 
             m_Footer = new StackLayout () {
@@ -98,6 +139,16 @@ namespace ATMobile.Controls
             this.Content = m_Outside;
 
             RefreshCalendar ();
+        }
+
+        private void DatePressed (int dayOfMonth)
+        {
+            m_SelectedDate = new DateTime (m_SelectedDate.Year, m_SelectedDate.Month, dayOfMonth);
+
+            var selected = OnDateSelected;
+            if (selected != null) {
+                selected (m_SelectedDate);
+            }
         }
 
         private void PreviousMonth (object sender, EventArgs e)
@@ -145,6 +196,31 @@ namespace ATMobile.Controls
         private void RefreshCalendar ()
         {
             m_lblTitle.Text = string.Format ("{0}/{1}", m_SelectedDate.Date.Month, m_SelectedDate.Date.Year);
+
+            DateTime firstOfMonth = new DateTime (m_SelectedDate.Year, m_SelectedDate.Month, 1);
+            DateTime lastOfMonth = firstOfMonth.AddMonths (1).AddDays (-1);
+            DayOfWeek dayOfWeekFirstOfMonth = firstOfMonth.DayOfWeek;
+
+            foreach (var button in m_btnDates) {
+                button.SetValue (0);
+                button.IsEnabled = false;
+            }
+
+            int start = (int)dayOfWeekFirstOfMonth;
+            int end = start + lastOfMonth.Day;
+            int dayCount = 1;
+            for (int i = start; i < end; i++) {
+                m_btnDates [i].SetValue (dayCount);
+                m_btnDates [i].IsEnabled = true;
+                dayCount++;
+            }
+        }
+
+        public void Dispose ()
+        {
+            foreach (var button in m_btnDates) {
+                button.OnClicked -= DatePressed;
+            }
         }
     }
 }

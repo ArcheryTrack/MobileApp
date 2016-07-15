@@ -28,10 +28,12 @@ namespace ATMobile.Forms
         private Label m_lblStartDate;
         private Button m_btnPickStart;
         private bool m_bolStartPicked;
+        private DateTime m_StartDate;
 
         private Label m_lblEndDate;
         private Button m_btnPickEnd;
         private bool m_bolEndPicked;
+        private DateTime m_EndDate;
 
         private Label m_lblArchers;
         private TournamentArcherListView m_Archers;
@@ -198,13 +200,27 @@ namespace ATMobile.Forms
         async private void PickStart (object sender, EventArgs e)
         {
             DatePickerForm picker = new DatePickerForm ("Select Tournament Start");
+            picker.OnDateSelected += StartPicked;
             await Navigation.PushModalAsync (picker);
         }
 
         async private void PickEnd (object sender, EventArgs e)
         {
             DatePickerForm picker = new DatePickerForm ("Select Tournament End");
+            picker.OnDateSelected += EndPicked;
             await Navigation.PushModalAsync (picker);
+        }
+
+        private void StartPicked (DateTime _start)
+        {
+            m_StartDate = _start;
+            m_lblStartDate.Text = m_StartDate.ToString ("d");
+        }
+
+        private void EndPicked (DateTime _end)
+        {
+            m_EndDate = _end;
+            m_lblEndDate.Text = m_EndDate.ToString ("d");
         }
 
         async private void PickLocation (object sender, EventArgs e)

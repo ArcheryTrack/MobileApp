@@ -22,18 +22,18 @@ namespace ATMobile.Forms
         private PracticeArrowListView m_ArrowsListView;
         private Grid m_EntryGrid;
 
-        private ArrowButton m_btnX;
-        private ArrowButton m_btn10;
-        private ArrowButton m_btn9;
-        private ArrowButton m_btn8;
-        private ArrowButton m_btn7;
-        private ArrowButton m_btn6;
-        private ArrowButton m_btn5;
-        private ArrowButton m_btn4;
-        private ArrowButton m_btn3;
-        private ArrowButton m_btn2;
-        private ArrowButton m_btn1;
-        private ArrowButton m_btnM;
+        private TextButton m_btnX;
+        private TextButton m_btn10;
+        private TextButton m_btn9;
+        private TextButton m_btn8;
+        private TextButton m_btn7;
+        private TextButton m_btn6;
+        private TextButton m_btn5;
+        private TextButton m_btn4;
+        private TextButton m_btn3;
+        private TextButton m_btn2;
+        private TextButton m_btn1;
+        private TextButton m_btnM;
 
         public PracticeEndForm () : base ("End")
         {
@@ -72,51 +72,51 @@ namespace ATMobile.Forms
             m_EntryGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = GridLength.Auto });
             m_EntryGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = GridLength.Auto });
 
-            m_btnX = new ArrowButton ("X");
+            m_btnX = new TextButton ("X");
             m_btnX.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btnX, 0, 0);
 
-            m_btn10 = new ArrowButton ("10");
+            m_btn10 = new TextButton ("10");
             m_btn10.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn10, 1, 0);
 
-            m_btn9 = new ArrowButton ("9");
+            m_btn9 = new TextButton ("9");
             m_btn9.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn9, 2, 0);
 
-            m_btn8 = new ArrowButton ("8");
+            m_btn8 = new TextButton ("8");
             m_btn8.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn8, 0, 1);
 
-            m_btn7 = new ArrowButton ("7");
+            m_btn7 = new TextButton ("7");
             m_btn7.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn7, 1, 1);
 
-            m_btn6 = new ArrowButton ("6");
+            m_btn6 = new TextButton ("6");
             m_btn6.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn6, 2, 1);
 
-            m_btn5 = new ArrowButton ("5");
+            m_btn5 = new TextButton ("5");
             m_btn5.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn5, 0, 2);
 
-            m_btn4 = new ArrowButton ("4");
+            m_btn4 = new TextButton ("4");
             m_btn4.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn4, 1, 2);
 
-            m_btn3 = new ArrowButton ("3");
+            m_btn3 = new TextButton ("3");
             m_btn3.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn3, 2, 2);
 
-            m_btn2 = new ArrowButton ("2");
+            m_btn2 = new TextButton ("2");
             m_btn2.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn2, 0, 3);
 
-            m_btn1 = new ArrowButton ("1");
+            m_btn1 = new TextButton ("1");
             m_btn1.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btn1, 1, 3);
 
-            m_btnM = new ArrowButton ("M");
+            m_btnM = new TextButton ("M");
             m_btnM.OnClicked += Clicked;
             m_EntryGrid.Children.Add (m_btnM, 2, 3);
 

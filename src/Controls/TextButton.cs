@@ -4,13 +4,13 @@ using Xamarin.Forms;
 
 namespace ATMobile.Controls
 {
-    public class ArrowButton : Button
+    public class TextButton : Button
     {
         private string m_Value;
 
-        public event OnClickedDelegate OnClicked;
+        public event OnTextButtonClickedDelegate OnClicked;
 
-        public ArrowButton (string _value)
+        public TextButton (string _value)
         {
             m_Value = _value;
             Text = _value;

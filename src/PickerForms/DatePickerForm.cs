@@ -1,6 +1,7 @@
 ﻿using System;
 using ATMobile.Constants;
 using ATMobile.Controls;
+using ATMobile.Delegates;
 using Xamarin.Forms;
 
 namespace ATMobile.PickerForms
@@ -11,6 +12,8 @@ namespace ATMobile.PickerForms
         private Label m_lblTitle;
         private CalendarControl m_CalendarControl;
         private Button m_btnCancel;
+
+        public OnDateSelectedDelegate OnDateSelected;
 
         public DatePickerForm (string _title)
         {
@@ -34,6 +37,7 @@ namespace ATMobile.PickerForms
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
+            m_CalendarControl.OnDateSelected += DateSelected;
             m_OutsideLayout.Children.Add (m_CalendarControl);
 
             m_btnCancel = new Button () {
@@ -44,6 +48,16 @@ namespace ATMobile.PickerForms
             m_OutsideLayout.Children.Add (m_btnCancel);
 
             Content = m_OutsideLayout;
+        }
+
+        async void DateSelected (DateTime _selectedDate)
+        {
+            var selected = OnDateSelected;
+            if (selected != null) {
+                selected (_selectedDate);
+            }
+
+            await Navigation.PopModalAsync ();
         }
 
         async void OnCancel (object sender, EventArgs e)
