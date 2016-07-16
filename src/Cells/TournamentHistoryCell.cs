@@ -1,38 +1,50 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using ATMobile.Delegates;
+using ATMobile.Objects;
+using Xamarin.Forms;
 
 namespace ATMobile.Cells
 {
     public class TournamentHistoryCell : ViewCell
     {
         private StackLayout m_Layout;
+        private Label m_lblName;
         private Label m_lblDateTime;
-        private Label m_lblLocation;
-        private Label m_lblArrows;
+
+        public static TournamentEditClickedDelegate TournamentEditClicked;
 
         public TournamentHistoryCell ()
         {
-            m_Layout = new StackLayout ();
-            m_Layout.Padding = new Thickness (0, 5);
+            m_Layout = new StackLayout {
+                Orientation = StackOrientation.Vertical,
+                Padding = new Thickness (0, 5)
+            };
 
-            StackLayout topRowLayout = new StackLayout { Orientation = StackOrientation.Horizontal };
+            m_lblName = new Label ();
+            m_lblName.SetBinding (Label.TextProperty, "NameString");
+            m_Layout.Children.Add (m_lblName);
 
             m_lblDateTime = new Label ();
             m_lblDateTime.SetBinding (Label.TextProperty, "DateTimeString");
-            topRowLayout.Children.Add (m_lblDateTime);
-
-            topRowLayout.Children.Add (new Label { Text = "  Total Arrows: " });
-
-            m_lblArrows = new Label ();
-            m_lblArrows.SetBinding (Label.TextProperty, "TotalArrowsShot");
-            topRowLayout.Children.Add (m_lblArrows);
-
-            m_Layout.Children.Add (topRowLayout);
-
-            m_lblLocation = new Label ();
-            m_lblLocation.SetBinding (Label.TextProperty, "RangeName");
-            m_Layout.Children.Add (m_lblLocation);
+            m_Layout.Children.Add (m_lblDateTime);
 
             View = m_Layout;
+
+            var editAction = new MenuItem { Text = "Edit", IsDestructive = false };
+            editAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
+            editAction.Clicked += EditClicked;
+            ContextActions.Add (editAction);
+        }
+
+        void EditClicked (object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            Tournament tournament = (Tournament)menuItem.CommandParameter;
+
+            var clicked = TournamentEditClicked;
+            if (clicked != null) {
+                clicked (tournament);
+            }
         }
     }
 }

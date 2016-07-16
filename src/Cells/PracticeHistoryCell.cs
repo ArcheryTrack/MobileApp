@@ -1,4 +1,6 @@
 ﻿using System;
+using ATMobile.Delegates;
+using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Cells
@@ -9,6 +11,8 @@ namespace ATMobile.Cells
         private Label m_lblDateTime;
         private Label m_lblLocation;
         private Label m_lblArrows;
+
+        public static PracticeEditClickedDelegate PracticeEditClicked;
 
         public PracticeHistoryCell ()
         {
@@ -34,6 +38,22 @@ namespace ATMobile.Cells
             m_Layout.Children.Add (m_lblLocation);
 
             View = m_Layout;
+
+            var editAction = new MenuItem { Text = "Edit", IsDestructive = false };
+            editAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
+            editAction.Clicked += EditClicked;
+            ContextActions.Add (editAction);
+        }
+
+        void EditClicked (object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            Practice practice = (Practice)menuItem.CommandParameter;
+
+            var clicked = PracticeEditClicked;
+            if (clicked != null) {
+                clicked (practice);
+            }
         }
     }
 }

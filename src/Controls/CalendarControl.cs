@@ -177,12 +177,18 @@ namespace ATMobile.Controls
 
         public DateTime MinimumDate {
             get { return m_MinDate; }
-            set { m_MinDate = value; }
+            set {
+                m_MinDate = value;
+                RefreshCalendar ();
+            }
         }
 
         public DateTime MaximumDate {
             get { return m_MaxDate; }
-            set { m_MaxDate = value; }
+            set {
+                m_MaxDate = value;
+                RefreshCalendar ();
+            }
         }
 
         public DateTime SelectedDate {
@@ -210,8 +216,17 @@ namespace ATMobile.Controls
             int end = start + lastOfMonth.Day;
             int dayCount = 1;
             for (int i = start; i < end; i++) {
+                DateTime current = new DateTime (m_SelectedDate.Year, m_SelectedDate.Month, dayCount);
+
                 m_btnDates [i].SetValue (dayCount);
-                m_btnDates [i].IsEnabled = true;
+
+                if (current < m_MinDate
+                    || current > m_MaxDate) {
+                    m_btnDates [i].IsEnabled = false;
+                } else {
+                    m_btnDates [i].IsEnabled = true;
+                }
+
                 dayCount++;
             }
         }

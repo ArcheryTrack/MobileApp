@@ -111,6 +111,12 @@ namespace ATMobile.Managers
             return dao.GetRanges ();
         }
 
+        public Range GetRange (Guid rangeId)
+        {
+            RangeDao dao = new RangeDao (m_Database);
+            return dao.Get (rangeId);
+        }
+
         public void Persist (Range _range)
         {
             RangeDao dao = new RangeDao (m_Database);

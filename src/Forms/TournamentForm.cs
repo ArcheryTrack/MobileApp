@@ -192,7 +192,30 @@ namespace ATMobile.Forms
 
         public override void Save ()
         {
+            m_Tournament.Name = m_txtName.Text;
 
+            if (m_bolStartPicked == true) {
+                m_Tournament.StartDateTime = m_StartDate;
+            }
+
+            if (m_bolEndPicked == true) {
+                m_Tournament.EndDateTime = m_EndDate;
+            }
+
+            if (m_Location != null) {
+                m_Tournament.RangeId = m_Location.Id;
+            }
+
+            if (m_TournamentType != null) {
+                m_Tournament.TournamentTypeId = m_TournamentType.Id;
+            }
+
+            m_Tournament.Archers = new List<Guid> ();
+            foreach (var archer in m_ArchersList) {
+                m_Tournament.Archers.Add (archer.Id);
+            }
+
+            ATManager.GetInstance ().Persist (m_Tournament);
 
             Navigation.PopAsync (true);
         }
@@ -201,6 +224,11 @@ namespace ATMobile.Forms
         {
             DatePickerForm picker = new DatePickerForm ("Select Tournament Start");
             picker.OnDateSelected += StartPicked;
+
+            if (m_bolEndPicked) {
+                picker.MaximumDate = m_EndDate;
+            }
+
             await Navigation.PushModalAsync (picker);
         }
 
@@ -208,18 +236,24 @@ namespace ATMobile.Forms
         {
             DatePickerForm picker = new DatePickerForm ("Select Tournament End");
             picker.OnDateSelected += EndPicked;
+
+            if (m_bolStartPicked) {
+                picker.MinimumDate = m_StartDate;
+            }
             await Navigation.PushModalAsync (picker);
         }
 
         private void StartPicked (DateTime _start)
         {
             m_StartDate = _start;
+            m_bolStartPicked = true;
             m_lblStartDate.Text = m_StartDate.ToString ("d");
         }
 
         private void EndPicked (DateTime _end)
         {
             m_EndDate = _end;
+            m_bolEndPicked = true;
             m_lblEndDate.Text = m_EndDate.ToString ("d");
         }
 
@@ -270,6 +304,34 @@ namespace ATMobile.Forms
                 m_Tournament = new Tournament ();
             } else {
                 m_Tournament = _tournament;
+            }
+
+            m_txtName.Text = m_Tournament.Name;
+
+            if (m_Tournament.StartDateTime != null) {
+                m_bolStartPicked = true;
+                m_lblStartDate.Text = m_Tournament.StartDateTime.Value.ToString ("d");
+            }
+
+            if (m_Tournament.EndDateTime != null) {
+                m_bolEndPicked = true;
+                m_lblEndDate.Text = m_Tournament.EndDateTime.Value.ToString ("d");
+            }
+
+            if (m_Tournament.RangeId != null) {
+                Range range = ATManager.GetInstance ().GetRange (m_Tournament.RangeId.Value);
+
+                if (range != null) {
+                    m_lblLocation.Text = range.Name;
+                }
+            }
+
+            if (m_Tournament.TournamentTypeId != null) {
+                TournamentType tournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
+
+                if (tournamentType != null) {
+                    m_lblTournamentType.Text = tournamentType.Name;
+                }
             }
 
             FillList (m_Tournament.Archers);

@@ -5,10 +5,11 @@ using Xamarin.Forms;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Constants;
+using ATMobile.Cells;
 
 namespace ATMobile.Forms
 {
-    public class PracticeHistoryForm : AbstractListForm
+    public class PracticeHistoryForm : AbstractListForm, IDisposable
     {
         private Picker m_ArcherPicker;
         private PracticeHistoryListView m_PracticeHistory;
@@ -33,9 +34,23 @@ namespace ATMobile.Forms
             m_PracticeHistory.ItemSelected += OnSelected;
             ListFrame.Content = m_PracticeHistory;
 
+            PracticeHistoryCell.PracticeEditClicked += OnClicked;
+
             GetCurrentArcher ();
 
             m_Loading = false;
+        }
+
+        void OnClicked (Practice _practice)
+        {
+            Archer selected = GetSelectedArcher ();
+
+            if (selected != null) {
+                PracticeForm editPractice = new PracticeForm ();
+                editPractice.SetupForm (selected, _practice);
+
+                Navigation.PushAsync (editPractice);
+            }
         }
 
         void GetCurrentArcher ()
@@ -125,6 +140,11 @@ namespace ATMobile.Forms
                 Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
                 m_PracticeHistory.RefreshList (archer.Id);
             }
+        }
+
+        public void Dispose ()
+        {
+            PracticeHistoryCell.PracticeEditClicked -= OnClicked;
         }
     }
 }

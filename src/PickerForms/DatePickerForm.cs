@@ -50,6 +50,24 @@ namespace ATMobile.PickerForms
             Content = m_OutsideLayout;
         }
 
+        public DateTime MinimumDate {
+            get {
+                return m_CalendarControl.MinimumDate;
+            }
+            set {
+                m_CalendarControl.MinimumDate = value;
+            }
+        }
+
+        public DateTime MaximumDate {
+            get {
+                return m_CalendarControl.MaximumDate;
+            }
+            set {
+                m_CalendarControl.MaximumDate = value;
+            }
+        }
+
         async void DateSelected (DateTime _selectedDate)
         {
             var selected = OnDateSelected;

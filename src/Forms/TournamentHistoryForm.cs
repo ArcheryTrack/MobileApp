@@ -1,10 +1,12 @@
-﻿using ATMobile.Controls;
+﻿using System;
+using ATMobile.Cells;
+using ATMobile.Controls;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class TournamentHistoryForm : AbstractListForm
+    public class TournamentHistoryForm : AbstractListForm, IDisposable
     {
         private TournamentListView m_Tournaments;
 
@@ -13,12 +15,21 @@ namespace ATMobile.Forms
             m_Tournaments = new TournamentListView ();
             m_Tournaments.ItemSelected += OnSelected;
             ListFrame.Content = m_Tournaments;
+
+            TournamentHistoryCell.TournamentEditClicked += EditTournament;
         }
 
         public override void Add ()
         {
+            TournamentForm addTournament = new TournamentForm ();
+            addTournament.SetupForm (null);
+            Navigation.PushAsync (addTournament);
+        }
+
+        public void EditTournament (Tournament _tournament)
+        {
             TournamentForm editTournament = new TournamentForm ();
-            editTournament.SetupForm (null);
+            editTournament.SetupForm (_tournament);
             Navigation.PushAsync (editTournament);
         }
 
@@ -26,14 +37,19 @@ namespace ATMobile.Forms
         {
             Tournament tournament = (Tournament)e.SelectedItem;
 
-            TournamentForm addTournament = new TournamentForm ();
-            addTournament.SetupForm (tournament);
-            Navigation.PushAsync (addTournament);
+            TournamentEndsForm form = new TournamentEndsForm ();
+            form.SetupForm (tournament);
+            Navigation.PushAsync (form, true);
         }
 
         protected override void OnAppearing ()
         {
             m_Tournaments.RefreshList ();
+        }
+
+        public void Dispose ()
+        {
+            TournamentHistoryCell.TournamentEditClicked -= EditTournament;
         }
     }
 }
