@@ -23,14 +23,14 @@ namespace ATMobile.Daos
             }
         }
 
-        public List<TournamentEnd> GetPracticeEnds (Guid _tournamentId)
+        public List<TournamentEnd> GetTournamentEnds (Guid _tournamentId)
         {
             var tournamentEnds = GetChildren (_tournamentId);
 
             return tournamentEnds.OrderBy ((TournamentEnd arg) => arg.EndNumber).ToList ();
         }
 
-        public List<TournamentEnd> GetPracticeEnds (Guid _tournamentId, Guid _archerId)
+        public List<TournamentEnd> GetTournamentEnds (Guid _tournamentId, Guid _archerId)
         {
             Query query = Query.And (Query.EQ ("ParentId", _tournamentId), Query.EQ ("ArcherId", _archerId));
             var tournamentEnds = m_Collection.Find (query).ToList ();

@@ -258,6 +258,22 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region TournamentEnds
+
+        public List<TournamentEnd> GetTournamentEnds (Guid _tournamentId, Guid _archerId)
+        {
+            TournamentEndDao dao = new TournamentEndDao (m_Database);
+            return dao.GetTournamentEnds (_tournamentId, _archerId);
+        }
+
+        public void Persist (TournamentEnd _tournamentEnd)
+        {
+            TournamentEndDao dao = new TournamentEndDao (m_Database);
+            dao.Persist (_tournamentEnd);
+        }
+
+        #endregion
+
         #region TournamentTypes
 
         public List<TournamentType> GetTournamentTypes ()

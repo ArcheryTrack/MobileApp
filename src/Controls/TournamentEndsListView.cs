@@ -17,11 +17,10 @@ namespace ATMobile.Controls
             HasUnevenRows = true;
         }
 
-        public void RefreshList (Guid _practiceId)
+        public void RefreshList (Guid _tournamentId, Guid _archerId)
         {
             ATManager manager = ATManager.GetInstance ();
-
-            //Ends = manager.GetTour (_practiceId);
+            Ends = manager.GetTournamentEnds (_tournamentId, _archerId);
 
             ItemsSource = Ends;
         }

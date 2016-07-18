@@ -9,11 +9,11 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class PracticeEndForm : AbstractEntryForm
+    public class TournamentEndForm : AbstractEntryForm
     {
         private Archer m_Archer;
-        private Practice m_Practice;
-        private PracticeEnd m_PracticeEnd;
+        private Tournament m_Practice;
+        private TournamentEnd m_PracticeEnd;
         private int m_EndCount;
         private TargetFace m_TargetFace;
 
@@ -22,8 +22,7 @@ namespace ATMobile.Forms
         private ShotArrowListView m_ArrowsListView;
         private ScoreControl m_ScoreControl;
 
-
-        public PracticeEndForm () : base ("End")
+        public TournamentEndForm () : base ("End")
         {
 
             m_lblPoints = new Label {

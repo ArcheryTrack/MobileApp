@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace ATMobile.Controls
 {
-    public class PracticeArrowListView : AbstractListView, IDisposable
+    public class ShotArrowListView : AbstractListView, IDisposable
     {
         private ObservableCollection<ShotArrow> m_Arrows;
 
@@ -24,7 +24,7 @@ namespace ATMobile.Controls
             }
         }
 
-        public PracticeArrowListView ()
+        public ShotArrowListView ()
         {
             ItemTemplate = new DataTemplate (typeof (PracticeArrowCell));
             PracticeArrowCell.DeletePracticeArrowClicked += ArrowDeleted;
