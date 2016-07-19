@@ -192,6 +192,7 @@ namespace ATMobile.Forms
 
         public override void Save ()
         {
+            //Save the Tournament
             m_Tournament.Name = m_txtName.Text;
 
             if (m_bolStartPicked == true) {
@@ -217,7 +218,37 @@ namespace ATMobile.Forms
 
             ATManager.GetInstance ().Persist (m_Tournament);
 
+            //Now create the rounds for the tournament based on the tournament type
+            BuildRounds (m_Tournament.Id, m_TournamentType);
+
             Navigation.PopAsync (true);
+        }
+
+        private void BuildRounds (Guid _tournamentId, TournamentType _tournamentType)
+        {
+            var manager = ATManager.GetInstance ();
+
+            //Only build if they haven't already been built
+            //TODO - Figure out what to do if changing tournament type
+            List<Round> rounds = manager.GetRounds (_tournamentId);
+
+            if (rounds.Count == 0) {
+
+                List<RoundType> roundTypes = manager.GetRoundTypes (_tournamentType.Id);
+
+                int count = 1;
+                foreach (var roundType in roundTypes) {
+                    Round round = new Round {
+                        ParentId = _tournamentId,
+                        RoundNumber = count,
+                        ExpectedArrowsPerEnd = roundType.ArrowsPerEnd,
+                        ExpectedEnds = roundType.NumberOfEnds,
+                        Distance = roundType.Distance
+                    };
+
+                    manager.Persist (round);
+                }
+            }
         }
 
         async private void PickStart (object sender, EventArgs e)
@@ -300,10 +331,13 @@ namespace ATMobile.Forms
 
         public void SetupForm (Tournament _tournament)
         {
+            bool editMode = false;
+
             if (_tournament == null) {
                 m_Tournament = new Tournament ();
             } else {
                 m_Tournament = _tournament;
+                editMode = true;
             }
 
             m_txtName.Text = m_Tournament.Name;
@@ -335,6 +369,12 @@ namespace ATMobile.Forms
             }
 
             FillList (m_Tournament.Archers);
+
+            //TODO - evaluate if we can allow TournamentTypes to be changed (may require removing rounds and ends)
+            //or maybe only if there are no ends can it be changed.
+            if (editMode) {
+                m_btnPickTournamentType.IsEnabled = false;
+            }
         }
 
         public void FillList (List<Guid> _archerGuids)

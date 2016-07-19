@@ -125,6 +125,22 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region Rounds
+
+        public List<Round> GetRounds (Guid _tournamentId)
+        {
+            RoundDao dao = new RoundDao (m_Database);
+            return dao.GetRounds (_tournamentId);
+        }
+
+        public void Persist (Round _round)
+        {
+            RoundDao dao = new RoundDao (m_Database);
+            dao.Persist (_round);
+        }
+
+        #endregion 
+
         #region RoundTypes
 
         public List<RoundType> GetRoundTypes (Guid _tournamentTypeId)

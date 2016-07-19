@@ -30,9 +30,9 @@ namespace ATMobile.Daos
             return tournamentEnds.OrderBy ((TournamentEnd arg) => arg.EndNumber).ToList ();
         }
 
-        public List<TournamentEnd> GetTournamentEnds (Guid _tournamentId, Guid _archerId)
+        public List<TournamentEnd> GetTournamentEnds (Guid _roundId, Guid _archerId)
         {
-            Query query = Query.And (Query.EQ ("ParentId", _tournamentId), Query.EQ ("ArcherId", _archerId));
+            Query query = Query.And (Query.EQ ("ParentId", _roundId), Query.EQ ("ArcherId", _archerId));
             var tournamentEnds = m_Collection.Find (query).ToList ();
 
             return tournamentEnds.OrderBy ((TournamentEnd arg) => arg.EndNumber).ToList ();

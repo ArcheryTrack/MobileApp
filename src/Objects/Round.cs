@@ -5,11 +5,15 @@ namespace ATMobile.Objects
 {
     public class Round : AbstractObject, IHasParent
     {
-        public Round ()
-        {
-        }
+        public int RoundNumber { get; set; }
+
+        public int ExpectedEnds { get; set; }
+
+        public int ExpectedArrowsPerEnd { get; set; }
 
         public Guid ParentId { get; set; }
+
+        public Distance Distance { get; set; }
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using ATMobile.Managers;
 
@@ -9,6 +10,8 @@ namespace ATMobile.Objects
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public Guid TargetFaceId { get; set; }
 
         public string Details {
             get {

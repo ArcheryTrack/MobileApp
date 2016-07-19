@@ -12,8 +12,9 @@ namespace ATMobile.Forms
     public class TournamentEndForm : AbstractEntryForm
     {
         private Archer m_Archer;
-        private Tournament m_Practice;
-        private TournamentEnd m_PracticeEnd;
+        private Tournament m_Tournament;
+        private TournamentType m_TournamentType;
+        private TournamentEnd m_TournamentEnd;
         private int m_EndCount;
         private TargetFace m_TargetFace;
 
@@ -116,7 +117,7 @@ namespace ATMobile.Forms
             ObservableCollection<ShotArrow> arrows = m_ArrowsListView.Arrows;
             arrows.Clear ();
 
-            foreach (var item in m_PracticeEnd.SortedByArrowNumber) {
+            foreach (var item in m_TournamentEnd.SortedByArrowNumber) {
                 arrows.Add (item);
             }
 
@@ -125,26 +126,30 @@ namespace ATMobile.Forms
 
         public void SetupForm (
             Archer _archer,
-            Practice _practice,
-            PracticeEnd _end,
+            Tournament _tournament,
+            TournamentEnd _end,
             int _endCount)
         {
             m_Archer = _archer;
-            m_Practice = _practice;
-            m_PracticeEnd = _end;
+            m_Tournament = _tournament;
+            m_TournamentEnd = _end;
             m_EndCount = _endCount;
 
-            if (m_Practice.TargetFaceId != null) {
-                m_TargetFace = TargetHelper.FindTarget (m_Practice.TargetFaceId.Value);
-            } else {
-                m_TargetFace = null;
+            if (m_Tournament.TournamentTypeId != null) {
+                m_TournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
+
+                if (m_TournamentType.TargetFaceId != null) {
+                    m_TargetFace = TargetHelper.FindTarget (m_TournamentType.TargetFaceId);
+                } else {
+                    m_TargetFace = null;
+                }
             }
 
-            if (m_PracticeEnd == null) {
-                m_PracticeEnd = new PracticeEnd ();
-                m_PracticeEnd.Id = Guid.NewGuid ();
-                m_PracticeEnd.ParentId = m_Practice.Id;
-                m_PracticeEnd.EndNumber = m_EndCount + 1;
+            if (m_TournamentEnd == null) {
+                m_TournamentEnd = new TournamentEnd ();
+                m_TournamentEnd.Id = Guid.NewGuid ();
+                m_TournamentEnd.ParentId = m_Tournament.Id;
+                m_TournamentEnd.EndNumber = m_EndCount + 1;
             }
 
             FillList ();
@@ -156,9 +161,9 @@ namespace ATMobile.Forms
 
         public override void Save ()
         {
-            m_PracticeEnd.Results = m_ArrowsListView.Arrows.ToList ();
+            m_TournamentEnd.Results = m_ArrowsListView.Arrows.ToList ();
 
-            ATManager.GetInstance ().Persist (m_PracticeEnd);
+            ATManager.GetInstance ().Persist (m_TournamentEnd);
 
             Navigation.PopAsync ();
         }
