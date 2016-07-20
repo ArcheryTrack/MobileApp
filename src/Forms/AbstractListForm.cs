@@ -4,27 +4,15 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public abstract class AbstractListForm : ContentPage
+    public abstract class AbstractListForm : AbstractForm
     {
-        protected StackLayout OutsideLayout;
         protected Button AddButton;
         protected Frame ListFrame;
 
         public abstract void Add ();
 
-        public AbstractListForm (string _title)
+        public AbstractListForm (string _title) : base (_title)
         {
-            Title = _title;
-
-            //Icon = "settings.png";
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
-
-            OutsideLayout = new StackLayout {
-                Spacing = 15,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                Padding = 5
-            };
-
             AddButton = new Button {
                 Text = "Add"
             };
@@ -35,9 +23,8 @@ namespace ATMobile.Forms
                 HasShadow = false,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            OutsideLayout.Children.Add (ListFrame);
 
-            Content = OutsideLayout;
+            OutsideLayout.Children.Add (ListFrame);
         }
 
         void OnAdd (object sender, EventArgs e)
