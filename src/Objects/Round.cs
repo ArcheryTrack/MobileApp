@@ -14,6 +14,13 @@ namespace ATMobile.Objects
         public Guid ParentId { get; set; }
 
         public Distance Distance { get; set; }
+
+        public string RoundText 
+        {
+            get {
+                return string.Format ("Round Number - {0}", RoundNumber);
+            }
+        }
     }
 }
 

@@ -247,6 +247,8 @@ namespace ATMobile.Forms
                     };
 
                     manager.Persist (round);
+
+                    count++;
                 }
             }
         }
