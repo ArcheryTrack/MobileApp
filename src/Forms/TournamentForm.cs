@@ -346,12 +346,14 @@ namespace ATMobile.Forms
 
             if (m_Tournament.StartDateTime != null) {
                 m_bolStartPicked = true;
-                m_lblStartDate.Text = m_Tournament.StartDateTime.Value.ToString ("d");
+                m_StartDate = m_Tournament.StartDateTime.Value;
+                m_lblStartDate.Text = m_StartDate.ToString ("d");
             }
 
             if (m_Tournament.EndDateTime != null) {
                 m_bolEndPicked = true;
-                m_lblEndDate.Text = m_Tournament.EndDateTime.Value.ToString ("d");
+                m_EndDate = m_Tournament.EndDateTime.Value;
+                m_lblEndDate.Text = m_EndDate.ToString ("d");
             }
 
             if (m_Tournament.RangeId != null) {
