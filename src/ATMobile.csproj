@@ -79,7 +79,6 @@
     <Compile Include="Forms\PracticeForm.cs" />
     <Compile Include="Forms\PracticeHistoryForm.cs" />
     <Compile Include="Forms\PracticeTypeSetupForm.cs" />
-    <Compile Include="Forms\RoundForm.cs" />
     <Compile Include="Forms\ScoreEndForm.cs" />
     <Compile Include="Forms\SightSettingForm.cs" />
     <Compile Include="Forms\SightSetupForm.cs" />
@@ -165,7 +164,7 @@
     <Compile Include="Daos\TournamentEndDao.cs" />
     <Compile Include="Delegates\ScoreControlClickedDelegates.cs" />
     <Compile Include="Forms\TournamentEndForm.cs" />
-    <Compile Include="Forms\RoundsForm.cs" />
+    <Compile Include="Forms\TournamentRoundsForm.cs" />
     <Compile Include="Forms\AbstractForm.cs" />
     <Compile Include="Controls\TournamentRoundsListView.cs" />
     <Compile Include="Cells\TournamentRoundCell.cs" />

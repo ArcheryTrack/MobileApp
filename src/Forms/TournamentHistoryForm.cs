@@ -37,7 +37,7 @@ namespace ATMobile.Forms
         {
             Tournament tournament = (Tournament)e.SelectedItem;
 
-            RoundsForm form = new RoundsForm ();
+            TournamentRoundsForm form = new TournamentRoundsForm ();
             form.SetupForm (tournament);
             Navigation.PushAsync (form, true);
         }
