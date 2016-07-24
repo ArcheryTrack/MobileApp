@@ -219,18 +219,19 @@ namespace ATMobile.Forms
             ATManager.GetInstance ().Persist (m_Tournament);
 
             //Now create the rounds for the tournament based on the tournament type
-            BuildRounds (m_Tournament.Id, m_TournamentType);
+            BuildRounds (m_Tournament, m_TournamentType);
 
             Navigation.PopAsync (true);
         }
 
-        private void BuildRounds (Guid _tournamentId, TournamentType _tournamentType)
+        private void BuildRounds (Tournament _tournament, TournamentType _tournamentType)
         {
             var manager = ATManager.GetInstance ();
 
             //Only build if they haven't already been built
             //TODO - Figure out what to do if changing tournament type
-            List<Round> rounds = manager.GetRounds (_tournamentId);
+            //Chek if the round itself exists
+            List<Round> rounds = manager.GetRounds (_tournament.Id);
 
             if (rounds.Count == 0) {
 
@@ -239,7 +240,7 @@ namespace ATMobile.Forms
                 int count = 1;
                 foreach (var roundType in roundTypes) {
                     Round round = new Round {
-                        ParentId = _tournamentId,
+                        ParentId = _tournament.Id,
                         RoundNumber = count,
                         ExpectedArrowsPerEnd = roundType.ArrowsPerEnd,
                         ExpectedEnds = roundType.NumberOfEnds,
@@ -252,6 +253,8 @@ namespace ATMobile.Forms
                 }
             }
         }
+
+
 
         async private void PickStart (object sender, EventArgs e)
         {

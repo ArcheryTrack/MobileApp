@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using ATMobile.Controls;
+using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
@@ -53,6 +55,26 @@ namespace ATMobile.Forms
 
             m_lblRound.Text = _round.RoundText;
             m_lblTournament.Text = _tournament.Name;
+        }
+        private void BuildEnds (Tournament _tournament, Round _round)
+        {
+            var manager = ATManager.GetInstance ();
+
+            foreach (var archerId in _tournament.Archers) {
+                List<TournamentEnd> ends = manager.GetTournamentEnds (_tournament.Id, archerId);
+
+                if (ends.Count == 0) {
+                    for (int i = 1; i <= _round.ExpectedEnds; i++) {
+                        TournamentEnd end = new TournamentEnd ();
+                        end.ArcherId = archerId;
+                        end.EndNumber = i;
+                        end.CreatedDateTime = DateTime.Now;
+                        end.ParentId = _round.Id;
+
+                        manager.Persist (end);
+                    }
+                }
+            }
         }
 
         public override void Add ()
