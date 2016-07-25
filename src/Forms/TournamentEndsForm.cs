@@ -7,8 +7,9 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class TournamentEndsForm : AbstractListForm
+    public class TournamentEndsForm : AbstractForm
     {
+        private StackLayout m_Inside;
         private Label m_lblTournament;
         private Label m_lblRound;
         private Label m_lblArcher;
@@ -17,35 +18,50 @@ namespace ATMobile.Forms
         private TournamentEndsListView m_TournamentEnds;
         private Tournament m_Tournament;
 
+        private Archer m_CurrentArcher;
+
         public TournamentEndsForm () : base ("Tournaments")
         {
+            m_Inside = new StackLayout {
+                Spacing = 5,
+                VerticalOptions = LayoutOptions.Fill,
+                Padding = 5
+            };
+            OutsideLayout.Children.Add (m_Inside);
+
             m_lblTournament = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center
             };
-            OutsideLayout.Children.Insert(0, m_lblTournament);
+            m_Inside.Children.Add (m_lblTournament);
 
             m_lblRound = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center
             };
-            OutsideLayout.Children.Insert (1, m_lblRound);
+            m_Inside.Children.Add (m_lblRound);
 
             m_lblArcher = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold
             };
-            OutsideLayout.Children.Insert (2, m_lblArcher);
+            m_Inside.Children.Add (m_lblArcher);
 
             m_lblSummary = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
                 Text = "Arrows: 0, Score: 0"
             };
-            OutsideLayout.Children.Insert (3, m_lblSummary);
+            m_Inside.Children.Add (m_lblSummary);
+
+            Frame tournamentEndsFrame = new Frame {
+                HasShadow = false,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            m_Inside.Children.Add (tournamentEndsFrame);
 
             m_TournamentEnds = new TournamentEndsListView ();
             m_TournamentEnds.ItemSelected += OnSelected;
-            ListFrame.Content = m_TournamentEnds;
+            tournamentEndsFrame.Content = m_TournamentEnds;
         }
 
         public void SetupForm (Tournament _tournament, Round _round)
@@ -55,7 +71,30 @@ namespace ATMobile.Forms
 
             m_lblRound.Text = _round.RoundText;
             m_lblTournament.Text = _tournament.Name;
+
+            if (m_Tournament.Archers.Count > 0) {
+                Guid archerId = m_Tournament.Archers [0];
+
+                m_CurrentArcher = ATManager.GetInstance ().GetArcher (archerId);
+
+                SetArcher ();
+            } else {
+                m_lblArcher.Text = "[No Archers Picked]";
+            }
+
+            SetScore ();
         }
+
+        private void SetArcher ()
+        {
+            m_lblArcher.Text = m_CurrentArcher.FullName;
+        }
+
+        private void SetScore ()
+        {
+
+        }
+
         private void BuildEnds (Tournament _tournament, Round _round)
         {
             var manager = ATManager.GetInstance ();
@@ -77,14 +116,17 @@ namespace ATMobile.Forms
             }
         }
 
-        public override void Add ()
+        void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
 
         }
 
-        void OnSelected (object sender, SelectedItemChangedEventArgs e)
+        protected override void OnAppearing ()
         {
+            base.OnAppearing ();
 
+            SetArcher ();
+            SetScore ();
         }
     }
 }
