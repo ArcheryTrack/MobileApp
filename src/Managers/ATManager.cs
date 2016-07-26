@@ -276,10 +276,10 @@ namespace ATMobile.Managers
 
         #region TournamentEnds
 
-        public List<TournamentEnd> GetTournamentEnds (Guid _tournamentId, Guid _archerId)
+        public List<TournamentEnd> GetTournamentEnds (Guid _roundId, Guid _archerId)
         {
             TournamentEndDao dao = new TournamentEndDao (m_Database);
-            return dao.GetTournamentEnds (_tournamentId, _archerId);
+            return dao.GetTournamentEnds (_roundId, _archerId);
         }
 
         public void Persist (TournamentEnd _tournamentEnd)

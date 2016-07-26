@@ -368,10 +368,10 @@ namespace ATMobile.Forms
             }
 
             if (m_Tournament.TournamentTypeId != null) {
-                TournamentType tournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
+                m_TournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
 
-                if (tournamentType != null) {
-                    m_lblTournamentType.Text = tournamentType.Name;
+                if (m_TournamentType != null) {
+                    m_lblTournamentType.Text = m_TournamentType.Name;
                 }
             }
 

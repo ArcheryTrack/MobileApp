@@ -9,15 +9,23 @@ namespace ATMobile.Forms
 {
     public class TournamentEndsForm : AbstractForm
     {
+
+
         private StackLayout m_Inside;
         private Label m_lblTournament;
         private Label m_lblRound;
+
+        private StackLayout m_ArcherLayout;
+        private Button m_btnPrevious;
+        private Button m_btnNext;
         private Label m_lblArcher;
+
         private Label m_lblSummary;
         private Round m_Round;
         private TournamentEndsListView m_TournamentEnds;
         private Tournament m_Tournament;
 
+        private int m_CurrentArcherIndex;
         private Archer m_CurrentArcher;
 
         public TournamentEndsForm () : base ("Tournaments")
@@ -41,12 +49,37 @@ namespace ATMobile.Forms
             };
             m_Inside.Children.Add (m_lblRound);
 
+            m_ArcherLayout = new StackLayout {
+                Spacing = 5,
+                Padding = 5,
+                Orientation = StackOrientation.Horizontal
+            };
+            m_Inside.Children.Add (m_ArcherLayout);
+
+            /* Setup the Archer */
+            m_btnPrevious = new Button {
+                Text = "<",
+                HorizontalOptions = LayoutOptions.Start
+            };
+            m_btnPrevious.Clicked += PreviousClicked;
+            m_ArcherLayout.Children.Add (m_btnPrevious);
+
             m_lblArcher = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
-                FontAttributes = FontAttributes.Bold
+                FontAttributes = FontAttributes.Bold,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Center,
             };
-            m_Inside.Children.Add (m_lblArcher);
+            m_ArcherLayout.Children.Add (m_lblArcher);
 
+            m_btnNext = new Button {
+                Text = ">",
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnNext.Clicked += NextClicked;
+            m_ArcherLayout.Children.Add (m_btnNext);
+
+            /* Setup the round summary */
             m_lblSummary = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
                 Text = "Arrows: 0, Score: 0"
@@ -73,21 +106,52 @@ namespace ATMobile.Forms
             m_lblTournament.Text = _tournament.Name;
 
             if (m_Tournament.Archers.Count > 0) {
-                Guid archerId = m_Tournament.Archers [0];
-
-                m_CurrentArcher = ATManager.GetInstance ().GetArcher (archerId);
-
-                SetArcher ();
+                m_CurrentArcherIndex = 0;
             } else {
                 m_lblArcher.Text = "[No Archers Picked]";
+                m_btnNext.IsEnabled = false;
+                m_btnNext.IsEnabled = false;
             }
 
-            SetScore ();
+            if (m_Tournament.Archers.Count > 1) {
+                m_btnNext.IsEnabled = true;
+                m_btnPrevious.IsEnabled = true;
+            } else {
+                m_btnNext.IsEnabled = false;
+                m_btnPrevious.IsEnabled = false;
+            }
+        }
+
+        void PreviousClicked (object sender, EventArgs e)
+        {
+            m_CurrentArcherIndex--;
+
+            if (m_CurrentArcherIndex < 0) {
+                m_CurrentArcherIndex = m_Tournament.Archers.Count - 1;
+            }
+
+            SetArcher ();
+        }
+
+        void NextClicked (object sender, EventArgs e)
+        {
+            m_CurrentArcherIndex++;
+
+            if (m_CurrentArcherIndex >= m_Tournament.Archers.Count) {
+                m_CurrentArcherIndex = 0;
+            }
+
+            SetArcher ();
         }
 
         private void SetArcher ()
         {
+            Guid archerId = m_Tournament.Archers [m_CurrentArcherIndex];
+            m_CurrentArcher = ATManager.GetInstance ().GetArcher (archerId);
+
             m_lblArcher.Text = m_CurrentArcher.FullName;
+
+            LoadEnds (archerId);
         }
 
         private void SetScore ()
@@ -95,7 +159,18 @@ namespace ATMobile.Forms
 
         }
 
-        private void BuildEnds (Tournament _tournament, Round _round)
+        private void LoadEnds (Guid _archerId)
+        {
+            List<TournamentEnd> ends = ATManager.GetInstance ().GetTournamentEnds (m_Round.Id, _archerId);
+
+            if (ends.Count == 0) {
+                ends = BuildEnds (m_Tournament, m_Round, _archerId);
+            }
+
+            m_TournamentEnds.ItemsSource = ends;
+        }
+
+        private void BuildAllEnds (Tournament _tournament, Round _round)
         {
             var manager = ATManager.GetInstance ();
 
@@ -103,17 +178,29 @@ namespace ATMobile.Forms
                 List<TournamentEnd> ends = manager.GetTournamentEnds (_tournament.Id, archerId);
 
                 if (ends.Count == 0) {
-                    for (int i = 1; i <= _round.ExpectedEnds; i++) {
-                        TournamentEnd end = new TournamentEnd ();
-                        end.ArcherId = archerId;
-                        end.EndNumber = i;
-                        end.CreatedDateTime = DateTime.Now;
-                        end.ParentId = _round.Id;
-
-                        manager.Persist (end);
-                    }
+                    BuildEnds (_tournament, _round, archerId);
                 }
             }
+        }
+
+        private List<TournamentEnd> BuildEnds (Tournament _tournament, Round _round, Guid _archerId)
+        {
+            var manager = ATManager.GetInstance ();
+
+            List<TournamentEnd> ends = new List<TournamentEnd> ();
+
+            for (int i = 1; i <= _round.ExpectedEnds; i++) {
+                TournamentEnd end = new TournamentEnd ();
+                end.ArcherId = _archerId;
+                end.EndNumber = i;
+                end.CreatedDateTime = DateTime.Now;
+                end.ParentId = _round.Id;
+
+                ends.Add (end);
+                manager.Persist (end);
+            }
+
+            return ends;
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
