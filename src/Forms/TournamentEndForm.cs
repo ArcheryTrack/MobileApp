@@ -12,11 +12,17 @@ namespace ATMobile.Forms
     public class TournamentEndForm : AbstractEntryForm
     {
         private Archer m_Archer;
-        private Tournament m_Tournament;
         private TournamentType m_TournamentType;
+
+        private Tournament m_Tournament;
+        private Round m_Round;
         private TournamentEnd m_TournamentEnd;
-        private int m_EndCount;
         private TargetFace m_TargetFace;
+
+        private StackLayout m_ArcherLayout;
+        private Button m_btnPrevious;
+        private Button m_btnNext;
+        private Label m_lblArcher;
 
         private Label m_lblPoints;
 
@@ -25,6 +31,29 @@ namespace ATMobile.Forms
 
         public TournamentEndForm () : base ("End")
         {
+            /* Setup the Archer */
+            m_btnPrevious = new Button {
+                Text = "<",
+                HorizontalOptions = LayoutOptions.Start
+            };
+            m_btnPrevious.Clicked += PreviousClicked;
+            m_ArcherLayout.Children.Add (m_btnPrevious);
+
+            m_lblArcher = new Label {
+                HorizontalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+            };
+            m_ArcherLayout.Children.Add (m_lblArcher);
+
+            m_btnNext = new Button {
+                Text = ">",
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnNext.Clicked += NextClicked;
+            m_ArcherLayout.Children.Add (m_btnNext);
+
 
             m_lblPoints = new Label {
                 Text = "Points: "
@@ -127,29 +156,20 @@ namespace ATMobile.Forms
         public void SetupForm (
             Archer _archer,
             Tournament _tournament,
-            TournamentEnd _end,
-            int _endCount)
+            Round _round,
+            TournamentEnd _end)
         {
             m_Archer = _archer;
             m_Tournament = _tournament;
+            m_Round = _round;
             m_TournamentEnd = _end;
-            m_EndCount = _endCount;
 
             if (m_Tournament.TournamentTypeId != null) {
                 m_TournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
 
-                if (m_TournamentType.TargetFaceId != null) {
+                if (m_TournamentType != null) {
                     m_TargetFace = TargetHelper.FindTarget (m_TournamentType.TargetFaceId);
-                } else {
-                    m_TargetFace = null;
                 }
-            }
-
-            if (m_TournamentEnd == null) {
-                m_TournamentEnd = new TournamentEnd ();
-                m_TournamentEnd.Id = Guid.NewGuid ();
-                m_TournamentEnd.ParentId = m_Tournament.Id;
-                m_TournamentEnd.EndNumber = m_EndCount + 1;
             }
 
             FillList ();

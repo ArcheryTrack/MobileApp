@@ -9,8 +9,6 @@ namespace ATMobile.Forms
 {
     public class TournamentEndsForm : AbstractForm
     {
-
-
         private StackLayout m_Inside;
         private Label m_lblTournament;
         private Label m_lblRound;
@@ -21,8 +19,9 @@ namespace ATMobile.Forms
         private Label m_lblArcher;
 
         private Label m_lblSummary;
-        private Round m_Round;
         private TournamentEndsListView m_TournamentEnds;
+
+        private Round m_Round;
         private Tournament m_Tournament;
 
         private int m_CurrentArcherIndex;
@@ -205,7 +204,11 @@ namespace ATMobile.Forms
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
+            TournamentEnd end = (TournamentEnd)e.SelectedItem;
 
+            TournamentEndForm form = new TournamentEndForm ();
+            form.SetupForm (m_CurrentArcher, m_Tournament, m_Round, end);
+            Navigation.PushAsync (form, true);
         }
 
         protected override void OnAppearing ()

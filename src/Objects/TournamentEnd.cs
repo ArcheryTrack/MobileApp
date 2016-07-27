@@ -39,6 +39,26 @@ namespace ATMobile.Objects
             }
         }
 
+        public string CellOutput {
+            get {
+                StringBuilder sb = new StringBuilder ();
+
+                sb.Append ("End ");
+                sb.Append (EndNumber);
+                sb.Append (" : ");
+
+                if (Results.Count == 0) {
+                    sb.Append ("Not Shot");
+                } else {
+                    sb.Append (ResultsString);
+                    sb.Append (" = ");
+                    sb.Append (TotalScore);
+                }
+
+                return sb.ToString ();
+            }
+        }
+
         public string ResultsString {
             get {
                 StringBuilder sb = new StringBuilder ();
@@ -53,6 +73,7 @@ namespace ATMobile.Objects
                 if (sb.Length > 0) {
                     sb.Remove (sb.Length - 2, 2);
                 }
+
 
                 return sb.ToString ();
             }
