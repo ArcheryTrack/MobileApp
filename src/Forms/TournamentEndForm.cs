@@ -19,6 +19,8 @@ namespace ATMobile.Forms
         private TournamentEnd m_TournamentEnd;
         private TargetFace m_TargetFace;
 
+        private Label m_lblTournament;
+        private Label m_lblEnd;
         private StackLayout m_ArcherLayout;
         private Button m_btnPrevious;
         private Button m_btnNext;
@@ -29,9 +31,34 @@ namespace ATMobile.Forms
         private ShotArrowListView m_ArrowsListView;
         private ScoreControl m_ScoreControl;
 
+        private int m_CurrentArcherIndex;
+        private Archer m_CurrentArcher;
+        private int m_EndNumber;
+
         public TournamentEndForm () : base ("End")
         {
+            m_lblTournament = new Label {
+                HorizontalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+            };
+            InsideLayout.Children.Add (m_lblTournament);
+
+            m_lblEnd = new Label {
+                HorizontalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+            };
+            InsideLayout.Children.Add (m_lblEnd);
+
             /* Setup the Archer */
+            m_ArcherLayout = new StackLayout {
+                Spacing = 5,
+                Padding = 5,
+                Orientation = StackOrientation.Horizontal
+            };
+            InsideLayout.Children.Add (m_ArcherLayout);
+
             m_btnPrevious = new Button {
                 Text = "<",
                 HorizontalOptions = LayoutOptions.Start
@@ -85,6 +112,65 @@ namespace ATMobile.Forms
             m_ScoreControl.ScoreClicked += Clicked;
             frame2.Content = m_ScoreControl;
             layout.Children.Add (frame2);
+        }
+
+        void PreviousClicked (object sender, EventArgs e)
+        {
+            SaveEnd ();
+
+            m_CurrentArcherIndex--;
+
+            if (m_CurrentArcherIndex < 0) {
+                m_CurrentArcherIndex = m_Tournament.Archers.Count - 1;
+            }
+
+            SetArcher ();
+        }
+
+        void NextClicked (object sender, EventArgs e)
+        {
+            SaveEnd ();
+
+            m_CurrentArcherIndex++;
+
+            if (m_CurrentArcherIndex >= m_Tournament.Archers.Count) {
+                m_CurrentArcherIndex = 0;
+            }
+
+            SetArcher ();
+        }
+
+        private void SetArcher ()
+        {
+            Guid archerId = m_Tournament.Archers [m_CurrentArcherIndex];
+            m_CurrentArcher = ATManager.GetInstance ().GetArcher (archerId);
+
+            m_lblArcher.Text = m_CurrentArcher.FullName;
+
+            LoadEnd (archerId, m_EndNumber);
+        }
+
+        public int CurrentArcherIndex {
+            get {
+                return m_CurrentArcherIndex;
+            }
+        }
+
+        public Archer CurrentArcher {
+            get {
+                return m_CurrentArcher;
+            }
+        }
+
+        private void LoadEnd (Guid _archerId, int _endNumber)
+        {
+            TournamentEnd end = ATManager.GetInstance ().GetTournamentEnd (m_Round.Id, _archerId, _endNumber);
+
+            if (end != null) {
+                m_TournamentEnd = end;
+
+                SetupEnd ();
+            }
         }
 
         private int FindNextArrowNumber ()
@@ -163,6 +249,12 @@ namespace ATMobile.Forms
             m_Tournament = _tournament;
             m_Round = _round;
             m_TournamentEnd = _end;
+            m_EndNumber = _end.EndNumber;
+
+            m_lblTournament.Text = _tournament.Name;
+            m_lblEnd.Text = string.Format ("Round {0}, End {1}", _round.RoundNumber, _end.EndNumber);
+
+            SetArcher ();
 
             if (m_Tournament.TournamentTypeId != null) {
                 m_TournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
@@ -171,19 +263,24 @@ namespace ATMobile.Forms
                     m_TargetFace = TargetHelper.FindTarget (m_TournamentType.TargetFaceId);
                 }
             }
+        }
 
+        private void SetupEnd ()
+        {
             FillList ();
-
             m_ScoreControl.SetTargetFace (m_TargetFace);
-
             SetPoints ();
+        }
+
+        public void SaveEnd ()
+        {
+            m_TournamentEnd.Results = m_ArrowsListView.Arrows.ToList ();
+            ATManager.GetInstance ().Persist (m_TournamentEnd);
         }
 
         public override void Save ()
         {
-            m_TournamentEnd.Results = m_ArrowsListView.Arrows.ToList ();
-
-            ATManager.GetInstance ().Persist (m_TournamentEnd);
+            SaveEnd ();
 
             Navigation.PopAsync ();
         }

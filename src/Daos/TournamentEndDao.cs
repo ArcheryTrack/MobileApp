@@ -37,6 +37,21 @@ namespace ATMobile.Daos
 
             return tournamentEnds.OrderBy ((TournamentEnd arg) => arg.EndNumber).ToList ();
         }
+
+        public TournamentEnd GetTournamentEnd (Guid _roundId, Guid _archerId, int _endNumber)
+        {
+            Query query = Query.And (Query.EQ ("ParentId", _roundId), Query.EQ ("ArcherId", _archerId));
+            var tournamentEnds = m_Collection.Find (query).ToList ();
+
+            //TODO - Make part of query.
+            foreach (var item in tournamentEnds) {
+                if (item.EndNumber == _endNumber) {
+                    return item;
+                }
+            }
+
+            return null;
+        }
     }
 }
 

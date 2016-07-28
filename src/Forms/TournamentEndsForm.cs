@@ -48,6 +48,7 @@ namespace ATMobile.Forms
             };
             m_Inside.Children.Add (m_lblRound);
 
+            /* Setup the Archer */
             m_ArcherLayout = new StackLayout {
                 Spacing = 5,
                 Padding = 5,
@@ -55,7 +56,6 @@ namespace ATMobile.Forms
             };
             m_Inside.Children.Add (m_ArcherLayout);
 
-            /* Setup the Archer */
             m_btnPrevious = new Button {
                 Text = "<",
                 HorizontalOptions = LayoutOptions.Start
