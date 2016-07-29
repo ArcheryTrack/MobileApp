@@ -19,6 +19,8 @@ namespace ATMobile.Objects
 
         public bool CountX { get; set; }
 
+        public Guid TargetFaceId { get; set; }
+
         public string Details {
             get {
                 return string.Format ("{0} ends of {1} arrows", NumberOfEnds, ArrowsPerEnd);

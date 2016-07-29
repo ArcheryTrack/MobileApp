@@ -1,7 +1,9 @@
 ﻿using System;
+using ATMobile.Data;
 using ATMobile.Enums;
 using ATMobile.Managers;
 using ATMobile.Objects;
+using ATMobile.PickerForms;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
@@ -16,6 +18,11 @@ namespace ATMobile.Forms
         private Entry m_txtArrowsPerEnd;
         private Entry m_txtDistance;
         private Picker m_pickUnits;
+
+        private StackLayout m_layoutTarget;
+        private Label m_lblTargetFace;
+        private Button m_btnPickTargetFace;
+        private TargetFace m_TargetFace;
 
         public RoundTypeForm () : base ("Round Types")
         {
@@ -46,6 +53,28 @@ namespace ATMobile.Forms
                 Keyboard = Keyboard.Numeric
             };
             InsideLayout.Children.Add (m_txtDistance);
+
+            m_layoutTarget = new StackLayout {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Center
+            };
+            InsideLayout.Children.Add (m_layoutTarget);
+
+            m_lblTargetFace = new Label {
+                Text = "Select Target Face"
+            };
+            m_layoutTarget.Children.Add (m_lblTargetFace);
+
+            m_btnPickTargetFace = new Button {
+                Text = "Pick",
+                WidthRequest = 80,
+                HeightRequest = 40,
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnPickTargetFace.Clicked += PickTargetFace;
+            m_layoutTarget.Children.Add (m_btnPickTargetFace);
 
             m_pickUnits = new Picker ();
             m_pickUnits.Items.Add ("Yards");
@@ -78,6 +107,25 @@ namespace ATMobile.Forms
                     m_pickUnits.SelectedIndex = 1;
                 }
             }
+
+            if (m_RoundType.TargetFaceId != Guid.Empty) {
+                m_TargetFace = TargetFaceData.FindTarget (m_RoundType.TargetFaceId);
+                m_lblTargetFace.Text = m_TargetFace.Name;
+            }
+        }
+
+        async private void PickTargetFace (object sender, EventArgs e)
+        {
+            TargetFacePicker picker = new TargetFacePicker ();
+            picker.ItemPicked += TargetFacePicked;
+
+            await Navigation.PushModalAsync (picker);
+        }
+
+        private void TargetFacePicked (TargetFace _targetFace)
+        {
+            m_TargetFace = _targetFace;
+            m_lblTargetFace.Text = _targetFace.Name;
         }
 
         public override void Save ()
@@ -91,6 +139,10 @@ namespace ATMobile.Forms
 
             if (!string.IsNullOrEmpty (m_txtArrowsPerEnd.Text)) {
                 m_RoundType.ArrowsPerEnd = Convert.ToInt32 (m_txtArrowsPerEnd.Text);
+            }
+
+            if (m_TargetFace != null) {
+                m_RoundType.TargetFaceId = m_TargetFace.Id;
             }
 
             int selectedUnit = m_pickUnits.SelectedIndex;

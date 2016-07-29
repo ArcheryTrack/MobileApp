@@ -202,6 +202,7 @@ namespace ATMobile.Forms
                     arrow.ScoreValue = m_TargetFace.MaximumPoints;
                     arrow.SortValue = arrow.ScoreValue + 1;
                 } else {
+                    //TODO - ??? 
                     arrow.ScoreValue = -1;
                     arrow.SortValue = arrow.ScoreValue + 1;
                 }

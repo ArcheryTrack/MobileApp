@@ -15,8 +15,7 @@ namespace ATMobile.Objects
 
         public Distance Distance { get; set; }
 
-        public string RoundText 
-        {
+        public string RoundText {
             get {
                 return string.Format ("Round Number - {0}", RoundNumber);
             }

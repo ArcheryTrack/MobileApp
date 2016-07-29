@@ -24,7 +24,18 @@ namespace ATMobile.Data
             return faces;
         }
 
+        public static TargetFace FindTarget (Guid _targetFaceId)
+        {
+            List<TargetFace> faces = GetData ();
 
+            foreach (var item in faces) {
+                if (item.Id == _targetFaceId) {
+                    return item;
+                }
+            }
+
+            return null;
+        }
     }
 }
 

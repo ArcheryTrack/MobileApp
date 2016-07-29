@@ -257,6 +257,28 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region TargetFaces
+
+        public List<TargetFace> GetTargetFaces ()
+        {
+            TargetFaceDao dao = new TargetFaceDao (m_Database);
+            return dao.GetTargetFaces ();
+        }
+
+        public TargetFace GetTargetFace (Guid _targetFaceId)
+        {
+            TargetFaceDao dao = new TargetFaceDao (m_Database);
+            return dao.Get (_targetFaceId);
+        }
+
+        public void Persist (TargetFace _targetFace)
+        {
+            TargetFaceDao dao = new TargetFaceDao (m_Database);
+            dao.Persist (_targetFace);
+        }
+
+        #endregion
+
         #region Tournament
 
 
