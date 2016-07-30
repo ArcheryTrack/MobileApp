@@ -12,59 +12,172 @@ namespace ATMobile.Forms
     {
         private RoundType m_RoundType;
 
-        private Entry m_txtName;
-        private Entry m_txtDescription;
-        private Entry m_txtNumberOfEnds;
-        private Entry m_txtArrowsPerEnd;
-        private Entry m_txtDistance;
-        private Picker m_pickUnits;
+        private Grid m_EntryGrid;
+        private Grid m_PickerGrid;
 
-        private StackLayout m_layoutTarget;
+        private Label m_lblName;
+        private Entry m_txtName;
+        private Label m_lblDescription;
+        private Entry m_txtDescription;
+        private Label m_lblEnds;
+        private Entry m_txtNumberOfEnds;
+        private Label m_lblArrows;
+        private Entry m_txtArrowsPerEnd;
+        private Label m_lblDistance;
+        private Entry m_txtDistance;
+
+        private Label m_lblUnits;
+        private Button m_btnPickUnits;
+        private DistanceUnit m_DistanceUnit;
+
         private Label m_lblTargetFace;
         private Button m_btnPickTargetFace;
         private TargetFace m_TargetFace;
 
+
         public RoundTypeForm () : base ("Round Types")
         {
-            m_txtName = new Entry {
-                Placeholder = "Name"
+            //Setup grid to hold the controls
+            m_EntryGrid = new Grid {
+                Padding = 5,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                RowDefinitions = {
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Name
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Description
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Ends
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Arrows
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Distance
+                    }
+                },
+                ColumnDefinitions = {
+                    new ColumnDefinition {
+                        Width = new GridLength(90, GridUnitType.Absolute)
+                    },
+                    new ColumnDefinition {
+                        Width = new GridLength(1, GridUnitType.Star)
+                    }
+                }
             };
-            InsideLayout.Children.Add (m_txtName);
+            InsideLayout.Children.Add (m_EntryGrid);
+
+            //Setup the Name
+            m_lblName = new Label {
+                Text = "Name",
+                VerticalTextAlignment = TextAlignment.Center
+            };
+            m_EntryGrid.Children.Add (m_lblName, 0, 0);
+
+            m_txtName = new Entry {
+                Placeholder = "Enter the name"
+            };
+            m_EntryGrid.Children.Add (m_txtName, 1, 0);
+
+            //Setup Description
+            m_lblDescription = new Label {
+                Text = "Description",
+                VerticalTextAlignment = TextAlignment.Center
+            };
+            m_EntryGrid.Children.Add (m_lblDescription, 0, 1);
 
             m_txtDescription = new Entry {
-                Placeholder = "Description"
+                Placeholder = "Enter the description"
             };
-            InsideLayout.Children.Add (m_txtDescription);
+            m_EntryGrid.Children.Add (m_txtDescription, 1, 1);
+
+            //Setup Number of Ends
+            m_lblEnds = new Label {
+                Text = "Ends",
+                VerticalTextAlignment = TextAlignment.Center
+            };
+            m_EntryGrid.Children.Add (m_lblEnds, 0, 2);
 
             m_txtNumberOfEnds = new Entry {
-                Placeholder = "Number of Ends",
+                Placeholder = "Ends per round",
                 Keyboard = Keyboard.Numeric
             };
-            InsideLayout.Children.Add (m_txtNumberOfEnds);
+            m_EntryGrid.Children.Add (m_txtNumberOfEnds, 1, 2);
+
+            //Setup Number of Arrows
+            m_lblArrows = new Label {
+                Text = "Arrows",
+                VerticalTextAlignment = TextAlignment.Center
+            };
+            m_EntryGrid.Children.Add (m_lblArrows, 0, 3);
 
             m_txtArrowsPerEnd = new Entry {
-                Placeholder = "Arrows per End",
+                Placeholder = "Arrows per end",
                 Keyboard = Keyboard.Numeric
             };
-            InsideLayout.Children.Add (m_txtArrowsPerEnd);
+            m_EntryGrid.Children.Add (m_txtArrowsPerEnd, 1, 3);
+
+            //Setup Number of Distance
+            m_lblDistance = new Label {
+                Text = "Distance",
+                VerticalTextAlignment = TextAlignment.Center
+            };
+            m_EntryGrid.Children.Add (m_lblDistance, 0, 4);
 
             m_txtDistance = new Entry {
-                Placeholder = "Distance",
+                Placeholder = "Enter the distance",
                 Keyboard = Keyboard.Numeric
             };
-            InsideLayout.Children.Add (m_txtDistance);
+            m_EntryGrid.Children.Add (m_txtDistance, 1, 4);
 
-            m_layoutTarget = new StackLayout {
-                Orientation = StackOrientation.Horizontal,
+            //Setup grid to hold the controls
+            m_PickerGrid = new Grid {
+                Padding = 5,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.Center
+                RowDefinitions = {
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Distance Units
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Target Face
+                    }
+                },
+                ColumnDefinitions = {
+                    new ColumnDefinition {
+                        Width = new GridLength(1, GridUnitType.Star)
+                    },
+                    new ColumnDefinition {
+                        Width = new GridLength(80, GridUnitType.Absolute)
+                    }
+                }
             };
-            InsideLayout.Children.Add (m_layoutTarget);
+            InsideLayout.Children.Add (m_PickerGrid);
 
-            m_lblTargetFace = new Label {
-                Text = "Select Target Face"
+            //Add the Distance Units
+            m_lblUnits = new Label {
+                Text = "Select Distance Units",
+                VerticalTextAlignment = TextAlignment.Center
             };
-            m_layoutTarget.Children.Add (m_lblTargetFace);
+            m_PickerGrid.Children.Add (m_lblUnits, 0, 0);
+
+            m_btnPickUnits = new Button {
+                Text = "Pick",
+                WidthRequest = 80,
+                HeightRequest = 40,
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnPickUnits.Clicked += PickDistanceUnits;
+            m_PickerGrid.Children.Add (m_btnPickUnits, 1, 0);
+
+            //Add the Target Face at the botton.
+            m_lblTargetFace = new Label {
+                Text = "Select Target Face",
+                VerticalTextAlignment = TextAlignment.Center
+            };
+            m_PickerGrid.Children.Add (m_lblTargetFace, 0, 1);
 
             m_btnPickTargetFace = new Button {
                 Text = "Pick",
@@ -74,13 +187,7 @@ namespace ATMobile.Forms
                 HorizontalOptions = LayoutOptions.End
             };
             m_btnPickTargetFace.Clicked += PickTargetFace;
-            m_layoutTarget.Children.Add (m_btnPickTargetFace);
-
-            m_pickUnits = new Picker ();
-            m_pickUnits.Items.Add ("Yards");
-            m_pickUnits.Items.Add ("Meters");
-            InsideLayout.Children.Add (m_pickUnits);
-            m_pickUnits.SelectedIndex = 0;
+            m_PickerGrid.Children.Add (m_btnPickTargetFace, 1, 1);
         }
 
         public void SetupForm (RoundType _roundType)
@@ -101,16 +208,13 @@ namespace ATMobile.Forms
             if (m_RoundType.Distance != null) {
                 m_txtDistance.Text = Convert.ToString (m_RoundType.Distance.Measurement);
 
-                if (m_RoundType.Distance.Units == DistanceUnits.Yards) {
-                    m_pickUnits.SelectedIndex = 0;
-                } else {
-                    m_pickUnits.SelectedIndex = 1;
-                }
+                m_DistanceUnit = DistanceUnitData.FindDistanceUnit (m_RoundType.Distance.Units);
+                SetUnitsText ();
             }
 
             if (m_RoundType.TargetFaceId != Guid.Empty) {
                 m_TargetFace = TargetFaceData.FindTarget (m_RoundType.TargetFaceId);
-                m_lblTargetFace.Text = m_TargetFace.Name;
+                SetTargetFaceText ();
             }
         }
 
@@ -125,7 +229,31 @@ namespace ATMobile.Forms
         private void TargetFacePicked (TargetFace _targetFace)
         {
             m_TargetFace = _targetFace;
-            m_lblTargetFace.Text = _targetFace.Name;
+            SetTargetFaceText ();
+        }
+
+        private void SetTargetFaceText ()
+        {
+            m_lblTargetFace.Text = m_TargetFace.Name;
+        }
+
+        async private void PickDistanceUnits (object sender, EventArgs e)
+        {
+            DistanceUnitsPicker picker = new DistanceUnitsPicker ();
+            picker.ItemPicked += DistanceUnitsPicked;
+
+            await Navigation.PushModalAsync (picker);
+        }
+
+        private void DistanceUnitsPicked (DistanceUnit _units)
+        {
+            m_DistanceUnit = _units;
+            SetUnitsText ();
+        }
+
+        private void SetUnitsText ()
+        {
+            m_lblUnits.Text = m_DistanceUnit.Name;
         }
 
         public override void Save ()
@@ -145,16 +273,8 @@ namespace ATMobile.Forms
                 m_RoundType.TargetFaceId = m_TargetFace.Id;
             }
 
-            int selectedUnit = m_pickUnits.SelectedIndex;
-            DistanceUnits units;
-            if (selectedUnit == 0) {
-                units = DistanceUnits.Yards;
-            } else {
-                units = DistanceUnits.Meters;
-            }
-
             double distanceValue = Convert.ToDouble (m_txtDistance.Text);
-            m_RoundType.Distance = new Distance { Measurement = distanceValue, Units = units };
+            m_RoundType.Distance = new Distance { Measurement = distanceValue, Units = m_DistanceUnit.UnitOfMeasure };
 
             ATManager.GetInstance ().Persist (m_RoundType);
 

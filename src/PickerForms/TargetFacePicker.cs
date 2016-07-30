@@ -7,7 +7,7 @@ namespace ATMobile.PickerForms
 {
     public class TargetFacePicker : GenericPicker<TargetFace, TargetFacePickerCell>
     {
-        public TargetFacePicker () : base ("Pick the Target Face", "FullName")
+        public TargetFacePicker () : base ("Pick the Target Face")
         {
             List.ItemsSource = TargetFaceData.GetData ();
         }

@@ -10,6 +10,11 @@ namespace ATMobile.Data
         public MenuListData ()
         {
             this.Add (new MenuItem () {
+                Title = "Home",
+                TargetType = typeof (DefaultForm)
+            });
+
+            this.Add (new MenuItem () {
                 Title = "Practice",
                 TargetType = typeof (PracticeHistoryForm)
             });
@@ -19,10 +24,12 @@ namespace ATMobile.Data
                 TargetType = typeof (TournamentHistoryForm)
             });
 
+            /*
             this.Add (new MenuItem () {
                 Title = "Estimate Distance",
                 TargetType = typeof (SightEstimateForm)
             });
+            */
 
             this.Add (new MenuItem () {
                 Title = "Sight Setup",

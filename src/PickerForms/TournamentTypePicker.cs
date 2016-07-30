@@ -7,7 +7,7 @@ namespace ATMobile.PickerForms
 {
     public class TournamentTypePicker : GenericPicker<TournamentType, TournamentTypePickerCell>
     {
-        public TournamentTypePicker () : base ("Pick the Type of Tournament", "FullName")
+        public TournamentTypePicker () : base ("Pick the Type of Tournament")
         {
             List.ItemsSource = ATManager.GetInstance ().GetTournamentTypes ();
         }

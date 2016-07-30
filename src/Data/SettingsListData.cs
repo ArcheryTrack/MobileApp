@@ -15,7 +15,7 @@ namespace ATMobile.Data
             });
 
             this.Add (new MenuItem () {
-                Title = "Ranges",
+                Title = "My Ranges",
                 TargetType = typeof (RangesForm)
             });
 
@@ -24,10 +24,12 @@ namespace ATMobile.Data
                 TargetType = typeof (TournamentTypesForm)
             });
 
+            /*
             this.Add (new MenuItem () {
                 Title = "Sync with Server",
                 TargetType = typeof (LoginForm)
             });
+            */
         }
     }
 }

@@ -19,10 +19,11 @@ namespace ATMobile.PickerForms
         public event GenericPickedDelegate<T> ItemPicked;
 
         public GenericPicker (
-            string _title,
-            string _listCellField)
+            string _title)
         {
             Title = _title;
+
+            Padding = new Thickness (0, 20, 0, 0);
 
             //Icon = "settings.png";
             BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);

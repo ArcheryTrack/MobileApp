@@ -18,6 +18,7 @@ namespace ATMobile.PickerForms
         public DatePickerForm (string _title)
         {
             Title = _title;
+            Padding = new Thickness (0, 20, 0, 0);
 
             //Icon = "settings.png";
             BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);

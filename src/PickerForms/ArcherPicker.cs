@@ -7,7 +7,7 @@ namespace ATMobile.PickerForms
 {
     public class ArcherPicker : GenericPicker<Archer, ArcherCell>
     {
-        public ArcherPicker () : base ("Pick Archer", "FullName")
+        public ArcherPicker () : base ("Pick Archer")
         {
             List.ItemsSource = ATManager.GetInstance ().GetArchers ();
         }
