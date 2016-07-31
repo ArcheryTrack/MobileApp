@@ -98,6 +98,23 @@
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_87_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_100_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_114_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_120_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_144_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_167_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_180_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_152_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_80_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_58_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_76_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_72_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_50_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_40_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_29_NoTitle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\ArcheryTrack_57_NoTitle.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -110,6 +127,13 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork%402x" />
+    <ITunesArtwork Include="iTunesArtwork" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\600px-Archery_Target_80cm.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

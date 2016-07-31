@@ -24,6 +24,11 @@ namespace ATMobile.Data
                 TargetType = typeof (TournamentTypesForm)
             });
 
+            this.Add (new MenuItem () {
+                Title = "About",
+                TargetType = typeof (AboutForm)
+            });
+
             /*
             this.Add (new MenuItem () {
                 Title = "Sync with Server",
