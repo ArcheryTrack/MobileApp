@@ -15,7 +15,7 @@ namespace ATMobile.Forms
         {
             //Icon = "settings.png";
             Title = "Settings"; // The Title property must be set.
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
+            BackgroundColor = Color.FromHex (UIConstants.MenuSettingsTitleColor);
 
             m_Menu = new SettingsListView ();
             m_Menu.ItemSelected += OnSelected;
@@ -23,7 +23,7 @@ namespace ATMobile.Forms
             var menuLabel = new ContentView {
                 Padding = new Thickness (10, 36, 0, 5),
                 Content = new Label {
-                    TextColor = Color.FromHex (UIConstants.MenuTextColor),
+                    TextColor = Color.FromHex (UIConstants.MenuSettingsTitleTextColor),
                     Text = "Setting",
                 }
             };
@@ -40,7 +40,7 @@ namespace ATMobile.Forms
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
-            var menuItem = e.SelectedItem as Controls.MenuItem;
+            var menuItem = e.SelectedItem as MenuOption;
             Page displayPage = (Page)Activator.CreateInstance (menuItem.TargetType);
             Navigation.PushAsync (displayPage, true);
         }

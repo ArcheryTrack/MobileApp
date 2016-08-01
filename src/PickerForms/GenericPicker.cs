@@ -26,7 +26,7 @@ namespace ATMobile.PickerForms
             Padding = new Thickness (0, 20, 0, 0);
 
             //Icon = "settings.png";
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
+            BackgroundColor = Color.FromHex (UIConstants.DetailFormBackgroundColor);
 
             m_OutsideLayout = new StackLayout {
                 Spacing = 15,

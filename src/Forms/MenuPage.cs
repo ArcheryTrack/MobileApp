@@ -15,14 +15,14 @@ namespace ATMobile.Forms
         {
             //Icon = "settings.png";
             Title = "Menu"; // The Title property must be set.
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
+            BackgroundColor = Color.FromHex (UIConstants.MenuTitleColor);
 
             Menu = new MenuListView ();
 
             var menuLabel = new ContentView {
                 Padding = new Thickness (10, 36, 0, 5),
                 Content = new Label {
-                    TextColor = Color.FromHex (UIConstants.MenuTextColor),
+                    TextColor = Color.FromHex (UIConstants.MenuTitleTextColor),
                     Text = "MENU",
                 }
             };

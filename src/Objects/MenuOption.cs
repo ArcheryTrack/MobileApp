@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ATMobile.Controls
+namespace ATMobile.Objects
 {
-    public class MenuItem
+    public class MenuOption
     {
         public string Title { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Constants;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
@@ -14,18 +15,23 @@ namespace ATMobile.Forms
             Title = "ArcheryTrack";
 
             var menuPage = new MenuPage ();
-
-            menuPage.Menu.ItemSelected += (sender, e) => NavigateTo (e.SelectedItem as ATMobile.Controls.MenuItem);
+            menuPage.Menu.ItemSelected += (sender, e) => NavigateTo (e.SelectedItem as Objects.MenuOption);
 
             Master = menuPage;
-            Detail = new NavigationPage (new DefaultForm ());
+            Detail = new NavigationPage (new DefaultForm ()) {
+                BarTextColor = Color.FromHex (UIConstants.NavBarTextColor),
+                BarBackgroundColor = Color.FromHex (UIConstants.NavBarColor)
+            };
         }
 
-        void NavigateTo (ATMobile.Controls.MenuItem menu)
+        void NavigateTo (Objects.MenuOption menu)
         {
             Page displayPage = (Page)Activator.CreateInstance (menu.TargetType);
 
-            Detail = new NavigationPage (displayPage);
+            Detail = new NavigationPage (displayPage) {
+                BarTextColor = Color.FromHex (UIConstants.NavBarTextColor),
+                BarBackgroundColor = Color.FromHex (UIConstants.NavBarColor)
+            };
 
             IsPresented = false;
         }

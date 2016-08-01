@@ -34,7 +34,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\MenuListView.cs" />
     <Compile Include="Data\MenuListData.cs" />
-    <Compile Include="Controls\MenuItem.cs" />
     <Compile Include="Enums\DistanceUnits.cs" />
     <Compile Include="Objects\Distance.cs" />
     <Compile Include="Helpers\DistanceHelper.cs" />
@@ -97,7 +96,6 @@
     <Compile Include="Constants\LocationConstants.cs" />
     <Compile Include="Controls\RangeListView.cs" />
     <Compile Include="Controls\AbstractListView.cs" />
-    <Compile Include="Cells\MenuCell.cs" />
     <Compile Include="Cells\ArcherCell.cs" />
     <Compile Include="Objects\QueueEntry.cs" />
     <Compile Include="Daos\QueueEntryDao.cs" />
@@ -175,6 +173,7 @@
     <Compile Include="Objects\DistanceUnit.cs" />
     <Compile Include="Data\DistanceUnitData.cs" />
     <Compile Include="Forms\AboutForm.cs" />
+    <Compile Include="Objects\MenuOption.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

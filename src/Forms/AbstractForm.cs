@@ -11,7 +11,7 @@ namespace ATMobile.Forms
         protected AbstractForm (string title)
         {
             Title = title;
-            BackgroundColor = Color.FromHex (UIConstants.FormBackgroundColor);
+            BackgroundColor = Color.FromHex (UIConstants.DetailFormBackgroundColor);
 
             OutsideLayout = new StackLayout {
                 Spacing = 15,

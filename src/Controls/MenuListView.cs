@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using System.Collections.Generic;
 using ATMobile.Data;
+using ATMobile.Constants;
 
 namespace ATMobile.Controls
 {
@@ -9,7 +10,9 @@ namespace ATMobile.Controls
     {
         public MenuListView ()
         {
-            List<MenuItem> data = new MenuListData ();
+            BackgroundColor = Color.FromHex (UIConstants.MenuListColor);
+
+            List<Objects.MenuOption> data = new MenuListData ();
 
             ItemsSource = data;
 

@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using ATMobile.Controls;
+using ATMobile.Objects;
 using ATMobile.Forms;
 
 namespace ATMobile.Data
 {
-    public class MenuListData : List<MenuItem>
+    public class MenuListData : List<MenuOption>
     {
         public MenuListData ()
         {
-            this.Add (new MenuItem () {
+            this.Add (new MenuOption () {
                 Title = "Home",
                 TargetType = typeof (DefaultForm)
             });
 
-            this.Add (new MenuItem () {
+            this.Add (new MenuOption () {
                 Title = "Practice",
                 TargetType = typeof (PracticeHistoryForm)
             });
 
-            this.Add (new MenuItem () {
+            this.Add (new MenuOption () {
                 Title = "Tournaments",
                 TargetType = typeof (TournamentHistoryForm)
             });
@@ -31,12 +31,12 @@ namespace ATMobile.Data
             });
             */
 
-            this.Add (new MenuItem () {
+            this.Add (new MenuOption () {
                 Title = "Sight Setup",
                 TargetType = typeof (SightSetupForm)
             });
 
-            this.Add (new MenuItem () {
+            this.Add (new MenuOption () {
                 Title = "Settings",
                 TargetType = typeof (SettingsForm)
             });
