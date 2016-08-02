@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using ATMobile.Objects;
+using ATMobile.Helpers;
 using System.Collections.Generic;
 using ATMobile.Daos;
 using LiteDB;
@@ -44,6 +45,31 @@ namespace ATMobile.Managers
         {
             ArcherDao dao = new ArcherDao (m_Database);
             return dao.GetArchers ();
+        }
+
+        public string GetArcherName (Guid archerId)
+        {
+            Archer archer = GetArcher (archerId);
+
+            if (archer != null) {
+                return archer.FullName;
+            }
+
+            return null;
+        }
+
+        public List<string> GetArcherNames (List<Guid> archerIds)
+        {
+            List<string> output = new List<string> ();
+
+            foreach (var archerId in archerIds) {
+                Archer archer = GetArcher (archerId);
+                if (archer != null) {
+                    output.Add (archer.FullName);
+                }
+            }
+
+            return output;
         }
 
         public void Persist (Archer archer)
@@ -95,6 +121,12 @@ namespace ATMobile.Managers
             return dao.GetPractices (_archerId);
         }
 
+        public List<Practice> GetPractices (DateTime start, DateTime end)
+        {
+            PracticeDao dao = new PracticeDao (m_Database);
+            return dao.GetPractices (start, end);
+        }
+
         public void Persist (Practice _practice)
         {
             PracticeDao dao = new PracticeDao (m_Database);
@@ -121,6 +153,54 @@ namespace ATMobile.Managers
         {
             RangeDao dao = new RangeDao (m_Database);
             dao.Persist (_range);
+        }
+
+        #endregion
+
+        #region Recent
+
+        public List<RecentItem> GetRecentItems ()
+        {
+            DateTime start = DateTime.Now.Date.AddDays (1);
+            DateTime end = DateTime.Now.Date.AddDays (-30);
+
+            List<RecentItem> items = new List<RecentItem> ();
+
+            List<Tournament> tournaments = GetTournaments (start, end);
+            foreach (var tournament in tournaments) {
+                RecentItem newItem = new RecentItem {
+                    ItemType = "Tournament",
+                    Id = tournament.Id
+                };
+
+                List<string> archers = GetArcherNames (tournament.Archers);
+                newItem.Archers = string.Join (", ", archers);
+
+                if (tournament.EndDateTime != null) {
+                    newItem.Date = tournament.EndDateTime.Value;
+                }
+
+                items.Add (newItem);
+            }
+
+            List<Practice> practices = GetPractices (start, end);
+            foreach (var practice in practices) {
+                RecentItem newItem = new RecentItem {
+                    ItemType = "Practice",
+                    Id = practice.Id
+                };
+
+                List<string> archers = GetArcherNames
+
+
+                items.Add (newItem);
+            }
+
+
+
+
+
+            return items;
         }
 
         #endregion
@@ -286,6 +366,12 @@ namespace ATMobile.Managers
         {
             TournamentDao dao = new TournamentDao (m_Database);
             return dao.GetAll ();
+        }
+
+        public List<Tournament> GetTournaments (DateTime start, DateTime end)
+        {
+            TournamentDao dao = new TournamentDao (m_Database);
+            return dao.GetTournaments (start, end);
         }
 
         public void Persist (Tournament _tournament)

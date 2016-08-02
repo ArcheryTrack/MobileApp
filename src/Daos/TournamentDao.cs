@@ -23,6 +23,12 @@ namespace ATMobile.Daos
             }
         }
 
+        public List<Tournament> GetTournaments (DateTime startDate, DateTime endDate)
+        {
+            Query query = Query.Between ("EndDateTime", startDate, endDate);
+            return m_Collection.Find (query).OrderByDescending ((Tournament arg) => arg.EndDateTime).ToList ();
+        }
+
         public List<Tournament> GetTournamentsByType (Guid _tournamentTypeId)
         {
             Query query = Query.EQ ("TournamentTypeId", _tournamentTypeId);

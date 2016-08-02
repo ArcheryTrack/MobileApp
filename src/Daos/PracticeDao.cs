@@ -24,6 +24,12 @@ namespace ATMobile.Daos
             }
         }
 
+        public List<Practice> GetPractices (DateTime startDate, DateTime endDate)
+        {
+            Query query = Query.Between ("DateTime", startDate, endDate);
+            return m_Collection.Find (query).OrderByDescending ((Practice arg) => arg.DateTime).ToList ();
+        }
+
         public List<Practice> GetPractices (Guid _archerGuid)
         {
             var practices = GetChildren (_archerGuid);

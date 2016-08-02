@@ -2,6 +2,8 @@
 {
     public static class UIConstants
     {
+        public const string SplashBackground = "2ed95e";
+        public const string SplashTextColor = "FFFFFF";
 
         public const string DetailFormBackgroundColor = "EEEEEE";
 
