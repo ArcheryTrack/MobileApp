@@ -5,7 +5,7 @@ using ATMobile.Helpers;
 using System.Collections.Generic;
 using ATMobile.Daos;
 using LiteDB;
-
+using System.Linq;
 
 namespace ATMobile.Managers
 {
@@ -115,6 +115,12 @@ namespace ATMobile.Managers
 
         #region PracticeHistory
 
+        public Practice GetPractice (Guid _practiceId)
+        {
+            PracticeDao dao = new PracticeDao (m_Database);
+            return dao.Get (_practiceId);
+        }
+
         public List<Practice> GetPractices (Guid _archerId)
         {
             PracticeDao dao = new PracticeDao (m_Database);
@@ -175,6 +181,7 @@ namespace ATMobile.Managers
 
                 List<string> archers = GetArcherNames (tournament.Archers);
                 newItem.Archers = string.Join (", ", archers);
+                newItem.ArcherCount = archers.Count;
 
                 if (tournament.EndDateTime != null) {
                     newItem.Date = tournament.EndDateTime.Value;
@@ -185,22 +192,20 @@ namespace ATMobile.Managers
 
             List<Practice> practices = GetPractices (start, end);
             foreach (var practice in practices) {
+
                 RecentItem newItem = new RecentItem {
                     ItemType = "Practice",
-                    Id = practice.Id
+                    Id = practice.Id,
+                    Archers = GetArcherName (practice.ParentId),
+                    Date = practice.DateTime,
+                    ArcherCount = 1
                 };
-
-                List<string> archers = GetArcherNames
-
 
                 items.Add (newItem);
             }
 
-
-
-
-
-            return items;
+            List<RecentItem> sorted = items.OrderByDescending (x => x.Date).ToList ();
+            return sorted;
         }
 
         #endregion
@@ -361,6 +366,11 @@ namespace ATMobile.Managers
 
         #region Tournament
 
+        public Tournament GetTournament (Guid tournamentId)
+        {
+            TournamentDao dao = new TournamentDao (m_Database);
+            return dao.Get (tournamentId);
+        }
 
         public List<Tournament> GetTournaments ()
         {

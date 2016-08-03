@@ -19,7 +19,6 @@ namespace ATMobile.Forms
                 Padding = 5
             };
 
-
             Content = OutsideLayout;
         }
 
