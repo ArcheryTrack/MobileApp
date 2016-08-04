@@ -7,7 +7,7 @@
 
         public const string DetailFormBackgroundColor = "EEEEEE";
 
-        public const string NavBarTextColor = "000000";
+        public const string NavBarTextColor = "FFFFFF";
         public const string NavBarColor = "57BED6";
 
         public const string MenuTitleTextColor = "000000";

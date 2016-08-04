@@ -9,19 +9,30 @@ using System.Linq;
 
 namespace ATMobile.Managers
 {
-    public class ATManager
+    public class ATManager : IDisposable
     {
         private static ATManager m_Instance;
 
         private string m_DataFolder;
         private string m_DatabaseFile;
         private LiteDatabase m_Database;
+        private ChartingManager m_ChartingManager
 
         private ATManager ()
         {
             m_DataFolder = App.DataFolder;
             m_DatabaseFile = Path.Combine (m_DataFolder, "ATMobile.db");
             m_Database = new LiteDatabase (m_DatabaseFile);
+        }
+
+        public ChartingManager ChartingManager {
+            get {
+                if (m_ChartingManager == null) {
+                    m_ChartingManager = new ChartingManager (this);
+                }
+
+                return m_ChartingManager;
+            }
         }
 
         public static ATManager GetInstance ()
@@ -81,6 +92,22 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region ChartEntries
+
+        public ChartEntry Get (Guid _id)
+        {
+            ChartEntryDao dao = new ChartEntryDao (m_Database);
+            return dao.Get (_id);
+        }
+
+        public void Persist (ChartEntry _chartEntry)
+        {
+            ChartEntryDao dao = new ChartEntryDao (m_Database);
+            dao.Persist (_chartEntry);
+        }
+
+        #endregion
+
         #region Countries
 
         public List<Country> GetCountries ()
@@ -109,6 +136,8 @@ namespace ATMobile.Managers
         {
             PracticeEndDao dao = new PracticeEndDao (m_Database);
             dao.Persist (_end);
+
+            ChartingManager.ProcessEnd (_end);
         }
 
         #endregion
@@ -222,6 +251,8 @@ namespace ATMobile.Managers
         {
             RoundDao dao = new RoundDao (m_Database);
             dao.Persist (_round);
+
+            ChartingManager.ProcessRound (_round.Id);
         }
 
         #endregion 

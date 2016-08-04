@@ -52,6 +52,22 @@ namespace ATMobile.Daos
             } else {
                 Update (_item);
             }
+
+            PersistQueueEntry (_item, "persist");
+        }
+
+        private void PersistQueueEntry (T _item, string _action)
+        {
+            QueueEntryDao dao = new QueueEntryDao (m_Database);
+
+            QueueEntry entry = new QueueEntry ();
+            entry.Action = _action;
+            entry.DateTime = DateTime.UtcNow;
+            entry.Id = Guid.NewGuid ();
+            entry.ObjectType = typeof (T).ToString ();
+            entry.Json = Newtonsoft.Json.JsonConvert.SerializeObject (_item);
+
+            dao.Persist (entry);
         }
 
         public T Get (Guid _id)
@@ -68,8 +84,13 @@ namespace ATMobile.Daos
 
         public void Delete (Guid _id)
         {
-            Query query = Query.EQ ("_id", _id);
-            m_Collection.Delete (query);
+            T item = Get (_id);
+            if (item != null) {
+                Query query = Query.EQ ("_id", _id);
+                m_Collection.Delete (query);
+
+                PersistQueueEntry (item, "delete");
+            }
         }
 
         public void Dispose ()
