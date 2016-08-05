@@ -195,16 +195,14 @@ namespace ATMobile.Forms
             ShotArrow arrow = new ShotArrow ();
 
             arrow.ArrowNumber = FindNextArrowNumber ();
-
             arrow.Score = value;
             if (value == "X") {
                 if (m_TargetFace != null) {
                     arrow.ScoreValue = m_TargetFace.MaximumPoints;
                     arrow.SortValue = arrow.ScoreValue + 1;
+                    arrow.PossiblePoints = m_TargetFace.MaximumPoints;
                 } else {
-                    //TODO - ??? 
-                    arrow.ScoreValue = -1;
-                    arrow.SortValue = arrow.ScoreValue + 1;
+
                 }
             } else if (value == "M") {
                 arrow.ScoreValue = 0;

@@ -86,9 +86,8 @@ namespace ATMobile.Forms
                 if (m_TargetFace != null) {
                     arrow.ScoreValue = m_TargetFace.MaximumPoints;
                     arrow.SortValue = arrow.ScoreValue + 1;
+                    arrow.PossiblePoints = m_TargetFace.MaximumPoints;
                 } else {
-                    arrow.ScoreValue = -1;
-                    arrow.SortValue = arrow.ScoreValue + 1;
                 }
             } else if (value == "M") {
                 arrow.ScoreValue = 0;
@@ -146,6 +145,7 @@ namespace ATMobile.Forms
                 m_PracticeEnd.Id = Guid.NewGuid ();
                 m_PracticeEnd.ParentId = m_Practice.Id;
                 m_PracticeEnd.EndNumber = m_EndCount + 1;
+                m_PracticeEnd.ArcherId = _archer.Id;
             }
 
             FillList ();

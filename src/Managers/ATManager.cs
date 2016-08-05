@@ -94,7 +94,7 @@ namespace ATMobile.Managers
 
         #region ChartEntries
 
-        public ChartEntry Get (Guid _id)
+        public ChartEntry GetChartEntry (Guid _id)
         {
             ChartEntryDao dao = new ChartEntryDao (m_Database);
             return dao.Get (_id);
@@ -105,6 +105,19 @@ namespace ATMobile.Managers
             ChartEntryDao dao = new ChartEntryDao (m_Database);
             dao.Persist (_chartEntry);
         }
+
+        public List<ChartEntry> GetChartEntriesForPractice (Guid _practiceId, Guid _archerId)
+        {
+            ChartEntryDao dao = new ChartEntryDao (m_Database);
+            return dao.GetChartEntriesForEnds (_practiceId, _archerId);
+        }
+
+        public List<ChartEntry> GetChartEntriesForRound (Guid _roundId, Guid _archerId)
+        {
+            ChartEntryDao dao = new ChartEntryDao (m_Database);
+            return dao.GetChartEntriesForEnds (_roundId, _archerId);
+        }
+
 
         #endregion
 
@@ -247,12 +260,16 @@ namespace ATMobile.Managers
             return dao.GetRounds (_tournamentId);
         }
 
+        public Round GetRound (Guid _roundId)
+        {
+            RoundDao dao = new RoundDao (m_Database);
+            return dao.Get (_roundId);
+        }
+
         public void Persist (Round _round)
         {
             RoundDao dao = new RoundDao (m_Database);
             dao.Persist (_round);
-
-            ChartingManager.ProcessRound (_round.Id);
         }
 
         #endregion 

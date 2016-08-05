@@ -13,6 +13,8 @@ namespace ATMobile.Objects
             Results = new List<ShotArrow> ();
         }
 
+        public Guid ArcherId { get; set; }
+
         public Guid ParentId { get; set; }
 
         public int EndNumber { get; set; }

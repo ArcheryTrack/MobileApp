@@ -9,30 +9,54 @@ namespace ATMobile.Objects
 
         public Guid? ParentId { get; set; }
 
-        private DateTime m_Date;
+        private DateTime? m_Date;
 
-        public int Sequence { get; set; }
+        public int? Sequence { get; set; }
 
         public Guid ArcherId { get; set; }
 
-        public DateTime Date {
+        public DateTime? Date {
             get {
                 return m_Date;
             }
             set {
-                m_Date = value.Date;
+                if (value != null) {
+                    m_Date = value.Value;
+                } else {
+                    m_Date = null;
+                }
             }
         }
 
         public int Count { get; set}
 
-        public Double Average { get; set; }
+        public double Score { get; set; }
 
-        public Double Total { get; set; }
+        public double Possible { get; set; }
 
-        public Double Minimum { get; set; }
+        public double Minimum { get; set; }
 
-        public Double Maximum { get; set; }
+        public double Maximum { get; set; }
+
+        public double Mean {
+            get {
+                if (Count > 0) {
+                    return Score / Count;
+                } else {
+                    return 0;
+                }
+            }
+        }
+
+        public double Percentage {
+            get {
+                if (Possible > 0) {
+                    return Score / Possible;
+                } else {
+                    return 0;
+                }
+            }
+        }
     }
 }
 
