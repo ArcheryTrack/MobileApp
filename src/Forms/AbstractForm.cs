@@ -14,13 +14,15 @@ namespace ATMobile.Forms
             BackgroundColor = Color.FromHex (UIConstants.DetailFormBackgroundColor);
 
             OutsideLayout = new StackLayout {
-                Spacing = 15,
+                Spacing = 5,
                 VerticalOptions = LayoutOptions.Fill,
                 Padding = 5
             };
 
             Content = OutsideLayout;
         }
+
+
 
     }
 }

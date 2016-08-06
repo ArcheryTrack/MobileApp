@@ -6,7 +6,7 @@ using ATMobile.Objects;
 
 namespace ATMobile.Managers
 {
-    public class ChartingManager
+    public class ChartingManager : IDisposable
     {
         private ATManager m_Manager;
 
@@ -113,7 +113,7 @@ namespace ATMobile.Managers
                 Id = _roundId,
                 ParentId = null,
                 Sequence = null,
-                Date = round.DateTime,
+                Date = round.Date,
                 ChartEntryType = ChartEntryTypes.End,
                 Count = count,
                 Score = sum,
@@ -127,6 +127,11 @@ namespace ATMobile.Managers
 
         public void ProcessTournament (Guid _id)
         {
+        }
+
+        public void Dispose ()
+        {
+            m_Manager = null;
         }
     }
 }

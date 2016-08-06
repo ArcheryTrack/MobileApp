@@ -25,6 +25,7 @@ namespace ATMobile.Forms
         private Button m_btnPrevious;
         private Button m_btnNext;
         private Label m_lblArcher;
+        private Entry m_txtNote;
 
         private Label m_lblPoints;
 
@@ -37,6 +38,9 @@ namespace ATMobile.Forms
 
         public TournamentEndForm () : base ("End")
         {
+            OutsideLayout.Spacing = 5;
+            InsideLayout.Spacing = 5;
+
             m_lblTournament = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -81,6 +85,12 @@ namespace ATMobile.Forms
             m_btnNext.Clicked += NextClicked;
             m_ArcherLayout.Children.Add (m_btnNext);
 
+            m_txtNote = new Entry {
+                Placeholder = "Notes on end",
+                HorizontalTextAlignment = TextAlignment.Start,
+                HeightRequest = 60
+            };
+            InsideLayout.Children.Add (m_txtNote);
 
             m_lblPoints = new Label {
                 Text = "Points: "
@@ -92,7 +102,7 @@ namespace ATMobile.Forms
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Padding = 5,
-                Spacing = 15
+                Spacing = 5
             };
             InsideLayout.Children.Add (layout);
 
@@ -144,6 +154,14 @@ namespace ATMobile.Forms
         {
             Guid archerId = m_Tournament.Archers [m_CurrentArcherIndex];
             m_CurrentArcher = ATManager.GetInstance ().GetArcher (archerId);
+
+            if (m_Tournament.Archers.Count <= 1) {
+                m_btnNext.IsEnabled = false;
+                m_btnPrevious.IsEnabled = false;
+            } else {
+                m_btnNext.IsEnabled = true;
+                m_btnPrevious.IsEnabled = true;
+            }
 
             m_lblArcher.Text = m_CurrentArcher.FullName;
 
@@ -267,12 +285,17 @@ namespace ATMobile.Forms
         private void SetupEnd ()
         {
             FillList ();
+
+            m_txtNote.Text = m_TournamentEnd.Note;
+
             m_ScoreControl.SetTargetFace (m_TargetFace);
+
             SetPoints ();
         }
 
         public void SaveEnd ()
         {
+            m_TournamentEnd.Note = m_txtNote.Text;
             m_TournamentEnd.Results = m_ArrowsListView.Arrows.ToList ();
             ATManager.GetInstance ().Persist (m_TournamentEnd);
         }

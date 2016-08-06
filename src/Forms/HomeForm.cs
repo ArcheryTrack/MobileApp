@@ -16,22 +16,20 @@ namespace ATMobile.Forms
 
             var menuPage = new MenuPage ();
             menuPage.Menu.ItemSelected += (sender, e) => NavigateTo (e.SelectedItem as Objects.MenuOption);
-
             Master = menuPage;
-            Detail = new NavigationPage (new DefaultForm ()) {
-                BarTextColor = Color.FromHex (UIConstants.NavBarTextColor),
-                BarBackgroundColor = Color.FromHex (UIConstants.NavBarColor)
-            };
+
+            Detail = new ATNavigationPage (new DefaultForm ());
         }
 
         void NavigateTo (Objects.MenuOption menu)
         {
             Page displayPage = (Page)Activator.CreateInstance (menu.TargetType);
 
-            Detail = new NavigationPage (displayPage) {
+            Detail = new ATNavigationPage (displayPage) {
                 BarTextColor = Color.FromHex (UIConstants.NavBarTextColor),
                 BarBackgroundColor = Color.FromHex (UIConstants.NavBarColor)
             };
+
 
             IsPresented = false;
         }

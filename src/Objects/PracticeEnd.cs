@@ -23,6 +23,8 @@ namespace ATMobile.Objects
 
         public List<ShotArrow> Results { get; set; }
 
+        public string Note { get; set; }
+
         public List<ShotArrow> SortedResults {
             get {
                 List<ShotArrow> sorted = Results.OrderByDescending (r => r.SortValue).ToList ();

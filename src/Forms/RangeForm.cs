@@ -1,11 +1,12 @@
 ﻿using System;
+using ATMobile.Interfaces;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class RangeForm : AbstractEntryForm
+    public class RangeForm : AbstractEntryForm, IValidatedPage
     {
         private Range m_Range;
         private Entry m_txtName;
@@ -72,7 +73,16 @@ namespace ATMobile.Forms
 
             ATManager.GetInstance ().Persist (m_Range);
 
-            Navigation.PopAsync ();
+            Navigation.PopModalAsync ();
+        }
+
+        public bool ValidatePage ()
+        {
+            if (m_txtName != null) {
+                return true;
+            }
+
+            return false;
         }
     }
 }

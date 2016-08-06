@@ -16,7 +16,7 @@ namespace ATMobile.Managers
         private string m_DataFolder;
         private string m_DatabaseFile;
         private LiteDatabase m_Database;
-        private ChartingManager m_ChartingManager
+        private ChartingManager m_ChartingManager;
 
         private ATManager ()
         {
@@ -482,8 +482,39 @@ namespace ATMobile.Managers
             return dao.Get (_tournamentTypeId);
         }
 
+
         #endregion
 
+        #region Logging
+
+        public void LogException (Exception ex)
+        {
+            //TODO
+        }
+
+        public void LogWarning (string message, params string [] values)
+        {
+            //TODO
+        }
+
+        public void LogInfo (string message, params string [] values)
+        {
+            //TODO
+        }
+
+        public void LogUserAction (string form, string button, string info = null)
+        {
+            //TODO
+        }
+
+        #endregion
+
+
+        public void Dispose ()
+        {
+            m_ChartingManager.Dispose ();
+            m_Instance = null;
+        }
     }
 }
 

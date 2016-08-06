@@ -48,7 +48,6 @@ namespace ATMobile.Forms
                 Practice practice = manager.GetPractice (recentItem.Id);
                 Archer archer = manager.GetArcher (practice.ParentId);
 
-
                 PracticeEndsForm form = new PracticeEndsForm ();
                 form.SetupForm (archer, practice);
                 Navigation.PushAsync (form, true);

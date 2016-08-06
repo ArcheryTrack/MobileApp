@@ -28,7 +28,7 @@ namespace ATMobile.Objects
             }
         }
 
-        public int Count { get; set}
+        public int Count { get; set; }
 
         public double Score { get; set; }
 

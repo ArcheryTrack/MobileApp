@@ -31,7 +31,7 @@ namespace ATMobile.Forms
         public override void Add ()
         {
             RangeForm addRange = new RangeForm ();
-            Navigation.PushAsync (addRange);
+            Navigation.PushModalAsync (addRange);
         }
 
         protected override void OnAppearing ()

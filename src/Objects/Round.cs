@@ -5,6 +5,8 @@ namespace ATMobile.Objects
 {
     public class Round : AbstractObject, IHasParent
     {
+        public DateTime Date { get; set; }
+
         public int RoundNumber { get; set; }
 
         public int ExpectedEnds { get; set; }
@@ -14,6 +16,8 @@ namespace ATMobile.Objects
         public Guid ParentId { get; set; }
 
         public Distance Distance { get; set; }
+
+        public string Note { get; set; }
 
         public string RoundText {
             get {

@@ -8,6 +8,7 @@ namespace ATMobile.Objects
         public Tournament ()
         {
             Archers = new List<Guid> ();
+            StartDateTime = DateTime.Now.Date;
         }
 
         public string Name { get; set; }
@@ -16,7 +17,7 @@ namespace ATMobile.Objects
 
         public Guid? TournamentTypeId { get; set; }
 
-        public DateTime? StartDateTime { get; set; }
+        public DateTime StartDateTime { get; set; }
 
         public DateTime? EndDateTime { get; set; }
 
@@ -34,26 +35,15 @@ namespace ATMobile.Objects
 
         public string DateTimeString {
             get {
-                if (StartDateTime == null
-                    && EndDateTime == null) {
-                    return "Date not set";
-                }
-
-                if (StartDateTime != null
-                    && EndDateTime == null) {
-                    return StartDateTime.Value.ToString ("d");
-                }
-
-                if (StartDateTime == null
-                    && EndDateTime != null) {
-                    return EndDateTime.Value.ToString ("d");
+                if (EndDateTime == null) {
+                    return StartDateTime.ToString ("d");
                 }
 
                 if (StartDateTime.Equals (EndDateTime)) {
-                    return StartDateTime.Value.ToString ("d");
+                    return StartDateTime.ToString ("d");
                 }
 
-                return StartDateTime.Value.ToString ("d") + " - " + EndDateTime.Value.ToString ("d");
+                return StartDateTime.ToString ("d") + " - " + EndDateTime.Value.ToString ("d");
             }
         }
     }

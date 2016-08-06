@@ -27,7 +27,7 @@ namespace ATMobile.Forms
         private int m_CurrentArcherIndex;
         private Archer m_CurrentArcher;
 
-        public TournamentEndsForm () : base ("Tournaments")
+        public TournamentEndsForm () : base ("Ends")
         {
             m_Inside = new StackLayout {
                 Spacing = 5,

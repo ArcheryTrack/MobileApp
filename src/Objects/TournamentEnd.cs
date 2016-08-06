@@ -19,6 +19,8 @@ namespace ATMobile.Objects
 
         public int EndNumber { get; set; }
 
+        public string Note { get; set; }
+
         public DateTime CreatedDateTime { get; set; }
 
         public List<ShotArrow> Results { get; set; }

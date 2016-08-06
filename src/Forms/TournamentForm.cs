@@ -247,6 +247,8 @@ namespace ATMobile.Forms
                         Distance = roundType.Distance
                     };
 
+
+
                     manager.Persist (round);
 
                     count++;
@@ -347,11 +349,9 @@ namespace ATMobile.Forms
 
             m_txtName.Text = m_Tournament.Name;
 
-            if (m_Tournament.StartDateTime != null) {
-                m_bolStartPicked = true;
-                m_StartDate = m_Tournament.StartDateTime.Value;
-                m_lblStartDate.Text = m_StartDate.ToString ("d");
-            }
+            m_bolStartPicked = true;
+            m_StartDate = m_Tournament.StartDateTime;
+            m_lblStartDate.Text = m_StartDate.ToString ("d");
 
             if (m_Tournament.EndDateTime != null) {
                 m_bolEndPicked = true;
