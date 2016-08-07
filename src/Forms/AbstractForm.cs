@@ -8,15 +8,17 @@ namespace ATMobile.Forms
     {
         protected StackLayout OutsideLayout;
 
-        protected AbstractForm (string title)
+        protected AbstractForm (string title,
+                               int padding = 5,
+                               int spacing = 5)
         {
             Title = title;
             BackgroundColor = Color.FromHex (UIConstants.DetailFormBackgroundColor);
 
             OutsideLayout = new StackLayout {
-                Spacing = 5,
+                Spacing = spacing,
                 VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
+                Padding = padding
             };
 
             Content = OutsideLayout;

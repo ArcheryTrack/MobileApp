@@ -138,8 +138,6 @@ namespace ATMobile.Forms
             }
 
             ATManager.GetInstance ().Persist (m_Practice);
-
-            Navigation.PopAsync ();
         }
     }
 }

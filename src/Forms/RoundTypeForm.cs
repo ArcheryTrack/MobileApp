@@ -277,8 +277,6 @@ namespace ATMobile.Forms
             m_RoundType.Distance = new Distance { Measurement = distanceValue, Units = m_DistanceUnit.UnitOfMeasure };
 
             ATManager.GetInstance ().Persist (m_RoundType);
-
-            Navigation.PopAsync (true);
         }
     }
 }

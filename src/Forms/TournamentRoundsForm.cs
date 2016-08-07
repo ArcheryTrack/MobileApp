@@ -39,7 +39,7 @@ namespace ATMobile.Forms
         {
             TournamentRoundForm editRound = new TournamentRoundForm ();
             editRound.SetupForm (m_Tournament, _round);
-            Navigation.PushAsync (editRound);
+            Navigation.PushModalAsync (editRound);
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)

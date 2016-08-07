@@ -63,8 +63,6 @@ namespace ATMobile.Forms
             m_Archer.StartedArchery = m_datStartedArchery.Date;
 
             ATManager.GetInstance ().Persist (m_Archer);
-
-            Navigation.PopAsync ();
         }
     }
 }

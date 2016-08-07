@@ -30,7 +30,6 @@ namespace ATMobile.Forms
                 BarBackgroundColor = Color.FromHex (UIConstants.NavBarColor)
             };
 
-
             IsPresented = false;
         }
     }

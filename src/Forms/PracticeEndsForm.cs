@@ -62,7 +62,8 @@ namespace ATMobile.Forms
         {
             PracticeEndForm practiceEnd = new PracticeEndForm ();
             practiceEnd.SetupForm (m_Archer, m_Practice, null, m_PracticeEnds.Ends.Count);
-            Navigation.PushAsync (practiceEnd);
+
+            Navigation.PushModalAsync (practiceEnd);
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
@@ -71,7 +72,7 @@ namespace ATMobile.Forms
 
             PracticeEndForm practiceEnd = new PracticeEndForm ();
             practiceEnd.SetupForm (m_Archer, m_Practice, end, m_PracticeEnds.Ends.Count);
-            Navigation.PushAsync (practiceEnd);
+            Navigation.PushModalAsync (practiceEnd);
         }
 
         protected override void OnAppearing ()

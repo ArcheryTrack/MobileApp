@@ -220,8 +220,6 @@ namespace ATMobile.Forms
 
             //Now create the rounds for the tournament based on the tournament type
             BuildRounds (m_Tournament, m_TournamentType);
-
-            Navigation.PopAsync (true);
         }
 
         private void BuildRounds (Tournament _tournament, TournamentType _tournamentType)

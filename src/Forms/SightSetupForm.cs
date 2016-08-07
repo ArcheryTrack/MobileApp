@@ -97,7 +97,7 @@ namespace ATMobile.Forms
                 SightSettingForm addSetting = new SightSettingForm ();
                 addSetting.SetSightSetting (selected, null);
 
-                Navigation.PushAsync (addSetting);
+                Navigation.PushModalAsync (addSetting);
             }
         }
 

@@ -22,13 +22,13 @@ namespace ATMobile.Forms
             ArcherForm addArcher = new ArcherForm ();
             addArcher.SetArcher (archer);
 
-            Navigation.PushAsync (addArcher);
+            Navigation.PushModalAsync (addArcher);
         }
 
         public override void Add ()
         {
             ArcherForm addArcher = new ArcherForm ();
-            Navigation.PushAsync (addArcher);
+            Navigation.PushModalAsync (addArcher);
         }
 
         protected override void OnAppearing ()

@@ -16,7 +16,7 @@ namespace ATMobile.Forms
         private PracticeEnd m_PracticeEnd;
         private int m_EndCount;
         private TargetFace m_TargetFace;
-
+        private Editor m_txtNote;
         private Label m_lblPoints;
 
         private ShotArrowListView m_ArrowsListView;
@@ -25,6 +25,11 @@ namespace ATMobile.Forms
 
         public PracticeEndForm () : base ("End")
         {
+            m_txtNote = new Editor {
+                HeightRequest = 60,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+            };
+            InsideLayout.Children.Add (m_txtNote);
 
             m_lblPoints = new Label {
                 Text = "Points: "
@@ -36,7 +41,7 @@ namespace ATMobile.Forms
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Padding = 5,
-                Spacing = 15
+                Spacing = 0
             };
             InsideLayout.Children.Add (layout);
 
@@ -160,8 +165,6 @@ namespace ATMobile.Forms
             m_PracticeEnd.Results = m_ArrowsListView.Arrows.ToList ();
 
             ATManager.GetInstance ().Persist (m_PracticeEnd);
-
-            Navigation.PopAsync ();
         }
 
         protected override void OnDisappearing ()

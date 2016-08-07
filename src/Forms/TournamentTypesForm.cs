@@ -22,7 +22,7 @@ namespace ATMobile.Forms
             TournamentTypeForm addTournamentType = new TournamentTypeForm ();
 
             addTournamentType.SetupForm (null);
-            Navigation.PushAsync (addTournamentType);
+            Navigation.PushModalAsync (addTournamentType);
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)

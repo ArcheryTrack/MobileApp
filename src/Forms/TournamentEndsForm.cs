@@ -208,7 +208,7 @@ namespace ATMobile.Forms
 
             TournamentEndForm form = new TournamentEndForm ();
             form.SetupForm (m_CurrentArcher, m_Tournament, m_Round, end);
-            Navigation.PushAsync (form, true);
+            Navigation.PushModalAsync (form, true);
         }
 
         protected override void OnAppearing ()

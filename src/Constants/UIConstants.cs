@@ -19,6 +19,7 @@
         public const string MenuListTextColor = "000000";
         public const string MenuListColor = "92F1AB";
 
+        public const string LineColor = "999999";
     }
 }
 

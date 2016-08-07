@@ -25,7 +25,7 @@ namespace ATMobile.Forms
         private Button m_btnPrevious;
         private Button m_btnNext;
         private Label m_lblArcher;
-        private Entry m_txtNote;
+        private Editor m_txtNote;
 
         private Label m_lblPoints;
 
@@ -85,9 +85,7 @@ namespace ATMobile.Forms
             m_btnNext.Clicked += NextClicked;
             m_ArcherLayout.Children.Add (m_btnNext);
 
-            m_txtNote = new Entry {
-                Placeholder = "Notes on end",
-                HorizontalTextAlignment = TextAlignment.Start,
+            m_txtNote = new Editor {
                 HeightRequest = 60
             };
             InsideLayout.Children.Add (m_txtNote);
@@ -303,8 +301,6 @@ namespace ATMobile.Forms
         public override void Save ()
         {
             SaveEnd ();
-
-            Navigation.PopAsync ();
         }
 
         protected override void OnDisappearing ()

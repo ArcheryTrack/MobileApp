@@ -87,11 +87,7 @@ namespace ATMobile.Forms
             m_SightSetting.Setting = Convert.ToDouble (m_txtSetting.Text);
 
             ATManager.GetInstance ().Persist (m_SightSetting);
-
-            Navigation.PopAsync ();
         }
     }
-
-
 }
 

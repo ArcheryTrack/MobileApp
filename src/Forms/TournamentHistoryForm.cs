@@ -23,14 +23,14 @@ namespace ATMobile.Forms
         {
             TournamentForm addTournament = new TournamentForm ();
             addTournament.SetupForm (null);
-            Navigation.PushAsync (addTournament);
+            Navigation.PushModalAsync (addTournament);
         }
 
         public void EditTournament (Tournament _tournament)
         {
             TournamentForm editTournament = new TournamentForm ();
             editTournament.SetupForm (_tournament);
-            Navigation.PushAsync (editTournament);
+            Navigation.PushModalAsync (editTournament);
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)

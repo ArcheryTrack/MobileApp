@@ -72,8 +72,6 @@ namespace ATMobile.Forms
             m_Range.Country = m_txtCountry.Text;
 
             ATManager.GetInstance ().Persist (m_Range);
-
-            Navigation.PopModalAsync ();
         }
 
         public bool ValidatePage ()

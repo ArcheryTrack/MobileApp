@@ -34,14 +34,14 @@ namespace ATMobile.Forms
             m_PracticeHistory.ItemSelected += OnSelected;
             ListFrame.Content = m_PracticeHistory;
 
-            PracticeHistoryCell.PracticeEditClicked += OnClicked;
+            PracticeHistoryCell.PracticeEditClicked += OnEditClicked;
 
             GetCurrentArcher ();
 
             m_Loading = false;
         }
 
-        void OnClicked (Practice _practice)
+        void OnEditClicked (Practice _practice)
         {
             Archer selected = GetSelectedArcher ();
 
@@ -49,7 +49,7 @@ namespace ATMobile.Forms
                 PracticeForm editPractice = new PracticeForm ();
                 editPractice.SetupForm (selected, _practice);
 
-                Navigation.PushAsync (editPractice);
+                Navigation.PushModalAsync (editPractice);
             }
         }
 
@@ -110,7 +110,7 @@ namespace ATMobile.Forms
                 PracticeForm addPractice = new PracticeForm ();
                 addPractice.SetupForm (selected, null);
 
-                Navigation.PushAsync (addPractice);
+                Navigation.PushModalAsync (addPractice);
             }
         }
 
@@ -123,7 +123,7 @@ namespace ATMobile.Forms
             if (selected != null) {
                 PracticeEndsForm practiceEnds = new PracticeEndsForm ();
                 practiceEnds.SetupForm (selected, practice);
-                Navigation.PushAsync (practiceEnds);
+                Navigation.PushModalAsync (practiceEnds);
             }
         }
 
@@ -144,7 +144,7 @@ namespace ATMobile.Forms
 
         public void Dispose ()
         {
-            PracticeHistoryCell.PracticeEditClicked -= OnClicked;
+            PracticeHistoryCell.PracticeEditClicked -= OnEditClicked;
         }
     }
 }

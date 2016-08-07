@@ -91,8 +91,6 @@ namespace ATMobile.Forms
         public override void Save ()
         {
             SaveTournamentType ();
-
-            Navigation.PopAsync (true);
         }
 
         protected override void OnAppearing ()
