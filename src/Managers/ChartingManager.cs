@@ -25,6 +25,7 @@ namespace ATMobile.Managers
 
             ChartEntry chartEntry = new ChartEntry {
                 Id = _practiceEnd.Id,
+                ArcherId = _practiceEnd.ArcherId,
                 ParentId = _practiceEnd.ParentId,
                 Sequence = _practiceEnd.EndNumber,
                 Date = null,
@@ -48,26 +49,29 @@ namespace ATMobile.Managers
             //Load all chart entries
             List<ChartEntry> entries = m_Manager.GetChartEntriesForPractice (_practiceId, _archerId);
 
-            int count = entries.Sum ((ChartEntry arg) => arg.Count);
-            double possible = entries.Sum ((ChartEntry arg) => arg.Possible);
-            double sum = entries.Sum ((ChartEntry arg) => arg.Score);
-            double min = entries.Min ((ChartEntry arg) => arg.Minimum);
-            double max = entries.Max ((ChartEntry arg) => arg.Maximum);
+            if (entries.Count > 0) {
+                int count = entries.Sum ((ChartEntry arg) => arg.Count);
+                double possible = entries.Sum ((ChartEntry arg) => arg.Possible);
+                double sum = entries.Sum ((ChartEntry arg) => arg.Score);
+                double min = entries.Min ((ChartEntry arg) => arg.Minimum);
+                double max = entries.Max ((ChartEntry arg) => arg.Maximum);
 
-            ChartEntry chartEntry = new ChartEntry {
-                Id = _practiceId,
-                ParentId = null,
-                Sequence = null,
-                Date = practice.DateTime,
-                ChartEntryType = ChartEntryTypes.End,
-                Count = count,
-                Score = sum,
-                Possible = possible,
-                Maximum = max,
-                Minimum = min,
-            };
+                ChartEntry chartEntry = new ChartEntry {
+                    Id = _practiceId,
+                    ArcherId = _archerId,
+                    ParentId = null,
+                    Sequence = null,
+                    Date = practice.DateTime,
+                    ChartEntryType = ChartEntryTypes.End,
+                    Count = count,
+                    Score = sum,
+                    Possible = possible,
+                    Maximum = max,
+                    Minimum = min,
+                };
 
-            m_Manager.Persist (chartEntry);
+                m_Manager.Persist (chartEntry);
+            }
         }
 
         public void ProcessEnd (TournamentEnd _tournamentEnd)
@@ -80,6 +84,7 @@ namespace ATMobile.Managers
 
             ChartEntry chartEntry = new ChartEntry {
                 Id = _tournamentEnd.Id,
+                ArcherId = _tournamentEnd.ArcherId,
                 ParentId = _tournamentEnd.ParentId,
                 Sequence = _tournamentEnd.EndNumber,
                 Date = null,
@@ -111,6 +116,7 @@ namespace ATMobile.Managers
 
             ChartEntry chartEntry = new ChartEntry {
                 Id = _roundId,
+                ArcherId = _archerId,
                 ParentId = null,
                 Sequence = null,
                 Date = round.Date,

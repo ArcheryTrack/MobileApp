@@ -31,9 +31,15 @@ namespace ATMobile.Daos
                 Query.And (
                     Query.And (
                         Query.EQ ("ParentId", _endParentId),
-                        Query.EQ ("ChartEntryTypes", (int)ChartEntryTypes.End)),
+                        Query.EQ ("ChartEntryType", (int)ChartEntryTypes.End)),
                     Query.EQ ("ArcherId", _archerId));
-            return m_Collection.Find (query).OrderBy (r => r.Sequence).ToList ();
+
+            List<ChartEntry> entries = m_Collection.FindAll ().ToList ();
+
+            return m_Collection.Find ((ChartEntry x) =>
+                                      x.ParentId == _endParentId
+                                      && x.ArcherId == _archerId
+                                      && x.ChartEntryType == ChartEntryTypes.End).ToList ();
         }
 
         public List<ChartEntry> GetChartEntriesForRounds (Guid _tournamentId, Guid _archerId)
@@ -42,7 +48,7 @@ namespace ATMobile.Daos
                 Query.And (
                     Query.And (
                         Query.EQ ("ParentId", _tournamentId),
-                        Query.EQ ("ChartEntryTypes", (int)ChartEntryTypes.Round)),
+                        Query.EQ ("ChartEntryType", (int)ChartEntryTypes.Round)),
                     Query.EQ ("ArcherId", _archerId));
             return m_Collection.Find (query).OrderBy (r => r.Sequence).ToList ();
         }
@@ -53,7 +59,7 @@ namespace ATMobile.Daos
                 Query.And (
                     Query.And (
                         Query.Between ("Date", _endDate, _endDate),
-                        Query.EQ ("ChartEntryTypes", (int)ChartEntryTypes.Practice)),
+                        Query.EQ ("ChartEntryType", (int)ChartEntryTypes.Practice)),
                     Query.EQ ("ArcherId", _archerId));
             return m_Collection.Find (query).OrderBy (r => r.Date).ToList ();
         }
@@ -64,7 +70,7 @@ namespace ATMobile.Daos
                 Query.And (
                     Query.And (
                         Query.Between ("Date", _endDate, _endDate),
-                        Query.EQ ("ChartEntryTypes", (int)ChartEntryTypes.Tournament)),
+                        Query.EQ ("ChartEntryType", (int)ChartEntryTypes.Tournament)),
                     Query.EQ ("ArcherId", _archerId));
             return m_Collection.Find (query).OrderBy (r => r.Date).ToList ();
         }

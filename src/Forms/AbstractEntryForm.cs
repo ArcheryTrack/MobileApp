@@ -86,9 +86,9 @@ namespace ATMobile.Forms
             ButtonsLayout.Children.Add (SaveButton);
 
             InsideLayout = new StackLayout {
-                Spacing = 0,
+                Spacing = 5,
                 VerticalOptions = LayoutOptions.Fill,
-                Padding = 0
+                Padding = 5
             };
             OutsideLayout.Children.Add (InsideLayout);
         }

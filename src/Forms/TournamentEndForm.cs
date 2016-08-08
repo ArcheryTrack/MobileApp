@@ -212,14 +212,11 @@ namespace ATMobile.Forms
 
             arrow.ArrowNumber = FindNextArrowNumber ();
             arrow.Score = value;
-            if (value == "X") {
-                if (m_TargetFace != null) {
-                    arrow.ScoreValue = m_TargetFace.MaximumPoints;
-                    arrow.SortValue = arrow.ScoreValue + 1;
-                    arrow.PossiblePoints = m_TargetFace.MaximumPoints;
-                } else {
+            arrow.PossiblePoints = m_TargetFace.MaximumPoints;
 
-                }
+            if (value == "X") {
+                arrow.ScoreValue = m_TargetFace.MaximumPoints;
+                arrow.SortValue = arrow.ScoreValue + 1;
             } else if (value == "M") {
                 arrow.ScoreValue = 0;
                 arrow.SortValue = 0;

@@ -123,7 +123,7 @@ namespace ATMobile.Forms
             if (selected != null) {
                 PracticeEndsForm practiceEnds = new PracticeEndsForm ();
                 practiceEnds.SetupForm (selected, practice);
-                Navigation.PushModalAsync (practiceEnds);
+                Navigation.PushAsync (practiceEnds);
             }
         }
 
