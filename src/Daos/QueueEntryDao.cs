@@ -34,6 +34,12 @@ namespace ATMobile.Daos
 
             return result;
         }
+
+        public void BuildIndexes ()
+        {
+
+        }
+
     }
 }
 

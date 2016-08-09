@@ -21,7 +21,8 @@ namespace ATMobile.Forms
 
             ListFrame = new Frame {
                 HasShadow = false,
-                VerticalOptions = LayoutOptions.FillAndExpand
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                Margin = new Thickness (20, 15, 20, 20)
             };
 
             OutsideLayout.Children.Add (ListFrame);

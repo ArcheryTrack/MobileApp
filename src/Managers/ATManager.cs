@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using ATMobile.Daos;
 using LiteDB;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ATMobile.Managers
 {
@@ -23,6 +24,15 @@ namespace ATMobile.Managers
             m_DataFolder = App.DataFolder;
             m_DatabaseFile = Path.Combine (m_DataFolder, "ATMobile.db");
             m_Database = new LiteDatabase (m_DatabaseFile);
+
+            BuildIndexes (m_Database);
+        }
+
+        public void BuildIndexes (LiteDatabase _database)
+        {
+            StructureManager sm = new StructureManager (_database);
+
+            Task.Run (() => { sm.BuildStructure (); });
         }
 
         public ChartingManager ChartingManager {

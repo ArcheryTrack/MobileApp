@@ -18,6 +18,10 @@ namespace ATMobile.Forms
                         <li>LiteDb</li>
                         <li>OxyPlot</li>
                     </ul>
+                    <p>Other Attribution</p>
+                    <ul>
+                        <li>Target Image - Alberto Barbati (via Wikipedia)</li>
+                    </ul>
                 </body>    
             </html> ";
 

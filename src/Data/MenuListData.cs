@@ -24,6 +24,11 @@ namespace ATMobile.Data
                 TargetType = typeof (TournamentHistoryForm)
             });
 
+            this.Add (new MenuOption () {
+                Title = "Journal",
+                TargetType = typeof (JournalEntriesForm)
+            });
+
             /*
             this.Add (new MenuItem () {
                 Title = "Estimate Distance",
