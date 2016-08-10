@@ -31,7 +31,7 @@ namespace ATMobile.Forms
 
             TournamentTypeForm editTournamentType = new TournamentTypeForm ();
             editTournamentType.SetupForm (tournamentType);
-            Navigation.PushAsync (editTournamentType);
+            Navigation.PushModalAsync (editTournamentType);
         }
 
         protected override void OnAppearing ()

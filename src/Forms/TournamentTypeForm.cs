@@ -66,7 +66,7 @@ namespace ATMobile.Forms
 
             RoundTypeForm form = new RoundTypeForm ();
             form.SetupForm (roundType);
-            Navigation.PushAsync (form);
+            Navigation.PushModalAsync (form);
         }
 
         private void SaveTournamentType ()
@@ -85,7 +85,7 @@ namespace ATMobile.Forms
 
             RoundTypeForm form = new RoundTypeForm ();
             form.SetupForm (roundType);
-            Navigation.PushAsync (form);
+            Navigation.PushModalAsync (form);
         }
 
         public override void Save ()
