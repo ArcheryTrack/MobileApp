@@ -31,7 +31,8 @@ namespace ATMobile.Forms
                 Source = new HtmlWebViewSource {
                     Html = HTML,
                 },
-                VerticalOptions = LayoutOptions.FillAndExpand
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                Margin = new Thickness (5, 5, 5, 5)
             };
 
             OutsideLayout.Children.Add (webView);

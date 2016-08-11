@@ -87,7 +87,7 @@ namespace ATMobile.Forms
 
             InsideLayout = new StackLayout {
                 Spacing = 5,
-                VerticalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.FillAndExpand,
                 Padding = 5,
                 Margin = new Thickness (20, 0, 20, 20)
             };

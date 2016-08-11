@@ -52,7 +52,6 @@ namespace ATMobile.Forms
                 form.SetupForm (archer, practice);
                 Navigation.PushAsync (form, true);
             }
-
         }
 
         protected override void OnAppearing ()

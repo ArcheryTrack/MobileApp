@@ -16,6 +16,7 @@ namespace ATMobile.Forms
         private PracticeEnd m_PracticeEnd;
         private int m_EndCount;
         private TargetFace m_TargetFace;
+        private Label m_lblNote;
         private Editor m_txtNote;
         private Label m_lblPoints;
 
@@ -25,12 +26,6 @@ namespace ATMobile.Forms
 
         public PracticeEndForm () : base ("End")
         {
-            m_txtNote = new Editor {
-                HeightRequest = 60,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-            };
-            InsideLayout.Children.Add (m_txtNote);
-
             m_lblPoints = new Label {
                 Text = "Points: "
             };
@@ -61,6 +56,19 @@ namespace ATMobile.Forms
             m_ScoreControl.ScoreClicked += Clicked;
             frame2.Content = m_ScoreControl;
             layout.Children.Add (frame2);
+
+            m_lblNote = new Label {
+                Text = "Note",
+                Margin = new Thickness (0, 10, 0, 5)
+            };
+            InsideLayout.Children.Add (m_lblNote);
+
+            m_txtNote = new Editor {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            InsideLayout.Children.Add (m_txtNote);
+
         }
 
         private int FindNextArrowNumber ()
