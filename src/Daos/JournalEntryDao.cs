@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ATMobile.Objects;
 using LiteDB;
 
@@ -20,6 +21,11 @@ namespace ATMobile.Daos
         public override void BuildIndexes ()
         {
 
+        }
+
+        public List<JournalEntry> GetJournalEntries (Guid _archerId)
+        {
+            return null;
         }
     }
 }

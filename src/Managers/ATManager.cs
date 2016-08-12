@@ -147,6 +147,28 @@ namespace ATMobile.Managers
 
         #endregion
 
+        #region JournalEntry
+
+        public void Persist (JournalEntry _entry)
+        {
+            JournalEntryDao dao = new JournalEntryDao (m_Database);
+            dao.Persist (_entry);
+        }
+
+        public JournalEntry GetJournalEntry (Guid _entryId)
+        {
+            JournalEntryDao dao = new JournalEntryDao (m_Database);
+            return dao.Get (_entryId);
+        }
+
+        public List<JournalEntry> GetJournalEntries (Guid _archerId)
+        {
+            JournalEntryDao dao = new JournalEntryDao (m_Database);
+            return dao.GetJournalEntries (_archerId);
+        }
+
+        #endregion
+
         #region PracticeEnds
 
         public List<PracticeEnd> GetPracticeEnds (Guid _practiceId)

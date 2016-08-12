@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ATMobile.Controls;
+using ATMobile.Helpers;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using ATMobile.PickerForms;
@@ -283,7 +284,7 @@ namespace ATMobile.Forms
         {
             m_StartDate = _start;
             m_bolStartPicked = true;
-            m_lblStartDate.Text = m_StartDate.ToString ("d");
+            m_lblStartDate.Text = m_StartDate.ToDisplayDate ();
         }
 
         private void EndPicked (DateTime _end)
