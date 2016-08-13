@@ -29,6 +29,7 @@ namespace ATMobile.Controls
         {
             ItemsSource = null;
         }
+
     }
 }
 

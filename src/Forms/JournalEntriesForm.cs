@@ -6,6 +6,7 @@ namespace ATMobile.Forms
         public JournalEntriesForm ()
             : base ("Journal")
         {
+
         }
 
         public override void Add ()
