@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 using ATMobile.Controls;
 using ATMobile.Helpers;
 using ATMobile.Managers;
@@ -189,6 +190,11 @@ namespace ATMobile.Forms
             m_Layout.Children.Add (m_btnAddArcher, 1, 5);
 
             InsideLayout.Children.Add (m_Layout);
+        }
+
+        public override void ValidateForm (StringBuilder _sb)
+        {
+
         }
 
         public override void Save ()

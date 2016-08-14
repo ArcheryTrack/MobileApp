@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ATMobile.Interfaces;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -55,6 +56,11 @@ namespace ATMobile.Forms
                 m_txtState.Text = m_Range.State;
                 m_txtCountry.Text = m_Range.Country;
             }
+        }
+
+        public override void ValidateForm (StringBuilder _sb)
+        {
+
         }
 
         public override void Save ()

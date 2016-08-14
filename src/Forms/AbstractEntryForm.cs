@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ATMobile.Constants;
 using Xamarin.Forms;
 
@@ -14,6 +15,7 @@ namespace ATMobile.Forms
         protected Button SaveButton;
 
         public abstract void Save ();
+        public abstract void ValidateForm (StringBuilder _sb);
 
         protected AbstractEntryForm (string _title) : base (_title, 0, 0)
         {
@@ -101,9 +103,15 @@ namespace ATMobile.Forms
 
         private void OnSave (object sender, EventArgs e)
         {
-            Save ();
+            StringBuilder sb = new StringBuilder ();
+            ValidateForm (sb);
 
-            Navigation.PopModalAsync (true);
+            if (sb.Length > 0) {
+                DisplayAlert ("Warning", sb.ToString (), "OK");
+            } else {
+                Save ();
+                Navigation.PopModalAsync (true);
+            }
         }
     }
 }

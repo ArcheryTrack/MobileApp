@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ATMobile.Helpers;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -88,6 +89,11 @@ namespace ATMobile.Forms
             m_lblDate.Text = m_Date.ToString ("d");
         }
 
+        public override void ValidateForm (StringBuilder _sb)
+        {
+
+        }
+
         public override void Save ()
         {
             m_Entry.DateTime = m_Date;
@@ -112,8 +118,8 @@ namespace ATMobile.Forms
             }
 
             m_lblArcher.Text = _archer.FullName;
-            m_lblDate.Text = _entry.DateTime.ToDisplayDate ();
-            m_txtNote.Text = _entry.EntryText;
+            m_lblDate.Text = m_Entry.DateTime.ToDisplayDate ();
+            m_txtNote.Text = m_Entry.EntryText;
         }
 
     }

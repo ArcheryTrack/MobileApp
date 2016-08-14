@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using ATMobile.Objects;
 using ATMobile.Managers;
+using System.Text;
 
 namespace ATMobile.Forms
 {
@@ -48,6 +49,14 @@ namespace ATMobile.Forms
             m_txtLastName.Text = _archer.LastName;
             m_datBirthdate.Date = _archer.BirthDate;
             m_datStartedArchery.Date = _archer.StartedArchery;
+        }
+
+        public override void ValidateForm (StringBuilder _sb)
+        {
+            if (m_txtFirstName.Text == null
+                && m_txtLastName.Text == null) {
+                _sb.AppendLine ("First or Last Name are required");
+            }
         }
 
         public override void Save ()

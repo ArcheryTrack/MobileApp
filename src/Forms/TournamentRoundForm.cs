@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ATMobile.Objects;
 
 namespace ATMobile.Forms
@@ -7,6 +8,11 @@ namespace ATMobile.Forms
     {
         public TournamentRoundForm () : base ("Edit Round")
         {
+        }
+
+        public override void ValidateForm (StringBuilder _sb)
+        {
+
         }
 
         public override void Save ()

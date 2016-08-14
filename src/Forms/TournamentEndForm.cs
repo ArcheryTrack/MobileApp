@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using ATMobile.Controls;
 using ATMobile.Helpers;
 using ATMobile.Managers;
@@ -293,6 +294,11 @@ namespace ATMobile.Forms
             m_TournamentEnd.Note = m_txtNote.Text;
             m_TournamentEnd.Results = m_ArrowsListView.Arrows.ToList ();
             ATManager.GetInstance ().Persist (m_TournamentEnd);
+        }
+
+        public override void ValidateForm (StringBuilder _sb)
+        {
+
         }
 
         public override void Save ()

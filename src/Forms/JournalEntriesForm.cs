@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ATMobile.Constants;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -56,17 +57,37 @@ namespace ATMobile.Forms
             m_ArcherLayout.Children.Add (m_btnNext);
 
             m_Archers = ATManager.GetInstance ().GetArchers ();
-            m_CurrentArcherIndex = 0;
+
+            Guid? archerId = ATManager.GetInstance ().GetGuidSetting (SettingConstants.CurrentArcher);
+            if (archerId.HasValue) {
+                for (int i = 0; i < m_Archers.Count; i++) {
+                    if (m_Archers [i].Id.Equals (archerId.Value)) {
+                        m_CurrentArcherIndex = i;
+                        break;
+                    }
+                }
+            } else {
+                m_CurrentArcherIndex = 0;
+            }
+
+
             SetArcher ();
         }
 
         public override void Add ()
         {
-
+            JournalEntryForm form = new JournalEntryForm ();
+            form.SetupForm (null, m_CurrentArcher);
+            Navigation.PushModalAsync (form, true);
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
+            JournalEntry entry = (JournalEntry)e.SelectedItem;
+
+            JournalEntryForm form = new JournalEntryForm ();
+            form.SetupForm (entry, m_CurrentArcher);
+            Navigation.PushModalAsync (form, true);
         }
 
         void PreviousClicked (object sender, EventArgs e)
@@ -95,11 +116,21 @@ namespace ATMobile.Forms
         {
             m_CurrentArcher = m_Archers [m_CurrentArcherIndex];
 
+            ATManager.GetInstance ().SetSetting (
+                        SettingConstants.CurrentArcher,
+                        m_CurrentArcher.Id);
+
             m_lblArcher.Text = m_CurrentArcher.FullName;
 
             m_lstJournalEntries.RefreshList (m_CurrentArcher.Id);
         }
 
+        protected override void OnAppearing ()
+        {
+            base.OnAppearing ();
+
+            m_lstJournalEntries.RefreshList (m_CurrentArcher.Id);
+        }
 
     }
 }

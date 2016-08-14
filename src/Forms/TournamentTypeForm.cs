@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -86,6 +87,11 @@ namespace ATMobile.Forms
             RoundTypeForm form = new RoundTypeForm ();
             form.SetupForm (roundType);
             Navigation.PushModalAsync (form);
+        }
+
+        public override void ValidateForm (StringBuilder _sb)
+        {
+
         }
 
         public override void Save ()

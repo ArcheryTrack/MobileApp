@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using ATMobile.Data;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -105,6 +106,11 @@ namespace ATMobile.Forms
                     }
                 }
             }
+        }
+
+        public override void ValidateForm (StringBuilder _sb)
+        {
+
         }
 
         public override void Save ()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ATMobile.Data;
 using ATMobile.Enums;
 using ATMobile.Managers;
@@ -254,6 +255,11 @@ namespace ATMobile.Forms
         private void SetUnitsText ()
         {
             m_lblUnits.Text = m_DistanceUnit.Name;
+        }
+
+        public override void ValidateForm (StringBuilder _sb)
+        {
+
         }
 
         public override void Save ()
