@@ -15,8 +15,6 @@ namespace ATMobile.Controls
     {
         Guid? m_ArcherId;
 
-
-
         public JournalEntryListView ()
         {
             ItemTemplate = new DataTemplate (typeof (JournalEntryCell));
@@ -26,16 +24,26 @@ namespace ATMobile.Controls
 
         public void RefreshList (Guid _archerId)
         {
+            Rows.Clear ();
+
             m_ArcherId = _archerId;
 
-            List<JournalEntry> entries = ATManager.GetInstance ().GetJournalEntries (m_ArcherId.Value);
+            List<JournalEntry> entries = ATManager.GetInstance ().GetJournalEntries (
+                m_ArcherId.Value,
+                0,
+                20);
 
-            Rows = new ObservableCollection<JournalEntry> (entries);
+            AppendRows (entries);
         }
 
-        public override void LoadMoreData (IList items)
+        public override void LoadMoreData (int start)
         {
+            List<JournalEntry> entries = ATManager.GetInstance ().GetJournalEntries (
+                m_ArcherId.Value,
+                start,
+                20);
 
+            AppendRows (entries);
         }
     }
 }

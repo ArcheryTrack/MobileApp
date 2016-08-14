@@ -167,6 +167,12 @@ namespace ATMobile.Managers
             return dao.GetJournalEntries (_archerId);
         }
 
+        public List<JournalEntry> GetJournalEntries (Guid _archerId, int start, int count)
+        {
+            JournalEntryDao dao = new JournalEntryDao (m_Database);
+            return dao.GetJournalEntries (_archerId, start, count);
+        }
+
         #endregion
 
         #region PracticeEnds
