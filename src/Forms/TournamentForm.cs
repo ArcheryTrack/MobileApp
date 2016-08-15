@@ -194,7 +194,13 @@ namespace ATMobile.Forms
 
         public override void ValidateForm (StringBuilder _sb)
         {
+            if (m_TournamentType == null) {
+                _sb.AppendLine ("You must pick a tournament type.");
+            }
 
+            if (m_ArchersList.Count == 0) {
+                _sb.AppendLine ("You must select at least one archer.");
+            }
         }
 
         public override void Save ()
@@ -249,19 +255,15 @@ namespace ATMobile.Forms
                         RoundNumber = count,
                         ExpectedArrowsPerEnd = roundType.ArrowsPerEnd,
                         ExpectedEnds = roundType.NumberOfEnds,
-                        Distance = roundType.Distance
+                        Distance = roundType.Distance,
+                        RoundTypeId = roundType.Id
                     };
 
-
-
                     manager.Persist (round);
-
                     count++;
                 }
             }
         }
-
-
 
         async private void PickStart (object sender, EventArgs e)
         {

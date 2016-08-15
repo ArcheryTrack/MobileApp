@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using ATMobile.Data;
+using ATMobile.Helpers;
 using ATMobile.Managers;
 using ATMobile.Objects;
+using ATMobile.PickerForms;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
@@ -12,67 +14,126 @@ namespace ATMobile.Forms
     {
         private Archer m_Archer;
         private Practice m_Practice;
-        private List<Range> m_Ranges;
-        private List<TargetFace> m_TargetFaces;
 
+        //Picked values
+        private DateTime m_Date;
+        private TargetFace m_TargetFace;
+        private Range m_Location;
+
+        private Grid m_Layout;
+
+        private bool m_bolDatePicked;
         private Label m_lblDate;
-        private DatePicker m_datDate;
+        private Button m_btnPickDate;
+
         private Label m_lblTime;
         private TimePicker m_timTime;
-        private Label m_lblLocation;
-        private Picker m_pickLocation;
-        private Label m_lblTargetFace;
-        private Picker m_pickTargetFace;
 
+        private Label m_lblLocation;
+        private Button m_btnPickLocation;
+
+        private Label m_lblTargetFace;
+        private Button m_btnPickTargetFace;
 
         public PracticeForm () : base ("Practice")
         {
-            DateTime now = DateTime.Now;
-
-            m_lblDate = new Label {
-                Text = "Date"
+            //Setup grid to hold the controls
+            m_Layout = new Grid {
+                Padding = 5,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                RowDefinitions = {
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Date
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Time
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Location
+                    },
+                    new RowDefinition {
+                        Height = new GridLength(40, GridUnitType.Absolute) //Target
+                    }
+                },
+                ColumnDefinitions = {
+                    new ColumnDefinition {
+                        Width = new GridLength(1, GridUnitType.Star)
+                    },
+                    new ColumnDefinition {
+                        Width = new GridLength(80, GridUnitType.Absolute)
+                    }
+                }
             };
-            InsideLayout.Children.Add (m_lblDate);
+            InsideLayout.Children.Add (m_Layout);
 
-            m_datDate = new DatePicker ();
-            m_datDate.Date = now.Date;
-            InsideLayout.Children.Add (m_datDate);
+            m_Date = DateTime.Now;
+
+            //Setup the StartDate
+            m_lblDate = new Label {
+                Text = "Date:",
+                HeightRequest = 40,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.StartAndExpand
+            };
+            m_Layout.Children.Add (m_lblDate, 0, 0);
+
+            m_btnPickDate = new Button {
+                Text = "Pick",
+                WidthRequest = 80,
+                HeightRequest = 40,
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnPickDate.Clicked += PickDate;
+            m_Layout.Children.Add (m_btnPickDate, 1, 0);
 
             m_lblTime = new Label {
                 Text = "Time"
             };
-            InsideLayout.Children.Add (m_lblTime);
+            m_Layout.Children.Add (m_lblTime);
 
             m_timTime = new TimePicker ();
-            m_timTime.Time = now.TimeOfDay;
+            m_timTime.Time = m_Date.TimeOfDay;
             InsideLayout.Children.Add (m_timTime);
 
+            SetDateTimeText ();
+
+            //Setup Location
             m_lblLocation = new Label {
-                Text = "Location"
+                Text = "Select location",
+                HeightRequest = 40,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.StartAndExpand
             };
-            InsideLayout.Children.Add (m_lblLocation);
+            m_Layout.Children.Add (m_lblLocation, 0, 2);
+
+            m_btnPickLocation = new Button {
+                Text = "Pick",
+                WidthRequest = 80,
+                HeightRequest = 40,
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnPickLocation.Clicked += PickLocation;
+            m_Layout.Children.Add (m_btnPickLocation, 1, 2);
 
 
-            m_pickLocation = new Picker ();
-            InsideLayout.Children.Add (m_pickLocation);
-
-            m_Ranges = ATManager.GetInstance ().GetRanges ();
-            foreach (var item in m_Ranges) {
-                m_pickLocation.Items.Add (item.Name);
-            }
-
+            //Add the Target Face at the botton.
             m_lblTargetFace = new Label {
-                Text = "Target"
+                Text = "Select Target Face",
+                VerticalTextAlignment = TextAlignment.Center
             };
-            InsideLayout.Children.Add (m_lblTargetFace);
+            m_Layout.Children.Add (m_lblTargetFace, 0, 3);
 
-            m_pickTargetFace = new Picker ();
-            InsideLayout.Children.Add (m_pickTargetFace);
-
-            m_TargetFaces = TargetFaceData.GetData ();
-            foreach (var item in m_TargetFaces) {
-                m_pickTargetFace.Items.Add (item.Name);
-            }
+            m_btnPickTargetFace = new Button {
+                Text = "Pick",
+                WidthRequest = 80,
+                HeightRequest = 40,
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.End
+            };
+            m_btnPickTargetFace.Clicked += PickTargetFace;
+            m_Layout.Children.Add (m_btnPickTargetFace, 1, 3);
         }
 
         public void SetupForm (Archer _archer, Practice _practice)
@@ -81,36 +142,85 @@ namespace ATMobile.Forms
             m_Practice = _practice;
 
             if (m_Practice != null) {
-                m_datDate.Date = m_Practice.DateTime.Date;
-                m_timTime.Time = m_Practice.DateTime.TimeOfDay;
+                m_Date = m_Practice.DateTime;
 
                 if (m_Practice.RangeId != null) {
-                    for (int i = 0; i < m_Ranges.Count; i++) {
-                        var range = m_Ranges [i];
-
-                        if (range.Id.Equals (m_Practice.RangeId)) {
-                            m_pickLocation.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                    m_Location = ATManager.GetInstance ().GetRange (_practice.RangeId.Value);
+                    SetRangeText ();
                 }
 
                 if (m_Practice.TargetFaceId != null) {
-                    for (int i = 0; i < m_TargetFaces.Count; i++) {
-                        var target = m_TargetFaces [i];
-
-                        if (target.Id.Equals (m_Practice.TargetFaceId)) {
-                            m_pickTargetFace.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                    m_TargetFace = ATManager.GetInstance ().GetTargetFace (_practice.TargetFaceId.Value);
+                    SetTargetFaceText ();
                 }
             }
         }
 
+        async private void PickTargetFace (object sender, EventArgs e)
+        {
+            TargetFacePicker picker = new TargetFacePicker ();
+            picker.ItemPicked += TargetFacePicked;
+
+            await Navigation.PushModalAsync (picker);
+        }
+
+        private void TargetFacePicked (TargetFace _targetFace)
+        {
+            m_TargetFace = _targetFace;
+            SetTargetFaceText ();
+        }
+
+        private void SetTargetFaceText ()
+        {
+            if (m_TargetFace != null) {
+                m_lblTargetFace.Text = m_TargetFace.Name;
+            }
+        }
+
+        async private void PickLocation (object sender, EventArgs e)
+        {
+            RangePicker picker = new RangePicker ();
+            picker.ItemPicked += RangePicked;
+
+            await Navigation.PushModalAsync (picker);
+        }
+
+        private void RangePicked (Range _range)
+        {
+            m_Location = _range;
+            SetRangeText ();
+        }
+
+        private void SetRangeText ()
+        {
+            m_lblLocation.Text = m_Location.Name;
+        }
+
+        async private void PickDate (object sender, EventArgs e)
+        {
+            DatePickerForm picker = new DatePickerForm ("Select Date");
+            picker.OnDateSelected += DatePicked;
+
+            await Navigation.PushModalAsync (picker);
+        }
+
+        private void DatePicked (DateTime _date)
+        {
+            m_Date = _date;
+            m_bolDatePicked = true;
+            SetDateTimeText ();
+        }
+
+        private void SetDateTimeText ()
+        {
+            m_lblDate.Text = m_Date.ToDisplayDate ("Date");
+        }
+
         public override void ValidateForm (StringBuilder _sb)
         {
-
+            if (m_TargetFace == null) {
+                _sb.AppendLine ("You must pick a target face.");
+            }
         }
 
         public override void Save ()
@@ -121,26 +231,20 @@ namespace ATMobile.Forms
                 m_Practice.ParentId = m_Archer.Id;
             }
 
-            DateTime date = m_datDate.Date;
+            DateTime date = m_Date;
             date = date.AddTicks (m_timTime.Time.Ticks);
             m_Practice.DateTime = date;
 
-            if (m_pickLocation.SelectedIndex >= 0) {
-                var range = m_Ranges [m_pickLocation.SelectedIndex];
-
-                m_Practice.RangeId = range.Id;
-                m_Practice.RangeName = range.Name;
+            if (m_Location != null) {
+                m_Practice.RangeId = m_Location.Id;
+                m_Practice.RangeName = m_Location.Name;
             } else {
                 m_Practice.RangeId = null;
                 m_Practice.RangeName = null;
             }
 
-            if (m_pickTargetFace.SelectedIndex >= 0) {
-                var target = m_TargetFaces [m_pickTargetFace.SelectedIndex];
-
-                m_Practice.TargetFaceId = target.Id;
-            } else {
-                m_Practice.TargetFaceId = null;
+            if (m_TargetFace != null) {
+                m_Practice.TargetFaceId = m_TargetFace.Id;
             }
 
             ATManager.GetInstance ().Persist (m_Practice);

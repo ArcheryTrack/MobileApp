@@ -26,6 +26,8 @@ namespace ATMobile.Forms
         private Button m_btnPrevious;
         private Button m_btnNext;
         private Label m_lblArcher;
+
+        private Label m_lblNote;
         private Editor m_txtNote;
 
         private Label m_lblPoints;
@@ -86,11 +88,6 @@ namespace ATMobile.Forms
             m_btnNext.Clicked += NextClicked;
             m_ArcherLayout.Children.Add (m_btnNext);
 
-            m_txtNote = new Editor {
-                HeightRequest = 60
-            };
-            InsideLayout.Children.Add (m_txtNote);
-
             m_lblPoints = new Label {
                 Text = "Points: "
             };
@@ -121,6 +118,18 @@ namespace ATMobile.Forms
             m_ScoreControl.ScoreClicked += Clicked;
             frame2.Content = m_ScoreControl;
             layout.Children.Add (frame2);
+
+            m_lblNote = new Label {
+                Text = "Note",
+                Margin = new Thickness (0, 10, 0, 5)
+            };
+            InsideLayout.Children.Add (m_lblNote);
+
+            m_txtNote = new Editor {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            InsideLayout.Children.Add (m_txtNote);
         }
 
         void PreviousClicked (object sender, EventArgs e)
@@ -273,7 +282,9 @@ namespace ATMobile.Forms
                 m_TournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
 
                 if (m_TournamentType != null) {
-                    m_TargetFace = TargetHelper.FindTarget (m_TournamentType.TargetFaceId);
+                    RoundType roundType = ATManager.GetInstance ().GetRoundType (m_Round.RoundTypeId);
+
+                    m_TargetFace = TargetHelper.FindTarget (roundType.TargetFaceId);
                 }
             }
         }

@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using ATMobile.Constants;
+using ATMobile.Data;
+using ATMobile.Objects;
+
 namespace ATMobile.Managers
 {
     public class InitialDataManager
@@ -13,11 +18,27 @@ namespace ATMobile.Managers
         public void PopulateData ()
         {
             PopulateLocations ();
+            PopulateTargetFaces ();
         }
 
         private void PopulateLocations ()
         {
 
+        }
+
+        private void PopulateTargetFaces ()
+        {
+            bool loaded = m_Manager.GetBoolSetting (SettingConstants.TargetFaceDataLoaded);
+
+            if (!loaded) {
+                List<TargetFace> ranges = TargetFaceData.GetData ();
+
+                foreach (var item in ranges) {
+                    m_Manager.Persist (item);
+                }
+            }
+
+            m_Manager.SetSetting (SettingConstants.TargetFaceDataLoaded, true);
         }
     }
 }

@@ -259,7 +259,21 @@ namespace ATMobile.Forms
 
         public override void ValidateForm (StringBuilder _sb)
         {
+            if (string.IsNullOrEmpty (m_txtName.Text)) {
+                _sb.AppendLine ("You must specify a name.");
+            }
 
+            if (string.IsNullOrEmpty (m_txtNumberOfEnds.Text)) {
+                _sb.AppendLine ("You must specify the number of ends");
+            }
+
+            if (string.IsNullOrEmpty (m_txtArrowsPerEnd.Text)) {
+                _sb.AppendLine ("You must specify the number of arrows per end");
+            }
+
+            if (m_TargetFace == null) {
+                _sb.AppendLine ("You must specify a target face.");
+            }
         }
 
         public override void Save ()

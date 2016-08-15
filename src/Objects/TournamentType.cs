@@ -11,8 +11,6 @@ namespace ATMobile.Objects
 
         public string Description { get; set; }
 
-        public Guid TargetFaceId { get; set; }
-
         public string Details {
             get {
                 List<RoundType> roundTypes = ATManager.GetInstance ().GetRoundTypes (Id);

@@ -60,7 +60,9 @@ namespace ATMobile.Forms
 
         public override void ValidateForm (StringBuilder _sb)
         {
-
+            if (string.IsNullOrEmpty (m_txtName.Text)) {
+                _sb.AppendLine ("You must specify the name of the range.");
+            }
         }
 
         public override void Save ()

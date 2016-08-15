@@ -320,6 +320,12 @@ namespace ATMobile.Managers
             return dao.GetRoundTypes (_tournamentTypeId);
         }
 
+        public RoundType GetRoundType (Guid _roundTypeId)
+        {
+            RoundTypeDao dao = new RoundTypeDao (m_Database);
+            return dao.Get (_roundTypeId);
+        }
+
         public void Persist (RoundType roundType)
         {
             RoundTypeDao dao = new RoundTypeDao (m_Database);
@@ -394,6 +400,25 @@ namespace ATMobile.Managers
         public void SetSetting (string _name, Guid _value)
         {
             SetSetting (_name, _value.ToString ());
+        }
+
+        public void SetSetting (string _name, bool _value)
+        {
+            SetSetting (_name, _value.ToString ());
+        }
+
+        public bool GetBoolSetting (string _name)
+        {
+            Setting setting = GetSetting (_name);
+
+            if (setting == null) return false;
+
+            bool output;
+            if (bool.TryParse (setting.Value, out output)) {
+                return output;
+            }
+
+            return false;
         }
 
         public Guid? GetGuidSetting (string _name)

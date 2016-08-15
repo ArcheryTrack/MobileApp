@@ -13,6 +13,8 @@ namespace ATMobile.Forms
                     <h1>ArcheryTrack</h1>
                     <p>A simple data base approach to tracking practice and tournaments.</p>
                     <br>
+                    <p>Written by Brian Nelson</p>
+                    <br>
                     <p>OpenSource Projects In Use</p>
                     <ul>
                         <li>LiteDb</li>
