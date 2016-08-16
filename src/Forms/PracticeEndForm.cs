@@ -146,7 +146,7 @@ namespace ATMobile.Forms
             m_EndCount = _endCount;
 
             if (m_Practice.TargetFaceId != null) {
-                m_TargetFace = TargetHelper.FindTarget (m_Practice.TargetFaceId.Value);
+                m_TargetFace = ATManager.GetInstance ().GetTargetFace (m_Practice.TargetFaceId.Value);
             } else {
                 m_TargetFace = null;
             }

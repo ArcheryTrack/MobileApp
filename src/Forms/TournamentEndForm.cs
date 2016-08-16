@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace ATMobile.Forms
     {
         private Archer m_Archer;
         private TournamentType m_TournamentType;
+        private RoundType m_RoundType;
 
         private Tournament m_Tournament;
         private Round m_Round;
@@ -282,9 +284,9 @@ namespace ATMobile.Forms
                 m_TournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
 
                 if (m_TournamentType != null) {
-                    RoundType roundType = ATManager.GetInstance ().GetRoundType (m_Round.RoundTypeId);
-
-                    m_TargetFace = TargetHelper.FindTarget (roundType.TargetFaceId);
+                    ATManager manager = ATManager.GetInstance ();
+                    m_RoundType = manager.GetRoundType (m_Round.RoundTypeId);
+                    m_TargetFace = manager.GetTargetFace (m_RoundType.TargetFaceId);
                 }
             }
         }
@@ -309,6 +311,14 @@ namespace ATMobile.Forms
 
         public override void ValidateForm (StringBuilder _sb)
         {
+            List<ShotArrow> arrows = m_ArrowsListView.Arrows.ToList ();
+
+            if (arrows.Count > m_RoundType.ArrowsPerEnd) {
+                _sb.AppendFormat ("Only {0} arrows were expected for this end, but {1} were recorded.",
+                                 m_RoundType.ArrowsPerEnd,
+                                 arrows.Count);
+
+            }
 
         }
 

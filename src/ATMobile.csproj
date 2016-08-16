@@ -105,7 +105,6 @@
     <Compile Include="Cells\PracticeArrowCell.cs" />
     <Compile Include="Controls\TextButton.cs" />
     <Compile Include="Delegates\ButtonClickedDelegates.cs" />
-    <Compile Include="Helpers\TargetHelper.cs" />
     <Compile Include="Delegates\DeletePracticeArrowClickedDelegate.cs" />
     <Compile Include="Controls\TournamentListView.cs" />
     <Compile Include="Cells\TournamentHistoryCell.cs" />

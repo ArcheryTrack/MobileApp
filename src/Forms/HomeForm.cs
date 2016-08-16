@@ -1,5 +1,6 @@
 ﻿using System;
 using ATMobile.Constants;
+using ATMobile.Managers;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
@@ -14,11 +15,21 @@ namespace ATMobile.Forms
 
             Title = "ArcheryTrack";
 
+            PopulateInitialData ();
+
             var menuPage = new MenuPage ();
             menuPage.Menu.ItemSelected += (sender, e) => NavigateTo (e.SelectedItem as Objects.MenuOption);
             Master = menuPage;
 
             Detail = new ATNavigationPage (new DefaultForm ());
+        }
+
+        private void PopulateInitialData ()
+        {
+            ATManager manager = ATManager.GetInstance ();
+
+            InitialDataManager dataManager = new InitialDataManager (manager);
+            dataManager.PopulateData ();
         }
 
         void NavigateTo (Objects.MenuOption menu)

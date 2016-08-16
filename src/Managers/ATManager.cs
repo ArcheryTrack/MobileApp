@@ -247,8 +247,8 @@ namespace ATMobile.Managers
 
         public List<RecentItem> GetRecentItems ()
         {
-            DateTime start = DateTime.Now.Date.AddDays (1);
-            DateTime end = DateTime.Now.Date.AddDays (-30);
+            DateTime end = DateTime.Now.Date.AddDays (1);
+            DateTime start = DateTime.Now.Date.AddDays (-30);
 
             List<RecentItem> items = new List<RecentItem> ();
 
@@ -262,10 +262,7 @@ namespace ATMobile.Managers
                 List<string> archers = GetArcherNames (tournament.Archers);
                 newItem.Archers = string.Join (", ", archers);
                 newItem.ArcherCount = archers.Count;
-
-                if (tournament.EndDateTime != null) {
-                    newItem.Date = tournament.EndDateTime.Value;
-                }
+                newItem.Date = tournament.StartDateTime;
 
                 items.Add (newItem);
             }
