@@ -1,6 +1,7 @@
 ﻿using System;
 using ATMobile.Constants;
 using ATMobile.Managers;
+using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
@@ -32,16 +33,27 @@ namespace ATMobile.Forms
             dataManager.PopulateData ();
         }
 
-        void NavigateTo (Objects.MenuOption menu)
+        void NavigateTo (MenuOption menu)
         {
-            Page displayPage = (Page)Activator.CreateInstance (menu.TargetType);
+            Page displayPage = null;
 
-            Detail = new ATNavigationPage (displayPage) {
-                BarTextColor = Color.FromHex (UIConstants.NavBarTextColor),
-                BarBackgroundColor = Color.FromHex (UIConstants.NavBarColor)
-            };
+            if (menu is PluginMenuOption) {
+                PluginMenuOption pmo = (PluginMenuOption)menu;
 
-            IsPresented = false;
+                displayPage = pmo.Plugin.GetPage (pmo);
+
+            } else {
+                displayPage = (Page)Activator.CreateInstance (menu.TargetType);
+            }
+
+            if (displayPage != null) {
+                Detail = new ATNavigationPage (displayPage) {
+                    BarTextColor = Color.FromHex (UIConstants.NavBarTextColor),
+                    BarBackgroundColor = Color.FromHex (UIConstants.NavBarColor)
+                };
+
+                IsPresented = false;
+            }
         }
     }
 }

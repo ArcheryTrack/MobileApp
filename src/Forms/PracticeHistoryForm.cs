@@ -57,7 +57,7 @@ namespace ATMobile.Forms
 
         void GetCurrentArcher ()
         {
-            Guid? currentArcher = ATManager.GetInstance ().GetGuidSetting (SettingConstants.CurrentArcher);
+            Guid? currentArcher = ATManager.GetInstance ().SettingManager.GetCurrentArcher ();
 
             if (currentArcher != null) {
                 for (int i = 0; i < m_Archers.Count; i++) {
@@ -89,9 +89,7 @@ namespace ATMobile.Forms
             if (!m_Loading) {
                 if (m_ArcherPicker.SelectedIndex != -1) {
                     Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
-                    ATManager.GetInstance ().SetSetting (
-                        SettingConstants.CurrentArcher,
-                        archer.Id);
+                    ATManager.GetInstance ().SettingManager.SetCurrentArcher (archer.Id);
                 }
             }
 

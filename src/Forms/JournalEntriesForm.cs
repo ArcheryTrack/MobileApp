@@ -58,7 +58,7 @@ namespace ATMobile.Forms
 
             m_Archers = ATManager.GetInstance ().GetArchers ();
 
-            Guid? archerId = ATManager.GetInstance ().GetGuidSetting (SettingConstants.CurrentArcher);
+            Guid? archerId = ATManager.GetInstance ().SettingManager.GetCurrentArcher ();
             if (archerId.HasValue) {
                 for (int i = 0; i < m_Archers.Count; i++) {
                     if (m_Archers [i].Id.Equals (archerId.Value)) {
@@ -116,9 +116,7 @@ namespace ATMobile.Forms
         {
             m_CurrentArcher = m_Archers [m_CurrentArcherIndex];
 
-            ATManager.GetInstance ().SetSetting (
-                        SettingConstants.CurrentArcher,
-                        m_CurrentArcher.Id);
+            ATManager.GetInstance ().SettingManager.SetCurrentArcher (m_CurrentArcher.Id);
 
             m_lblArcher.Text = m_CurrentArcher.FullName;
 

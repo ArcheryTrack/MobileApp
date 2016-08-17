@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMobile.iOS", "iOS\ATMobil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMobile.Droid", "Droid\ATMobile.Droid.csproj", "{4A8A0B17-2CB8-4640-9F39-22C680BFEA0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMobileLogging", "..\..\ATMobilePlugins\src\ATMobileLogging\ATMobileLogging.csproj", "{CD9759E5-669B-4A9E-8A74-A87644EDFF96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,12 +53,26 @@ Global
 		{7621F20D-991F-439E-9621-0EB474FACF9D}.Release|iPhone.Build.0 = Release|iPhone
 		{7621F20D-991F-439E-9621-0EB474FACF9D}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{7621F20D-991F-439E-9621-0EB474FACF9D}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Release|iPhone.Build.0 = Release|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{CD9759E5-669B-4A9E-8A74-A87644EDFF96}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.inheritsSet = null
-		$1.scope = text/x-csharp
+		$1.scope = application/vnd.apple-interface-builder
+		$1.FileWidth = 120
+		$1.inheritsScope = text/plain
 		$0.CSharpFormattingPolicy = $2
 		$2.AnonymousMethodBraceStyle = NextLine
 		$2.PropertyBraceStyle = NextLine
@@ -81,7 +97,8 @@ Global
 		$3.ResourceNamePolicy = FileFormatDefault
 		$0.XmlFormattingPolicy = $4
 		$4.inheritsSet = null
-		$4.scope = application/xaml+xml
+		$4.scope = application/vnd.apple-interface-builder
+		$4.inheritsScope = application/xml
 		$0.TextStylePolicy = $5
 		$5.FileWidth = 120
 		$5.inheritsSet = VisualStudio

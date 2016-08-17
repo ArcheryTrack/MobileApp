@@ -317,9 +317,7 @@ namespace ATMobile.Forms
                 _sb.AppendFormat ("Only {0} arrows were expected for this end, but {1} were recorded.",
                                  m_RoundType.ArrowsPerEnd,
                                  arrows.Count);
-
             }
-
         }
 
         public override void Save ()

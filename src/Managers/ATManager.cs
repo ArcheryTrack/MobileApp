@@ -7,6 +7,8 @@ using ATMobile.Daos;
 using LiteDB;
 using System.Linq;
 using System.Threading.Tasks;
+using ATMobile.Interfaces;
+using ATMobile.Constants;
 
 namespace ATMobile.Managers
 {
@@ -18,6 +20,9 @@ namespace ATMobile.Managers
         private string m_DatabaseFile;
         private LiteDatabase m_Database;
         private ChartingManager m_ChartingManager;
+        private PluginManager m_PluginManager;
+        private MessagingManager m_MessagingManager;
+        private SettingManager m_SettingManager;
 
         private ATManager ()
         {
@@ -26,6 +31,12 @@ namespace ATMobile.Managers
             m_Database = new LiteDatabase (m_DatabaseFile);
 
             BuildIndexes (m_Database);
+        }
+
+        public LiteDatabase Database {
+            get {
+                return m_Database;
+            }
         }
 
         public void BuildIndexes (LiteDatabase _database)
@@ -42,6 +53,36 @@ namespace ATMobile.Managers
                 }
 
                 return m_ChartingManager;
+            }
+        }
+
+        public PluginManager PluginManager {
+            get {
+                if (m_PluginManager == null) {
+                    m_PluginManager = new PluginManager (this);
+                }
+
+                return m_PluginManager;
+            }
+        }
+
+        public MessagingManager MessagingManager {
+            get {
+                if (m_MessagingManager == null) {
+                    m_MessagingManager = new MessagingManager (this);
+                }
+
+                return m_MessagingManager;
+            }
+        }
+
+        public SettingManager SettingManager {
+            get {
+                if (m_SettingManager == null) {
+                    m_SettingManager = new SettingManager (this);
+                }
+
+                return m_SettingManager;
             }
         }
 
@@ -348,91 +389,7 @@ namespace ATMobile.Managers
 
         #endregion
 
-        #region Setting
 
-        public List<Setting> GetSettings ()
-        {
-            SettingDao dao = new SettingDao (m_Database);
-            return dao.GetAll ();
-        }
-
-        public void Persist (Setting _setting)
-        {
-            SettingDao dao = new SettingDao (m_Database);
-            dao.Persist (_setting);
-        }
-
-        public Setting GetSetting (string _name)
-        {
-            SettingDao dao = new SettingDao (m_Database);
-            return dao.GetSetting (_name);
-        }
-
-        public string GetSettingValue (string _name)
-        {
-            SettingDao dao = new SettingDao (m_Database);
-            Setting setting = dao.GetSetting (_name);
-
-            if (setting != null) {
-                return setting.Value;
-            }
-
-            return null;
-        }
-
-        public void SetSetting (string _name, string _value)
-        {
-            SettingDao dao = new SettingDao (m_Database);
-            Setting setting = dao.GetSetting (_name);
-
-            if (setting == null) {
-                setting = new Setting ();
-                setting.Name = _name;
-            }
-
-            setting.Value = _value;
-            dao.Persist (setting);
-        }
-
-        public void SetSetting (string _name, Guid _value)
-        {
-            SetSetting (_name, _value.ToString ());
-        }
-
-        public void SetSetting (string _name, bool _value)
-        {
-            SetSetting (_name, _value.ToString ());
-        }
-
-        public bool GetBoolSetting (string _name)
-        {
-            Setting setting = GetSetting (_name);
-
-            if (setting == null) return false;
-
-            bool output;
-            if (bool.TryParse (setting.Value, out output)) {
-                return output;
-            }
-
-            return false;
-        }
-
-        public Guid? GetGuidSetting (string _name)
-        {
-            Setting setting = GetSetting (_name);
-
-            if (setting == null) return null;
-
-            Guid output;
-            if (Guid.TryParse (setting.Value, out output)) {
-                return output;
-            }
-
-            return null;
-        }
-
-        #endregion
 
         #region States
 

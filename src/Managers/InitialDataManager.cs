@@ -28,8 +28,7 @@ namespace ATMobile.Managers
 
         private void PopulateTargetFaces ()
         {
-            bool loaded = m_Manager.GetBoolSetting (SettingConstants.TargetFaceDataLoaded);
-
+            bool loaded = m_Manager.SettingManager.GetTargetFaceDataLoaded ();
             if (!loaded) {
                 List<TargetFace> ranges = TargetFaceData.GetData ();
 
@@ -38,7 +37,7 @@ namespace ATMobile.Managers
                 }
             }
 
-            m_Manager.SetSetting (SettingConstants.TargetFaceDataLoaded, true);
+            m_Manager.SettingManager.SetTargetFaceDataLoaded (true);
         }
     }
 }

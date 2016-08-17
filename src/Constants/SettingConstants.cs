@@ -1,5 +1,4 @@
-﻿using System;
-namespace ATMobile.Constants
+﻿namespace ATMobile.Constants
 {
     public static class SettingConstants
     {
@@ -14,6 +13,9 @@ namespace ATMobile.Constants
         public const string InitialDataLoaded = "InitialDataLoaded";
 
         public const string TargetFaceDataLoaded = "TargetFaceDataLoaded";
+
+        public const string InstallId = "InstallId";
+
     }
 }
 
