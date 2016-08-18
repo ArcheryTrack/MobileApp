@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ATMobile.Constants;
 using ATMobile.Data;
+using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
@@ -12,15 +13,15 @@ namespace ATMobile.Controls
         public SettingsListView ()
         {
             BackgroundColor = Color.FromHex (UIConstants.MenuListColor);
-            List<MenuOption> data = new SettingsListData ();
-
-            ItemsSource = data;
 
             var cell = new DataTemplate (typeof (ImageCell));
             cell.SetBinding (TextCell.TextProperty, "Title");
             cell.SetBinding (ImageCell.ImageSourceProperty, "IconSource");
 
             ItemTemplate = cell;
+
+            List<MenuOption> data = ATManager.GetInstance ().MenuManager.GetSettingsMenu ();
+            ItemsSource = data;
         }
     }
 }

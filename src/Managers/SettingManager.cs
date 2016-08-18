@@ -6,7 +6,7 @@ using ATMobile.Objects;
 
 namespace ATMobile.Managers
 {
-    public class SettingManager
+    public class SettingManager : IDisposable
     {
         public ATManager m_Manager;
 
@@ -142,6 +142,10 @@ namespace ATMobile.Managers
             SetSetting (SettingConstants.TargetFaceDataLoaded, _value);
         }
 
+        public void Dispose ()
+        {
+            m_Manager = null;
+        }
     }
 }
 

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace ATMobile.Managers
 {
-    public class MessagingManager
+    public class MessagingManager : IDisposable
     {
         private ATManager m_Manager;
 
@@ -36,6 +36,13 @@ namespace ATMobile.Managers
             if (mr != null) {
                 mr (_message);
             }
+        }
+
+        public void Dispose ()
+        {
+            m_Manager = null;
+
+            //TODO dispose of the bus
         }
     }
 }

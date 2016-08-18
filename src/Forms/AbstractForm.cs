@@ -35,7 +35,7 @@ namespace ATMobile.Forms
                 Action = _action
             };
 
-            //manager.MessagingManager.Publish (
+            manager.MessagingManager.Publish (am);
         }
 
     }

@@ -4,7 +4,7 @@ using ATMobile.Interfaces;
 
 namespace ATMobile.Managers
 {
-    public class PluginManager
+    public class PluginManager : IDisposable
     {
         private ATManager m_Manager;
 
@@ -19,9 +19,23 @@ namespace ATMobile.Managers
         public void AddPlugin (IPlugin _plugin)
         {
             var plugins = Plugins as List<IPlugin>;
+
+            _plugin.InitializePlugin (m_Manager);
+
             plugins.Add (_plugin);
         }
 
+        public void AppendPlugins (List<IPlugin> plugins)
+        {
+            foreach (var item in plugins) {
+                AddPlugin (item);
+            }
+        }
+
+        public void Dispose ()
+        {
+            m_Manager = null;
+        }
     }
 
 }

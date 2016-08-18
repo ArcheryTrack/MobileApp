@@ -1,6 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
 using ATMobile.Forms;
+using System.Collections.Generic;
+using ATMobile.Interfaces;
+using ATMobile.Managers;
 
 namespace ATMobile
 {
@@ -8,9 +11,13 @@ namespace ATMobile
     {
         public static string DataFolder;
 
-        public App (string _dataFolder)
+        public App (string _dataFolder, List<IPlugin> _plugins = null)
         {
             DataFolder = _dataFolder;
+
+            if (_plugins != null) {
+                ATManager.GetInstance ().PluginManager.AppendPlugins (_plugins);
+            }
 
             // The root page of your application
             MainPage = new HomeForm (this);

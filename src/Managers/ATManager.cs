@@ -23,6 +23,7 @@ namespace ATMobile.Managers
         private PluginManager m_PluginManager;
         private MessagingManager m_MessagingManager;
         private SettingManager m_SettingManager;
+        private MenuManager m_MenuManager;
 
         private ATManager ()
         {
@@ -83,6 +84,16 @@ namespace ATMobile.Managers
                 }
 
                 return m_SettingManager;
+            }
+        }
+
+        public MenuManager MenuManager {
+            get {
+                if (m_MenuManager == null) {
+                    m_MenuManager = new MenuManager (this);
+                }
+
+                return m_MenuManager;
             }
         }
 
