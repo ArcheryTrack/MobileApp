@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ATMobile.Controls;
+using ATMobile.Helpers;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
@@ -23,6 +24,7 @@ namespace ATMobile.Forms
 
         private Round m_Round;
         private Tournament m_Tournament;
+        private List<TournamentEnd> m_Ends;
 
         private int m_CurrentArcherIndex;
         private Archer m_CurrentArcher;
@@ -32,7 +34,8 @@ namespace ATMobile.Forms
             m_Inside = new StackLayout {
                 Spacing = 5,
                 VerticalOptions = LayoutOptions.Fill,
-                Padding = 5
+                Padding = 5,
+                Margin = new Thickness (20, 10, 20, 20)
             };
             OutsideLayout.Children.Add (m_Inside);
 
@@ -50,8 +53,6 @@ namespace ATMobile.Forms
 
             /* Setup the Archer */
             m_ArcherLayout = new StackLayout {
-                Spacing = 5,
-                Padding = 5,
                 Orientation = StackOrientation.Horizontal
             };
             m_Inside.Children.Add (m_ArcherLayout);
@@ -81,7 +82,8 @@ namespace ATMobile.Forms
             /* Setup the round summary */
             m_lblSummary = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
-                Text = "Arrows: 0, Score: 0"
+                Text = "Arrows Shot: 0, Score: 0",
+                Margin = new Thickness (0, 0, 0, 10)
             };
             m_Inside.Children.Add (m_lblSummary);
 
@@ -155,51 +157,27 @@ namespace ATMobile.Forms
 
         private void SetScore ()
         {
+            int arrows = 0;
+            int score = 0;
 
+            foreach (var end in m_Ends) {
+
+                score += end.TotalScore;
+                arrows += end.ArrowsScored;
+            }
+
+            m_lblSummary.Text = string.Format ("Arrows Shot: {0}, Score: {1}", arrows, score);
         }
 
         private void LoadEnds (Guid _archerId)
         {
-            List<TournamentEnd> ends = ATManager.GetInstance ().GetTournamentEnds (m_Round.Id, _archerId);
+            m_Ends = ATManager.GetInstance ().GetTournamentEnds (m_Round.Id, _archerId);
 
-            if (ends.Count == 0) {
-                ends = BuildEnds (m_Tournament, m_Round, _archerId);
+            if (m_Ends.Count == 0) {
+                m_Ends = TournamentHelper.BuildEnds (m_Tournament, m_Round, _archerId);
             }
 
-            m_TournamentEnds.ItemsSource = ends;
-        }
-
-        private void BuildAllEnds (Tournament _tournament, Round _round)
-        {
-            var manager = ATManager.GetInstance ();
-
-            foreach (var archerId in _tournament.Archers) {
-                List<TournamentEnd> ends = manager.GetTournamentEnds (_tournament.Id, archerId);
-
-                if (ends.Count == 0) {
-                    BuildEnds (_tournament, _round, archerId);
-                }
-            }
-        }
-
-        private List<TournamentEnd> BuildEnds (Tournament _tournament, Round _round, Guid _archerId)
-        {
-            var manager = ATManager.GetInstance ();
-
-            List<TournamentEnd> ends = new List<TournamentEnd> ();
-
-            for (int i = 1; i <= _round.ExpectedEnds; i++) {
-                TournamentEnd end = new TournamentEnd ();
-                end.ArcherId = _archerId;
-                end.EndNumber = i;
-                end.CreatedDateTime = DateTime.Now;
-                end.ParentId = _round.Id;
-
-                ends.Add (end);
-                manager.Persist (end);
-            }
-
-            return ends;
+            m_TournamentEnds.ItemsSource = m_Ends;
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)

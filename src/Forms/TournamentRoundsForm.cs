@@ -18,13 +18,15 @@ namespace ATMobile.Forms
         {
             m_lblTournamentTitle = new Label {
                 VerticalTextAlignment = TextAlignment.Center,
-                HorizontalTextAlignment = TextAlignment.Center
+                HorizontalTextAlignment = TextAlignment.Center,
+                Margin = new Thickness (20, 10, 20, 0)
             };
             OutsideLayout.Children.Add (m_lblTournamentTitle);
 
             Frame frame = new Frame {
                 HasShadow = false,
                 VerticalOptions = LayoutOptions.FillAndExpand,
+                Margin = new Thickness (20, 15, 20, 20)
             };
             m_listRounds = new TournamentRoundsListView ();
             m_listRounds.ItemSelected += OnSelected;

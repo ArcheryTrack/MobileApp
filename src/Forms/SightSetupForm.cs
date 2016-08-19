@@ -24,7 +24,9 @@ namespace ATMobile.Forms
             //Load Archers and setup picker
             m_Archers = ATManager.GetInstance ().GetArchers ();
 
-            m_ArcherPicker = new Picker ();
+            m_ArcherPicker = new Picker () {
+                Margin = new Thickness (20, 0, 20, 0)
+            };
             foreach (var archer in m_Archers) {
                 m_ArcherPicker.Items.Add (archer.FullName);
             }

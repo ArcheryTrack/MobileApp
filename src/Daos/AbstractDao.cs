@@ -39,7 +39,22 @@ namespace ATMobile.Daos
             m_Collection.Update (_item);
         }
 
+        /// <summary>
+        /// Persists then publishes
+        /// </summary>
+        /// <param name="_item">Item.</param>
         public void Persist (T _item)
+        {
+            PersistDirect (_item);
+
+            PersistQueueEntry (_item, "persist");
+        }
+
+        /// <summary>
+        /// This method bipasses publishing
+        /// </summary>
+        /// <param name="_item">Item.</param>
+        public void PersistDirect (T _item)
         {
             if (_item.Id.Equals (Guid.Empty)) {
                 throw new ArgumentException ("Empty Guid not allowed");
@@ -52,8 +67,6 @@ namespace ATMobile.Daos
             } else {
                 Update (_item);
             }
-
-            PersistQueueEntry (_item, "persist");
         }
 
         private void PersistQueueEntry (T _item, string _action)
@@ -82,14 +95,33 @@ namespace ATMobile.Daos
             return items.ToList ();
         }
 
+        /// <summary>
+        /// Deletes then queues the item 
+        /// </summary>
+        /// <param name="_id">Identifier.</param>
         public void Delete (Guid _id)
         {
             T item = Get (_id);
+
             if (item != null) {
                 Query query = Query.EQ ("_id", _id);
                 m_Collection.Delete (query);
 
                 PersistQueueEntry (item, "delete");
+            }
+        }
+
+        /// <summary>
+        /// Deletes the item without queueing
+        /// </summary>
+        /// <param name="_id">Identifier.</param>
+        public void DeleteDirect (Guid _id)
+        {
+            T item = Get (_id);
+
+            if (item != null) {
+                Query query = Query.EQ ("_id", _id);
+                m_Collection.Delete (query);
             }
         }
 

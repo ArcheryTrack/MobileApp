@@ -94,6 +94,12 @@ namespace ATMobile.Objects
                 return total;
             }
         }
+
+        public int ArrowsScored {
+            get {
+                return Results.Count;
+            }
+        }
     }
 }
 
