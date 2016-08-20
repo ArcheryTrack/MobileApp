@@ -17,7 +17,7 @@
         public const string MenuSettingsTitleColor = "90D8E9";
 
         public const string MenuListTextColor = "000000";
-        public const string MenuListColor = "92F1AB";
+        public const string MenuListColor = "CCCCCC";
 
         public const string LineColor = "999999";
     }

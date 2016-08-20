@@ -42,7 +42,7 @@
                     <rect key="frame" x="37" y="169" width="246" height="254"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" customColorSpace="calibratedWhite" colorSpace="calibratedRGB" red="0.17647058823529413" green="0.83529411764705885" blue="0.29411764705882354" alpha="1"/>
+            <color key="backgroundColor" customColorSpace="calibratedWhite" colorSpace="calibratedWhite" white="0" alpha="1"/>
             <nil key="simulatedStatusBarMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
             <constraints>

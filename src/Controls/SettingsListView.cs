@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ATMobile.Cells;
 using ATMobile.Constants;
 using ATMobile.Data;
 using ATMobile.Managers;
@@ -14,11 +15,7 @@ namespace ATMobile.Controls
         {
             BackgroundColor = Color.FromHex (UIConstants.MenuListColor);
 
-            var cell = new DataTemplate (typeof (ImageCell));
-            cell.SetBinding (TextCell.TextProperty, "Title");
-            cell.SetBinding (ImageCell.ImageSourceProperty, "IconSource");
-
-            ItemTemplate = cell;
+            ItemTemplate = new DataTemplate (typeof (MenuCell));
 
             List<MenuOption> data = ATManager.GetInstance ().MenuManager.GetSettingsMenu ();
             ItemsSource = data;
