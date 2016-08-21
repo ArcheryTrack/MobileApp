@@ -37,8 +37,6 @@
     <Compile Include="Enums\DistanceUnits.cs" />
     <Compile Include="Objects\Distance.cs" />
     <Compile Include="Helpers\DistanceHelper.cs" />
-    <Compile Include="Daos\SightSettingDao.cs" />
-    <Compile Include="Objects\SightSetting.cs" />
     <Compile Include="Daos\AbstractDao.cs" />
     <Compile Include="Managers\ATManager.cs" />
     <Compile Include="Objects\AbstractObject.cs" />
@@ -64,7 +62,6 @@
     <Compile Include="Daos\SettingDao.cs" />
     <Compile Include="Daos\TargetFaceDao.cs" />
     <Compile Include="Controls\ArcherListView.cs" />
-    <Compile Include="Controls\SightSettingListView.cs" />
     <Compile Include="Constants\SettingConstants.cs" />
     <Compile Include="Forms\ArchersForm.cs" />
     <Compile Include="Forms\ArcherForm.cs" />
@@ -74,12 +71,9 @@
     <Compile Include="Forms\PracticeForm.cs" />
     <Compile Include="Forms\PracticeHistoryForm.cs" />
     <Compile Include="Forms\PracticeTypeSetupForm.cs" />
-    <Compile Include="Forms\SightSettingForm.cs" />
-    <Compile Include="Forms\SightSetupForm.cs" />
     <Compile Include="Forms\TournamentHistoryForm.cs" />
     <Compile Include="Forms\TournamentTypeForm.cs" />
     <Compile Include="Forms\LoginForm.cs" />
-    <Compile Include="Forms\SightEstimateForm.cs" />
     <Compile Include="Cells\SightSettingCell.cs" />
     <Compile Include="Controls\PracticeHistoryListView.cs" />
     <Compile Include="Cells\PracticeHistoryCell.cs" />
@@ -201,6 +195,7 @@
     <Compile Include="Managers\MenuManager.cs" />
     <Compile Include="Helpers\TournamentHelper.cs" />
     <Compile Include="Cells\MenuCell.cs" />
+    <Compile Include="Constants\AboutConstants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

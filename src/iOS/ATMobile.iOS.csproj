@@ -111,6 +111,10 @@
       <Project>{CD9759E5-669B-4A9E-8A74-A87644EDFF96}</Project>
       <Name>ATMobileLogging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\ATMobileEquipmentPlugin\src\ATMobileEquipment\ATMobileEquipment.csproj">
+      <Project>{E2832B86-EC5A-4EA3-B8DA-197AE8D10C01}</Project>
+      <Name>ATMobileEquipment</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />

@@ -5,36 +5,39 @@ using ATMobile.Forms;
 
 namespace ATMobile.Data
 {
-    public class SettingsListData : List<MenuOption>
+    public static class SettingsListData
     {
-        public SettingsListData ()
+        public static List<MenuOption> GetMenu (IEnumerable<PluginMenuOption> _pluginMenuItems)
         {
-            this.Add (new MenuOption () {
+            List<MenuOption> menuItems = new List<MenuOption> ();
+
+            menuItems.Add (new MenuOption () {
                 Title = "Archers",
                 TargetType = typeof (ArchersForm)
             });
 
-            this.Add (new MenuOption () {
+            menuItems.Add (new MenuOption () {
                 Title = "My Ranges",
                 TargetType = typeof (RangesForm)
             });
 
-            this.Add (new MenuOption () {
+            menuItems.Add (new MenuOption () {
                 Title = "Tournament Types",
                 TargetType = typeof (TournamentTypesForm)
             });
 
-            this.Add (new MenuOption () {
+            if (_pluginMenuItems != null) {
+                foreach (var item in _pluginMenuItems) {
+                    menuItems.Add (item);
+                }
+            }
+
+            menuItems.Add (new MenuOption () {
                 Title = "About",
                 TargetType = typeof (AboutForm)
             });
 
-            /*
-            this.Add (new MenuItem () {
-                Title = "Sync with Server",
-                TargetType = typeof (LoginForm)
-            });
-            */
+            return menuItems;
         }
     }
 }

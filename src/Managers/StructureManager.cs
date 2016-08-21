@@ -51,9 +51,6 @@ namespace ATMobile.Managers
             SettingDao settingDao = new SettingDao (m_Database);
             settingDao.BuildIndexes ();
 
-            SightSettingDao sightSettingDao = new SightSettingDao (m_Database);
-            sightSettingDao.BuildIndexes ();
-
             StateDao stateDao = new StateDao (m_Database);
             stateDao.BuildIndexes ();
 

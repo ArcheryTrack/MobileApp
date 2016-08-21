@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ATMobile.Data;
 using ATMobile.Interfaces;
+using ATMobile.Objects;
 
 namespace ATMobile.Managers
 {
@@ -19,42 +20,42 @@ namespace ATMobile.Managers
             m_Manager = null;
         }
 
-        public MenuListData GetMainMenu ()
+        public List<MenuOption> GetMainMenu ()
         {
-            var menu = new MenuListData ();
-
             IEnumerable<IPlugin> plugins = m_Manager.PluginManager.Plugins;
+
+            List<PluginMenuOption> pluginMenuOptions = new List<PluginMenuOption> ();
 
             foreach (var plugin in plugins) {
                 var pluginMenuItems = plugin.GetMainMenuItems ();
 
                 if (pluginMenuItems != null) {
                     foreach (var item in pluginMenuItems) {
-                        menu.Add (item);
+                        pluginMenuOptions.Add (item);
                     }
                 }
             }
 
-            return menu;
+            return MenuListData.GetMenu (pluginMenuOptions);
         }
 
-        public SettingsListData GetSettingsMenu ()
+        public List<MenuOption> GetSettingsMenu ()
         {
-            var menu = new SettingsListData ();
-
             IEnumerable<IPlugin> plugins = m_Manager.PluginManager.Plugins;
+
+            List<PluginMenuOption> pluginMenuOptions = new List<PluginMenuOption> ();
 
             foreach (var plugin in plugins) {
                 var pluginMenuItems = plugin.GetSettingsMenuItems ();
 
                 if (pluginMenuItems != null) {
                     foreach (var item in pluginMenuItems) {
-                        menu.Add (item);
+                        pluginMenuOptions.Add (item);
                     }
                 }
             }
 
-            return menu;
+            return SettingsListData.GetMenu (pluginMenuOptions);
         }
     }
 }

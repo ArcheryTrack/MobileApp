@@ -7,6 +7,7 @@ using UIKit;
 using System.IO;
 using ATMobile.Interfaces;
 using ATMobileLogging;
+using ATMobile.Plugins.Equipment;
 
 namespace ATMobile.iOS
 {
@@ -33,6 +34,7 @@ namespace ATMobile.iOS
         {
             List<IPlugin> plugins = new List<IPlugin> ();
 
+            plugins.Add (new EquipmentPlugin ());
             plugins.Add (new LoggingPlugin ());
 
             return plugins;

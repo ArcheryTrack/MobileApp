@@ -383,24 +383,6 @@ namespace ATMobile.Managers
 
         #endregion
 
-        #region Sight Settings
-
-        public List<SightSetting> GetSightSettings (Guid _archerGuid)
-        {
-            SightSettingDao dao = new SightSettingDao (m_Database);
-            var settings = dao.GetSightSettings (_archerGuid);
-            return settings;
-        }
-
-        public void Persist (SightSetting _sightSetting)
-        {
-            SightSettingDao dao = new SightSettingDao (m_Database);
-            dao.Persist (_sightSetting);
-        }
-
-        #endregion
-
-
 
         #region States
 
