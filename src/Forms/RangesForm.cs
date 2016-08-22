@@ -25,6 +25,8 @@ namespace ATMobile.Forms
             RangeForm addRange = new RangeForm ();
             addRange.SetupForm (range);
 
+            PublishActionMessage ("Range Selected");
+
             Navigation.PushModalAsync (addRange);
         }
 

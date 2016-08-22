@@ -30,6 +30,9 @@ namespace ATMobile.Forms
         {
             TournamentForm editTournament = new TournamentForm ();
             editTournament.SetupForm (_tournament);
+
+            PublishActionMessage ("Tournament Edit Selected");
+
             Navigation.PushModalAsync (editTournament);
         }
 
@@ -39,6 +42,9 @@ namespace ATMobile.Forms
 
             TournamentRoundsForm form = new TournamentRoundsForm ();
             form.SetupForm (tournament);
+
+            PublishActionMessage ("Tournament Selected");
+
             Navigation.PushAsync (form, true);
         }
 

@@ -31,6 +31,9 @@ namespace ATMobile.Forms
 
             TournamentTypeForm editTournamentType = new TournamentTypeForm ();
             editTournamentType.SetupForm (tournamentType);
+
+            PublishActionMessage ("TournamentType Selected");
+
             Navigation.PushModalAsync (editTournamentType);
         }
 

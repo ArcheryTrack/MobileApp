@@ -90,11 +90,11 @@ namespace ATMobile.Forms
             m_lblTime = new Label {
                 Text = "Time"
             };
-            m_Layout.Children.Add (m_lblTime);
+            m_Layout.Children.Add (m_lblTime, 0, 1);
 
             m_timTime = new TimePicker ();
             m_timTime.Time = m_Date.TimeOfDay;
-            InsideLayout.Children.Add (m_timTime);
+            m_Layout.Children.Add (m_timTime, 1, 1);
 
             SetDateTimeText ();
 

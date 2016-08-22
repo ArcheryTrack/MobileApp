@@ -115,6 +115,10 @@
       <Project>{E2832B86-EC5A-4EA3-B8DA-197AE8D10C01}</Project>
       <Name>ATMobileEquipment</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\ATMobilePlugins\src\ATMobilePubSub\ATMobilePubSub.csproj">
+      <Project>{66046CDD-4741-453D-B4A1-DFE5467F2090}</Project>
+      <Name>ATMobilePubSub</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />

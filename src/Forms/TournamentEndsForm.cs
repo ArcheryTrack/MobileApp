@@ -186,6 +186,9 @@ namespace ATMobile.Forms
 
             TournamentEndForm form = new TournamentEndForm ();
             form.SetupForm (m_CurrentArcher, m_Tournament, m_Round, end);
+
+            PublishActionMessage ("Tournament End Selected");
+
             Navigation.PushModalAsync (form, true);
         }
 

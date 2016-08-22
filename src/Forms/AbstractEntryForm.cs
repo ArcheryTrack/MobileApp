@@ -98,6 +98,8 @@ namespace ATMobile.Forms
 
         private void OnCancel (object sender, EventArgs e)
         {
+            PublishActionMessage ("Cancel Pressed");
+
             Navigation.PopModalAsync (true);
         }
 
@@ -109,6 +111,7 @@ namespace ATMobile.Forms
             if (sb.Length > 0) {
                 DisplayAlert ("Warning", sb.ToString (), "OK");
             } else {
+                PublishActionMessage ("Save Pressed");
                 Save ();
                 Navigation.PopModalAsync (true);
             }

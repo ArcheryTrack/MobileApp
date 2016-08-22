@@ -42,6 +42,9 @@ namespace ATMobile.Forms
 
                 TournamentRoundsForm form = new TournamentRoundsForm ();
                 form.SetupForm (tournament);
+
+                PublishActionMessage ("Recent Tournament");
+
                 Navigation.PushAsync (form, true);
 
             } else {
@@ -50,6 +53,9 @@ namespace ATMobile.Forms
 
                 PracticeEndsForm form = new PracticeEndsForm ();
                 form.SetupForm (archer, practice);
+
+                PublishActionMessage ("Recent Practice");
+
                 Navigation.PushAsync (form, true);
             }
         }

@@ -41,6 +41,9 @@ namespace ATMobile.Forms
         {
             TournamentRoundForm editRound = new TournamentRoundForm ();
             editRound.SetupForm (m_Tournament, _round);
+
+            PublishActionMessage ("Round Edit Selected");
+
             Navigation.PushModalAsync (editRound);
         }
 
@@ -50,6 +53,9 @@ namespace ATMobile.Forms
 
             TournamentEndsForm tournamentEnds = new TournamentEndsForm ();
             tournamentEnds.SetupForm (m_Tournament, round);
+
+            PublishActionMessage ("Round Selected");
+
             Navigation.PushAsync (tournamentEnds);
         }
 

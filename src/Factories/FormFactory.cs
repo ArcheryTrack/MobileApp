@@ -17,8 +17,6 @@ namespace ATMobile.Factories
                 return new RangesForm ();
             case "Tournament Type":
                 return new TournamentTypesForm ();
-            case "Sync with Server":
-                return new LoginForm ();
             }
 
             return page;

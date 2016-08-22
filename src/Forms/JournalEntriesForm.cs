@@ -87,6 +87,9 @@ namespace ATMobile.Forms
 
             JournalEntryForm form = new JournalEntryForm ();
             form.SetupForm (entry, m_CurrentArcher);
+
+            PublishActionMessage ("JournalEntry Selected");
+
             Navigation.PushModalAsync (form, true);
         }
 

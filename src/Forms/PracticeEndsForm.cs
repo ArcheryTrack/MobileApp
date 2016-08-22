@@ -72,6 +72,9 @@ namespace ATMobile.Forms
 
             PracticeEndForm practiceEnd = new PracticeEndForm ();
             practiceEnd.SetupForm (m_Archer, m_Practice, end, m_PracticeEnds.Ends.Count);
+
+            PublishActionMessage ("Practice End Selected");
+
             Navigation.PushModalAsync (practiceEnd);
         }
 

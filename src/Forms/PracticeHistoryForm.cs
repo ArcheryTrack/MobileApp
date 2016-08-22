@@ -51,6 +51,8 @@ namespace ATMobile.Forms
                 PracticeForm editPractice = new PracticeForm ();
                 editPractice.SetupForm (selected, _practice);
 
+                PublishActionMessage ("Practice Edit");
+
                 Navigation.PushModalAsync (editPractice);
             }
         }
@@ -123,6 +125,9 @@ namespace ATMobile.Forms
             if (selected != null) {
                 PracticeEndsForm practiceEnds = new PracticeEndsForm ();
                 practiceEnds.SetupForm (selected, practice);
+
+                PublishActionMessage ("Practice Selected");
+
                 Navigation.PushAsync (practiceEnds);
             }
         }

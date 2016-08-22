@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
 using Foundation;
 using UIKit;
 using System.IO;
 using ATMobile.Interfaces;
-using ATMobileLogging;
+using ATMobile.Plugins.Logging;
 using ATMobile.Plugins.Equipment;
+using ATMobile.Plugins.PubSub;
 
 namespace ATMobile.iOS
 {
@@ -36,6 +35,7 @@ namespace ATMobile.iOS
 
             plugins.Add (new EquipmentPlugin ());
             plugins.Add (new LoggingPlugin ());
+            plugins.Add (new PubSubPlugin ());
 
             return plugins;
         }

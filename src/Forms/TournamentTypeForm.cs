@@ -67,6 +67,9 @@ namespace ATMobile.Forms
 
             RoundTypeForm form = new RoundTypeForm ();
             form.SetupForm (roundType);
+
+            PublishActionMessage ("RoundType Selected");
+
             Navigation.PushModalAsync (form);
         }
 
@@ -86,6 +89,9 @@ namespace ATMobile.Forms
 
             RoundTypeForm form = new RoundTypeForm ();
             form.SetupForm (roundType);
+
+            PublishActionMessage ("Add Round Selected");
+
             Navigation.PushModalAsync (form);
         }
 

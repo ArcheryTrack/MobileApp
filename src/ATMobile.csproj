@@ -70,10 +70,8 @@
     <Compile Include="Forms\MenuPage.cs" />
     <Compile Include="Forms\PracticeForm.cs" />
     <Compile Include="Forms\PracticeHistoryForm.cs" />
-    <Compile Include="Forms\PracticeTypeSetupForm.cs" />
     <Compile Include="Forms\TournamentHistoryForm.cs" />
     <Compile Include="Forms\TournamentTypeForm.cs" />
-    <Compile Include="Forms\LoginForm.cs" />
     <Compile Include="Cells\SightSettingCell.cs" />
     <Compile Include="Controls\PracticeHistoryListView.cs" />
     <Compile Include="Cells\PracticeHistoryCell.cs" />

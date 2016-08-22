@@ -1,6 +1,7 @@
 ﻿using System;
 using ATMobile.Constants;
 using ATMobile.Managers;
+using ATMobile.Messages;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
@@ -33,9 +34,23 @@ namespace ATMobile.Forms
             dataManager.PopulateData ();
         }
 
-        void NavigateTo (MenuOption menu)
+        private void SendMessage (string _action)
+        {
+            ATManager manager = ATManager.GetInstance ();
+
+            ActionMessage am = new ActionMessage {
+                Form = this.GetType ().FullName,
+                Action = _action
+            };
+
+            manager.MessagingManager.Publish (am);
+        }
+
+        private void NavigateTo (MenuOption menu)
         {
             Page displayPage = null;
+
+            SendMessage (string.Format ("{0} menu clicked", menu.Title));
 
             if (menu is PluginMenuOption) {
                 PluginMenuOption pmo = (PluginMenuOption)menu;
