@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using ATMobile.Objects;
 using ATMobile.Managers;
 using System.Text;
+using ATMobile.Controls;
 
 namespace ATMobile.Forms
 {
@@ -11,10 +12,8 @@ namespace ATMobile.Forms
         private Archer m_Archer;
         private Entry m_txtFirstName;
         private Entry m_txtLastName;
-        private Label m_lblBirthDate;
-        private Label m_lblStartedArchery;
-        private DatePicker m_datBirthdate;
-        private DatePicker m_datStartedArchery;
+        private ATDatePicker m_dpBirthDate;
+        private ATDatePicker m_dpStartedArchery;
 
         public ArcherForm () : base ("Archer")
         {
@@ -26,19 +25,12 @@ namespace ATMobile.Forms
             m_txtLastName.Placeholder = "Last Name";
             InsideLayout.Children.Add (m_txtLastName);
 
-            m_lblBirthDate = new Label ();
-            m_lblBirthDate.Text = "Birth Date";
-            InsideLayout.Children.Add (m_lblBirthDate);
+            m_dpBirthDate = new ATDatePicker ("Birth Date", "Select the Archer's birth date", _showDecade: true);
+            InsideLayout.Children.Add (m_dpBirthDate);
 
-            m_datBirthdate = new DatePicker ();
-            InsideLayout.Children.Add (m_datBirthdate);
+            m_dpStartedArchery = new ATDatePicker ("Started Archery", "Select approximate date started archery.", _showDecade: true);
+            InsideLayout.Children.Add (m_dpStartedArchery);
 
-            m_lblStartedArchery = new Label ();
-            m_lblStartedArchery.Text = "Started Archery On";
-            InsideLayout.Children.Add (m_lblStartedArchery);
-
-            m_datStartedArchery = new DatePicker ();
-            InsideLayout.Children.Add (m_datStartedArchery);
         }
 
         public void SetArcher (Archer _archer)
@@ -47,8 +39,9 @@ namespace ATMobile.Forms
 
             m_txtFirstName.Text = _archer.FirstName;
             m_txtLastName.Text = _archer.LastName;
-            m_datBirthdate.Date = _archer.BirthDate;
-            m_datStartedArchery.Date = _archer.StartedArchery;
+
+            m_dpBirthDate.SelectedDate = _archer.BirthDate;
+            m_dpStartedArchery.SelectedDate = _archer.StartedArchery;
         }
 
         public override void ValidateForm (StringBuilder _sb)
@@ -68,8 +61,9 @@ namespace ATMobile.Forms
 
             m_Archer.FirstName = m_txtFirstName.Text;
             m_Archer.LastName = m_txtLastName.Text;
-            m_Archer.BirthDate = m_datBirthdate.Date;
-            m_Archer.StartedArchery = m_datStartedArchery.Date;
+
+            m_Archer.BirthDate = m_dpBirthDate.SelectedDate;
+            m_Archer.StartedArchery = m_dpStartedArchery.SelectedDate;
 
             ATManager.GetInstance ().Persist (m_Archer);
         }

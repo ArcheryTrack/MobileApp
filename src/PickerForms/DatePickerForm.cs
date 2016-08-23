@@ -15,7 +15,7 @@ namespace ATMobile.PickerForms
 
         public OnDateSelectedDelegate OnDateSelected;
 
-        public DatePickerForm (string _title)
+        public DatePickerForm (string _title, bool showDecade = false)
         {
             m_OutsideLayout = new StackLayout {
                 Spacing = 0,
@@ -70,7 +70,7 @@ namespace ATMobile.PickerForms
             //Icon = "settings.png";
             BackgroundColor = Color.FromHex (UIConstants.DetailFormBackgroundColor);
 
-            m_CalendarControl = new CalendarControl {
+            m_CalendarControl = new CalendarControl (showDecade) {
                 SelectedDate = DateTime.Now,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -88,6 +88,19 @@ namespace ATMobile.PickerForms
             m_OutsideLayout.Children.Add (m_btnCancel);
 
             Content = m_OutsideLayout;
+        }
+
+        public DateTime? SelectedDate {
+            get {
+                return m_CalendarControl.SelectedDate;
+            }
+            set {
+                if (value == null) {
+                    m_CalendarControl.SelectedDate = DateTime.Now;
+                } else {
+                    m_CalendarControl.SelectedDate = value.Value;
+                }
+            }
         }
 
         public DateTime MinimumDate {

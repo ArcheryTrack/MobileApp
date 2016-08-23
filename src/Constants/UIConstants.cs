@@ -20,6 +20,12 @@
         public const string MenuListColor = "CCCCCC";
 
         public const string LineColor = "999999";
+
+        public const string CalendarBackground = "EEEEEE";
+        public const string SelectedDate = "57BED6";
+        public const string SelectedDateText = "FFFFFF";
+        public const string NotSelectedDate = "FFFFFF";
+        public const string NotSelectedDateText = "000000";
     }
 }
 
