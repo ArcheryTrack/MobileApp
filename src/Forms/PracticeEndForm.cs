@@ -162,6 +162,7 @@ namespace ATMobile.Forms
             FillList ();
 
             m_ScoreControl.SetTargetFace (m_TargetFace);
+            m_txtNote.Text = m_PracticeEnd.Note;
 
             SetPoints ();
         }
@@ -174,6 +175,7 @@ namespace ATMobile.Forms
         public override void Save ()
         {
             m_PracticeEnd.Results = m_ArrowsListView.Arrows.ToList ();
+            m_PracticeEnd.Note = m_txtNote.Text;
 
             ATManager.GetInstance ().Persist (m_PracticeEnd);
         }

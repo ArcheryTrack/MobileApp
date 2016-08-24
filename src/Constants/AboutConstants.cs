@@ -11,7 +11,7 @@ namespace ATMobile.Constants
                     <h1>ArcheryTrack</h1>
                     <p>A simple data base approach to tracking practice and tournaments.</p>
                     <br>
-                    <p>Written by Brian Nelson</p>
+                    <p>Copyright 2016 Brian Nelson</p>
                     <br>
                     <p>OpenSource Projects In Use</p>
                     <ul>
@@ -21,7 +21,7 @@ namespace ATMobile.Constants
                     </ul>
                     <p>Other Attribution</p>
                     <ul>
-                        <li>Target Image - Alberto Barbati (via Wikipedia)</li>
+                        <li>FITA Target Image - Alberto Barbati (via Wikipedia)</li>
                     </ul>
                 </body>    
             </html> ";

@@ -41,7 +41,7 @@ namespace ATMobile.Controls
             };
 
             m_lblDateText = new Label {
-                Text = "Start Date:",
+                Text = m_strLongDescription,
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.StartAndExpand
