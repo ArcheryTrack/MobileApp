@@ -18,6 +18,7 @@ namespace ATMobile.Constants
                         <li>LiteDb</li>
                         <li>NetwtonSoft</li>
                         <li>OxyPlot</li>
+                        <li>paulpatarinski/Xamarin.Forms.Plugins (iOS)</li>
                     </ul>
                     <p>Other Attribution</p>
                     <ul>

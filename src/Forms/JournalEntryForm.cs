@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using ATMobile.Controls;
 using ATMobile.Helpers;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -13,14 +14,8 @@ namespace ATMobile.Forms
         private JournalEntry m_Entry;
         private Archer m_Archer;
 
-        private Grid m_Layout;
-
         private Label m_lblArcher;
-        private Label m_lblDate;
-        private Button m_btnPickDate;
-        private bool m_bolDatePicked;
-        private DateTime m_Date;
-
+        private ATDatePicker m_dpDate;
         private Editor m_txtNote;
 
         public JournalEntryForm () : base ("Journal Entry")
@@ -31,62 +26,20 @@ namespace ATMobile.Forms
             };
             InsideLayout.Children.Add (m_lblArcher);
 
-            //Setup grid to hold the controls
-            m_Layout = new Grid {
-                Padding = 5,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                RowDefinitions = {
-                    new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute) //Date
-                    }
-                },
-                ColumnDefinitions = {
-                    new ColumnDefinition {
-                        Width = new GridLength(1, GridUnitType.Star)
-                    },
-                    new ColumnDefinition {
-                        Width = new GridLength(80, GridUnitType.Absolute)
-                    }
-                }
+            m_dpDate = new ATDatePicker (
+                "Journal Date",
+                "Select the date of the Journal Entry") {
+                SelectedDate = DateTime.Now,
+                Margin = new Thickness (0, 40, 0, 0)
             };
-            InsideLayout.Children.Add (m_Layout);
-
-            m_lblDate = new Label {
-                Text = "Date/Time"
-            };
-            m_Layout.Children.Add (m_lblDate, 0, 0);
-
-            m_btnPickDate = new Button {
-                Text = "Pick",
-                WidthRequest = 80,
-                HeightRequest = 40,
-                BorderWidth = 1,
-                HorizontalOptions = LayoutOptions.End
-            };
-            m_btnPickDate.Clicked += PickDate;
-            m_Layout.Children.Add (m_btnPickDate, 1, 0);
+            InsideLayout.Children.Add (m_dpDate);
 
             m_txtNote = new Editor {
+                Margin = new Thickness (0, 65, 0, 0),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             InsideLayout.Children.Add (m_txtNote);
-        }
-
-        async private void PickDate (object sender, EventArgs e)
-        {
-            DatePickerForm picker = new DatePickerForm ("Select Date");
-            picker.OnDateSelected += DatePicked;
-
-            await Navigation.PushModalAsync (picker);
-        }
-
-        private void DatePicked (DateTime _start)
-        {
-            //TODO allow user to pick time
-            m_Date = _start.Date;
-            m_bolDatePicked = true;
-            m_lblDate.Text = m_Date.ToString ("d");
         }
 
         public override void ValidateForm (StringBuilder _sb)
@@ -96,7 +49,11 @@ namespace ATMobile.Forms
 
         public override void Save ()
         {
-            m_Entry.DateTime = m_Date;
+            if (m_dpDate.SelectedDate.HasValue) {
+                m_Entry.DateTime = m_dpDate.SelectedDate.Value;
+            } else {
+                m_Entry.DateTime = DateTime.Now;
+            }
             m_Entry.EntryText = m_txtNote.Text;
 
             ATManager.GetInstance ().Persist (m_Entry);
@@ -107,18 +64,18 @@ namespace ATMobile.Forms
             m_Archer = _archer;
 
             if (_entry == null) {
-                m_Date = DateTime.Now;
+                DateTime now = DateTime.Now;
+                m_dpDate.SelectedDate = now;
 
                 m_Entry = new JournalEntry ();
-                m_Entry.DateTime = m_Date;
+                m_Entry.DateTime = now;
                 m_Entry.ParentId = _archer.Id;
             } else {
                 m_Entry = _entry;
-                m_Date = _entry.DateTime;
+                m_dpDate.SelectedDate = _entry.DateTime;
             }
 
             m_lblArcher.Text = _archer.FullName;
-            m_lblDate.Text = m_Entry.DateTime.ToDisplayDate ();
             m_txtNote.Text = m_Entry.EntryText;
         }
 

@@ -7,6 +7,7 @@ using ATMobile.Interfaces;
 using ATMobile.Plugins.Logging;
 using ATMobile.Plugins.Equipment;
 using ATMobile.Plugins.PubSub;
+using KeyboardOverlap.Forms.Plugin.iOSUnified;
 
 namespace ATMobile.iOS
 {
@@ -16,6 +17,7 @@ namespace ATMobile.iOS
         public override bool FinishedLaunching (UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init ();
+            KeyboardOverlapRenderer.Init ();
 
             string rootAppFolder = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments);
             string dataFolder = Path.Combine (rootAppFolder, "Library", "ATMobile");

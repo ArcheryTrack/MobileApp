@@ -269,7 +269,7 @@ namespace ATMobile.Controls
                 } else {
                     m_btnDates [i].IsEnabled = true;
 
-                    if (current == m_SelectedDate) {
+                    if (current == m_SelectedDate.Date) {
                         m_btnDates [i].BackgroundColor = selectedColor;
                         m_btnDates [i].TextColor = selectedTextColor;
                     } else {
