@@ -5,11 +5,16 @@ using ATMobile.Objects;
 
 namespace ATMobile.PickerForms
 {
-    public class RangePicker : GenericPicker<Range, TournamentTypePickerCell>
+    public class RangePicker : AbstractGenericPicker<Range, TournamentTypePickerCell>
     {
-        public RangePicker () : base ("Pick the Type of Tournament")
+        public RangePicker () : base ("Pick the Range", "Range")
         {
             List.ItemsSource = ATManager.GetInstance ().GetRanges ();
+        }
+
+        public override void AddPressed ()
+        {
+            throw new NotImplementedException ();
         }
     }
 }

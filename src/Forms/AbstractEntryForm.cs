@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Text;
 using ATMobile.Constants;
+using ATMobile.Controls;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
     public abstract class AbstractEntryForm : AbstractForm
     {
-        private Label m_lblTitle;
-        protected StackLayout ButtonsLayout;
+        private Header m_Header;
+        protected ATButtonBar ButtonsLayout;
         protected StackLayout InsideLayout;
 
         protected Button CancelButton;
@@ -19,73 +20,19 @@ namespace ATMobile.Forms
 
         protected AbstractEntryForm (string _title) : base (_title, 0, 0)
         {
-            AbsoluteLayout header = new AbsoluteLayout {
-                BackgroundColor = Color.FromHex (UIConstants.NavBarColor),
-                Margin = new Thickness (0, 0, 0, 0),
-                MinimumHeightRequest = 65,
-                HeightRequest = 65
+            m_Header = new Header (_title) {
+                Margin = new Thickness (0, 0, 0, 0)
             };
-            OutsideLayout.Children.Add (header);
+            OutsideLayout.Children.Add (m_Header);
 
-            m_lblTitle = new Label {
-                Text = _title,
-                VerticalTextAlignment = TextAlignment.Center,
-                HorizontalTextAlignment = TextAlignment.Center,
-                TextColor = Color.FromHex (UIConstants.NavBarTextColor),
-                FontAttributes = FontAttributes.Bold
-            };
-
-            AbsoluteLayout.SetLayoutFlags (m_lblTitle,
-                AbsoluteLayoutFlags.PositionProportional);
-
-            AbsoluteLayout.SetLayoutBounds (m_lblTitle,
-                new Rectangle (0.5,
-                    0.7, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
-            header.Children.Add (m_lblTitle);
-
-            BoxView line = new BoxView {
-                HeightRequest = 1,
-                Color = Color.FromHex (UIConstants.LineColor),
-                HorizontalOptions = LayoutOptions.FillAndExpand
-            };
-
-            AbsoluteLayout.SetLayoutFlags (
-                line,
-                AbsoluteLayoutFlags.WidthProportional);
-
-            AbsoluteLayout.SetLayoutBounds (line,
-                new Rectangle (0,
-                               64.5,
-                               1,
-                               AbsoluteLayout.AutoSize));
-
-            header.Children.Add (line);
-
-            ButtonsLayout = new StackLayout {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                Orientation = StackOrientation.Horizontal,
-                Padding = 0,
-                Spacing = 0
-            };
+            ButtonsLayout = new ATButtonBar ();
             OutsideLayout.Children.Add (ButtonsLayout);
 
-            CancelButton = new Button {
-                Text = "Cancel",
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                VerticalOptions = LayoutOptions.Center,
-                WidthRequest = 100
-            };
+            CancelButton = ButtonsLayout.Add ("Cancel", LayoutOptions.StartAndExpand);
             CancelButton.Clicked += OnCancel;
-            ButtonsLayout.Children.Add (CancelButton);
 
-            SaveButton = new Button {
-                Text = "Save",
-                HorizontalOptions = LayoutOptions.EndAndExpand,
-                VerticalOptions = LayoutOptions.Center,
-                WidthRequest = 100
-            };
+            SaveButton = ButtonsLayout.Add ("Save", LayoutOptions.EndAndExpand);
             SaveButton.Clicked += OnSave;
-            ButtonsLayout.Children.Add (SaveButton);
 
             InsideLayout = new StackLayout {
                 Spacing = 5,

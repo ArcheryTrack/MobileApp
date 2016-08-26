@@ -5,11 +5,16 @@ using ATMobile.Objects;
 
 namespace ATMobile.PickerForms
 {
-    public class ArcherPicker : GenericPicker<Archer, ArcherCell>
+    public class ArcherPicker : AbstractGenericPicker<Archer, ArcherCell>
     {
-        public ArcherPicker () : base ("Pick Archer")
+        public ArcherPicker () : base ("Pick Archer", "Archer")
         {
             List.ItemsSource = ATManager.GetInstance ().GetArchers ();
+        }
+
+        public override void AddPressed ()
+        {
+            throw new NotImplementedException ();
         }
     }
 }
