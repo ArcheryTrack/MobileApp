@@ -8,12 +8,16 @@ using ATMobile.Plugins.Logging;
 using ATMobile.Plugins.Equipment;
 using ATMobile.Plugins.PubSub;
 using KeyboardOverlap.Forms.Plugin.iOSUnified;
+using ATMobile.iOS.Managers;
 
 namespace ATMobile.iOS
 {
     [Register ("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
+        private App m_App;
+        private IPlatformManager m_PlatformManager;
+
         public override bool FinishedLaunching (UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init ();
@@ -26,7 +30,10 @@ namespace ATMobile.iOS
                 Directory.CreateDirectory (dataFolder);
             }
 
-            LoadApplication (new App (dataFolder, GetPlugins ()));
+            m_PlatformManager = new PlatformManager ();
+
+            m_App = new App (dataFolder, GetPlugins ());
+            LoadApplication (m_App);
 
             return base.FinishedLaunching (app, options);
         }
@@ -36,7 +43,9 @@ namespace ATMobile.iOS
             List<IPlugin> plugins = new List<IPlugin> ();
 
             plugins.Add (new EquipmentPlugin ());
-            plugins.Add (new LoggingPlugin ());
+
+            //TODO - Change where these constants are set
+            plugins.Add (new LoggingPlugin (m_PlatformManager, "iOS", "127.0.0.1", "xBG4Y4Y8LMD6mWvwRMhNaVKXBZuRGTFEuxpgcEE9wwvXC6yB"));
             plugins.Add (new PubSubPlugin ());
 
             return plugins;

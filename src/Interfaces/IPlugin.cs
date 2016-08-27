@@ -15,6 +15,9 @@ namespace ATMobile.Interfaces
         List<PluginMenuOption> GetSettingsMenuItems ();
 
         Page GetPage (PluginMenuOption _menuOption);
+
+        void OnSleep ();
+        void OnResume ();
     }
 }
 

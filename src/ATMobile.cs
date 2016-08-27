@@ -25,17 +25,25 @@ namespace ATMobile
 
         protected override void OnStart ()
         {
-            // Handle when your app starts
+
         }
 
         protected override void OnSleep ()
         {
-            // Handle when your app sleeps
+            IEnumerable<IPlugin> plugins = ATManager.GetInstance ().PluginManager.Plugins;
+
+            foreach (var plugin in plugins) {
+                plugin.OnSleep ();
+            }
         }
 
         protected override void OnResume ()
         {
-            // Handle when your app resumes
+            IEnumerable<IPlugin> plugins = ATManager.GetInstance ().PluginManager.Plugins;
+
+            foreach (var plugin in plugins) {
+                plugin.OnResume ();
+            }
         }
     }
 }

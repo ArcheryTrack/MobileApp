@@ -1,5 +1,6 @@
 ﻿using System;
 using ATMobile.Cells;
+using ATMobile.Forms;
 using ATMobile.Managers;
 using ATMobile.Objects;
 
@@ -9,12 +10,19 @@ namespace ATMobile.PickerForms
     {
         public RangePicker () : base ("Pick the Range", "Range")
         {
-            List.ItemsSource = ATManager.GetInstance ().GetRanges ();
         }
 
         public override void AddPressed ()
         {
-            throw new NotImplementedException ();
+            RangeForm addRange = new RangeForm ();
+            Navigation.PushModalAsync (addRange);
+        }
+
+        protected override void OnAppearing ()
+        {
+            base.OnAppearing ();
+
+            List.ItemsSource = ATManager.GetInstance ().GetRanges ();
         }
     }
 }

@@ -22,7 +22,8 @@ namespace ATMobile.PickerForms
 
         protected AbstractGenericPicker (
             string _title,
-            string _subject)
+            string _subject,
+            bool showAdd = true)
         {
             BackgroundColor = Color.FromHex (UIConstants.DetailFormBackgroundColor);
             Title = _title;
@@ -45,8 +46,10 @@ namespace ATMobile.PickerForms
             m_btnCancel = buttons.Add ("Cancel", LayoutOptions.StartAndExpand);
             m_btnCancel.Clicked += OnCancel;
 
-            m_btnAdd = buttons.Add (string.Format ("Add {0}", _subject), LayoutOptions.EndAndExpand, 200);
-            m_btnAdd.Clicked += OnAdd;
+            if (showAdd) {
+                m_btnAdd = buttons.Add (string.Format ("Add {0}", _subject), LayoutOptions.EndAndExpand, 200);
+                m_btnAdd.Clicked += OnAdd;
+            }
 
             Frame frame = new Frame {
                 Margin = new Thickness (10, 10, 10, 5),

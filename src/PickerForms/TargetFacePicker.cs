@@ -8,14 +8,13 @@ namespace ATMobile.PickerForms
 {
     public class TargetFacePicker : AbstractGenericPicker<TargetFace, TargetFacePickerCell>
     {
-        public TargetFacePicker () : base ("Pick the Target Face", "Target Face")
+        public TargetFacePicker () : base ("Pick the Target Face", "Target Face", false)
         {
             List.ItemsSource = ATManager.GetInstance ().GetTargetFaces ();
         }
 
         public override void AddPressed ()
         {
-            throw new NotImplementedException ();
         }
     }
 }

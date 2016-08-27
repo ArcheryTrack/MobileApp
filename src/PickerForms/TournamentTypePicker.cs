@@ -1,5 +1,6 @@
 ﻿using System;
 using ATMobile.Cells;
+using ATMobile.Forms;
 using ATMobile.Managers;
 using ATMobile.Objects;
 
@@ -9,12 +10,20 @@ namespace ATMobile.PickerForms
     {
         public TournamentTypePicker () : base ("Pick the Type of Tournament", "Tournament Type")
         {
-            List.ItemsSource = ATManager.GetInstance ().GetTournamentTypes ();
         }
 
         public override void AddPressed ()
         {
-            throw new NotImplementedException ();
+            TournamentTypeForm addTournamentType = new TournamentTypeForm ();
+            addTournamentType.SetupForm (null);
+            Navigation.PushModalAsync (addTournamentType);
+        }
+
+        protected override void OnAppearing ()
+        {
+            base.OnAppearing ();
+
+            List.ItemsSource = ATManager.GetInstance ().GetTournamentTypes ();
         }
     }
 }

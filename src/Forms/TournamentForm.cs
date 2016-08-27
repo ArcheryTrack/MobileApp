@@ -38,7 +38,7 @@ namespace ATMobile.Forms
         private DateTime m_EndDate;
 
         private Label m_lblArchers;
-        private TournamentArcherListView m_Archers;
+        private TournamentArcherListView m_lstArchers;
         private Button m_btnAddArcher;
         private ObservableCollection<Archer> m_ArchersList;
 
@@ -73,7 +73,7 @@ namespace ATMobile.Forms
                         Height = new GridLength(25, GridUnitType.Absolute) //Archers Label
                     },
                     new RowDefinition {
-                        Height = new GridLength(140, GridUnitType.Absolute) //Archers List and button
+                        Height = new GridLength(1, GridUnitType.Star) //Archers List and button
                     }
                 },
                 ColumnDefinitions = {
@@ -174,9 +174,11 @@ namespace ATMobile.Forms
             Frame archersFrame = new Frame {
                 HasShadow = false
             };
-            m_Archers = new TournamentArcherListView ();
-            m_Archers.HeightRequest = 100;
-            archersFrame.Content = m_Archers;
+            m_lstArchers = new TournamentArcherListView {
+                MinimumHeightRequest = 100,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+            };
+            archersFrame.Content = m_lstArchers;
             m_Layout.Children.Add (archersFrame, 0, 5);
 
             m_btnAddArcher = new Button {
@@ -320,7 +322,12 @@ namespace ATMobile.Forms
 
         async private void AddArcher (object sender, EventArgs e)
         {
-            ArcherPicker picker = new ArcherPicker ();
+            List<Guid> archerGuids = new List<Guid> ();
+            foreach (Archer archer in m_ArchersList) {
+                archerGuids.Add (archer.Id);
+            }
+
+            ArcherPicker picker = new ArcherPicker (archerGuids);
             picker.ItemPicked += ArcherPicked;
 
             await Navigation.PushModalAsync (picker);
@@ -404,7 +411,7 @@ namespace ATMobile.Forms
                 }
             }
 
-            m_Archers.ItemsSource = m_ArchersList;
+            m_lstArchers.ItemsSource = m_ArchersList;
         }
     }
 }
