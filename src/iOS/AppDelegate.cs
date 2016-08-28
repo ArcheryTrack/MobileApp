@@ -45,7 +45,7 @@ namespace ATMobile.iOS
             plugins.Add (new EquipmentPlugin ());
 
             //TODO - Change where these constants are set
-            plugins.Add (new LoggingPlugin (m_PlatformManager, "iOS", "127.0.0.1", "xBG4Y4Y8LMD6mWvwRMhNaVKXBZuRGTFEuxpgcEE9wwvXC6yB"));
+            plugins.Add (new LoggingPlugin (m_PlatformManager, "iOS", "http://10.88.0.162:8888", "xBG4Y4Y8LMD6mWvwRMhNaVKXBZuRGTFEuxpgcEE9wwvXC6yB"));
             plugins.Add (new PubSubPlugin ());
 
             return plugins;

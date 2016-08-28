@@ -26,6 +26,8 @@
         public const string SelectedDateText = "FFFFFF";
         public const string NotSelectedDate = "FFFFFF";
         public const string NotSelectedDateText = "000000";
+
+        public const string FontFamily = "sans-serif";
     }
 }
 
