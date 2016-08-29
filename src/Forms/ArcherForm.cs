@@ -10,19 +10,21 @@ namespace ATMobile.Forms
     public class ArcherForm : AbstractEntryForm
     {
         private Archer m_Archer;
-        private Entry m_txtFirstName;
-        private Entry m_txtLastName;
+        private ATTextWithLabel m_txtFirstName;
+        private ATTextWithLabel m_txtLastName;
         private ATDatePicker m_dpBirthDate;
         private ATDatePicker m_dpStartedArchery;
 
         public ArcherForm () : base ("Archer")
         {
-            m_txtFirstName = new Entry ();
-            m_txtFirstName.Placeholder = "First Name";
+            m_txtFirstName = new ATTextWithLabel ();
+            m_txtFirstName.Title = "First Name";
+            m_txtFirstName.Placeholder = "Enter the first name of the archer";
             InsideLayout.Children.Add (m_txtFirstName);
 
-            m_txtLastName = new Entry ();
-            m_txtLastName.Placeholder = "Last Name";
+            m_txtLastName = new ATTextWithLabel ();
+            m_txtLastName.Title = "Last Name";
+            m_txtLastName.Placeholder = "Enter the last name of the archer";
             InsideLayout.Children.Add (m_txtLastName);
 
             m_dpBirthDate = new ATDatePicker ("Birth Date", "Select the Archer's birth date", _showDecade: true);
