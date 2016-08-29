@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ATMobile.Controls;
 using ATMobile.Data;
 using ATMobile.Helpers;
 using ATMobile.Managers;
@@ -23,16 +24,16 @@ namespace ATMobile.Forms
         private Grid m_Layout;
 
         private bool m_bolDatePicked;
-        private Label m_lblDate;
+        private ATLabel m_lblDate;
         private Button m_btnPickDate;
 
-        private Label m_lblTime;
+        private ATLabel m_lblTime;
         private TimePicker m_timTime;
 
-        private Label m_lblLocation;
+        private ATLabel m_lblLocation;
         private Button m_btnPickLocation;
 
-        private Label m_lblTargetFace;
+        private ATLabel m_lblTargetFace;
         private Button m_btnPickTargetFace;
 
         public PracticeForm () : base ("Practice")
@@ -69,7 +70,7 @@ namespace ATMobile.Forms
             m_Date = DateTime.Now;
 
             //Setup the StartDate
-            m_lblDate = new Label {
+            m_lblDate = new ATLabel {
                 Text = "Date:",
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -87,7 +88,7 @@ namespace ATMobile.Forms
             m_btnPickDate.Clicked += PickDate;
             m_Layout.Children.Add (m_btnPickDate, 1, 0);
 
-            m_lblTime = new Label {
+            m_lblTime = new ATLabel {
                 Text = "Time"
             };
             m_Layout.Children.Add (m_lblTime, 0, 1);
@@ -99,7 +100,7 @@ namespace ATMobile.Forms
             SetDateTimeText ();
 
             //Setup Location
-            m_lblLocation = new Label {
+            m_lblLocation = new ATLabel {
                 Text = "Select location",
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -119,7 +120,7 @@ namespace ATMobile.Forms
 
 
             //Add the Target Face at the botton.
-            m_lblTargetFace = new Label {
+            m_lblTargetFace = new ATLabel {
                 Text = "Select Target Face",
                 VerticalTextAlignment = TextAlignment.Center
             };

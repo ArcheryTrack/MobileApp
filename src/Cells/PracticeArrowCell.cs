@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Controls;
 using ATMobile.Delegates;
 using ATMobile.Objects;
 using Xamarin.Forms;
@@ -10,14 +11,14 @@ namespace ATMobile.Cells
         public static DeletePracticeArrowClickedDelegate DeletePracticeArrowClicked;
 
         private StackLayout m_Layout;
-        private Label m_lblScore;
+        private ATLabel m_lblScore;
 
         public PracticeArrowCell ()
         {
             m_Layout = new StackLayout ();
             m_Layout.Padding = new Thickness (0, 5);
 
-            m_lblScore = new Label ();
+            m_lblScore = new ATLabel ();
             m_lblScore.SetBinding (Label.TextProperty, "Score");
             m_Layout.Children.Add (m_lblScore);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using ATMobile.Controls;
 using ATMobile.Data;
 using ATMobile.Enums;
 using ATMobile.Managers;
@@ -16,22 +17,22 @@ namespace ATMobile.Forms
         private Grid m_EntryGrid;
         private Grid m_PickerGrid;
 
-        private Label m_lblName;
+        private ATLabel m_lblName;
         private Entry m_txtName;
-        private Label m_lblDescription;
+        private ATLabel m_lblDescription;
         private Entry m_txtDescription;
-        private Label m_lblEnds;
+        private ATLabel m_lblEnds;
         private Entry m_txtNumberOfEnds;
-        private Label m_lblArrows;
+        private ATLabel m_lblArrows;
         private Entry m_txtArrowsPerEnd;
-        private Label m_lblDistance;
+        private ATLabel m_lblDistance;
         private Entry m_txtDistance;
 
-        private Label m_lblUnits;
+        private ATLabel m_lblUnits;
         private Button m_btnPickUnits;
         private DistanceUnit m_DistanceUnit;
 
-        private Label m_lblTargetFace;
+        private ATLabel m_lblTargetFace;
         private Button m_btnPickTargetFace;
         private TargetFace m_TargetFace;
 
@@ -71,7 +72,7 @@ namespace ATMobile.Forms
             InsideLayout.Children.Add (m_EntryGrid);
 
             //Setup the Name
-            m_lblName = new Label {
+            m_lblName = new ATLabel {
                 Text = "Name",
                 VerticalTextAlignment = TextAlignment.Center
             };
@@ -83,7 +84,7 @@ namespace ATMobile.Forms
             m_EntryGrid.Children.Add (m_txtName, 1, 0);
 
             //Setup Description
-            m_lblDescription = new Label {
+            m_lblDescription = new ATLabel {
                 Text = "Description",
                 VerticalTextAlignment = TextAlignment.Center
             };
@@ -95,7 +96,7 @@ namespace ATMobile.Forms
             m_EntryGrid.Children.Add (m_txtDescription, 1, 1);
 
             //Setup Number of Ends
-            m_lblEnds = new Label {
+            m_lblEnds = new ATLabel {
                 Text = "Ends",
                 VerticalTextAlignment = TextAlignment.Center
             };
@@ -108,7 +109,7 @@ namespace ATMobile.Forms
             m_EntryGrid.Children.Add (m_txtNumberOfEnds, 1, 2);
 
             //Setup Number of Arrows
-            m_lblArrows = new Label {
+            m_lblArrows = new ATLabel {
                 Text = "Arrows",
                 VerticalTextAlignment = TextAlignment.Center
             };
@@ -121,7 +122,7 @@ namespace ATMobile.Forms
             m_EntryGrid.Children.Add (m_txtArrowsPerEnd, 1, 3);
 
             //Setup Number of Distance
-            m_lblDistance = new Label {
+            m_lblDistance = new ATLabel {
                 Text = "Distance",
                 VerticalTextAlignment = TextAlignment.Center
             };
@@ -157,7 +158,7 @@ namespace ATMobile.Forms
             InsideLayout.Children.Add (m_PickerGrid);
 
             //Add the Distance Units
-            m_lblUnits = new Label {
+            m_lblUnits = new ATLabel {
                 Text = "Select Distance Units",
                 VerticalTextAlignment = TextAlignment.Center
             };
@@ -174,7 +175,7 @@ namespace ATMobile.Forms
             m_PickerGrid.Children.Add (m_btnPickUnits, 1, 0);
 
             //Add the Target Face at the botton.
-            m_lblTargetFace = new Label {
+            m_lblTargetFace = new ATLabel {
                 Text = "Select Target Face",
                 VerticalTextAlignment = TextAlignment.Center
             };

@@ -11,12 +11,12 @@ namespace ATMobile.Forms
         private Tournament m_Tournament;
 
         TournamentRoundsListView m_listRounds;
-        Label m_lblTournamentTitle;
+        ATLabel m_lblTournamentTitle;
 
 
         public TournamentRoundsForm () : base ("Rounds")
         {
-            m_lblTournamentTitle = new Label {
+            m_lblTournamentTitle = new ATLabel {
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center,
                 Margin = new Thickness (20, 10, 20, 0)

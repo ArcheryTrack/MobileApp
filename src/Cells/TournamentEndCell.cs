@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Controls;
 using Xamarin.Forms;
 
 namespace ATMobile.Cells
@@ -6,7 +7,7 @@ namespace ATMobile.Cells
     public class TournamentEndCell : ViewCell
     {
         private StackLayout m_Layout;
-        private Label m_lblScore;
+        private ATLabel m_lblScore;
 
         public TournamentEndCell ()
         {
@@ -14,7 +15,7 @@ namespace ATMobile.Cells
             m_Layout.Orientation = StackOrientation.Horizontal;
             m_Layout.Padding = new Thickness (0, 5);
 
-            m_lblScore = new Label () {
+            m_lblScore = new ATLabel () {
                 HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Center
             };

@@ -23,7 +23,7 @@ namespace ATMobile.Forms
 
             var menuLabel = new ContentView {
                 Padding = new Thickness (10, 36, 0, 5),
-                Content = new Label {
+                Content = new ATLabel {
                     TextColor = Color.FromHex (UIConstants.MenuSettingsTitleTextColor),
                     Text = "Setting",
                 }

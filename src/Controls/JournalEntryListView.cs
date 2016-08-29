@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;

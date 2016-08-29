@@ -8,11 +8,11 @@ namespace ATMobile.Forms
     public class DefaultForm : AbstractForm
     {
         private RecentListView m_listRecent;
-        private Label m_lblTitle;
+        private ATLabel m_lblTitle;
 
         public DefaultForm () : base ("ArcheryTrack")
         {
-            m_lblTitle = new Label {
+            m_lblTitle = new ATLabel {
                 Text = "Recent Activities",
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center,

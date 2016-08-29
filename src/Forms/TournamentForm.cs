@@ -19,25 +19,25 @@ namespace ATMobile.Forms
 
         private Grid m_Layout;
 
-        private Label m_lblLocation;
+        private ATLabel m_lblLocation;
         private Button m_btnPickLocation;
         private Range m_Location;
 
-        private Label m_lblTournamentType;
+        private ATLabel m_lblTournamentType;
         private Button m_btnPickTournamentType;
         private TournamentType m_TournamentType;
 
-        private Label m_lblStartDate;
+        private ATLabel m_lblStartDate;
         private Button m_btnPickStart;
         private bool m_bolStartPicked;
         private DateTime m_StartDate;
 
-        private Label m_lblEndDate;
+        private ATLabel m_lblEndDate;
         private Button m_btnPickEnd;
         private bool m_bolEndPicked;
         private DateTime m_EndDate;
 
-        private Label m_lblArchers;
+        private ATLabel m_lblArchers;
         private TournamentArcherListView m_lstArchers;
         private Button m_btnAddArcher;
         private ObservableCollection<Archer> m_ArchersList;
@@ -87,7 +87,7 @@ namespace ATMobile.Forms
             };
 
             //Setup Location
-            m_lblLocation = new Label {
+            m_lblLocation = new ATLabel {
                 Text = "Select location",
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -106,7 +106,7 @@ namespace ATMobile.Forms
             m_Layout.Children.Add (m_btnPickLocation, 1, 0);
 
             //Setup the Tournament Type
-            m_lblTournamentType = new Label {
+            m_lblTournamentType = new ATLabel {
                 Text = "Select tournament type",
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -125,7 +125,7 @@ namespace ATMobile.Forms
             m_Layout.Children.Add (m_btnPickTournamentType, 1, 1);
 
             //Setup the StartDate
-            m_lblStartDate = new Label {
+            m_lblStartDate = new ATLabel {
                 Text = "Start Date:",
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -144,7 +144,7 @@ namespace ATMobile.Forms
             m_Layout.Children.Add (m_btnPickStart, 1, 2);
 
             //Setup the EndDate
-            m_lblEndDate = new Label {
+            m_lblEndDate = new ATLabel {
                 Text = "End Date:",
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -164,7 +164,7 @@ namespace ATMobile.Forms
 
 
             //Add the archers label
-            m_lblArchers = new Label {
+            m_lblArchers = new ATLabel {
                 Text = "Selected Archers",
                 VerticalTextAlignment = TextAlignment.End
             };

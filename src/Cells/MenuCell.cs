@@ -1,5 +1,6 @@
 ﻿using System;
 using ATMobile.Constants;
+using ATMobile.Controls;
 using Xamarin.Forms;
 
 namespace ATMobile.Cells
@@ -7,7 +8,7 @@ namespace ATMobile.Cells
     public class MenuCell : ViewCell
     {
         private StackLayout m_Layout;
-        private Label m_lblCellText;
+        private ATLabel m_lblCellText;
 
         public MenuCell ()
         {
@@ -15,7 +16,7 @@ namespace ATMobile.Cells
             m_Layout.Padding = new Thickness (0, 5);
             m_Layout.Margin = new Thickness (20, 8, 20, 0);
 
-            m_lblCellText = new Label ();
+            m_lblCellText = new ATLabel ();
             m_lblCellText.SetBinding (Label.TextProperty, "Title");
             m_lblCellText.TextColor = Color.FromHex (UIConstants.MenuListTextColor);
             m_lblCellText.VerticalTextAlignment = TextAlignment.Center;

@@ -16,7 +16,7 @@ namespace ATMobile.Forms
         private StackLayout m_ArcherLayout;
         private Button m_btnPrevious;
         private Button m_btnNext;
-        private Label m_lblArcher;
+        private ATLabel m_lblArcher;
         private JournalEntryListView m_lstJournalEntries;
 
         public JournalEntriesForm ()
@@ -41,7 +41,7 @@ namespace ATMobile.Forms
             m_btnPrevious.Clicked += PreviousClicked;
             m_ArcherLayout.Children.Add (m_btnPrevious);
 
-            m_lblArcher = new Label {
+            m_lblArcher = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold,
                 HorizontalOptions = LayoutOptions.FillAndExpand,

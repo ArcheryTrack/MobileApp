@@ -10,7 +10,7 @@ namespace ATMobile.Controls
         private string m_strLongDescription;
         private string m_strShortDescription;
         private DateTime? m_datSelected;
-        private Label m_lblDateText;
+        private ATLabel m_lblDateText;
         private Grid m_gridLayout;
         private Button m_btnPickDate;
         private bool m_ShowDecade;
@@ -40,7 +40,7 @@ namespace ATMobile.Controls
                 }
             };
 
-            m_lblDateText = new Label {
+            m_lblDateText = new ATLabel {
                 Text = m_strLongDescription,
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,

@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Controls;
 using Xamarin.Forms;
 
 namespace ATMobile.Cells
@@ -6,9 +7,9 @@ namespace ATMobile.Cells
     public class PracticeEndCell : ViewCell
     {
         private StackLayout m_Layout;
-        private Label m_lblEndNumber;
-        private Label m_lblScore;
-        private Label m_lblTotal;
+        private ATLabel m_lblEndNumber;
+        private ATLabel m_lblScore;
+        private ATLabel m_lblTotal;
 
         public PracticeEndCell ()
         {
@@ -16,21 +17,21 @@ namespace ATMobile.Cells
             m_Layout.Orientation = StackOrientation.Horizontal;
             m_Layout.Padding = new Thickness (0, 5);
 
-            m_Layout.Children.Add (new Label () { Text = "End " });
+            m_Layout.Children.Add (new ATLabel () { Text = "End " });
 
-            m_lblEndNumber = new Label ();
+            m_lblEndNumber = new ATLabel ();
             m_lblEndNumber.SetBinding (Label.TextProperty, "EndNumber");
             m_Layout.Children.Add (m_lblEndNumber);
 
-            m_Layout.Children.Add (new Label () { Text = ":" });
+            m_Layout.Children.Add (new ATLabel () { Text = ":" });
 
-            m_lblScore = new Label ();
+            m_lblScore = new ATLabel ();
             m_lblScore.SetBinding (Label.TextProperty, "ResultsString");
             m_Layout.Children.Add (m_lblScore);
 
-            m_Layout.Children.Add (new Label () { Text = " = " });
+            m_Layout.Children.Add (new ATLabel () { Text = " = " });
 
-            m_lblTotal = new Label ();
+            m_lblTotal = new ATLabel ();
             m_lblTotal.SetBinding (Label.TextProperty, "TotalScore");
             m_Layout.Children.Add (m_lblTotal);
 

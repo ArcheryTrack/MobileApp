@@ -14,13 +14,13 @@ namespace ATMobile.Forms
         private JournalEntry m_Entry;
         private Archer m_Archer;
 
-        private Label m_lblArcher;
+        private ATLabel m_lblArcher;
         private ATDatePicker m_dpDate;
         private Editor m_txtNote;
 
         public JournalEntryForm () : base ("Journal Entry")
         {
-            m_lblArcher = new Label {
+            m_lblArcher = new ATLabel {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 HorizontalTextAlignment = TextAlignment.Center
             };

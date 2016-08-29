@@ -22,17 +22,17 @@ namespace ATMobile.Forms
         private TournamentEnd m_TournamentEnd;
         private TargetFace m_TargetFace;
 
-        private Label m_lblTournament;
-        private Label m_lblEnd;
+        private ATLabel m_lblTournament;
+        private ATLabel m_lblEnd;
         private StackLayout m_ArcherLayout;
         private Button m_btnPrevious;
         private Button m_btnNext;
-        private Label m_lblArcher;
+        private ATLabel m_lblArcher;
 
-        private Label m_lblNote;
+        private ATLabel m_lblNote;
         private Editor m_txtNote;
 
-        private Label m_lblPoints;
+        private ATLabel m_lblPoints;
 
         private ShotArrowListView m_ArrowsListView;
         private ScoreControl m_ScoreControl;
@@ -46,14 +46,14 @@ namespace ATMobile.Forms
             OutsideLayout.Spacing = 5;
             InsideLayout.Spacing = 5;
 
-            m_lblTournament = new Label {
+            m_lblTournament = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Center,
             };
             InsideLayout.Children.Add (m_lblTournament);
 
-            m_lblEnd = new Label {
+            m_lblEnd = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Center,
@@ -75,7 +75,7 @@ namespace ATMobile.Forms
             m_btnPrevious.Clicked += PreviousClicked;
             m_ArcherLayout.Children.Add (m_btnPrevious);
 
-            m_lblArcher = new Label {
+            m_lblArcher = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -90,7 +90,7 @@ namespace ATMobile.Forms
             m_btnNext.Clicked += NextClicked;
             m_ArcherLayout.Children.Add (m_btnNext);
 
-            m_lblPoints = new Label {
+            m_lblPoints = new ATLabel {
                 Text = "Points: "
             };
             InsideLayout.Children.Add (m_lblPoints);
@@ -121,7 +121,7 @@ namespace ATMobile.Forms
             frame2.Content = m_ScoreControl;
             layout.Children.Add (frame2);
 
-            m_lblNote = new Label {
+            m_lblNote = new ATLabel {
                 Text = "Note",
                 Margin = new Thickness (0, 10, 0, 5)
             };

@@ -6,7 +6,7 @@ namespace ATMobile.Controls
 {
     public class Header : ContentView
     {
-        private Label m_lblTitle;
+        private ATLabel m_lblTitle;
 
         public Header (string _title)
         {
@@ -18,7 +18,7 @@ namespace ATMobile.Controls
             };
             Content = header;
 
-            m_lblTitle = new Label {
+            m_lblTitle = new ATLabel {
                 Text = _title,
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center,

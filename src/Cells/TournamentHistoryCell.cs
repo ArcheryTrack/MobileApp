@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Controls;
 using ATMobile.Delegates;
 using ATMobile.Objects;
 using Xamarin.Forms;
@@ -8,8 +9,8 @@ namespace ATMobile.Cells
     public class TournamentHistoryCell : ViewCell
     {
         private StackLayout m_Layout;
-        private Label m_lblName;
-        private Label m_lblDateTime;
+        private ATLabel m_lblName;
+        private ATLabel m_lblDateTime;
 
         public static TournamentEditClickedDelegate TournamentEditClicked;
 
@@ -20,11 +21,11 @@ namespace ATMobile.Cells
                 Padding = new Thickness (0, 5)
             };
 
-            m_lblName = new Label ();
+            m_lblName = new ATLabel ();
             m_lblName.SetBinding (Label.TextProperty, "NameString");
             m_Layout.Children.Add (m_lblName);
 
-            m_lblDateTime = new Label ();
+            m_lblDateTime = new ATLabel ();
             m_lblDateTime.SetBinding (Label.TextProperty, "DateTimeString");
             m_Layout.Children.Add (m_lblDateTime);
 

@@ -24,7 +24,7 @@ namespace ATMobile.Controls
         private Button m_btnPreviousDecade;
         private Button m_btnNextDecade;
 
-        private Label m_lblTitle;
+        private ATLabel m_lblTitle;
         private IntButton [] m_btnDates;
 
         //Calendar Grid
@@ -79,7 +79,7 @@ namespace ATMobile.Controls
             m_btnPreviousMonth.Clicked += PreviousMonth;
             m_Header.Children.Add (m_btnPreviousMonth);
 
-            m_lblTitle = new Label {
+            m_lblTitle = new ATLabel {
                 Text = "",
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center,
@@ -133,13 +133,13 @@ namespace ATMobile.Controls
                     new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
                 }
             };
-            m_gridCal.Children.Add (new Label { Text = "S", HorizontalTextAlignment = TextAlignment.Center }, 0, 0);
-            m_gridCal.Children.Add (new Label { Text = "M", HorizontalTextAlignment = TextAlignment.Center }, 1, 0);
-            m_gridCal.Children.Add (new Label { Text = "T", HorizontalTextAlignment = TextAlignment.Center }, 2, 0);
-            m_gridCal.Children.Add (new Label { Text = "W", HorizontalTextAlignment = TextAlignment.Center }, 3, 0);
-            m_gridCal.Children.Add (new Label { Text = "T", HorizontalTextAlignment = TextAlignment.Center }, 4, 0);
-            m_gridCal.Children.Add (new Label { Text = "F", HorizontalTextAlignment = TextAlignment.Center }, 5, 0);
-            m_gridCal.Children.Add (new Label { Text = "S", HorizontalTextAlignment = TextAlignment.Center }, 6, 0);
+            m_gridCal.Children.Add (new ATLabel { Text = "S", HorizontalTextAlignment = TextAlignment.Center }, 0, 0);
+            m_gridCal.Children.Add (new ATLabel { Text = "M", HorizontalTextAlignment = TextAlignment.Center }, 1, 0);
+            m_gridCal.Children.Add (new ATLabel { Text = "T", HorizontalTextAlignment = TextAlignment.Center }, 2, 0);
+            m_gridCal.Children.Add (new ATLabel { Text = "W", HorizontalTextAlignment = TextAlignment.Center }, 3, 0);
+            m_gridCal.Children.Add (new ATLabel { Text = "T", HorizontalTextAlignment = TextAlignment.Center }, 4, 0);
+            m_gridCal.Children.Add (new ATLabel { Text = "F", HorizontalTextAlignment = TextAlignment.Center }, 5, 0);
+            m_gridCal.Children.Add (new ATLabel { Text = "S", HorizontalTextAlignment = TextAlignment.Center }, 6, 0);
 
             m_btnDates = new IntButton [42];
             for (int i = 0; i < 42; i++) {

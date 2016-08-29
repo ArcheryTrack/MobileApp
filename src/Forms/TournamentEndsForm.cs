@@ -11,15 +11,15 @@ namespace ATMobile.Forms
     public class TournamentEndsForm : AbstractForm
     {
         private StackLayout m_Inside;
-        private Label m_lblTournament;
-        private Label m_lblRound;
+        private ATLabel m_lblTournament;
+        private ATLabel m_lblRound;
 
         private StackLayout m_ArcherLayout;
         private Button m_btnPrevious;
         private Button m_btnNext;
-        private Label m_lblArcher;
+        private ATLabel m_lblArcher;
 
-        private Label m_lblSummary;
+        private ATLabel m_lblSummary;
         private TournamentEndsListView m_TournamentEnds;
 
         private Round m_Round;
@@ -39,13 +39,13 @@ namespace ATMobile.Forms
             };
             OutsideLayout.Children.Add (m_Inside);
 
-            m_lblTournament = new Label {
+            m_lblTournament = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center
             };
             m_Inside.Children.Add (m_lblTournament);
 
-            m_lblRound = new Label {
+            m_lblRound = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center
             };
@@ -64,7 +64,7 @@ namespace ATMobile.Forms
             m_btnPrevious.Clicked += PreviousClicked;
             m_ArcherLayout.Children.Add (m_btnPrevious);
 
-            m_lblArcher = new Label {
+            m_lblArcher = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -80,7 +80,7 @@ namespace ATMobile.Forms
             m_ArcherLayout.Children.Add (m_btnNext);
 
             /* Setup the round summary */
-            m_lblSummary = new Label {
+            m_lblSummary = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 Text = "Arrows Shot: 0, Score: 0",
                 Margin = new Thickness (0, 0, 0, 10)

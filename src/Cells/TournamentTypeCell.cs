@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Controls;
 using Xamarin.Forms;
 
 namespace ATMobile.Cells
@@ -6,19 +7,19 @@ namespace ATMobile.Cells
     public class TournamentTypeCell : ViewCell
     {
         private StackLayout m_Layout;
-        private Label m_lblName;
-        private Label m_lblDetails;
+        private ATLabel m_lblName;
+        private ATLabel m_lblDetails;
 
         public TournamentTypeCell ()
         {
             m_Layout = new StackLayout ();
             m_Layout.Padding = new Thickness (0, 5);
 
-            m_lblName = new Label ();
+            m_lblName = new ATLabel ();
             m_lblName.SetBinding (Label.TextProperty, "Name");
             m_Layout.Children.Add (m_lblName);
 
-            m_lblDetails = new Label ();
+            m_lblDetails = new ATLabel ();
             m_lblDetails.SetBinding (Label.TextProperty, "Details");
             m_Layout.Children.Add (m_lblDetails);
 

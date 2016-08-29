@@ -8,19 +8,19 @@ namespace ATMobile.Forms
     {
         private Archer m_Archer;
         private Practice m_Practice;
-        private Label m_lblArcher;
-        private Label m_lblSummary;
+        private ATLabel m_lblArcher;
+        private ATLabel m_lblSummary;
         private PracticeEndsListView m_PracticeEnds;
 
         public PracticeEndsForm () : base ("Practice")
         {
-            m_lblArcher = new Label {
+            m_lblArcher = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold
             };
             OutsideLayout.Children.Insert (0, m_lblArcher);
 
-            m_lblSummary = new Label {
+            m_lblSummary = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
                 Text = "Arrows: 0, Score: 0"
             };

@@ -9,7 +9,6 @@ namespace ATMobile.PickerForms
     public class DatePickerForm : ContentPage
     {
         private StackLayout m_OutsideLayout;
-        private Label m_lblTitle;
         private CalendarControl m_CalendarControl;
         private Button m_btnCancel;
 
