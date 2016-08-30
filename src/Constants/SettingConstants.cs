@@ -8,8 +8,6 @@
 
         public const string Username = "Username";
 
-        public const string UserToken = "UserToken";
-
         public const string InitialDataLoaded = "InitialDataLoaded";
 
         public const string TargetFaceDataLoaded = "TargetFaceDataLoaded";

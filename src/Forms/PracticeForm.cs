@@ -23,7 +23,6 @@ namespace ATMobile.Forms
 
         private Grid m_Layout;
 
-        private bool m_bolDatePicked;
         private ATLabel m_lblDate;
         private Button m_btnPickDate;
 
@@ -89,7 +88,9 @@ namespace ATMobile.Forms
             m_Layout.Children.Add (m_btnPickDate, 1, 0);
 
             m_lblTime = new ATLabel {
-                Text = "Time"
+                Text = "Time",
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                VerticalTextAlignment = TextAlignment.Center
             };
             m_Layout.Children.Add (m_lblTime, 0, 1);
 
@@ -208,7 +209,6 @@ namespace ATMobile.Forms
         private void DatePicked (DateTime _date)
         {
             m_Date = _date;
-            m_bolDatePicked = true;
             SetDateTimeText ();
         }
 

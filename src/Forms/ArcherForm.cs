@@ -15,8 +15,22 @@ namespace ATMobile.Forms
         private ATDatePicker m_dpBirthDate;
         private ATDatePicker m_dpStartedArchery;
 
-        public ArcherForm () : base ("Archer")
+        public ArcherForm (bool initialArcher = false) : base ("Archer")
         {
+            if (initialArcher) {
+                ATLabel instruction = new ATLabel {
+                    Text = "Please create an initial archer.",
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    VerticalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Margin = new Thickness (0, 0, 0, 25),
+                    FontAttributes = FontAttributes.Bold
+                };
+                InsideLayout.Children.Add (instruction);
+
+                CancelButton.IsVisible = false;
+            }
+
             m_txtFirstName = new ATTextWithLabel ();
             m_txtFirstName.Title = "First Name";
             m_txtFirstName.Placeholder = "Enter the first name of the archer";

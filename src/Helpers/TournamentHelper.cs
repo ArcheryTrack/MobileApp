@@ -26,7 +26,7 @@ namespace ATMobile.Helpers
 
             List<TournamentEnd> ends = new List<TournamentEnd> ();
 
-            for (int i = 1; i <= _round.ExpectedEnds; i++) {
+            for (int i = 1; i <= _round.NumberOfEnds; i++) {
                 TournamentEnd end = new TournamentEnd ();
                 end.ArcherId = _archerId;
                 end.EndNumber = i;
@@ -39,8 +39,6 @@ namespace ATMobile.Helpers
 
             return ends;
         }
-
-
     }
 }
 

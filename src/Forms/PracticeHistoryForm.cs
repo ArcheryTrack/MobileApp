@@ -16,7 +16,7 @@ namespace ATMobile.Forms
         private List<Archer> m_Archers;
         private bool m_Loading;
 
-        public PracticeHistoryForm () : base ("Practice History")
+        public PracticeHistoryForm () : base ("Practice History", "Add Practice")
         {
             m_Loading = true;
 
@@ -31,6 +31,10 @@ namespace ATMobile.Forms
             }
             m_ArcherPicker.SelectedIndexChanged += OnArcherPicked;
             OutsideLayout.Children.Insert (1, m_ArcherPicker);
+
+            if (m_Archers.Count == 1) {
+                m_ArcherPicker.IsEnabled = false;
+            }
 
             m_PracticeHistory = new PracticeHistoryListView ();
             m_PracticeHistory.ItemSelected += OnSelected;

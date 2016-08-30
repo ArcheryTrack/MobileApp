@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using ATMobile.Controls;
-using ATMobile.Helpers;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
@@ -13,10 +12,6 @@ namespace ATMobile.Forms
 {
     public class TournamentEndForm : AbstractEntryForm
     {
-        private Archer m_Archer;
-        private TournamentType m_TournamentType;
-        private RoundType m_RoundType;
-
         private Tournament m_Tournament;
         private Round m_Round;
         private TournamentEnd m_TournamentEnd;
@@ -269,7 +264,6 @@ namespace ATMobile.Forms
             Round _round,
             TournamentEnd _end)
         {
-            m_Archer = _archer;
             m_Tournament = _tournament;
             m_Round = _round;
             m_TournamentEnd = _end;
@@ -280,15 +274,8 @@ namespace ATMobile.Forms
 
             SetArcher ();
 
-            if (m_Tournament.TournamentTypeId != null) {
-                m_TournamentType = ATManager.GetInstance ().GetTournamentType (m_Tournament.TournamentTypeId.Value);
-
-                if (m_TournamentType != null) {
-                    ATManager manager = ATManager.GetInstance ();
-                    m_RoundType = manager.GetRoundType (m_Round.RoundTypeId);
-                    m_TargetFace = manager.GetTargetFace (m_RoundType.TargetFaceId);
-                }
-            }
+            ATManager manager = ATManager.GetInstance ();
+            m_TargetFace = manager.GetTargetFace (m_Round.TargetFaceId);
         }
 
         private void SetupEnd ()
@@ -313,10 +300,10 @@ namespace ATMobile.Forms
         {
             List<ShotArrow> arrows = m_ArrowsListView.Arrows.ToList ();
 
-            if (arrows.Count > m_RoundType.ArrowsPerEnd) {
+            if (arrows.Count > m_Round.ArrowsPerEnd) {
                 _sb.AppendFormat ("Only {0} arrows were expected for this end, but {1} were recorded.",
-                                 m_RoundType.ArrowsPerEnd,
-                                 arrows.Count);
+                                  m_Round.ArrowsPerEnd,
+                                  arrows.Count);
             }
         }
 

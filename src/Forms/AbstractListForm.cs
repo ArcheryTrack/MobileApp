@@ -11,10 +11,14 @@ namespace ATMobile.Forms
 
         public abstract void Add ();
 
-        public AbstractListForm (string _title) : base (_title)
+        public AbstractListForm (
+            string _title,
+            string _addButtonText = "Add") : base (_title)
         {
             AddButton = new Button {
-                Text = "Add"
+                Text = _addButtonText,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                MinimumWidthRequest = 200
             };
             AddButton.Clicked += OnAdd;
             OutsideLayout.Children.Add (AddButton);

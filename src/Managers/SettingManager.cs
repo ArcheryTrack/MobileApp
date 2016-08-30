@@ -33,7 +33,7 @@ namespace ATMobile.Managers
             return dao.GetSetting (_name);
         }
 
-        private string GetSettingValue (string _name)
+        public string GetSettingValue (string _name)
         {
             SettingDao dao = new SettingDao (m_Manager.Database);
             Setting setting = dao.GetSetting (_name);
@@ -45,7 +45,8 @@ namespace ATMobile.Managers
             return null;
         }
 
-        private void SetSetting (string _name, string _value)
+
+        public void SetSetting (string _name, string _value)
         {
             SettingDao dao = new SettingDao (m_Manager.Database);
             Setting setting = dao.GetSetting (_name);
@@ -59,17 +60,17 @@ namespace ATMobile.Managers
             dao.Persist (setting);
         }
 
-        private void SetSetting (string _name, Guid _value)
+        public void SetSetting (string _name, Guid _value)
         {
             SetSetting (_name, _value.ToString ());
         }
 
-        private void SetSetting (string _name, bool _value)
+        public void SetSetting (string _name, bool _value)
         {
             SetSetting (_name, _value.ToString ());
         }
 
-        private bool GetBoolSetting (string _name)
+        public bool GetBoolSetting (string _name)
         {
             Setting setting = GetSetting (_name);
 
@@ -83,7 +84,7 @@ namespace ATMobile.Managers
             return false;
         }
 
-        private Guid? GetGuidSetting (string _name)
+        public Guid? GetGuidSetting (string _name)
         {
             Setting setting = GetSetting (_name);
 
@@ -112,14 +113,7 @@ namespace ATMobile.Managers
 
         public string GetUsername ()
         {
-            string userId = GetSettingValue (SettingConstants.Username);
-
-            return userId;
-        }
-
-        public void SetUsername (string _username)
-        {
-            SetSetting (SettingConstants.Username, _username);
+            return GetSettingValue (SettingConstants.Username);
         }
 
         public Guid? GetCurrentArcher ()

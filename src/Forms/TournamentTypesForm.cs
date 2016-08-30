@@ -6,11 +6,9 @@ namespace ATMobile.Forms
 {
     public class TournamentTypesForm : AbstractListForm
     {
-        private StackLayout m_OutsideLayout;
-        private Button m_btnAddType;
         private TournamentTypeListView m_TournamentTypes;
 
-        public TournamentTypesForm () : base ("Tournament Types")
+        public TournamentTypesForm () : base ("Tournament Templates")
         {
             m_TournamentTypes = new TournamentTypeListView ();
             m_TournamentTypes.ItemSelected += OnSelected;

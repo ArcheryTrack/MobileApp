@@ -1,4 +1,5 @@
-﻿using ATMobile.Controls;
+﻿using System.Collections.Generic;
+using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
@@ -30,9 +31,21 @@ namespace ATMobile.Forms
             frame.Content = m_listRecent;
 
             OutsideLayout.Children.Add (frame);
+
+            ShowAddArcher ();
         }
 
-        void OnSelected (object sender, SelectedItemChangedEventArgs e)
+        private void ShowAddArcher ()
+        {
+            List<Archer> archers = ATManager.GetInstance ().GetArchers ();
+
+            if (archers.Count == 0) {
+                ArcherForm archerForm = new ArcherForm (initialArcher: true);
+                Navigation.PushModalAsync (archerForm);
+            }
+        }
+
+        private void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
             var manager = ATManager.GetInstance ();
             RecentItem recentItem = (RecentItem)e.SelectedItem;

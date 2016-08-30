@@ -16,11 +16,11 @@ namespace ATMobile.Forms
         private RoundTypeListView m_RoundTypes;
         private Button m_btnAddRound;
 
-        public TournamentTypeForm () : base ("Tournament Type Setup")
+        public TournamentTypeForm () : base ("Tournament Template Setup")
         {
             m_txtName = new ATTextWithLabel {
                 Title = "Name",
-                Placeholder = "Enter a name for the tournament type"
+                Placeholder = "Enter a name for the tournament template"
             };
             InsideLayout.Children.Add (m_txtName);
 

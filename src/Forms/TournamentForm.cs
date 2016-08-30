@@ -255,8 +255,10 @@ namespace ATMobile.Forms
                     Round round = new Round {
                         ParentId = _tournament.Id,
                         RoundNumber = count,
-                        ExpectedArrowsPerEnd = roundType.ArrowsPerEnd,
-                        ExpectedEnds = roundType.NumberOfEnds,
+                        ArrowsPerEnd = roundType.ArrowsPerEnd,
+                        NumberOfEnds = roundType.NumberOfEnds,
+                        TargetFaceId = roundType.TargetFaceId,
+                        CountX = roundType.CountX,
                         Distance = roundType.Distance,
                         RoundTypeId = roundType.Id
                     };
