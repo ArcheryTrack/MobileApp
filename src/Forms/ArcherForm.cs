@@ -31,14 +31,16 @@ namespace ATMobile.Forms
                 CancelButton.IsVisible = false;
             }
 
-            m_txtFirstName = new ATTextWithLabel ();
-            m_txtFirstName.Title = "First Name";
-            m_txtFirstName.Placeholder = "Enter the first name of the archer";
+            m_txtFirstName = new ATTextWithLabel {
+                Title = "First Name",
+                Placeholder = "Enter the first name of the archer"
+            };
             InsideLayout.Children.Add (m_txtFirstName);
 
-            m_txtLastName = new ATTextWithLabel ();
-            m_txtLastName.Title = "Last Name";
-            m_txtLastName.Placeholder = "Enter the last name of the archer";
+            m_txtLastName = new ATTextWithLabel {
+                Title = "Last Name",
+                Placeholder = "Enter the last name of the archer"
+            };
             InsideLayout.Children.Add (m_txtLastName);
 
             m_dpBirthDate = new ATDatePicker ("Birth Date", "Select the Archer's birth date", _showDecade: true);

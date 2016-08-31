@@ -35,7 +35,10 @@ namespace ATMobile.Controls
             };
             m_EntryGrid.Children.Add (m_lblTitle, 0, 0);
 
-            m_txtEntry = new Entry ();
+            m_txtEntry = new Entry {
+                Keyboard = Keyboard.Plain
+            };
+
             m_EntryGrid.Children.Add (m_txtEntry, 1, 0);
 
             Content = m_EntryGrid;
@@ -65,6 +68,15 @@ namespace ATMobile.Controls
             }
             set {
                 m_txtEntry.Placeholder = value;
+            }
+        }
+
+        public Keyboard Keyboard {
+            get {
+                return m_txtEntry.Keyboard;
+            }
+            set {
+                m_txtEntry.Keyboard = value;
             }
         }
     }

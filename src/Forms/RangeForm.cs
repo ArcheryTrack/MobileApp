@@ -20,34 +20,40 @@ namespace ATMobile.Forms
 
         public RangeForm () : base ("Range")
         {
-            m_txtName = new ATTextWithLabel ();
-            m_txtName.Title = "Name";
-            m_txtName.Placeholder = "Enter the name of the range.";
+            m_txtName = new ATTextWithLabel {
+                Title = "Name",
+                Placeholder = "Enter the name of the range."
+            };
             InsideLayout.Children.Add (m_txtName);
 
-            m_txtAddress1 = new ATTextWithLabel ();
-            m_txtAddress1.Title = "Address 1";
-            m_txtAddress1.Placeholder = "Enter primary address";
+            m_txtAddress1 = new ATTextWithLabel () {
+                Title = "Address 1",
+                Placeholder = "Enter primary address"
+            };
             InsideLayout.Children.Add (m_txtAddress1);
 
-            m_txtAddress2 = new ATTextWithLabel ();
-            m_txtAddress2.Title = "Address 2";
-            m_txtAddress2.Placeholder = "Enter secondary address";
+            m_txtAddress2 = new ATTextWithLabel {
+                Title = "Address 2",
+                Placeholder = "Enter secondary address"
+            };
             InsideLayout.Children.Add (m_txtAddress2);
 
-            m_txtCity = new ATTextWithLabel ();
-            m_txtCity.Title = "City";
-            m_txtCity.Placeholder = "Enter the city name";
+            m_txtCity = new ATTextWithLabel {
+                Title = "City",
+                Placeholder = "Enter the city name"
+            };
             InsideLayout.Children.Add (m_txtCity);
 
-            m_txtState = new ATTextWithLabel ();
-            m_txtState.Title = "State";
-            m_txtState.Placeholder = "Enter the state abbreviation";
+            m_txtState = new ATTextWithLabel {
+                Title = "State",
+                Placeholder = "Enter the state abbreviation"
+            };
             InsideLayout.Children.Add (m_txtState);
 
-            m_txtCountry = new ATTextWithLabel ();
-            m_txtCountry.Title = "Country";
-            m_txtCountry.Placeholder = "Enter the country abbreviation";
+            m_txtCountry = new ATTextWithLabel {
+                Title = "Country",
+                Placeholder = "Enter the country abbreviation"
+            };
             InsideLayout.Children.Add (m_txtCountry);
         }
 
