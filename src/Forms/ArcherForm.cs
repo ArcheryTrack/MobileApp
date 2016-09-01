@@ -19,7 +19,7 @@ namespace ATMobile.Forms
         {
             if (initialArcher) {
                 ATLabel instruction = new ATLabel {
-                    Text = "Please create an initial archer.",
+                    Text = "Please create an initial archer.  To login to existing account hit cancel and pick login.",
                     HorizontalTextAlignment = TextAlignment.Center,
                     VerticalTextAlignment = TextAlignment.Center,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -28,7 +28,7 @@ namespace ATMobile.Forms
                 };
                 InsideLayout.Children.Add (instruction);
 
-                CancelButton.IsVisible = false;
+                //CancelButton.IsVisible = false;
             }
 
             m_txtFirstName = new ATTextWithLabel {

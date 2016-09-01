@@ -9,6 +9,7 @@ namespace ATMobile.Controls
         public ATLabel ()
         {
             FontFamily = UIConstants.FontFamily;
+            LineBreakMode = LineBreakMode.WordWrap;
         }
     }
 }

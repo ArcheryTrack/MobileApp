@@ -40,8 +40,15 @@ namespace ATMobile.Controls
                 }
             };
 
+            string text;
+            if (Device.Idiom == TargetIdiom.Phone) {
+                text = m_strShortDescription;
+            } else {
+                text = m_strLongDescription;
+            }
+
             m_lblDateText = new ATLabel {
-                Text = m_strLongDescription,
+                Text = text,
                 HeightRequest = 40,
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.StartAndExpand

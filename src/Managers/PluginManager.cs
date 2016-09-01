@@ -36,6 +36,17 @@ namespace ATMobile.Managers
         {
             m_Manager = null;
         }
+
+        public IPlugin FindPlugin (string type)
+        {
+            foreach (var plugin in Plugins) {
+                if (plugin.GetType ().Name == type) {
+                    return plugin;
+                }
+            }
+
+            return null;
+        }
     }
 
 }

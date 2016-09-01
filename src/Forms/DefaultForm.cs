@@ -32,12 +32,13 @@ namespace ATMobile.Forms
 
             OutsideLayout.Children.Add (frame);
 
-            ShowAddArcher ();
+            BootstrapIfNeeded ();
         }
 
-        private void ShowAddArcher ()
+        private void BootstrapIfNeeded ()
         {
-            List<Archer> archers = ATManager.GetInstance ().GetArchers ();
+            ATManager manager = ATManager.GetInstance ();
+            List<Archer> archers = manager.GetArchers ();
 
             if (archers.Count == 0) {
                 ArcherForm archerForm = new ArcherForm (initialArcher: true);
