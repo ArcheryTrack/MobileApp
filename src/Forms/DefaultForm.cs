@@ -31,19 +31,6 @@ namespace ATMobile.Forms
             frame.Content = m_listRecent;
 
             OutsideLayout.Children.Add (frame);
-
-            BootstrapIfNeeded ();
-        }
-
-        private void BootstrapIfNeeded ()
-        {
-            ATManager manager = ATManager.GetInstance ();
-            List<Archer> archers = manager.GetArchers ();
-
-            if (archers.Count == 0) {
-                ArcherForm archerForm = new ArcherForm (initialArcher: true);
-                Navigation.PushModalAsync (archerForm);
-            }
         }
 
         private void OnSelected (object sender, SelectedItemChangedEventArgs e)

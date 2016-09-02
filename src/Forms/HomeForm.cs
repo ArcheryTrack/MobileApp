@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ATMobile.Constants;
+using ATMobile.Interfaces;
 using ATMobile.Managers;
 using ATMobile.Messages;
 using ATMobile.Objects;
@@ -7,8 +9,9 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class HomeForm : MasterDetailPage
+    public class HomeForm : MasterDetailPage, IMainForm
     {
+        public bool FiredAppStarted = false;
         private App m_App;
 
         public HomeForm (App _app)
@@ -68,6 +71,21 @@ namespace ATMobile.Forms
                 };
 
                 IsPresented = false;
+            }
+        }
+
+        public Task ShowAlert (string _title, string _message, string _accept, string _cancel)
+        {
+            return DisplayAlert (_title, _message, _accept, _cancel);
+        }
+
+        protected override void OnAppearing ()
+        {
+            base.OnAppearing ();
+
+            if (!FiredAppStarted) {
+                FiredAppStarted = true;
+                ATManager.GetInstance ().MessagingManager.Publish (this);
             }
         }
     }

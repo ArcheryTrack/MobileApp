@@ -1,8 +1,10 @@
 ﻿using System;
 using ATMobile.Delegates;
+using ATMobile.Interfaces;
 using ATMobile.Messages;
 using ATMobile.Objects;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace ATMobile.Managers
 {
@@ -11,6 +13,7 @@ namespace ATMobile.Managers
         private ATManager m_Manager;
 
         public event MessageReceivedDelegate MessageReceived;
+        public event ApplicationStartedDelegate ApplicationStarted;
 
         public MessagingManager (ATManager _manager)
         {
@@ -27,6 +30,15 @@ namespace ATMobile.Managers
             };
 
             Publish (message);
+        }
+
+        public void Publish (IMainForm _mainForm)
+        {
+            var appStarted = ApplicationStarted;
+
+            if (appStarted != null) {
+                appStarted (_mainForm);
+            }
         }
 
         public void Publish (BusMessage _message)
