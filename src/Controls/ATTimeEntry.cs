@@ -25,7 +25,7 @@ namespace ATMobile.Controls
                         Width = new GridLength(1, GridUnitType.Star)
                     },
                     new ColumnDefinition {
-                        Width = new GridLength(90, GridUnitType.Absolute)
+                        Width = new GridLength(80, GridUnitType.Absolute)
                     }
                 }
             };

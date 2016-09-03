@@ -7,6 +7,8 @@ namespace ATMobile.Objects
     {
         public Guid ParentId { get; set; }
 
+        public CompetitionType CompetitionType { get; set; }
+
         public DateTime Date { get; set; }
 
         public int RoundNumber { get; set; }
