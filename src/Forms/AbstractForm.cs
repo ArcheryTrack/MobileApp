@@ -11,16 +11,34 @@ namespace ATMobile.Forms
         protected StackLayout OutsideLayout;
 
         protected AbstractForm (string title,
-                               int padding = 5,
-                               int spacing = 5)
+                               int? padding = null,
+                               int? spacing = null)
         {
             Title = title;
             BackgroundColor = Color.FromHex (UIConstants.DetailFormBackgroundColor);
 
+            if (Device.Idiom == TargetIdiom.Phone) {
+                if (padding == null) {
+                    padding = 0;
+                }
+
+                if (spacing == null) {
+                    spacing = 1;
+                }
+            } else {
+                if (padding == null) {
+                    padding = 5;
+                }
+
+                if (spacing == null) {
+                    spacing = 5;
+                }
+            }
+
             OutsideLayout = new StackLayout {
-                Spacing = spacing,
+                Spacing = spacing.Value,
                 VerticalOptions = LayoutOptions.Fill,
-                Padding = padding
+                Padding = padding.Value
             };
 
             Content = OutsideLayout;

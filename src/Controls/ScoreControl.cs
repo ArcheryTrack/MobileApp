@@ -7,6 +7,8 @@ namespace ATMobile.Controls
 {
     public class ScoreControl : ContentView, IDisposable
     {
+        bool m_EnableX;
+
         private TargetFace m_TargetFace;
 
         private Grid m_EntryGrid;
@@ -100,9 +102,11 @@ namespace ATMobile.Controls
             }
         }
 
-        public void SetTargetFace (TargetFace _targetFace)
+        public void SetTargetFace (TargetFace _targetFace, bool _enableX)
         {
             m_TargetFace = _targetFace;
+            m_EnableX = _enableX;
+
             EnableControls ();
             DisableControls ();
         }
@@ -110,7 +114,6 @@ namespace ATMobile.Controls
         private void EnableControls ()
         {
             m_btnM.IsEnabled = true;
-            m_btnX.IsEnabled = true;
             m_btn1.IsEnabled = true;
             m_btn2.IsEnabled = true;
             m_btn3.IsEnabled = true;
@@ -122,6 +125,10 @@ namespace ATMobile.Controls
             m_btn8.IsEnabled = true;
             m_btn9.IsEnabled = true;
             m_btn10.IsEnabled = true;
+
+            if (m_EnableX) {
+                m_btnX.IsEnabled = true;
+            }
         }
 
         private void DisableControls ()
@@ -177,6 +184,10 @@ namespace ATMobile.Controls
                     || m_TargetFace.MaximumPoints < 1) {
                     m_btn1.IsEnabled = false;
                 }
+            }
+
+            if (!m_EnableX) {
+                m_btnX.IsEnabled = false;
             }
         }
 

@@ -35,12 +35,19 @@ namespace ATMobile.Forms
             SaveButton.Clicked += OnSave;
 
             InsideLayout = new StackLayout {
-                Spacing = 5,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                Padding = 5,
-                Margin = new Thickness (20, 0, 20, 20)
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
             OutsideLayout.Children.Add (InsideLayout);
+
+            if (Device.Idiom == TargetIdiom.Phone) {
+                InsideLayout.Spacing = 2;
+                InsideLayout.Padding = 0;
+                InsideLayout.Margin = new Thickness (10, 0, 10, 10);
+            } else {
+                InsideLayout.Padding = 5;
+                InsideLayout.Spacing = 5;
+                InsideLayout.Margin = new Thickness (20, 0, 20, 20);
+            }
         }
 
         private void OnCancel (object sender, EventArgs e)

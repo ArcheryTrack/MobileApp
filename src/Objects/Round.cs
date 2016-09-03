@@ -23,7 +23,7 @@ namespace ATMobile.Objects
 
         public string Note { get; set; }
 
-        public Guid RoundTypeId { get; set; }
+        public Guid? RoundTypeId { get; set; }
 
         public string RoundText {
             get {

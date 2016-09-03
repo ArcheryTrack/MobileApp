@@ -20,7 +20,7 @@ namespace ATMobile
             }
 
             // The root page of your application
-            MainPage = new HomeForm (this);
+            MainPage = new MainForm (this);
         }
 
         protected override void OnStart ()

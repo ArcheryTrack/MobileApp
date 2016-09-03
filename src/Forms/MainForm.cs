@@ -9,12 +9,12 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class HomeForm : MasterDetailPage, IMainForm
+    public class MainForm : MasterDetailPage, IMainForm
     {
         public bool FiredAppStarted = false;
         private App m_App;
 
-        public HomeForm (App _app)
+        public MainForm (App _app)
         {
             m_App = _app;
 
@@ -74,7 +74,7 @@ namespace ATMobile.Forms
             }
         }
 
-        public Task ShowAlert (string _title, string _message, string _accept, string _cancel)
+        public Task<bool> ShowAlert (string _title, string _message, string _accept, string _cancel)
         {
             return DisplayAlert (_title, _message, _accept, _cancel);
         }
@@ -87,6 +87,11 @@ namespace ATMobile.Forms
                 FiredAppStarted = true;
                 ATManager.GetInstance ().MessagingManager.Publish (this);
             }
+        }
+
+        public void PushModal (ContentPage _form)
+        {
+            Navigation.PushModalAsync (_form);
         }
     }
 }

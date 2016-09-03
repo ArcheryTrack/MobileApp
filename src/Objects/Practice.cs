@@ -23,6 +23,8 @@ namespace ATMobile.Objects
 
         public bool TrackArrow { get; set; }
 
+        public bool CountX { get; set; }
+
         public string DateTimeString {
             get {
                 return DateTime.ToString ("g");

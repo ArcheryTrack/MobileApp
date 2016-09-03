@@ -10,10 +10,10 @@ namespace ATMobile.Forms
     public class ArcherForm : AbstractEntryForm
     {
         private Archer m_Archer;
-        private ATTextWithLabel m_txtFirstName;
-        private ATTextWithLabel m_txtLastName;
-        private ATDatePicker m_dpBirthDate;
-        private ATDatePicker m_dpStartedArchery;
+        private ATTextEntry m_txtFirstName;
+        private ATTextEntry m_txtLastName;
+        private ATDateEntry m_dpBirthDate;
+        private ATDateEntry m_dpStartedArchery;
 
         public ArcherForm (bool initialArcher = false) : base ("Archer")
         {
@@ -31,24 +31,23 @@ namespace ATMobile.Forms
                 //CancelButton.IsVisible = false;
             }
 
-            m_txtFirstName = new ATTextWithLabel {
+            m_txtFirstName = new ATTextEntry {
                 Title = "First Name",
                 Placeholder = "Enter the first name of the archer"
             };
             InsideLayout.Children.Add (m_txtFirstName);
 
-            m_txtLastName = new ATTextWithLabel {
+            m_txtLastName = new ATTextEntry {
                 Title = "Last Name",
                 Placeholder = "Enter the last name of the archer"
             };
             InsideLayout.Children.Add (m_txtLastName);
 
-            m_dpBirthDate = new ATDatePicker ("Birth Date", "Select the Archer's birth date", _showDecade: true);
+            m_dpBirthDate = new ATDateEntry ("Birth Date", "Select the Archer's birth date", _showDecade: true);
             InsideLayout.Children.Add (m_dpBirthDate);
 
-            m_dpStartedArchery = new ATDatePicker ("Started Archery", "Select approximate date started archery.", _showDecade: true);
+            m_dpStartedArchery = new ATDateEntry ("Started Archery", "Select approximate date started archery.", _showDecade: true);
             InsideLayout.Children.Add (m_dpStartedArchery);
-
         }
 
         public void SetArcher (Archer _archer)

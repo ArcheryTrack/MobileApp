@@ -15,7 +15,7 @@ namespace ATMobile.Forms
         private Archer m_Archer;
 
         private ATLabel m_lblArcher;
-        private ATDatePicker m_dpDate;
+        private ATDateEntry m_dpDate;
         private Editor m_txtNote;
 
         public JournalEntryForm () : base ("Journal Entry")
@@ -26,7 +26,7 @@ namespace ATMobile.Forms
             };
             InsideLayout.Children.Add (m_lblArcher);
 
-            m_dpDate = new ATDatePicker (
+            m_dpDate = new ATDateEntry (
                 "Journal Date",
                 "Select the date of the Journal Entry") {
                 SelectedDate = DateTime.Now,

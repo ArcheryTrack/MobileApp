@@ -3,13 +3,13 @@ using Xamarin.Forms;
 
 namespace ATMobile.Controls
 {
-    public class ATTextWithLabel : ContentView
+    public class ATToggleEntry : ContentView
     {
         private ATLabel m_lblTitle;
-        private Entry m_txtEntry;
+        private Switch m_swChoice;
         private Grid m_EntryGrid;
 
-        public ATTextWithLabel ()
+        public ATToggleEntry ()
         {
             //Setup grid to hold the controls
             m_EntryGrid = new Grid {
@@ -22,10 +22,10 @@ namespace ATMobile.Controls
                 },
                 ColumnDefinitions = {
                     new ColumnDefinition {
-                        Width = new GridLength (90, GridUnitType.Absolute)
+                        Width = new GridLength(1, GridUnitType.Star)
                     },
                     new ColumnDefinition {
-                        Width = new GridLength (1, GridUnitType.Star)
+                        Width = new GridLength(80, GridUnitType.Absolute)
                     }
                 }
             };
@@ -35,11 +35,10 @@ namespace ATMobile.Controls
             };
             m_EntryGrid.Children.Add (m_lblTitle, 0, 0);
 
-            m_txtEntry = new Entry {
-                Keyboard = Keyboard.Plain
-            };
+            m_swChoice = new Switch {
 
-            m_EntryGrid.Children.Add (m_txtEntry, 1, 0);
+            };
+            m_EntryGrid.Children.Add (m_swChoice, 1, 0);
 
             Content = m_EntryGrid;
         }
@@ -48,35 +47,19 @@ namespace ATMobile.Controls
             get {
                 return m_lblTitle.Text;
             }
+
             set {
                 m_lblTitle.Text = value;
             }
         }
 
-        public string Text {
+        public bool IsToggled {
             get {
-                return m_txtEntry.Text;
+                return m_swChoice.IsToggled;
             }
-            set {
-                m_txtEntry.Text = value;
-            }
-        }
 
-        public string Placeholder {
-            get {
-                return m_txtEntry.Placeholder;
-            }
             set {
-                m_txtEntry.Placeholder = value;
-            }
-        }
-
-        public Keyboard Keyboard {
-            get {
-                return m_txtEntry.Keyboard;
-            }
-            set {
-                m_txtEntry.Keyboard = value;
+                m_swChoice.IsToggled = value;
             }
         }
     }

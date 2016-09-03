@@ -161,7 +161,7 @@ namespace ATMobile.Forms
 
             FillList ();
 
-            m_ScoreControl.SetTargetFace (m_TargetFace);
+            m_ScoreControl.SetTargetFace (m_TargetFace, false);
             m_txtNote.Text = m_PracticeEnd.Note;
 
             SetPoints ();

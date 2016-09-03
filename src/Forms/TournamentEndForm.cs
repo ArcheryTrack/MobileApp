@@ -38,8 +38,13 @@ namespace ATMobile.Forms
 
         public TournamentEndForm () : base ("End")
         {
-            OutsideLayout.Spacing = 5;
-            InsideLayout.Spacing = 5;
+            if (Device.Idiom == TargetIdiom.Phone) {
+                OutsideLayout.Spacing = 0;
+                InsideLayout.Spacing = 0;
+            } else {
+                OutsideLayout.Spacing = 5;
+                InsideLayout.Spacing = 5;
+            }
 
             m_lblTournament = new ATLabel {
                 HorizontalTextAlignment = TextAlignment.Center,
@@ -57,11 +62,17 @@ namespace ATMobile.Forms
 
             /* Setup the Archer */
             m_ArcherLayout = new StackLayout {
-                Spacing = 5,
-                Padding = 5,
                 Orientation = StackOrientation.Horizontal
             };
             InsideLayout.Children.Add (m_ArcherLayout);
+
+            if (Device.Idiom == TargetIdiom.Phone) {
+                m_ArcherLayout.Spacing = 1;
+                m_ArcherLayout.Padding = 1;
+            } else {
+                m_ArcherLayout.Spacing = 5;
+                m_ArcherLayout.Padding = 5;
+            }
 
             m_btnPrevious = new Button {
                 Text = "<",
@@ -93,10 +104,16 @@ namespace ATMobile.Forms
             StackLayout layout = new StackLayout {
                 Orientation = StackOrientation.Horizontal,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                Padding = 5,
-                Spacing = 5
+                HorizontalOptions = LayoutOptions.FillAndExpand
             };
+
+            if (Device.Idiom == TargetIdiom.Phone) {
+                layout.Spacing = 1;
+                layout.Padding = 1;
+            } else {
+                layout.Spacing = 5;
+                layout.Padding = 5;
+            }
             InsideLayout.Children.Add (layout);
 
             Frame frame = new Frame {
@@ -117,9 +134,15 @@ namespace ATMobile.Forms
             layout.Children.Add (frame2);
 
             m_lblNote = new ATLabel {
-                Text = "Note",
-                Margin = new Thickness (0, 10, 0, 5)
+                Text = "Note"
             };
+
+            if (Device.Idiom == TargetIdiom.Phone) {
+                m_lblNote.Margin = new Thickness (0, 0, 0, 0);
+            } else {
+                m_lblNote.Margin = new Thickness (0, 10, 0, 5);
+            }
+
             InsideLayout.Children.Add (m_lblNote);
 
             m_txtNote = new Editor {
@@ -284,7 +307,7 @@ namespace ATMobile.Forms
 
             m_txtNote.Text = m_TournamentEnd.Note;
 
-            m_ScoreControl.SetTargetFace (m_TargetFace);
+            m_ScoreControl.SetTargetFace (m_TargetFace, m_Round.CountX);
 
             SetPoints ();
         }

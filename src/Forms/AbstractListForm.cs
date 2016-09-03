@@ -25,9 +25,15 @@ namespace ATMobile.Forms
 
             ListFrame = new Frame {
                 HasShadow = false,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                Margin = new Thickness (20, 15, 20, 20)
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
+
+            if (Device.Idiom == TargetIdiom.Phone) {
+                ListFrame.Margin = new Thickness (10, 5, 10, 10);
+            } else {
+                ListFrame.Margin = new Thickness (20, 15, 20, 20);
+            }
+
 
             OutsideLayout.Children.Add (ListFrame);
         }

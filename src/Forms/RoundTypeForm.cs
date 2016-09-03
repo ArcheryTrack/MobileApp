@@ -14,19 +14,14 @@ namespace ATMobile.Forms
     {
         private RoundType m_RoundType;
 
-        private Grid m_EntryGrid;
         private Grid m_PickerGrid;
 
-        private ATLabel m_lblName;
-        private Entry m_txtName;
-        private ATLabel m_lblDescription;
-        private Entry m_txtDescription;
-        private ATLabel m_lblEnds;
-        private Entry m_txtNumberOfEnds;
-        private ATLabel m_lblArrows;
-        private Entry m_txtArrowsPerEnd;
-        private ATLabel m_lblDistance;
-        private Entry m_txtDistance;
+        private ATTextEntry m_txtName;
+        private ATTextEntry m_txtDescription;
+        private ATTextEntry m_txtNumberOfEnds;
+        private ATTextEntry m_txtArrowsPerEnd;
+        private ATToggleEntry m_togCountX;
+        private ATTextEntry m_txtDistance;
 
         private ATLabel m_lblUnits;
         private Button m_btnPickUnits;
@@ -39,100 +34,44 @@ namespace ATMobile.Forms
 
         public RoundTypeForm () : base ("Round Types")
         {
-            //Setup grid to hold the controls
-            m_EntryGrid = new Grid {
-                Padding = 5,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                RowDefinitions = {
-                    new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute) //Name
-                    },
-                    new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute) //Description
-                    },
-                    new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute) //Ends
-                    },
-                    new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute) //Arrows
-                    },
-                    new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute) //Distance
-                    }
-                },
-                ColumnDefinitions = {
-                    new ColumnDefinition {
-                        Width = new GridLength(90, GridUnitType.Absolute)
-                    },
-                    new ColumnDefinition {
-                        Width = new GridLength(1, GridUnitType.Star)
-                    }
-                }
-            };
-            InsideLayout.Children.Add (m_EntryGrid);
-
-            //Setup the Name
-            m_lblName = new ATLabel {
-                Text = "Name",
-                VerticalTextAlignment = TextAlignment.Center
-            };
-            m_EntryGrid.Children.Add (m_lblName, 0, 0);
-
-            m_txtName = new Entry {
+            m_txtName = new ATTextEntry {
+                Title = "Name",
                 Placeholder = "Enter the name"
             };
-            m_EntryGrid.Children.Add (m_txtName, 1, 0);
+            InsideLayout.Children.Add (m_txtName);
 
-            //Setup Description
-            m_lblDescription = new ATLabel {
-                Text = "Description",
-                VerticalTextAlignment = TextAlignment.Center
-            };
-            m_EntryGrid.Children.Add (m_lblDescription, 0, 1);
-
-            m_txtDescription = new Entry {
+            m_txtDescription = new ATTextEntry {
+                Title = "Description",
                 Placeholder = "Enter the description"
             };
-            m_EntryGrid.Children.Add (m_txtDescription, 1, 1);
+            InsideLayout.Children.Add (m_txtDescription);
 
-            //Setup Number of Ends
-            m_lblEnds = new ATLabel {
-                Text = "Ends",
-                VerticalTextAlignment = TextAlignment.Center
-            };
-            m_EntryGrid.Children.Add (m_lblEnds, 0, 2);
-
-            m_txtNumberOfEnds = new Entry {
+            m_txtNumberOfEnds = new ATTextEntry {
+                Title = "Ends",
                 Placeholder = "Ends per round",
                 Keyboard = Keyboard.Numeric
             };
-            m_EntryGrid.Children.Add (m_txtNumberOfEnds, 1, 2);
+            InsideLayout.Children.Add (m_txtNumberOfEnds);
 
-            //Setup Number of Arrows
-            m_lblArrows = new ATLabel {
-                Text = "Arrows",
-                VerticalTextAlignment = TextAlignment.Center
-            };
-            m_EntryGrid.Children.Add (m_lblArrows, 0, 3);
-
-            m_txtArrowsPerEnd = new Entry {
+            m_txtArrowsPerEnd = new ATTextEntry {
+                Title = "Arrows",
                 Placeholder = "Arrows per end",
                 Keyboard = Keyboard.Numeric
             };
-            m_EntryGrid.Children.Add (m_txtArrowsPerEnd, 1, 3);
+            InsideLayout.Children.Add (m_txtArrowsPerEnd);
 
-            //Setup Number of Distance
-            m_lblDistance = new ATLabel {
-                Text = "Distance",
-                VerticalTextAlignment = TextAlignment.Center
+            m_togCountX = new ATToggleEntry {
+                Title = "Count Xs?",
+                IsToggled = false
             };
-            m_EntryGrid.Children.Add (m_lblDistance, 0, 4);
+            InsideLayout.Children.Add (m_togCountX);
 
-            m_txtDistance = new Entry {
+            m_txtDistance = new ATTextEntry {
+                Title = "Distance",
                 Placeholder = "Enter the distance",
                 Keyboard = Keyboard.Numeric
             };
-            m_EntryGrid.Children.Add (m_txtDistance, 1, 4);
+            InsideLayout.Children.Add (m_txtDistance);
 
             //Setup grid to hold the controls
             m_PickerGrid = new Grid {
@@ -198,6 +137,7 @@ namespace ATMobile.Forms
 
             m_txtName.Text = m_RoundType.Name;
             m_txtDescription.Text = m_RoundType.Description;
+            m_togCountX.IsToggled = m_RoundType.CountX;
 
             if (m_RoundType.NumberOfEnds >= 1) {
                 m_txtNumberOfEnds.Text = Convert.ToString (m_RoundType.NumberOfEnds);

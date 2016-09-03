@@ -12,10 +12,15 @@ namespace ATMobile.Controls
             m_Buttons = new StackLayout {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Orientation = StackOrientation.Horizontal,
-                Margin = new Thickness (0, 10, 0, 20),
                 Padding = 0,
                 Spacing = 0
             };
+
+            if (Device.Idiom == TargetIdiom.Phone) {
+                m_Buttons.Margin = new Thickness (0, 10, 0, 10);
+            } else {
+                m_Buttons.Margin = new Thickness (0, 10, 0, 20);
+            }
 
             Content = m_Buttons;
         }

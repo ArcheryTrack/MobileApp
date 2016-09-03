@@ -11,46 +11,46 @@ namespace ATMobile.Forms
     public class RangeForm : AbstractEntryForm, IValidatedPage
     {
         private Range m_Range;
-        private ATTextWithLabel m_txtName;
-        private ATTextWithLabel m_txtAddress1;
-        private ATTextWithLabel m_txtAddress2;
-        private ATTextWithLabel m_txtCity;
-        private ATTextWithLabel m_txtState;
-        private ATTextWithLabel m_txtCountry;
+        private ATTextEntry m_txtName;
+        private ATTextEntry m_txtAddress1;
+        private ATTextEntry m_txtAddress2;
+        private ATTextEntry m_txtCity;
+        private ATTextEntry m_txtState;
+        private ATTextEntry m_txtCountry;
 
         public RangeForm () : base ("Range")
         {
-            m_txtName = new ATTextWithLabel {
+            m_txtName = new ATTextEntry {
                 Title = "Name",
                 Placeholder = "Enter the name of the range."
             };
             InsideLayout.Children.Add (m_txtName);
 
-            m_txtAddress1 = new ATTextWithLabel () {
+            m_txtAddress1 = new ATTextEntry () {
                 Title = "Address 1",
                 Placeholder = "Enter primary address"
             };
             InsideLayout.Children.Add (m_txtAddress1);
 
-            m_txtAddress2 = new ATTextWithLabel {
+            m_txtAddress2 = new ATTextEntry {
                 Title = "Address 2",
                 Placeholder = "Enter secondary address"
             };
             InsideLayout.Children.Add (m_txtAddress2);
 
-            m_txtCity = new ATTextWithLabel {
+            m_txtCity = new ATTextEntry {
                 Title = "City",
                 Placeholder = "Enter the city name"
             };
             InsideLayout.Children.Add (m_txtCity);
 
-            m_txtState = new ATTextWithLabel {
+            m_txtState = new ATTextEntry {
                 Title = "State",
                 Placeholder = "Enter the state abbreviation"
             };
             InsideLayout.Children.Add (m_txtState);
 
-            m_txtCountry = new ATTextWithLabel {
+            m_txtCountry = new ATTextEntry {
                 Title = "Country",
                 Placeholder = "Enter the country abbreviation"
             };

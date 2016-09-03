@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Controls
 {
-    public class ATDatePicker : ContentView, IDisposable
+    public class ATDateEntry : ContentView, IDisposable
     {
         private string m_strLongDescription;
         private string m_strShortDescription;
@@ -15,7 +15,7 @@ namespace ATMobile.Controls
         private Button m_btnPickDate;
         private bool m_ShowDecade;
 
-        public ATDatePicker (string _shortDescription, string _longDescription, bool _showDecade = false)
+        public ATDateEntry (string _shortDescription, string _longDescription, bool _showDecade = false)
         {
             m_strShortDescription = _shortDescription;
             m_strLongDescription = _longDescription;
@@ -87,7 +87,13 @@ namespace ATMobile.Controls
                 return m_datSelected;
             }
             set {
-                m_datSelected = value;
+                DateTime? temp = value;
+
+                if (temp != null) {
+                    temp = temp.Value.Date;
+                }
+
+                m_datSelected = temp;
 
                 if (m_datSelected == null) {
                     m_lblDateText.Text = m_strLongDescription;
