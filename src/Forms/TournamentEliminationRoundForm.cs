@@ -13,6 +13,7 @@ namespace ATMobile.Forms
         private Round m_Round;
         private ATDateEntry m_datDate;
         private ATTextEntry m_txtSeed;
+        private ATEditor m_txtNote;
 
         public TournamentEliminationRoundForm () : base ("Edit Elimination Round")
         {
@@ -25,6 +26,9 @@ namespace ATMobile.Forms
                 Placeholder = "Enter starting seed"
             };
             InsideLayout.Children.Add (m_txtSeed);
+
+            m_txtNote = new ATEditor (100, 200);
+            InsideLayout.Children.Add (m_txtNote);
         }
 
         public override void Save ()
@@ -37,6 +41,8 @@ namespace ATMobile.Forms
             if (int.TryParse (m_txtSeed.Text, out seed)) {
                 m_Round.Seed = seed;
             }
+
+            m_Round.Note = m_txtNote.Text;
 
             ATManager.GetInstance ().Persist (m_Round);
         }
@@ -56,6 +62,8 @@ namespace ATMobile.Forms
             if (m_Round.Seed.HasValue) {
                 m_txtSeed.Text = Convert.ToString (m_Round.Seed);
             }
+
+            m_txtNote.Text = m_Round.Note;
         }
     }
 }
