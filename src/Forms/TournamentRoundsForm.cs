@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using ATMobile.Cells;
 using ATMobile.Controls;
+using ATMobile.Enums;
+using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
@@ -10,27 +13,40 @@ namespace ATMobile.Forms
     {
         private Tournament m_Tournament;
 
-        TournamentRoundsListView m_listRounds;
-        ATLabel m_lblTournamentTitle;
-
+        private ATButtonBar m_ButtonBar;
+        private TournamentRoundsListView m_listRounds;
+        private ATLabel m_lblTournamentTitle;
+        private Button m_btnAddRound;
 
         public TournamentRoundsForm () : base ("Rounds")
         {
             m_lblTournamentTitle = new ATLabel {
                 VerticalTextAlignment = TextAlignment.Center,
-                HorizontalTextAlignment = TextAlignment.Center,
-                Margin = new Thickness (20, 10, 20, 0)
+                HorizontalTextAlignment = TextAlignment.Center
             };
             OutsideLayout.Children.Add (m_lblTournamentTitle);
 
+            m_ButtonBar = new ATButtonBar ();
+            m_btnAddRound = m_ButtonBar.Add ("Add Round", LayoutOptions.CenterAndExpand);
+            m_btnAddRound.Clicked += AddRound_Clicked;
+            OutsideLayout.Children.Add (m_ButtonBar);
+
+
             Frame frame = new Frame {
                 HasShadow = false,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                Margin = new Thickness (20, 15, 20, 20)
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
             m_listRounds = new TournamentRoundsListView ();
             m_listRounds.ItemSelected += OnSelected;
             frame.Content = m_listRounds;
+
+            if (Device.Idiom == TargetIdiom.Phone) {
+                m_lblTournamentTitle.Margin = new Thickness (20, 15, 20, 0);
+                frame.Margin = new Thickness (20, 10, 20, 20);
+            } else {
+                m_lblTournamentTitle.Margin = new Thickness (20, 15, 20, 0);
+                frame.Margin = new Thickness (20, 15, 20, 20);
+            }
 
             OutsideLayout.Children.Add (frame);
 
@@ -39,24 +55,34 @@ namespace ATMobile.Forms
 
         public void EditRound (Round _round)
         {
-            TournamentRoundForm editRound = new TournamentRoundForm ();
-            editRound.SetupForm (m_Tournament, _round);
-
-            PublishActionMessage ("Round Edit Selected");
-
-            Navigation.PushModalAsync (editRound);
+            if (_round.CompetitionType == CompetitionType.Ranking) {
+                TournamentRoundForm editRound = new TournamentRoundForm ();
+                editRound.SetupForm (m_Tournament, _round);
+                PublishActionMessage ("Ranking Round Edit Selected");
+                Navigation.PushModalAsync (editRound);
+            } else {
+                TournamentEliminationRoundForm form = new TournamentEliminationRoundForm ();
+                form.SetupForm (m_Tournament, _round);
+                PublishActionMessage ("Elimination Round Edit Selected");
+                Navigation.PushModalAsync (form);
+            }
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
         {
             Round round = (Round)e.SelectedItem;
 
-            TournamentEndsForm tournamentEnds = new TournamentEndsForm ();
-            tournamentEnds.SetupForm (m_Tournament, round);
-
-            PublishActionMessage ("Round Selected");
-
-            Navigation.PushAsync (tournamentEnds);
+            if (round.CompetitionType == CompetitionType.Ranking) {
+                TournamentEndsForm tournamentEnds = new TournamentEndsForm ();
+                tournamentEnds.SetupForm (m_Tournament, round);
+                PublishActionMessage ("Ranking Round Selected");
+                Navigation.PushAsync (tournamentEnds);
+            } else {
+                TournamentMatchesForm tournamentMatches = new TournamentMatchesForm ();
+                tournamentMatches.SetupForm (m_Tournament, round);
+                PublishActionMessage ("Elimination Round Selected");
+                Navigation.PushAsync (tournamentMatches);
+            }
         }
 
         public void SetupForm (Tournament _tournament)
@@ -69,6 +95,55 @@ namespace ATMobile.Forms
                 m_lblTournamentTitle.Text = "[Name not specified]";
             }
             m_listRounds.RefreshList (_tournament.Id);
+        }
+
+        async void AddRound_Clicked (object sender, EventArgs e)
+        {
+            PublishActionMessage ("Round Added");
+
+            var action = await DisplayActionSheet ("What type of Round", "Cancel", null, "Ranking Round", "Elimination Round");
+
+            Round round = new Round {
+                ParentId = m_Tournament.Id,
+                RoundNumber = GetNextRoundNumber ()
+            };
+
+            DateTime now = DateTime.Now;
+            if (now > m_Tournament.StartDateTime) {
+                round.Date = now.Date;
+            } else {
+                round.Date = m_Tournament.StartDateTime;
+            }
+
+            if (action == "Ranking Round") {
+                round.CompetitionType = CompetitionType.Ranking;
+
+                var form = new TournamentRoundForm ();
+                form.SetupForm (m_Tournament, round);
+                await Navigation.PushModalAsync (form);
+
+            } else if (action == "Elimination Round") {
+                round.CompetitionType = CompetitionType.Elimination;
+
+                var form = new TournamentEliminationRoundForm ();
+                form.SetupForm (m_Tournament, round);
+                await Navigation.PushModalAsync (form);
+            }
+        }
+
+        public int GetNextRoundNumber ()
+        {
+            List<Round> rounds = ATManager.GetInstance ().GetRounds (m_Tournament.Id);
+
+            int max = 0;
+
+            foreach (var round in rounds) {
+                if (round.RoundNumber > max) {
+                    max = round.RoundNumber;
+                }
+            }
+
+            return max + 1;
         }
 
         public void Dispose ()

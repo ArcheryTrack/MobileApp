@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Enums;
 using ATMobile.Interfaces;
 
 namespace ATMobile.Objects
@@ -7,17 +8,19 @@ namespace ATMobile.Objects
     {
         public Guid ParentId { get; set; }
 
-        public CompetitionType CompetitionType { get; set; }
-
         public DateTime Date { get; set; }
 
         public int RoundNumber { get; set; }
 
+        public CompetitionType CompetitionType { get; set; }
+
+        public int? Seed { get; set; }
+
         public int NumberOfEnds { get; set; }
 
-        public Distance Distance { get; set; }
-
         public int ArrowsPerEnd { get; set; }
+
+        public Distance Distance { get; set; }
 
         public bool CountX { get; set; }
 

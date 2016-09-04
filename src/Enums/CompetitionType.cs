@@ -2,9 +2,8 @@
 {
     public enum CompetitionType
     {
-        Fixed = 0,
-        MatchRecurve = 1,
-        MatchCompound = 2
+        Ranking = 0,
+        Elimination = 1
     }
 }
 
