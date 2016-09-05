@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Constants;
 using Xamarin.Forms;
 
 namespace ATMobile.Controls
@@ -77,6 +78,23 @@ namespace ATMobile.Controls
             }
             set {
                 m_txtEntry.Keyboard = value;
+            }
+        }
+
+        public new bool IsEnabled {
+            get {
+                return base.IsEnabled;
+            }
+
+            set {
+                base.IsEnabled = value;
+                m_txtEntry.IsEnabled = value;
+
+                if (base.IsEnabled) {
+                    m_txtEntry.BackgroundColor = Color.FromHex (UIConstants.TextBackgroundEnabled);
+                } else {
+                    m_txtEntry.BackgroundColor = Color.FromHex (UIConstants.TextBackgroundDisabled);
+                }
             }
         }
     }

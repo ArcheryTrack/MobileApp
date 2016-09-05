@@ -1,4 +1,5 @@
 ﻿using System;
+using ATMobile.Constants;
 using Xamarin.Forms;
 
 namespace ATMobile.Controls
@@ -9,7 +10,7 @@ namespace ATMobile.Controls
         private Editor m_txtEditor;
         private Label m_lblTitle;
 
-        public ATEditor (int _minimumHeightRequest = 100,
+        public ATEditor (int _minimumHeightRequest = 80,
                          int? _maximumHeightRequest = null)
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
@@ -61,6 +62,23 @@ namespace ATMobile.Controls
 
             set {
                 m_lblTitle.Text = value;
+            }
+        }
+
+        public new bool IsEnabled {
+            get {
+                return base.IsEnabled;
+            }
+
+            set {
+                base.IsEnabled = value;
+                m_txtEditor.IsEnabled = value;
+
+                if (base.IsEnabled) {
+                    m_txtEditor.BackgroundColor = Color.FromHex (UIConstants.TextBackgroundEnabled);
+                } else {
+                    m_txtEditor.BackgroundColor = Color.FromHex (UIConstants.TextBackgroundDisabled);
+                }
             }
         }
     }

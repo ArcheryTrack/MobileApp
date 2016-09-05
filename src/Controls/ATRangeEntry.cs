@@ -105,6 +105,17 @@ namespace ATMobile.Controls
                 SetText ();
             }
         }
+
+        public new bool IsEnabled {
+            get {
+                return base.IsEnabled;
+            }
+
+            set {
+                base.IsEnabled = value;
+                m_btnPick.IsEnabled = value;
+            }
+        }
     }
 }
 

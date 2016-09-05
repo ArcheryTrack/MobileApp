@@ -28,6 +28,9 @@
         public const string NotSelectedDateText = "000000";
 
         public const string FontFamily = "sans-serif";
+
+        public const string TextBackgroundEnabled = "FFFFFF";
+        public const string TextBackgroundDisabled = "DDDDDD";
     }
 }
 

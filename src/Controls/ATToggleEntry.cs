@@ -62,6 +62,8 @@ namespace ATMobile.Controls
                 m_swChoice.IsToggled = value;
             }
         }
+
+
     }
 }
 

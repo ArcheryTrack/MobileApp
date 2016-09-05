@@ -260,7 +260,8 @@ namespace ATMobile.Forms
                         TargetFaceId = roundType.TargetFaceId,
                         CountX = roundType.CountX,
                         Distance = roundType.Distance,
-                        RoundTypeId = roundType.Id
+                        RoundTypeId = roundType.Id,
+                        Date = _tournament.StartDateTime
                     };
 
                     manager.Persist (round);
