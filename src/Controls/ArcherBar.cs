@@ -25,12 +25,7 @@ namespace ATMobile.Controls
 
             Guid? archerId = ATManager.GetInstance ().SettingManager.GetCurrentArcher ();
             if (archerId.HasValue) {
-                for (int i = 0; i < m_Archers.Count; i++) {
-                    if (m_Archers [i].Id.Equals (archerId.Value)) {
-                        m_CurrentArcherIndex = i;
-                        break;
-                    }
-                }
+                m_CurrentArcherIndex = FindArcherIndex (archerId.Value);
             } else {
                 m_CurrentArcherIndex = 0;
             }
@@ -72,10 +67,50 @@ namespace ATMobile.Controls
             get {
                 return m_CurrentArcher;
             }
+
+            set {
+                m_CurrentArcher = value;
+
+                if (value != null) {
+                    m_CurrentArcherIndex = FindArcherIndex (m_CurrentArcher.Id);
+                } else {
+                    m_CurrentArcherIndex = 0;
+                }
+
+                SetArcher ();
+            }
+        }
+
+        private int FindArcherIndex (Guid _archerId)
+        {
+            int index = 0;
+
+            for (int i = 0; i < m_Archers.Count; i++) {
+                if (m_Archers [i].Id.Equals (_archerId)) {
+                    index = i;
+                }
+            }
+
+            return index;
+        }
+
+        public List<Archer> Archers {
+            get {
+                return m_Archers;
+            }
+
+            set {
+                m_Archers = value;
+
+                SetArcher ();
+            }
         }
 
         private void SetArcher ()
         {
+            if (m_CurrentArcherIndex + 1 > m_Archers.Count) {
+                m_CurrentArcherIndex = 0;
+            }
             m_CurrentArcher = m_Archers [m_CurrentArcherIndex];
 
             ATManager.GetInstance ().SettingManager.SetCurrentArcher (m_CurrentArcher.Id);

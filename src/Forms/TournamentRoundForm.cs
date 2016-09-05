@@ -13,8 +13,8 @@ namespace ATMobile.Forms
         private Round m_Round;
         private ATDateEntry m_datDate;
         private ATDistanceEntry m_distMeasurement;
-        private ATTextEntry m_txtNumberOfEnds;
-        private ATTextEntry m_txtArrowsPerEnd;
+        private ATIntegerEntry m_txtNumberOfEnds;
+        private ATIntegerEntry m_txtArrowsPerEnd;
         private ATTargetEntry m_targetEntry;
         private ATToggleEntry m_togCountX;
         private ATEditor m_txtNote;
@@ -28,15 +28,13 @@ namespace ATMobile.Forms
             m_distMeasurement = new ATDistanceEntry ();
             InsideLayout.Children.Add (m_distMeasurement);
 
-            m_txtNumberOfEnds = new ATTextEntry {
-                Title = "Number of Ends",
-                Keyboard = Keyboard.Numeric
+            m_txtNumberOfEnds = new ATIntegerEntry {
+                Title = "Number of Ends"
             };
             InsideLayout.Children.Add (m_txtNumberOfEnds);
 
-            m_txtArrowsPerEnd = new ATTextEntry {
-                Title = "Arrows Per End",
-                Keyboard = Keyboard.Numeric
+            m_txtArrowsPerEnd = new ATIntegerEntry {
+                Title = "Arrows Per End"
             };
             InsideLayout.Children.Add (m_txtArrowsPerEnd);
 
@@ -54,13 +52,23 @@ namespace ATMobile.Forms
 
         public override void ValidateForm (StringBuilder _sb)
         {
-
+            if (m_targetEntry.TargetFace == null) {
+                _sb.AppendLine ("A Target Face is required");
+            }
         }
 
         public override void Save ()
         {
             m_Round.Date = m_datDate.SelectedDate.Value;
             m_Round.Note = m_txtNote.Text;
+            m_Round.ArrowsPerEnd = m_txtArrowsPerEnd.Value;
+            m_Round.NumberOfEnds = m_txtNumberOfEnds.Value;
+            m_Round.CountX = m_togCountX.IsToggled;
+            m_Round.Distance = m_distMeasurement.Distance;
+
+            if (m_targetEntry.TargetFace != null) {
+                m_Round.TargetFaceId = m_targetEntry.TargetFace.Id;
+            }
 
             ATManager.GetInstance ().Persist (m_Round);
         }
@@ -77,8 +85,8 @@ namespace ATMobile.Forms
 
             m_datDate.SelectedDate = m_Round.Date;
             m_distMeasurement.Distance = m_Round.Distance;
-            m_txtNumberOfEnds.Text = Convert.ToString (m_Round.NumberOfEnds);
-            m_txtArrowsPerEnd.Text = Convert.ToString (m_Round.ArrowsPerEnd);
+            m_txtNumberOfEnds.Value = m_Round.NumberOfEnds;
+            m_txtArrowsPerEnd.Value = m_Round.ArrowsPerEnd;
 
             if (!Guid.Empty.Equals (m_Round.TargetFaceId)) {
                 TargetFace face = ATManager.GetInstance ().GetTargetFace (m_Round.TargetFaceId);

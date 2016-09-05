@@ -120,6 +120,18 @@ namespace ATMobile.Managers
             return dao.GetArchers ();
         }
 
+        public List<Archer> GetArchers (List<Guid> archerIds)
+        {
+            List<Archer> output = new List<Archer> ();
+
+            foreach (var archerId in archerIds) {
+                Archer archer = GetArcher (archerId);
+                output.Add (archer);
+            }
+
+            return output;
+        }
+
         public string GetArcherName (Guid archerId)
         {
             Archer archer = GetArcher (archerId);
@@ -226,6 +238,28 @@ namespace ATMobile.Managers
         }
 
         #endregion
+
+        #region Matches
+
+        public void Persist (Match _match)
+        {
+            MatchDao dao = new MatchDao (m_Database);
+            dao.Persist (_match);
+        }
+
+        public List<Match> GetMatches (Guid _roundId)
+        {
+            MatchDao dao = new MatchDao (m_Database);
+            return dao.GetMatches (_roundId);
+        }
+
+        public void DeleteMatch (Guid _matchId)
+        {
+            MatchDao dao = new MatchDao (m_Database);
+            dao.Delete (_matchId);
+        }
+
+        #endregion 
 
         #region PracticeEnds
 
@@ -357,6 +391,29 @@ namespace ATMobile.Managers
         {
             RoundDao dao = new RoundDao (m_Database);
             dao.Persist (_round);
+        }
+
+        /// <summary>
+        /// Cascade Deletes rounds
+        /// </summary>
+        /// <param name="_roundId">Round identifier.</param>
+        public void DeleteRound (Guid _roundId)
+        {
+            RoundDao roundDao = new RoundDao (m_Database);
+            MatchDao matchDao = new MatchDao (m_Database);
+            TournamentEndDao endDao = new TournamentEndDao (m_Database);
+
+            List<Match> matches = matchDao.GetMatches (_roundId);
+            foreach (var match in matches) {
+                matchDao.Delete (match.Id);
+            }
+
+            List<TournamentEnd> ends = endDao.GetTournamentEnds (_roundId);
+            foreach (var end in ends) {
+                endDao.Delete (end.Id);
+            }
+
+            roundDao.Delete (_roundId);
         }
 
         #endregion 

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using ATMobile.Cells;
-using ATMobile.Managers;
-using ATMobile.Objects;
+﻿using ATMobile.Cells;
 using Xamarin.Forms;
 
 namespace ATMobile.Controls
 {
     public class TournamentEndsListView : AbstractListView
     {
-        public List<TournamentEnd> Ends;
-
         public TournamentEndsListView ()
         {
             ItemTemplate = new DataTemplate (typeof (TournamentEndCell));

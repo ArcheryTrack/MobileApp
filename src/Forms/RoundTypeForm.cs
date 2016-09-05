@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Text;
 using ATMobile.Controls;
-using ATMobile.Data;
-using ATMobile.Enums;
 using ATMobile.Managers;
 using ATMobile.Objects;
-using ATMobile.PickerForms;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
@@ -18,19 +15,11 @@ namespace ATMobile.Forms
 
         private ATTextEntry m_txtName;
         private ATTextEntry m_txtDescription;
-        private ATTextEntry m_txtNumberOfEnds;
-        private ATTextEntry m_txtArrowsPerEnd;
+        private ATIntegerEntry m_txtNumberOfEnds;
+        private ATIntegerEntry m_txtArrowsPerEnd;
         private ATToggleEntry m_togCountX;
-        private ATTextEntry m_txtDistance;
-
-        private ATLabel m_lblUnits;
-        private Button m_btnPickUnits;
-        private DistanceUnit m_DistanceUnit;
-
-        private ATLabel m_lblTargetFace;
-        private Button m_btnPickTargetFace;
-        private TargetFace m_TargetFace;
-
+        private ATDistanceEntry m_txtDistance;
+        private ATTargetEntry m_targetEntry;
 
         public RoundTypeForm () : base ("Round Types")
         {
@@ -46,17 +35,15 @@ namespace ATMobile.Forms
             };
             InsideLayout.Children.Add (m_txtDescription);
 
-            m_txtNumberOfEnds = new ATTextEntry {
+            m_txtNumberOfEnds = new ATIntegerEntry {
                 Title = "Ends",
-                Placeholder = "Ends per round",
-                Keyboard = Keyboard.Numeric
+                Placeholder = "Ends per round"
             };
             InsideLayout.Children.Add (m_txtNumberOfEnds);
 
-            m_txtArrowsPerEnd = new ATTextEntry {
+            m_txtArrowsPerEnd = new ATIntegerEntry {
                 Title = "Arrows",
-                Placeholder = "Arrows per end",
-                Keyboard = Keyboard.Numeric
+                Placeholder = "Arrows per end"
             };
             InsideLayout.Children.Add (m_txtArrowsPerEnd);
 
@@ -66,69 +53,11 @@ namespace ATMobile.Forms
             };
             InsideLayout.Children.Add (m_togCountX);
 
-            m_txtDistance = new ATTextEntry {
-                Title = "Distance",
-                Placeholder = "Enter the distance",
-                Keyboard = Keyboard.Numeric
-            };
+            m_txtDistance = new ATDistanceEntry ();
             InsideLayout.Children.Add (m_txtDistance);
 
-            //Setup grid to hold the controls
-            m_PickerGrid = new Grid {
-                Padding = 5,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                RowDefinitions = {
-                    new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute) //Distance Units
-                    },
-                    new RowDefinition {
-                        Height = new GridLength(40, GridUnitType.Absolute) //Target Face
-                    }
-                },
-                ColumnDefinitions = {
-                    new ColumnDefinition {
-                        Width = new GridLength(1, GridUnitType.Star)
-                    },
-                    new ColumnDefinition {
-                        Width = new GridLength(80, GridUnitType.Absolute)
-                    }
-                }
-            };
-            InsideLayout.Children.Add (m_PickerGrid);
-
-            //Add the Distance Units
-            m_lblUnits = new ATLabel {
-                Text = "Select Distance Units",
-                VerticalTextAlignment = TextAlignment.Center
-            };
-            m_PickerGrid.Children.Add (m_lblUnits, 0, 0);
-
-            m_btnPickUnits = new Button {
-                Text = "Pick",
-                WidthRequest = 80,
-                HeightRequest = 40,
-                BorderWidth = 1,
-                HorizontalOptions = LayoutOptions.End
-            };
-            m_btnPickUnits.Clicked += PickDistanceUnits;
-            m_PickerGrid.Children.Add (m_btnPickUnits, 1, 0);
-
-            //Add the Target Face at the botton.
-            m_lblTargetFace = new ATLabel {
-                Text = "Select Target Face",
-                VerticalTextAlignment = TextAlignment.Center
-            };
-            m_PickerGrid.Children.Add (m_lblTargetFace, 0, 1);
-
-            m_btnPickTargetFace = new Button {
-                Text = "Pick",
-                WidthRequest = 80,
-                HeightRequest = 40,
-                BorderWidth = 1,
-                HorizontalOptions = LayoutOptions.End
-            };
-            m_btnPickTargetFace.Clicked += PickTargetFace;
-            m_PickerGrid.Children.Add (m_btnPickTargetFace, 1, 1);
+            m_targetEntry = new ATTargetEntry ("Target", "Target Face");
+            InsideLayout.Children.Add (m_targetEntry);
         }
 
         public void SetupForm (RoundType _roundType)
@@ -140,62 +69,19 @@ namespace ATMobile.Forms
             m_togCountX.IsToggled = m_RoundType.CountX;
 
             if (m_RoundType.NumberOfEnds >= 1) {
-                m_txtNumberOfEnds.Text = Convert.ToString (m_RoundType.NumberOfEnds);
+                m_txtNumberOfEnds.Value = m_RoundType.NumberOfEnds;
             }
 
             if (m_RoundType.ArrowsPerEnd >= 1) {
-                m_txtArrowsPerEnd.Text = Convert.ToString (m_RoundType.ArrowsPerEnd);
+                m_txtArrowsPerEnd.Value = m_RoundType.ArrowsPerEnd;
             }
 
-            if (m_RoundType.Distance != null) {
-                m_txtDistance.Text = Convert.ToString (m_RoundType.Distance.Measurement);
+            m_txtDistance.Distance = m_RoundType.Distance;
 
-                m_DistanceUnit = DistanceUnitData.FindDistanceUnit (m_RoundType.Distance.Units);
-                SetUnitsText ();
+            if (!Guid.Empty.Equals (m_RoundType.TargetFaceId)) {
+                TargetFace t = ATManager.GetInstance ().GetTargetFace (m_RoundType.TargetFaceId);
+                m_targetEntry.TargetFace = t;
             }
-
-            if (m_RoundType.TargetFaceId != Guid.Empty) {
-                m_TargetFace = TargetFaceData.FindTarget (m_RoundType.TargetFaceId);
-                SetTargetFaceText ();
-            }
-        }
-
-        async private void PickTargetFace (object sender, EventArgs e)
-        {
-            TargetFacePicker picker = new TargetFacePicker ();
-            picker.ItemPicked += TargetFacePicked;
-
-            await Navigation.PushModalAsync (picker);
-        }
-
-        private void TargetFacePicked (TargetFace _targetFace)
-        {
-            m_TargetFace = _targetFace;
-            SetTargetFaceText ();
-        }
-
-        private void SetTargetFaceText ()
-        {
-            m_lblTargetFace.Text = m_TargetFace.Name;
-        }
-
-        async private void PickDistanceUnits (object sender, EventArgs e)
-        {
-            DistanceUnitsPicker picker = new DistanceUnitsPicker ();
-            picker.ItemPicked += DistanceUnitsPicked;
-
-            await Navigation.PushModalAsync (picker);
-        }
-
-        private void DistanceUnitsPicked (DistanceUnit _units)
-        {
-            m_DistanceUnit = _units;
-            SetUnitsText ();
-        }
-
-        private void SetUnitsText ()
-        {
-            m_lblUnits.Text = m_DistanceUnit.Name;
         }
 
         public override void ValidateForm (StringBuilder _sb)
@@ -204,15 +90,15 @@ namespace ATMobile.Forms
                 _sb.AppendLine ("You must specify a name.");
             }
 
-            if (string.IsNullOrEmpty (m_txtNumberOfEnds.Text)) {
+            if (m_txtNumberOfEnds.Value == 0) {
                 _sb.AppendLine ("You must specify the number of ends");
             }
 
-            if (string.IsNullOrEmpty (m_txtArrowsPerEnd.Text)) {
+            if (m_txtArrowsPerEnd.Value == 0) {
                 _sb.AppendLine ("You must specify the number of arrows per end");
             }
 
-            if (m_TargetFace == null) {
+            if (m_targetEntry.TargetFace == null) {
                 _sb.AppendLine ("You must specify a target face.");
             }
         }
@@ -222,20 +108,14 @@ namespace ATMobile.Forms
             m_RoundType.Name = m_txtName.Text;
             m_RoundType.Description = m_txtDescription.Text;
 
-            if (!string.IsNullOrEmpty (m_txtNumberOfEnds.Text)) {
-                m_RoundType.NumberOfEnds = Convert.ToInt32 (m_txtNumberOfEnds.Text);
+            m_RoundType.NumberOfEnds = Convert.ToInt32 (m_txtNumberOfEnds.Value);
+            m_RoundType.ArrowsPerEnd = Convert.ToInt32 (m_txtArrowsPerEnd.Value);
+
+            if (m_targetEntry.TargetFace != null) {
+                m_RoundType.TargetFaceId = m_targetEntry.TargetFace.Id;
             }
 
-            if (!string.IsNullOrEmpty (m_txtArrowsPerEnd.Text)) {
-                m_RoundType.ArrowsPerEnd = Convert.ToInt32 (m_txtArrowsPerEnd.Text);
-            }
-
-            if (m_TargetFace != null) {
-                m_RoundType.TargetFaceId = m_TargetFace.Id;
-            }
-
-            double distanceValue = Convert.ToDouble (m_txtDistance.Text);
-            m_RoundType.Distance = new Distance { Measurement = distanceValue, Units = m_DistanceUnit.UnitOfMeasure };
+            m_RoundType.Distance = m_txtDistance.Distance;
 
             ATManager.GetInstance ().Persist (m_RoundType);
         }

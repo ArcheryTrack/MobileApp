@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-
-namespace ATMobile.Cells
+﻿namespace ATMobile.Cells
 {
     public class ArcherCell : AbstractBaseCell
     {
