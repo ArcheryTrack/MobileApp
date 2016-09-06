@@ -29,14 +29,6 @@ namespace ATMobile.Daos
 
             return practices.OrderBy ((Match arg) => arg.MatchNumber).ToList ();
         }
-
-        public List<Match> GetMatches (Guid _roundId, Guid _archerId)
-        {
-            Query query = Query.And (Query.EQ ("ParentId", _roundId), Query.EQ ("ArcherId", _archerId));
-            var matches = m_Collection.Find (query).ToList ();
-
-            return matches.OrderBy ((Match arg) => arg.MatchNumber).ToList ();
-        }
     }
 }
 

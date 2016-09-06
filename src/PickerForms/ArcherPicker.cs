@@ -31,7 +31,8 @@ namespace ATMobile.PickerForms
             List<Archer> final = new List<Archer> ();
 
             foreach (var item in temp) {
-                if (!m_Excluded.Contains (item.Id)) {
+                if (m_Excluded == null
+                    || !m_Excluded.Contains (item.Id)) {
                     final.Add (item);
                 }
             }

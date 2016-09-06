@@ -1,6 +1,7 @@
 ﻿using System;
 using ATMobile.Enums;
 using ATMobile.Interfaces;
+using ATMobile.Managers;
 
 namespace ATMobile.Objects
 {
@@ -13,8 +14,6 @@ namespace ATMobile.Objects
         public int RoundNumber { get; set; }
 
         public CompetitionType CompetitionType { get; set; }
-
-        public int? Seed { get; set; }
 
         public int NumberOfEnds { get; set; }
 
@@ -30,9 +29,36 @@ namespace ATMobile.Objects
 
         public Guid? RoundTypeId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the archer identifier.
+        /// Only used for Match Rounds
+        /// </summary>
+        /// <value>The archer identifier.</value>
+        public Guid? ArcherId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Archer's seed.
+        /// Only used for match rounds.
+        /// </summary>
+        /// <value>The seed.</value>
+        public int? Seed { get; set; }
+
+
         public string RoundText {
             get {
-                return string.Format ("Round Number - {0}", RoundNumber);
+                if (CompetitionType == CompetitionType.Ranking) {
+                    return string.Format ("Round Number - {0}", RoundNumber);
+                } else {
+                    if (ArcherId != null) {
+                        Archer archer = ATManager.GetInstance ().GetArcher (ArcherId.Value);
+
+                        if (archer != null) {
+                            return string.Format ("Elimination Round for {0}", archer.FullName);
+                        }
+                    }
+
+                    return string.Format ("Elimination Round", RoundNumber);
+                }
             }
         }
     }

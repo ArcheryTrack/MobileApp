@@ -13,12 +13,16 @@ namespace ATMobile.Forms
         private Round m_Round;
         private ATDateEntry m_datDate;
         private ATTextEntry m_txtSeed;
+        private ATArcherEntry m_entArcher;
         private ATEditor m_txtNote;
 
         public TournamentEliminationRoundForm () : base ("Edit Elimination Round")
         {
             m_datDate = new ATDateEntry ("Date", "Date");
             InsideLayout.Children.Add (m_datDate);
+
+            m_entArcher = new ATArcherEntry ("Archer", "Select Archer");
+            InsideLayout.Children.Add (m_entArcher);
 
             m_txtSeed = new ATTextEntry {
                 Keyboard = Keyboard.Numeric,
@@ -43,13 +47,16 @@ namespace ATMobile.Forms
             }
 
             m_Round.Note = m_txtNote.Text;
+            m_Round.ArcherId = m_entArcher.Archer.Id;
 
             ATManager.GetInstance ().Persist (m_Round);
         }
 
         public override void ValidateForm (StringBuilder _sb)
         {
-
+            if (m_entArcher == null) {
+                _sb.AppendLine ("An archer is required.");
+            }
         }
 
         public void SetupForm (Tournament _tournament, Round _round)
@@ -58,6 +65,11 @@ namespace ATMobile.Forms
             m_Round = _round;
 
             m_datDate.SelectedDate = m_Round.Date;
+
+            if (_tournament.Archers.Count == 1) {
+                Archer archer = ATManager.GetInstance ().GetArcher (_tournament.Archers [0]);
+                m_entArcher.Archer = archer;
+            }
 
             if (m_Round.Seed.HasValue) {
                 m_txtSeed.Text = Convert.ToString (m_Round.Seed);

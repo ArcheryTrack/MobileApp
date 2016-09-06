@@ -94,7 +94,7 @@ namespace ATMobile.Forms
             } else {
                 m_lblTournamentTitle.Text = "[Name not specified]";
             }
-            m_listRounds.RefreshList (_tournament.Id);
+            //m_listRounds.RefreshList (_tournament.Id);
         }
 
         async void AddRound_Clicked (object sender, EventArgs e)
@@ -149,6 +149,13 @@ namespace ATMobile.Forms
         public void Dispose ()
         {
             TournamentRoundCell.RoundEditClicked -= EditRound;
+        }
+
+        protected override void OnAppearing ()
+        {
+            base.OnAppearing ();
+
+            m_listRounds.RefreshList (m_Tournament.Id);
         }
     }
 }
