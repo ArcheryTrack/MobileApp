@@ -66,8 +66,9 @@ namespace ATMobile.Forms
 
         void MatchSelected (object sender, SelectedItemChangedEventArgs e)
         {
+            Match match = (Match)e.SelectedItem;
             TournamentMatchForm matchForm = new TournamentMatchForm ();
-            matchForm.SetupForm (m_Tournament, m_Round, null);
+            matchForm.SetupForm (m_Tournament, m_Round, match);
             Navigation.PushModalAsync (matchForm);
         }
 

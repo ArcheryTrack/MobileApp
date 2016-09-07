@@ -11,9 +11,9 @@ namespace ATMobile.Objects
 
         public int Score { get; set; }
 
-        public string Competitor { get; set; }
+        public string Opponent { get; set; }
 
-        public int CompetitorScore { get; set; }
+        public int OpponentScore { get; set; }
 
         public string Note { get; set; }
 
@@ -28,15 +28,15 @@ namespace ATMobile.Objects
         public string DisplayText {
             get {
 
-                if (Competitor != null) {
+                if (Opponent != null) {
                     if (Won) {
-                        return string.Format ("{0} against {1} (Won)", MatchNumber, Competitor);
+                        return string.Format ("Match {0} against {1} (Won)", MatchNumber, Opponent);
                     }
 
-                    return string.Format ("{0} against {1}", MatchNumber, Competitor);
+                    return string.Format ("Match {0} against {1}", MatchNumber, Opponent);
                 }
 
-                return string.Format ("{0}", MatchNumber);
+                return string.Format ("Match {0}", MatchNumber);
             }
         }
     }
