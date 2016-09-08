@@ -49,12 +49,20 @@ namespace ATMobile.Forms
         {
             m_Archer = _archer;
 
-            m_Practice = _practice;
+            if (m_Archer == null) {
+                ArcherPicker picker = new ArcherPicker ();
+                Navigation.PushModalAsync (picker);
+            }
 
+            m_Practice = _practice;
             if (_practice == null) {
                 m_Practice = new Practice {
-                    DateTime = DateTime.Now
+                    DateTime = DateTime.Now,
+                    Id = Guid.NewGuid (),
+                    ParentId = m_Archer.Id
                 };
+            } else if (Guid.Empty.Equals (_practice.ParentId)) {
+                _practice.ParentId = m_Archer.Id;
             }
 
             m_datDate.SelectedDate = m_Practice.DateTime;
@@ -73,12 +81,6 @@ namespace ATMobile.Forms
 
         public override void Save ()
         {
-            if (m_Practice == null) {
-                m_Practice = new Practice ();
-                m_Practice.Id = Guid.NewGuid ();
-                m_Practice.ParentId = m_Archer.Id;
-            }
-
             DateTime date = m_datDate.SelectedDate.Value;
             date = date.AddTicks (m_timTime.Time.Ticks);
             m_Practice.DateTime = date;

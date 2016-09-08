@@ -45,7 +45,24 @@ namespace ATMobile.Daos
         /// <param name="_item">Item.</param>
         public void Persist (T _item)
         {
-            PersistDirect (_item);
+            DateTime now = DateTime.Now;
+
+            if (_item.Id.Equals (Guid.Empty)) {
+                throw new ArgumentException ("Empty Guid not allowed");
+            }
+
+            T existing = Get (_item.Id);
+
+            if (existing == null) {
+                _item.CreatedOn = now;
+                _item.ModifiedOn = now;
+
+                Insert (_item);
+            } else {
+                _item.ModifiedOn = now;
+
+                Update (_item);
+            }
 
             PersistQueueEntry (_item, "persist");
         }

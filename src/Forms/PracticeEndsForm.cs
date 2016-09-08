@@ -1,5 +1,6 @@
 ﻿using ATMobile.Controls;
 using ATMobile.Objects;
+using ATMobile.PickerForms;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
@@ -25,6 +26,12 @@ namespace ATMobile.Forms
                 Text = "Arrows: 0, Score: 0"
             };
             OutsideLayout.Children.Insert (1, m_lblSummary);
+
+            if (Device.Idiom == TargetIdiom.Phone) {
+                m_lblArcher.Margin = new Thickness (0, 10, 0, 0);
+            } else {
+                m_lblArcher.Margin = new Thickness (0, 20, 0, 0);
+            }
 
             m_PracticeEnds = new PracticeEndsListView ();
             m_PracticeEnds.ItemSelected += OnSelected;

@@ -299,6 +299,12 @@ namespace ATMobile.Managers
             return dao.GetPractices (start, end);
         }
 
+        public List<Practice> GetRecentPractices (DateTime start, DateTime end)
+        {
+            PracticeDao dao = new PracticeDao (m_Database);
+            return dao.GetPractices (start, end);
+        }
+
         public void Persist (Practice _practice)
         {
             PracticeDao dao = new PracticeDao (m_Database);
@@ -338,7 +344,7 @@ namespace ATMobile.Managers
 
             List<RecentItem> items = new List<RecentItem> ();
 
-            List<Tournament> tournaments = GetTournaments (start, end);
+            List<Tournament> tournaments = GetRecentTournaments (start, end);
             foreach (var tournament in tournaments) {
                 RecentItem newItem = new RecentItem {
                     ItemType = "Tournament",
@@ -497,6 +503,12 @@ namespace ATMobile.Managers
         {
             TournamentDao dao = new TournamentDao (m_Database);
             return dao.GetTournaments (start, end);
+        }
+
+        public List<Tournament> GetRecentTournaments (DateTime start, DateTime end)
+        {
+            TournamentDao dao = new TournamentDao (m_Database);
+            return dao.GetRecentTournaments (start, end);
         }
 
         public void Persist (Tournament _tournament)

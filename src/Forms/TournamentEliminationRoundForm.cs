@@ -66,8 +66,8 @@ namespace ATMobile.Forms
 
             m_datDate.SelectedDate = m_Round.Date;
 
-            if (_tournament.Archers.Count == 1) {
-                Archer archer = ATManager.GetInstance ().GetArcher (_tournament.Archers [0]);
+            if (m_Tournament.Archers.Count == 1) {
+                Archer archer = ATManager.GetInstance ().GetArcher (m_Tournament.Archers [0]);
                 m_entArcher.Archer = archer;
             }
 
@@ -76,6 +76,8 @@ namespace ATMobile.Forms
             }
 
             m_txtNote.Text = m_Round.Note;
+
+            m_entArcher.PossibleArchers = m_Tournament.Archers;
         }
     }
 }

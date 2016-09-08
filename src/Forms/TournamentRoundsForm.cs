@@ -31,7 +31,6 @@ namespace ATMobile.Forms
             m_btnAddRound.Clicked += AddRound_Clicked;
             OutsideLayout.Children.Add (m_ButtonBar);
 
-
             Frame frame = new Frame {
                 HasShadow = false,
                 VerticalOptions = LayoutOptions.FillAndExpand

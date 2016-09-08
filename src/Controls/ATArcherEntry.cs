@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ATMobile.Objects;
 using ATMobile.PickerForms;
 using Xamarin.Forms;
@@ -13,6 +14,7 @@ namespace ATMobile.Controls
         private Grid m_gridLayout;
         private Button m_btnPick;
         private Archer m_Archer;
+        private List<Guid> m_PossibleArchers = null;
 
         public ATArcherEntry (string _shortDescription, string _longDescription)
         {
@@ -65,7 +67,7 @@ namespace ATMobile.Controls
 
         async private void Pick (object sender, EventArgs e)
         {
-            ArcherPicker picker = new ArcherPicker ();
+            ArcherPicker picker = new ArcherPicker (m_PossibleArchers, false);
             picker.ItemPicked += Picked;
 
             await Navigation.PushModalAsync (picker);
@@ -113,6 +115,15 @@ namespace ATMobile.Controls
             set {
                 base.IsEnabled = value;
                 m_btnPick.IsEnabled = value;
+            }
+        }
+
+        public List<Guid> PossibleArchers {
+            get {
+                return m_PossibleArchers;
+            }
+            set {
+                m_PossibleArchers = value;
             }
         }
     }
