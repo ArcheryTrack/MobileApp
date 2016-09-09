@@ -50,6 +50,7 @@ namespace ATMobile.Forms
             OutsideLayout.Children.Add (frame);
 
             TournamentRoundCell.RoundEditClicked += EditRound;
+            TournamentRoundCell.RoundDeleteClicked += DeleteRound;
         }
 
         public void EditRound (Round _round)
@@ -64,6 +65,22 @@ namespace ATMobile.Forms
                 form.SetupForm (m_Tournament, _round);
                 PublishActionMessage ("Elimination Round Edit Selected");
                 Navigation.PushModalAsync (form);
+            }
+        }
+
+        public async void DeleteRound (Round _round)
+        {
+            if (_round.CompetitionType == CompetitionType.Ranking) {
+                PublishActionMessage ("Ranking Round Delete Selected");
+            } else {
+                PublishActionMessage ("Elimination Round Delete Selected");
+            }
+
+            bool result = await DisplayAlert ("ArcheryTrack", "Are you sure you want to delete this round.  All associated records will also be deleted", "Delete", "Cancel");
+
+            if (result) {
+                ATManager.GetInstance ().DeleteRound (_round.Id);
+                m_listRounds.RefreshList (m_Tournament.Id);
             }
         }
 
@@ -93,7 +110,6 @@ namespace ATMobile.Forms
             } else {
                 m_lblTournamentTitle.Text = "[Name not specified]";
             }
-            //m_listRounds.RefreshList (_tournament.Id);
         }
 
         async void AddRound_Clicked (object sender, EventArgs e)
@@ -148,6 +164,7 @@ namespace ATMobile.Forms
         public void Dispose ()
         {
             TournamentRoundCell.RoundEditClicked -= EditRound;
+            TournamentRoundCell.RoundDeleteClicked -= DeleteRound;
         }
 
         protected override void OnAppearing ()

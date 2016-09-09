@@ -192,6 +192,12 @@ namespace ATMobile.Managers
             return dao.GetChartEntriesForEnds (_roundId, _archerId);
         }
 
+        public void DeleteChartEntry (Guid _id)
+        {
+            ChartEntryDao dao = new ChartEntryDao (m_Database);
+            dao.Delete (_id);
+        }
+
 
         #endregion
 
@@ -257,6 +263,7 @@ namespace ATMobile.Managers
         {
             MatchDao dao = new MatchDao (m_Database);
             dao.Delete (_matchId);
+            DeleteChartEntry (_matchId);
         }
 
         #endregion 
@@ -275,6 +282,13 @@ namespace ATMobile.Managers
             dao.Persist (_end);
 
             ChartingManager.ProcessEnd (_end);
+        }
+
+        public void DeletePracticeEnd (Guid _practiceEndId)
+        {
+            PracticeEndDao dao = new PracticeEndDao (m_Database);
+            dao.Delete (_practiceEndId);
+            DeleteChartEntry (_practiceEndId);
         }
 
         #endregion
@@ -309,6 +323,23 @@ namespace ATMobile.Managers
         {
             PracticeDao dao = new PracticeDao (m_Database);
             dao.Persist (_practice);
+        }
+
+        /// <summary>
+        /// Deletes the practice and cascade deletes practice ends.
+        /// </summary>
+        /// <param name="_practiceId">Practice identifier.</param>
+        public void DeletePractice (Guid _practiceId)
+        {
+            List<PracticeEnd> ends = GetPracticeEnds (_practiceId);
+
+            foreach (var end in ends) {
+                DeletePracticeEnd (end.Id);
+            }
+
+            PracticeDao dao = new PracticeDao (m_Database);
+            dao.Delete (_practiceId);
+            DeleteChartEntry (_practiceId);
         }
 
         #endregion
@@ -400,26 +431,25 @@ namespace ATMobile.Managers
         }
 
         /// <summary>
-        /// Cascade Deletes rounds
+        /// Deletes the round.  Cascade Deletes Ends and Matches
         /// </summary>
         /// <param name="_roundId">Round identifier.</param>
         public void DeleteRound (Guid _roundId)
         {
             RoundDao roundDao = new RoundDao (m_Database);
-            MatchDao matchDao = new MatchDao (m_Database);
-            TournamentEndDao endDao = new TournamentEndDao (m_Database);
 
-            List<Match> matches = matchDao.GetMatches (_roundId);
+            List<Match> matches = GetMatches (_roundId);
             foreach (var match in matches) {
-                matchDao.Delete (match.Id);
+                DeleteMatch (match.Id);
             }
 
-            List<TournamentEnd> ends = endDao.GetTournamentEnds (_roundId);
+            List<TournamentEnd> ends = GetTournamentEnds (_roundId);
             foreach (var end in ends) {
-                endDao.Delete (end.Id);
+                DeleteTournamentEnd (end.Id);
             }
 
             roundDao.Delete (_roundId);
+            DeleteChartEntry (_roundId);
         }
 
         #endregion 
@@ -517,6 +547,23 @@ namespace ATMobile.Managers
             dao.Persist (_tournament);
         }
 
+        /// <summary>
+        /// Deletes the tournament.  Cascade Deletes Rounds, Matches and ends
+        /// </summary>
+        /// <param name="_tournamentId">Tournament identifier.</param>
+        public void DeleteTournament (Guid _tournamentId)
+        {
+            List<Round> rounds = GetRounds (_tournamentId);
+
+            foreach (var round in rounds) {
+                DeleteRound (round.Id);
+            }
+
+            TournamentDao dao = new TournamentDao (m_Database);
+            dao.Delete (_tournamentId);
+            DeleteChartEntry (_tournamentId);
+        }
+
         #endregion
 
         #region TournamentEnds
@@ -533,10 +580,22 @@ namespace ATMobile.Managers
             return dao.GetTournamentEnds (_roundId, _archerId);
         }
 
+        public List<TournamentEnd> GetTournamentEnds (Guid _roundId)
+        {
+            TournamentEndDao dao = new TournamentEndDao (m_Database);
+            return dao.GetTournamentEnds (_roundId);
+        }
+
         public void Persist (TournamentEnd _tournamentEnd)
         {
             TournamentEndDao dao = new TournamentEndDao (m_Database);
             dao.Persist (_tournamentEnd);
+        }
+
+        public void DeleteTournamentEnd (Guid _id)
+        {
+            TournamentEndDao dao = new TournamentEndDao (m_Database);
+            dao.Delete (_id);
         }
 
         #endregion

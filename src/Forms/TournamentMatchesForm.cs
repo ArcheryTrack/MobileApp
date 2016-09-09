@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -36,6 +37,8 @@ namespace ATMobile.Forms
             } else {
                 m_lblArcher.Margin = new Thickness (0, 20, 0, 0);
             }
+
+            MatchCell.MatchDeleteClicked += DeleteMatch;
         }
 
         public override void Add ()
@@ -60,7 +63,12 @@ namespace ATMobile.Forms
                 }
             }
 
-            m_Matches = manager.GetMatches (m_Round.Id);
+            RefreshList ();
+        }
+
+        void RefreshList ()
+        {
+            m_Matches = ATManager.GetInstance ().GetMatches (m_Round.Id);
             m_lstMatches.ItemsSource = m_Matches;
         }
 
@@ -70,6 +78,23 @@ namespace ATMobile.Forms
             TournamentMatchForm matchForm = new TournamentMatchForm ();
             matchForm.SetupForm (m_Tournament, m_Round, match);
             Navigation.PushModalAsync (matchForm);
+        }
+
+        public async void DeleteMatch (Match _match)
+        {
+            PublishActionMessage ("Match Delete Selected");
+
+            bool result = await DisplayAlert ("ArcheryTrack", "Are you sure you want to delete this match.  All associated records will also be deleted", "Delete", "Cancel");
+
+            if (result) {
+                ATManager.GetInstance ().DeleteMatch (_match.Id);
+                RefreshList ();
+            }
+        }
+
+        public void Dispose ()
+        {
+            MatchCell.MatchDeleteClicked -= DeleteMatch;
         }
 
         protected override void OnAppearing ()

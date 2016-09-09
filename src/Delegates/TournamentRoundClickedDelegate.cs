@@ -3,6 +3,6 @@ using ATMobile.Objects;
 
 namespace ATMobile.Delegates
 {
-    public delegate void TournamentRoundEditClickedDelegate (Round _round);
+    public delegate void TournamentRoundClickedDelegate (Round _round);
 }
 

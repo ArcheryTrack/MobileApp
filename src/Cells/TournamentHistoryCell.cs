@@ -12,7 +12,8 @@ namespace ATMobile.Cells
         private ATLabel m_lblName;
         private ATLabel m_lblDateTime;
 
-        public static TournamentEditClickedDelegate TournamentEditClicked;
+        public static TournamentClickedDelegate TournamentEditClicked;
+        public static TournamentClickedDelegate TournamentDeleteClicked;
 
         public TournamentHistoryCell ()
         {
@@ -35,9 +36,25 @@ namespace ATMobile.Cells
             editAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
             editAction.Clicked += EditClicked;
             ContextActions.Add (editAction);
+
+            var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
+            deleteAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
+            deleteAction.Clicked += DeleteClicked;
+            ContextActions.Add (deleteAction);
         }
 
-        void EditClicked (object sender, EventArgs e)
+        private void DeleteClicked (object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            Tournament tournament = (Tournament)menuItem.CommandParameter;
+
+            var clicked = TournamentDeleteClicked;
+            if (clicked != null) {
+                clicked (tournament);
+            }
+        }
+
+        private void EditClicked (object sender, EventArgs e)
         {
             var menuItem = (MenuItem)sender;
             Tournament tournament = (Tournament)menuItem.CommandParameter;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -54,7 +55,7 @@ namespace ATMobile.Forms
 
         public override void ValidateForm (StringBuilder _sb)
         {
-            if (m_entArcher == null) {
+            if (m_entArcher.Archer == null) {
                 _sb.AppendLine ("An archer is required.");
             }
         }

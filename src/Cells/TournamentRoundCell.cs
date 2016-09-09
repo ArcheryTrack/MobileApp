@@ -7,7 +7,8 @@ namespace ATMobile.Cells
 {
     public class TournamentRoundCell : AbstractBaseCell
     {
-        public static TournamentRoundEditClickedDelegate RoundEditClicked;
+        public static TournamentRoundClickedDelegate RoundEditClicked;
+        public static TournamentRoundClickedDelegate RoundDeleteClicked;
 
         public TournamentRoundCell () : base ("RoundText")
         {
@@ -15,6 +16,11 @@ namespace ATMobile.Cells
             editAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
             editAction.Clicked += EditClicked;
             ContextActions.Add (editAction);
+
+            var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
+            deleteAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
+            deleteAction.Clicked += DeleteClicked;
+            ContextActions.Add (deleteAction);
         }
 
         void EditClicked (object sender, EventArgs e)
@@ -23,6 +29,17 @@ namespace ATMobile.Cells
             Round round = (Round)menuItem.CommandParameter;
 
             var clicked = RoundEditClicked;
+            if (clicked != null) {
+                clicked (round);
+            }
+        }
+
+        void DeleteClicked (object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            Round round = (Round)menuItem.CommandParameter;
+
+            var clicked = RoundDeleteClicked;
             if (clicked != null) {
                 clicked (round);
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using ATMobile.Cells;
 using ATMobile.Controls;
+using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
@@ -17,6 +18,7 @@ namespace ATMobile.Forms
             ListFrame.Content = m_Tournaments;
 
             TournamentHistoryCell.TournamentEditClicked += EditTournament;
+            TournamentHistoryCell.TournamentDeleteClicked += DeleteTournament;
         }
 
         public override void Add ()
@@ -34,6 +36,18 @@ namespace ATMobile.Forms
             PublishActionMessage ("Tournament Edit Selected");
 
             Navigation.PushModalAsync (editTournament);
+        }
+
+        public async void DeleteTournament (Tournament _tournament)
+        {
+            PublishActionMessage ("Tournament Delete Selected");
+
+            bool result = await DisplayAlert ("ArcheryTrack", "Are you sure you want to delete this tournament.  All associated records will also be deleted", "Delete", "Cancel");
+
+            if (result) {
+                ATManager.GetInstance ().DeleteTournament (_tournament.Id);
+                m_Tournaments.RefreshList ();
+            }
         }
 
         void OnSelected (object sender, SelectedItemChangedEventArgs e)
@@ -56,6 +70,7 @@ namespace ATMobile.Forms
         public void Dispose ()
         {
             TournamentHistoryCell.TournamentEditClicked -= EditTournament;
+            TournamentHistoryCell.TournamentDeleteClicked -= DeleteTournament;
         }
     }
 }
