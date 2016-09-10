@@ -1,5 +1,7 @@
 ﻿using System;
 using ATMobile.Controls;
+using ATMobile.Delegates;
+using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Cells
@@ -10,6 +12,8 @@ namespace ATMobile.Cells
         private ATLabel m_lblEndNumber;
         private ATLabel m_lblScore;
         private ATLabel m_lblTotal;
+
+        public static PracticeEndClickedDelegate PracticeEndDeleteClicked;
 
         public PracticeEndCell ()
         {
@@ -36,6 +40,22 @@ namespace ATMobile.Cells
             m_Layout.Children.Add (m_lblTotal);
 
             View = m_Layout;
+
+            var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
+            deleteAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
+            deleteAction.Clicked += DeleteClicked;
+            ContextActions.Add (deleteAction);
+        }
+
+        void DeleteClicked (object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            PracticeEnd practiceEnd = (PracticeEnd)menuItem.CommandParameter;
+
+            var clicked = PracticeEndDeleteClicked;
+            if (clicked != null) {
+                clicked (practiceEnd);
+            }
         }
     }
 }

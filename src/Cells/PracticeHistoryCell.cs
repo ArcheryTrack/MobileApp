@@ -13,7 +13,8 @@ namespace ATMobile.Cells
         private ATLabel m_lblLocation;
         private ATLabel m_lblArrows;
 
-        public static PracticeEditClickedDelegate PracticeEditClicked;
+        public static PracticeClickedDelegate PracticeEditClicked;
+        public static PracticeClickedDelegate PracticeDeleteClicked;
 
         public PracticeHistoryCell ()
         {
@@ -44,6 +45,11 @@ namespace ATMobile.Cells
             editAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
             editAction.Clicked += EditClicked;
             ContextActions.Add (editAction);
+
+            var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
+            deleteAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
+            deleteAction.Clicked += DeleteClicked;
+            ContextActions.Add (deleteAction);
         }
 
         void EditClicked (object sender, EventArgs e)
@@ -52,6 +58,17 @@ namespace ATMobile.Cells
             Practice practice = (Practice)menuItem.CommandParameter;
 
             var clicked = PracticeEditClicked;
+            if (clicked != null) {
+                clicked (practice);
+            }
+        }
+
+        void DeleteClicked (object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            Practice practice = (Practice)menuItem.CommandParameter;
+
+            var clicked = PracticeDeleteClicked;
             if (clicked != null) {
                 clicked (practice);
             }

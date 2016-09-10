@@ -291,6 +291,20 @@ namespace ATMobile.Managers
             DeleteChartEntry (_practiceEndId);
         }
 
+        public void RenumberPracticeEnds (Guid _practiceId)
+        {
+            List<PracticeEnd> ends = GetPracticeEnds (_practiceId);
+
+            int i = 1;
+
+            foreach (var end in ends) {
+                end.EndNumber = i;
+                Persist (end);
+
+                i++;
+            }
+        }
+
         #endregion
 
         #region PracticeHistory

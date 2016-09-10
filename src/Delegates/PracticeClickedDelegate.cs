@@ -3,6 +3,6 @@ using ATMobile.Objects;
 
 namespace ATMobile.Delegates
 {
-    public delegate void PracticeEditClickedDelegate (Practice _practice);
+    public delegate void PracticeClickedDelegate (Practice _practice);
 }
 

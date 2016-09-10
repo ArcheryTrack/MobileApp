@@ -40,14 +40,15 @@ namespace ATMobile.Forms
             m_PracticeHistory.ItemSelected += OnSelected;
             ListFrame.Content = m_PracticeHistory;
 
-            PracticeHistoryCell.PracticeEditClicked += OnEditClicked;
+            PracticeHistoryCell.PracticeEditClicked += EditPractice;
+            PracticeHistoryCell.PracticeDeleteClicked += DeletePractice;
 
             GetCurrentArcher ();
 
             m_Loading = false;
         }
 
-        void OnEditClicked (Practice _practice)
+        void EditPractice (Practice _practice)
         {
             Archer selected = GetSelectedArcher ();
 
@@ -58,6 +59,18 @@ namespace ATMobile.Forms
                 PublishActionMessage ("Practice Edit");
 
                 Navigation.PushModalAsync (editPractice);
+            }
+        }
+
+        public async void DeletePractice (Practice _practice)
+        {
+            PublishActionMessage ("Practice Delete Selected");
+
+            bool result = await DisplayAlert ("ArcheryTrack", "Are you sure you want to delete this practice.  All associated records will also be deleted", "Delete", "Cancel");
+
+            if (result) {
+                ATManager.GetInstance ().DeletePractice (_practice.Id);
+                RefreshList ();
             }
         }
 
@@ -153,7 +166,8 @@ namespace ATMobile.Forms
 
         public void Dispose ()
         {
-            PracticeHistoryCell.PracticeEditClicked -= OnEditClicked;
+            PracticeHistoryCell.PracticeEditClicked -= EditPractice;
+            PracticeHistoryCell.PracticeDeleteClicked -= DeletePractice;
         }
     }
 }

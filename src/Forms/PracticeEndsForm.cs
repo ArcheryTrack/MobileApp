@@ -1,11 +1,14 @@
-﻿using ATMobile.Controls;
+﻿using System;
+using ATMobile.Cells;
+using ATMobile.Controls;
+using ATMobile.Managers;
 using ATMobile.Objects;
 using ATMobile.PickerForms;
 using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class PracticeEndsForm : AbstractListForm
+    public class PracticeEndsForm : AbstractListForm, IDisposable
     {
         private Archer m_Archer;
         private Practice m_Practice;
@@ -34,8 +37,10 @@ namespace ATMobile.Forms
             }
 
             m_PracticeEnds = new PracticeEndsListView ();
-            m_PracticeEnds.ItemSelected += OnSelected;
+            m_PracticeEnds.ItemSelected += EditPracticeEnd;
             ListFrame.Content = m_PracticeEnds;
+
+            PracticeEndCell.PracticeEndDeleteClicked += DeletePracticeEnd;
         }
 
         public void SetupForm (Archer _archer, Practice _practice)
@@ -73,7 +78,7 @@ namespace ATMobile.Forms
             Navigation.PushModalAsync (practiceEnd);
         }
 
-        void OnSelected (object sender, SelectedItemChangedEventArgs e)
+        void EditPracticeEnd (object sender, SelectedItemChangedEventArgs e)
         {
             PracticeEnd end = (PracticeEnd)e.SelectedItem;
 
@@ -85,6 +90,22 @@ namespace ATMobile.Forms
             Navigation.PushModalAsync (practiceEnd);
         }
 
+        public async void DeletePracticeEnd (PracticeEnd _practiceEnd)
+        {
+            PublishActionMessage ("Practice End Delete Selected");
+
+            bool result = await DisplayAlert ("ArcheryTrack", "Are you sure you want to delete this practice end.  All associated records will also be deleted", "Delete", "Cancel");
+
+            if (result) {
+                ATManager manager = ATManager.GetInstance ();
+
+                manager.DeletePracticeEnd (_practiceEnd.Id);
+                manager.RenumberPracticeEnds (_practiceEnd.ParentId);
+
+                RefreshList ();
+            }
+        }
+
         protected override void OnAppearing ()
         {
             RefreshList ();
@@ -94,6 +115,11 @@ namespace ATMobile.Forms
         {
             m_PracticeEnds.RefreshList (m_Practice.Id);
             SetSummary ();
+        }
+
+        public void Dispose ()
+        {
+            PracticeEndCell.PracticeEndDeleteClicked -= DeletePracticeEnd;
         }
     }
 }
