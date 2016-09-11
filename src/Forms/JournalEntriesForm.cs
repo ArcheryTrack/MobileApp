@@ -62,7 +62,13 @@ namespace ATMobile.Forms
 
         private void RefreshList ()
         {
-            m_lstJournalEntries.RefreshList (m_CurrentArcher.Id);
+            if (m_CurrentArcher != null) {
+                m_lstJournalEntries.RefreshList (m_CurrentArcher.Id);
+                AddButton.IsEnabled = true;
+            } else {
+                AddButton.IsEnabled = false;
+                m_lstJournalEntries.ItemsSource = null;
+            }
         }
     }
 }

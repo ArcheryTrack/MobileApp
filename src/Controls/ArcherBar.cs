@@ -108,18 +108,32 @@ namespace ATMobile.Controls
 
         private void SetArcher ()
         {
-            if (m_CurrentArcherIndex + 1 > m_Archers.Count) {
-                m_CurrentArcherIndex = 0;
-            }
-            m_CurrentArcher = m_Archers [m_CurrentArcherIndex];
+            if (m_Archers.Count == 0) {
+                m_btnNext.IsEnabled = false;
+                m_btnPrevious.IsEnabled = false;
+                m_lblArcher.Text = "No Archers Created";
+            } else {
+                if (m_Archers.Count == 1) {
+                    m_btnNext.IsEnabled = false;
+                    m_btnPrevious.IsEnabled = false;
+                } else {
+                    m_btnNext.IsEnabled = true;
+                    m_btnPrevious.IsEnabled = true;
+                }
 
-            ATManager.GetInstance ().SettingManager.SetCurrentArcher (m_CurrentArcher.Id);
+                if (m_CurrentArcherIndex + 1 > m_Archers.Count) {
+                    m_CurrentArcherIndex = 0;
+                }
+                m_CurrentArcher = m_Archers [m_CurrentArcherIndex];
 
-            m_lblArcher.Text = m_CurrentArcher.FullName;
+                ATManager.GetInstance ().SettingManager.SetCurrentArcher (m_CurrentArcher.Id);
 
-            var picked = ArcherPicked;
-            if (picked != null) {
-                picked (m_CurrentArcher);
+                m_lblArcher.Text = m_CurrentArcher.FullName;
+
+                var picked = ArcherPicked;
+                if (picked != null) {
+                    picked (m_CurrentArcher);
+                }
             }
         }
 

@@ -18,7 +18,7 @@ namespace ATMobile.Constants
                         <li>LiteDb</li>
                         <li>NetwtonSoft</li>
                         <li>paulpatarinski/Xamarin.Forms.Plugins (iOS only) - Copyright (c) 2014 Paul Patarinski</li>
-                        <li>FubarDevelopment/restsharp.portable - Copyright (c) 2013-2016, Mark Junker All rights reserved.</li>
+                        <li>RestSharp</li>
                     </ul>
                     <p>Other Attribution</p>
                     <ul>

@@ -11,30 +11,19 @@ namespace ATMobile.Forms
 {
     public class PracticeHistoryForm : AbstractListForm, IDisposable
     {
-        private Picker m_ArcherPicker;
+        private ArcherBar m_ArcherBar;
         private PracticeHistoryListView m_PracticeHistory;
-        private List<Archer> m_Archers;
         private bool m_Loading;
+        private Archer m_CurrentArcher;
 
         public PracticeHistoryForm () : base ("Practice History", "Add Practice")
         {
             m_Loading = true;
 
-            //Load Archers and setup picker
-            m_Archers = ATManager.GetInstance ().GetArchers ();
-
-            m_ArcherPicker = new Picker {
-                Margin = new Thickness (20, 0, 20, 0)
-            };
-            foreach (var archer in m_Archers) {
-                m_ArcherPicker.Items.Add (archer.FullName);
-            }
-            m_ArcherPicker.SelectedIndexChanged += OnArcherPicked;
-            OutsideLayout.Children.Insert (1, m_ArcherPicker);
-
-            if (m_Archers.Count == 1) {
-                m_ArcherPicker.IsEnabled = false;
-            }
+            m_ArcherBar = new ArcherBar ();
+            m_ArcherBar.ArcherPicked += ArcherPicked;
+            m_CurrentArcher = m_ArcherBar.CurrentArcher;
+            OutsideLayout.Children.Insert (1, m_ArcherBar);
 
             m_PracticeHistory = new PracticeHistoryListView ();
             m_PracticeHistory.ItemSelected += OnSelected;
@@ -43,18 +32,14 @@ namespace ATMobile.Forms
             PracticeHistoryCell.PracticeEditClicked += EditPractice;
             PracticeHistoryCell.PracticeDeleteClicked += DeletePractice;
 
-            GetCurrentArcher ();
-
             m_Loading = false;
         }
 
         void EditPractice (Practice _practice)
         {
-            Archer selected = GetSelectedArcher ();
-
-            if (selected != null) {
+            if (m_CurrentArcher != null) {
                 PracticeForm editPractice = new PracticeForm ();
-                editPractice.SetupForm (selected, _practice);
+                editPractice.SetupForm (m_CurrentArcher, _practice);
 
                 PublishActionMessage ("Practice Edit");
 
@@ -74,48 +59,15 @@ namespace ATMobile.Forms
             }
         }
 
-        void GetCurrentArcher ()
-        {
-            Guid? currentArcher = ATManager.GetInstance ().SettingManager.GetCurrentArcher ();
 
-            if (currentArcher != null) {
-                for (int i = 0; i < m_Archers.Count; i++) {
-                    Archer archer = m_Archers [i];
-
-                    if (archer.Id == currentArcher.Value) {
-                        m_ArcherPicker.SelectedIndex = i;
-                        break;
-                    }
-                }
-            } else {
-                if (m_Archers.Count > 0) {
-                    m_ArcherPicker.SelectedIndex = 0;
-                }
-            }
-        }
-
-        Archer GetSelectedArcher ()
-        {
-            if (m_ArcherPicker.SelectedIndex >= 0) {
-                return m_Archers [m_ArcherPicker.SelectedIndex];
-            }
-
-            return null;
-        }
-
-        void OnArcherPicked (object sender, EventArgs e)
+        void ArcherPicked (Archer archer)
         {
             if (!m_Loading) {
-                if (m_ArcherPicker.SelectedIndex != -1) {
-                    Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
-                    ATManager.GetInstance ().SettingManager.SetCurrentArcher (archer.Id);
-                }
-            }
+                m_CurrentArcher = archer;
 
-            if (m_ArcherPicker.SelectedIndex >= 0) {
-                AddButton.IsEnabled = true;
-            } else {
-                AddButton.IsEnabled = false;
+                if (m_CurrentArcher != null) {
+                    ATManager.GetInstance ().SettingManager.SetCurrentArcher (m_CurrentArcher.Id);
+                }
             }
 
             RefreshList ();
@@ -123,7 +75,7 @@ namespace ATMobile.Forms
 
         public override void Add ()
         {
-            Archer selected = GetSelectedArcher ();
+            Archer selected = m_CurrentArcher;
 
             if (selected != null) {
                 PracticeForm addPractice = new PracticeForm ();
@@ -137,11 +89,9 @@ namespace ATMobile.Forms
         {
             Practice practice = (Practice)e.SelectedItem;
 
-            Archer selected = GetSelectedArcher ();
-
-            if (selected != null) {
+            if (m_CurrentArcher != null) {
                 PracticeEndsForm practiceEnds = new PracticeEndsForm ();
-                practiceEnds.SetupForm (selected, practice);
+                practiceEnds.SetupForm (m_CurrentArcher, practice);
 
                 PublishActionMessage ("Practice Selected");
 
@@ -156,11 +106,11 @@ namespace ATMobile.Forms
 
         private void RefreshList ()
         {
-            if (m_ArcherPicker.SelectedIndex == -1) {
-                m_PracticeHistory.ClearList ();
+            if (m_CurrentArcher != null) {
+                m_PracticeHistory.RefreshList (m_CurrentArcher.Id);
+                AddButton.IsEnabled = true;
             } else {
-                Archer archer = m_Archers [m_ArcherPicker.SelectedIndex];
-                m_PracticeHistory.RefreshList (archer.Id);
+                AddButton.IsEnabled = false;
             }
         }
 
