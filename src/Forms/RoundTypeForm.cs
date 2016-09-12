@@ -64,7 +64,12 @@ namespace ATMobile.Forms
         {
             m_RoundType = _roundType;
 
-            m_txtName.Text = m_RoundType.Name;
+            if (m_RoundType.Name == null) {
+                m_txtName.Text = string.Format ("Round {0}", m_RoundType.RoundNumber);
+            } else {
+                m_txtName.Text = m_RoundType.Name;
+            }
+
             m_txtDescription.Text = m_RoundType.Description;
             m_togCountX.IsToggled = m_RoundType.CountX;
 

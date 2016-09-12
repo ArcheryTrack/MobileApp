@@ -287,8 +287,14 @@ namespace ATMobile.Managers
         public void DeletePracticeEnd (Guid _practiceEndId)
         {
             PracticeEndDao dao = new PracticeEndDao (m_Database);
+            PracticeEnd practiceEnd = dao.Get (_practiceEndId);
+
             dao.Delete (_practiceEndId);
             DeleteChartEntry (_practiceEndId);
+
+            if (practiceEnd != null) {
+                RenumberPracticeEnds (practiceEnd.ParentId);
+            }
         }
 
         public void RenumberPracticeEnds (Guid _practiceId)
@@ -451,6 +457,7 @@ namespace ATMobile.Managers
         public void DeleteRound (Guid _roundId)
         {
             RoundDao roundDao = new RoundDao (m_Database);
+            Round round = roundDao.Get (_roundId);
 
             List<Match> matches = GetMatches (_roundId);
             foreach (var match in matches) {
@@ -464,6 +471,24 @@ namespace ATMobile.Managers
 
             roundDao.Delete (_roundId);
             DeleteChartEntry (_roundId);
+
+            if (round != null) {
+                RenumberRounds (round.ParentId);
+            }
+        }
+
+        public void RenumberRounds (Guid _tournamentId)
+        {
+            List<Round> rounds = GetRounds (_tournamentId);
+
+            int i = 1;
+
+            foreach (var round in rounds) {
+                round.RoundNumber = i;
+                Persist (round);
+
+                i++;
+            }
         }
 
         #endregion 
@@ -486,6 +511,32 @@ namespace ATMobile.Managers
         {
             RoundTypeDao dao = new RoundTypeDao (m_Database);
             dao.Persist (roundType);
+        }
+
+        public void DeleteRoundType (Guid _roundTypeId)
+        {
+            RoundTypeDao dao = new RoundTypeDao (m_Database);
+            RoundType roundType = dao.Get (_roundTypeId);
+
+            dao.Delete (_roundTypeId);
+
+            if (roundType != null) {
+                RenumberRoundTypes (roundType.ParentId);
+            }
+        }
+
+        public void RenumberRoundTypes (Guid _tournamentTypeId)
+        {
+            List<RoundType> roundTypes = GetRoundTypes (_tournamentTypeId);
+
+            int i = 1;
+
+            foreach (var rt in roundTypes) {
+                rt.RoundNumber = i;
+                Persist (rt);
+
+                i++;
+            }
         }
 
         #endregion

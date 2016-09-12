@@ -196,6 +196,10 @@ namespace ATMobile.Forms
 
         public override void ValidateForm (StringBuilder _sb)
         {
+            if (m_txtName.Text == null) {
+                _sb.AppendLine ("You must give the tournament a name");
+            }
+
             if (m_TournamentType == null) {
                 _sb.AppendLine ("You must pick a tournament type.");
             }

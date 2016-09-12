@@ -1,5 +1,7 @@
 ﻿using System;
 using ATMobile.Controls;
+using ATMobile.Delegates;
+using ATMobile.Objects;
 using Xamarin.Forms;
 
 namespace ATMobile.Cells
@@ -9,6 +11,8 @@ namespace ATMobile.Cells
         private StackLayout m_Layout;
         private ATLabel m_lblName;
         private ATLabel m_lblDetails;
+
+        public static RoundTypeClickedDelegate RoundTypeDeleteClicked;
 
         public RoundTypeCell ()
         {
@@ -24,6 +28,22 @@ namespace ATMobile.Cells
             m_Layout.Children.Add (m_lblDetails);
 
             View = m_Layout;
+
+            var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
+            deleteAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
+            deleteAction.Clicked += DeleteClicked;
+            ContextActions.Add (deleteAction);
+        }
+
+        void DeleteClicked (object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            RoundType round = (RoundType)menuItem.CommandParameter;
+
+            var clicked = RoundTypeDeleteClicked;
+            if (clicked != null) {
+                clicked (round);
+            }
         }
     }
 }

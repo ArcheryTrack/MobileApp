@@ -9,6 +9,8 @@ namespace ATMobile.Objects
 
         public string Description { get; set; }
 
+        public int RoundNumber { get; set; }
+
         public Guid ParentId { get; set; }
 
         public int NumberOfEnds { get; set; }

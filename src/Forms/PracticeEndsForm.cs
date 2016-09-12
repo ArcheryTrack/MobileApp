@@ -100,7 +100,6 @@ namespace ATMobile.Forms
                 ATManager manager = ATManager.GetInstance ();
 
                 manager.DeletePracticeEnd (_practiceEnd.Id);
-                manager.RenumberPracticeEnds (_practiceEnd.ParentId);
 
                 RefreshList ();
             }

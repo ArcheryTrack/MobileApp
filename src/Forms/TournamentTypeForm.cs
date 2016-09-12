@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -7,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class TournamentTypeForm : AbstractEntryForm
+    public class TournamentTypeForm : AbstractEntryForm, IDisposable
     {
         private TournamentType m_TournamentType;
 
@@ -45,6 +46,8 @@ namespace ATMobile.Forms
             };
             frame.Content = m_RoundTypes;
             InsideLayout.Children.Add (frame);
+
+            RoundTypeCell.RoundTypeDeleteClicked += DeleteRoundTypeClicked;
         }
 
         public void SetupForm (TournamentType _tournamentType)
@@ -88,6 +91,7 @@ namespace ATMobile.Forms
 
             RoundType roundType = new RoundType ();
             roundType.ParentId = m_TournamentType.Id;
+            roundType.RoundNumber = m_RoundTypes.Count + 1;
 
             RoundTypeForm form = new RoundTypeForm ();
             form.SetupForm (roundType);
@@ -104,6 +108,18 @@ namespace ATMobile.Forms
             }
         }
 
+        public async void DeleteRoundTypeClicked (RoundType _roundType)
+        {
+            PublishActionMessage ("Round Type Delete Selected");
+
+            bool result = await DisplayAlert ("ArcheryTrack", "Are you sure you want to delete this round type.  All associated records will also be deleted", "Delete", "Cancel");
+
+            if (result) {
+                ATManager.GetInstance ().DeleteRoundType (_roundType.Id);
+                m_RoundTypes.RefreshList (m_TournamentType.Id);
+            }
+        }
+
         public override void Save ()
         {
             SaveTournamentType ();
@@ -114,6 +130,11 @@ namespace ATMobile.Forms
             base.OnAppearing ();
 
             m_RoundTypes.RefreshList (m_TournamentType.Id);
+        }
+
+        public void Dispose ()
+        {
+            RoundTypeCell.RoundTypeDeleteClicked -= DeleteRoundTypeClicked;
         }
     }
 }

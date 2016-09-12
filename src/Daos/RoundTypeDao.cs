@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ATMobile.Objects;
 using LiteDB;
 
@@ -24,7 +25,9 @@ namespace ATMobile.Daos
 
         public List<RoundType> GetRoundTypes (Guid _tournamentTypeId)
         {
-            return GetChildren (_tournamentTypeId);
+            List<RoundType> roundTypes = GetChildren (_tournamentTypeId);
+
+            return roundTypes.OrderBy ((RoundType arg) => arg.RoundNumber).ToList ();
         }
     }
 }

@@ -32,6 +32,12 @@ namespace ATMobile.Controls
         {
             ItemsSource = null;
         }
+
+        public int Count {
+            get {
+                return m_RoundTypes.Count;
+            }
+        }
     }
 }
 
