@@ -284,7 +284,7 @@ namespace ATMobile.Managers
             ChartingManager.ProcessEnd (_end);
         }
 
-        public void DeletePracticeEnd (Guid _practiceEndId)
+        public void DeletePracticeEnd (Guid _practiceEndId, bool renumber = true)
         {
             PracticeEndDao dao = new PracticeEndDao (m_Database);
             PracticeEnd practiceEnd = dao.Get (_practiceEndId);
@@ -292,7 +292,8 @@ namespace ATMobile.Managers
             dao.Delete (_practiceEndId);
             DeleteChartEntry (_practiceEndId);
 
-            if (practiceEnd != null) {
+            if (practiceEnd != null
+                && renumber) {
                 RenumberPracticeEnds (practiceEnd.ParentId);
             }
         }
@@ -349,12 +350,12 @@ namespace ATMobile.Managers
         /// Deletes the practice and cascade deletes practice ends.
         /// </summary>
         /// <param name="_practiceId">Practice identifier.</param>
-        public void DeletePractice (Guid _practiceId)
+        public void DeletePractice (Guid _practiceId, bool renumber = true)
         {
             List<PracticeEnd> ends = GetPracticeEnds (_practiceId);
 
             foreach (var end in ends) {
-                DeletePracticeEnd (end.Id);
+                DeletePracticeEnd (end.Id, renumber);
             }
 
             PracticeDao dao = new PracticeDao (m_Database);
@@ -454,7 +455,7 @@ namespace ATMobile.Managers
         /// Deletes the round.  Cascade Deletes Ends and Matches
         /// </summary>
         /// <param name="_roundId">Round identifier.</param>
-        public void DeleteRound (Guid _roundId)
+        public void DeleteRound (Guid _roundId, bool renumber = true)
         {
             RoundDao roundDao = new RoundDao (m_Database);
             Round round = roundDao.Get (_roundId);
@@ -472,7 +473,8 @@ namespace ATMobile.Managers
             roundDao.Delete (_roundId);
             DeleteChartEntry (_roundId);
 
-            if (round != null) {
+            if (round != null
+                && renumber) {
                 RenumberRounds (round.ParentId);
             }
         }
@@ -513,14 +515,15 @@ namespace ATMobile.Managers
             dao.Persist (roundType);
         }
 
-        public void DeleteRoundType (Guid _roundTypeId)
+        public void DeleteRoundType (Guid _roundTypeId, bool renumber = true)
         {
             RoundTypeDao dao = new RoundTypeDao (m_Database);
             RoundType roundType = dao.Get (_roundTypeId);
 
             dao.Delete (_roundTypeId);
 
-            if (roundType != null) {
+            if (roundType != null
+                && renumber) {
                 RenumberRoundTypes (roundType.ParentId);
             }
         }
@@ -621,7 +624,7 @@ namespace ATMobile.Managers
             List<Round> rounds = GetRounds (_tournamentId);
 
             foreach (var round in rounds) {
-                DeleteRound (round.Id);
+                DeleteRound (round.Id, false);
             }
 
             TournamentDao dao = new TournamentDao (m_Database);
@@ -683,6 +686,18 @@ namespace ATMobile.Managers
         {
             TournamentTypeDao dao = new TournamentTypeDao (m_Database);
             return dao.Get (_tournamentTypeId);
+        }
+
+        public void DeleteTournamentType (Guid _tournamentTypeId)
+        {
+            TournamentTypeDao dao = new TournamentTypeDao (m_Database);
+
+            List<RoundType> roundTypes = GetRoundTypes (_tournamentTypeId);
+            foreach (var roundType in roundTypes) {
+                DeleteRoundType (roundType.Id, false);
+            }
+
+            dao.Delete (_tournamentTypeId);
         }
 
 
