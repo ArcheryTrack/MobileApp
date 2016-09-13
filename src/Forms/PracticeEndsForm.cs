@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class PracticeEndsForm : AbstractListForm, IDisposable
+    public class PracticeEndsForm : AbstractListForm
     {
         private Archer m_Archer;
         private Practice m_Practice;
@@ -110,15 +110,16 @@ namespace ATMobile.Forms
             RefreshList ();
         }
 
+        protected override void OnDisappearing ()
+        {
+            base.OnDisappearing ();
+            PracticeEndCell.PracticeEndDeleteClicked -= DeletePracticeEnd;
+        }
+
         private void RefreshList ()
         {
             m_PracticeEnds.RefreshList (m_Practice.Id);
             SetSummary ();
-        }
-
-        public void Dispose ()
-        {
-            PracticeEndCell.PracticeEndDeleteClicked -= DeletePracticeEnd;
         }
     }
 }

@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class TournamentHistoryForm : AbstractListForm, IDisposable
+    public class TournamentHistoryForm : AbstractListForm
     {
         private TournamentListView m_Tournaments;
 
@@ -16,9 +16,6 @@ namespace ATMobile.Forms
             m_Tournaments = new TournamentListView ();
             m_Tournaments.ItemSelected += OnSelected;
             ListFrame.Content = m_Tournaments;
-
-            TournamentHistoryCell.TournamentEditClicked += EditTournament;
-            TournamentHistoryCell.TournamentDeleteClicked += DeleteTournament;
         }
 
         public override void Add ()
@@ -65,6 +62,9 @@ namespace ATMobile.Forms
         protected override void OnAppearing ()
         {
             m_Tournaments.RefreshList ();
+
+            TournamentHistoryCell.TournamentEditClicked += EditTournament;
+            TournamentHistoryCell.TournamentDeleteClicked += DeleteTournament;
         }
 
         public void Dispose ()

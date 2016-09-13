@@ -9,7 +9,7 @@ using ATMobile.Cells;
 
 namespace ATMobile.Forms
 {
-    public class PracticeHistoryForm : AbstractListForm, IDisposable
+    public class PracticeHistoryForm : AbstractListForm
     {
         private ArcherBar m_ArcherBar;
         private PracticeHistoryListView m_PracticeHistory;
@@ -28,9 +28,6 @@ namespace ATMobile.Forms
             m_PracticeHistory = new PracticeHistoryListView ();
             m_PracticeHistory.ItemSelected += OnSelected;
             ListFrame.Content = m_PracticeHistory;
-
-            PracticeHistoryCell.PracticeEditClicked += EditPractice;
-            PracticeHistoryCell.PracticeDeleteClicked += DeletePractice;
 
             m_Loading = false;
         }
@@ -101,7 +98,18 @@ namespace ATMobile.Forms
 
         protected override void OnAppearing ()
         {
+            PracticeHistoryCell.PracticeEditClicked += EditPractice;
+            PracticeHistoryCell.PracticeDeleteClicked += DeletePractice;
+
             RefreshList ();
+        }
+
+        protected override void OnDisappearing ()
+        {
+            base.OnDisappearing ();
+
+            PracticeHistoryCell.PracticeEditClicked -= EditPractice;
+            PracticeHistoryCell.PracticeDeleteClicked -= DeletePractice;
         }
 
         private void RefreshList ()
@@ -112,12 +120,6 @@ namespace ATMobile.Forms
             } else {
                 AddButton.IsEnabled = false;
             }
-        }
-
-        public void Dispose ()
-        {
-            PracticeHistoryCell.PracticeEditClicked -= EditPractice;
-            PracticeHistoryCell.PracticeDeleteClicked -= DeletePractice;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using ATMobile.Controls;
+﻿using System;
+using ATMobile.Cells;
+using ATMobile.Controls;
+using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
 
@@ -36,11 +39,32 @@ namespace ATMobile.Forms
             Navigation.PushModalAsync (addRange);
         }
 
+        async void DeleteClicked (Range _range)
+        {
+            PublishActionMessage ("Range Delete Selected");
+
+            bool result = await DisplayAlert ("ArcheryTrack", "Are you sure you want to delete this Range.", "Delete", "Cancel");
+
+            if (result) {
+                ATManager manager = ATManager.GetInstance ();
+
+                manager.DeleteRange (_range.Id);
+                m_RangeList.RefreshList ();
+            }
+        }
+
         protected override void OnAppearing ()
         {
             base.OnAppearing ();
 
+            RangeCell.RangeDeleteClicked += DeleteClicked;
             m_RangeList.RefreshList ();
+        }
+
+        protected override void OnDisappearing ()
+        {
+            base.OnDisappearing ();
+            RangeCell.RangeDeleteClicked -= DeleteClicked;
         }
     }
 }

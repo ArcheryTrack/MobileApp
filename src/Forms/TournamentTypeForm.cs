@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class TournamentTypeForm : AbstractEntryForm, IDisposable
+    public class TournamentTypeForm : AbstractEntryForm
     {
         private TournamentType m_TournamentType;
 
@@ -46,8 +46,6 @@ namespace ATMobile.Forms
             };
             frame.Content = m_RoundTypes;
             InsideLayout.Children.Add (frame);
-
-            RoundTypeCell.RoundTypeDeleteClicked += DeleteRoundTypeClicked;
         }
 
         public void SetupForm (TournamentType _tournamentType)
@@ -129,11 +127,13 @@ namespace ATMobile.Forms
         {
             base.OnAppearing ();
 
+            RoundTypeCell.RoundTypeDeleteClicked += DeleteRoundTypeClicked;
             m_RoundTypes.RefreshList (m_TournamentType.Id);
         }
 
-        public void Dispose ()
+        protected override void OnDisappearing ()
         {
+            base.OnDisappearing ();
             RoundTypeCell.RoundTypeDeleteClicked -= DeleteRoundTypeClicked;
         }
     }

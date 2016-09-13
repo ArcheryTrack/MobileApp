@@ -385,6 +385,12 @@ namespace ATMobile.Managers
             dao.Persist (_range);
         }
 
+        public void DeleteRange (Guid _rangeId)
+        {
+            RangeDao dao = new RangeDao (m_Database);
+            dao.Delete (_rangeId);
+        }
+
         #endregion
 
         #region Recent

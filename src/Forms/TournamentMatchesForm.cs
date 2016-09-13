@@ -37,8 +37,6 @@ namespace ATMobile.Forms
             } else {
                 m_lblArcher.Margin = new Thickness (0, 20, 0, 0);
             }
-
-            MatchCell.MatchDeleteClicked += DeleteMatch;
         }
 
         public override void Add ()
@@ -92,17 +90,19 @@ namespace ATMobile.Forms
             }
         }
 
-        public void Dispose ()
-        {
-            MatchCell.MatchDeleteClicked -= DeleteMatch;
-        }
-
         protected override void OnAppearing ()
         {
             base.OnAppearing ();
 
+            MatchCell.MatchDeleteClicked += DeleteMatch;
             m_Matches = ATManager.GetInstance ().GetMatches (m_Round.Id);
             m_lstMatches.ItemsSource = m_Matches;
+        }
+
+        protected override void OnDisappearing ()
+        {
+            base.OnDisappearing ();
+            MatchCell.MatchDeleteClicked -= DeleteMatch;
         }
     }
 }

@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace ATMobile.Forms
 {
-    public class TournamentRoundsForm : AbstractForm, IDisposable
+    public class TournamentRoundsForm : AbstractForm
     {
         private Tournament m_Tournament;
 
@@ -48,9 +48,6 @@ namespace ATMobile.Forms
             }
 
             OutsideLayout.Children.Add (frame);
-
-            TournamentRoundCell.RoundEditClicked += EditRound;
-            TournamentRoundCell.RoundDeleteClicked += DeleteRound;
         }
 
         public void EditRound (Round _round)
@@ -161,17 +158,20 @@ namespace ATMobile.Forms
             return max + 1;
         }
 
-        public void Dispose ()
-        {
-            TournamentRoundCell.RoundEditClicked -= EditRound;
-            TournamentRoundCell.RoundDeleteClicked -= DeleteRound;
-        }
-
         protected override void OnAppearing ()
         {
             base.OnAppearing ();
 
+            TournamentRoundCell.RoundEditClicked += EditRound;
+            TournamentRoundCell.RoundDeleteClicked += DeleteRound;
             m_listRounds.RefreshList (m_Tournament.Id);
+        }
+
+        protected override void OnDisappearing ()
+        {
+            base.OnDisappearing ();
+            TournamentRoundCell.RoundEditClicked -= EditRound;
+            TournamentRoundCell.RoundDeleteClicked -= DeleteRound;
         }
     }
 }
