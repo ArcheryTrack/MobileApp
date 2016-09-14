@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ATMobile.Objects;
 
 namespace ATMobile.Delegates
 {
-    public delegate void TournamentTypeClickedDelegate (TournamentType _tournamentType);
+    public delegate Task TournamentTypeClickedDelegate (TournamentType _tournamentType);
 }
 

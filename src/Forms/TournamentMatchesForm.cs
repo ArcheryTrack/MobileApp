@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;
@@ -78,7 +79,7 @@ namespace ATMobile.Forms
             Navigation.PushModalAsync (matchForm);
         }
 
-        public async void DeleteMatch (Match _match)
+        public async Task DeleteMatch (Match _match)
         {
             PublishActionMessage ("Match Delete Selected");
 

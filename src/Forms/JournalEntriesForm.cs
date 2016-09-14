@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using ATMobile.Constants;
+﻿using System.Threading.Tasks;
+using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
@@ -49,8 +48,16 @@ namespace ATMobile.Forms
         protected override void OnAppearing ()
         {
             base.OnAppearing ();
+            JournalEntryCell.JournalEntryDeleteClicked += DeleteClicked;
 
             RefreshList ();
+        }
+
+        protected override void OnDisappearing ()
+        {
+            base.OnDisappearing ();
+
+            JournalEntryCell.JournalEntryDeleteClicked -= DeleteClicked;
         }
 
         private void ArcherPicked (Archer _archer)
@@ -68,6 +75,20 @@ namespace ATMobile.Forms
             } else {
                 AddButton.IsEnabled = false;
                 m_lstJournalEntries.ItemsSource = null;
+            }
+        }
+
+        async Task DeleteClicked (JournalEntry _journalEntry)
+        {
+            PublishActionMessage ("Range Delete Selected");
+
+            bool result = await DisplayAlert ("ArcheryTrack", "Are you sure you want to delete this Journal Entry.", "Delete", "Cancel");
+
+            if (result) {
+                ATManager manager = ATManager.GetInstance ();
+
+                manager.DeleteJournalEntry (_journalEntry.Id);
+                RefreshList ();
             }
         }
     }

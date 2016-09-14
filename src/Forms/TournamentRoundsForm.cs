@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Enums;
@@ -50,22 +51,22 @@ namespace ATMobile.Forms
             OutsideLayout.Children.Add (frame);
         }
 
-        public void EditRound (Round _round)
+        public async Task EditRound (Round _round)
         {
             if (_round.CompetitionType == CompetitionType.Ranking) {
                 TournamentRoundForm editRound = new TournamentRoundForm ();
                 editRound.SetupForm (m_Tournament, _round);
                 PublishActionMessage ("Ranking Round Edit Selected");
-                Navigation.PushModalAsync (editRound);
+                await Navigation.PushModalAsync (editRound);
             } else {
                 TournamentEliminationRoundForm form = new TournamentEliminationRoundForm ();
                 form.SetupForm (m_Tournament, _round);
                 PublishActionMessage ("Elimination Round Edit Selected");
-                Navigation.PushModalAsync (form);
+                await Navigation.PushModalAsync (form);
             }
         }
 
-        public async void DeleteRound (Round _round)
+        public async Task DeleteRound (Round _round)
         {
             if (_round.CompetitionType == CompetitionType.Ranking) {
                 PublishActionMessage ("Ranking Round Delete Selected");

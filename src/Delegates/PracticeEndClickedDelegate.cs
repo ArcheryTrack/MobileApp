@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ATMobile.Objects;
 
 namespace ATMobile.Delegates
 {
-    public delegate void PracticeEndClickedDelegate (PracticeEnd _practiceEnd);
+    public delegate Task PracticeEndClickedDelegate (PracticeEnd _practiceEnd);
 }
 

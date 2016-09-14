@@ -4,6 +4,5 @@ using ATMobile.Objects;
 
 namespace ATMobile.Delegates
 {
-    public delegate Task TournamentClickedDelegate (Tournament _tournament);
+    public delegate Task JournalEntryClickedDelegate (JournalEntry _journalEntry);
 }
-

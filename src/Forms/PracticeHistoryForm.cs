@@ -6,6 +6,7 @@ using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Constants;
 using ATMobile.Cells;
+using System.Threading.Tasks;
 
 namespace ATMobile.Forms
 {
@@ -32,19 +33,18 @@ namespace ATMobile.Forms
             m_Loading = false;
         }
 
-        void EditPractice (Practice _practice)
+        public async Task EditPractice (Practice _practice)
         {
             if (m_CurrentArcher != null) {
                 PracticeForm editPractice = new PracticeForm ();
                 editPractice.SetupForm (m_CurrentArcher, _practice);
 
                 PublishActionMessage ("Practice Edit");
-
-                Navigation.PushModalAsync (editPractice);
+                await Navigation.PushModalAsync (editPractice);
             }
         }
 
-        public async void DeletePractice (Practice _practice)
+        public async Task DeletePractice (Practice _practice)
         {
             PublishActionMessage ("Practice Delete Selected");
 

@@ -243,6 +243,12 @@ namespace ATMobile.Managers
             return dao.GetJournalEntries (_archerId, start, count);
         }
 
+        public void DeleteJournalEntry (Guid _journalEntryId)
+        {
+            JournalEntryDao dao = new JournalEntryDao (m_Database);
+            dao.Delete (_journalEntryId);
+        }
+
         #endregion
 
         #region Matches

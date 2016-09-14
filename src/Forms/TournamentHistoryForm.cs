@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;
@@ -25,17 +26,17 @@ namespace ATMobile.Forms
             Navigation.PushModalAsync (addTournament);
         }
 
-        public void EditTournament (Tournament _tournament)
+        public async Task EditTournament (Tournament _tournament)
         {
             TournamentForm editTournament = new TournamentForm ();
             editTournament.SetupForm (_tournament);
 
             PublishActionMessage ("Tournament Edit Selected");
 
-            Navigation.PushModalAsync (editTournament);
+            await Navigation.PushModalAsync (editTournament);
         }
 
-        public async void DeleteTournament (Tournament _tournament)
+        public async Task DeleteTournament (Tournament _tournament)
         {
             PublishActionMessage ("Tournament Delete Selected");
 

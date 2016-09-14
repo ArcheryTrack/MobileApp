@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ATMobile.Constants;
 using ATMobile.Interfaces;
 using Xamarin.Forms;
@@ -13,12 +14,12 @@ namespace ATMobile.Forms
             BarBackgroundColor = Color.FromHex (UIConstants.NavBarColor);
         }
 
-        async public new void PushAsync (Page _page, bool _animated)
+        async public new Task PushAsync (Page _page, bool _animated)
         {
             await base.PushAsync (_page, _animated);
         }
 
-        async public new void PopAsync (bool _animated)
+        async public new Task PopAsync (bool _animated)
         {
             var validatedContentPage = CurrentPage as IValidatedPage;
 

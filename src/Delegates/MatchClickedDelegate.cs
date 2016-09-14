@@ -1,7 +1,8 @@
-﻿using ATMobile.Objects;
+﻿using System.Threading.Tasks;
+using ATMobile.Objects;
 
 namespace ATMobile.Delegates
 {
-    public delegate void MatchClickedDelegate (Match _match);
+    public delegate Task MatchClickedDelegate (Match _match);
 }
 

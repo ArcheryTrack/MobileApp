@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;
@@ -90,7 +91,7 @@ namespace ATMobile.Forms
             Navigation.PushModalAsync (practiceEnd);
         }
 
-        public async void DeletePracticeEnd (PracticeEnd _practiceEnd)
+        public async Task DeletePracticeEnd (PracticeEnd _practiceEnd)
         {
             PublishActionMessage ("Practice End Delete Selected");
 

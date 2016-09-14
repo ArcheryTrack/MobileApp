@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ATMobile.Cells;
 using ATMobile.Controls;
 using ATMobile.Managers;
@@ -46,7 +47,7 @@ namespace ATMobile.Forms
             m_TournamentTypes.RefreshList ();
         }
 
-        async void DeleteClicked (TournamentType _tournamentType)
+        async Task DeleteClicked (TournamentType _tournamentType)
         {
             PublishActionMessage ("Tournament Type Delete Selected");
 
