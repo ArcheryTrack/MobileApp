@@ -1,7 +1,8 @@
-﻿using ATMobile.Objects;
+﻿using System.Threading.Tasks;
+using ATMobile.Objects;
 
 namespace ATMobile.Delegates
 {
-    public delegate void RangeClickedDelegate (Range _range);
+    public delegate Task RangeClickedDelegate (Range _range);
 }
 

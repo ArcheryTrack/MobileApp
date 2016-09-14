@@ -6,7 +6,7 @@ using ATMobile.Objects;
 
 namespace ATMobile.PickerForms
 {
-    public class RangePicker : AbstractGenericPicker<Range, TournamentTypePickerCell>
+    public class RangePicker : AbstractGenericPicker<Range, RangePickerCell>
     {
         public RangePicker () : base ("Pick the Range", "Range")
         {

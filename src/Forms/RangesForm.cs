@@ -4,6 +4,7 @@ using ATMobile.Controls;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace ATMobile.Forms
 {
@@ -39,7 +40,7 @@ namespace ATMobile.Forms
             Navigation.PushModalAsync (addRange);
         }
 
-        async void DeleteClicked (Range _range)
+        async Task DeleteClicked (Range _range)
         {
             PublishActionMessage ("Range Delete Selected");
 

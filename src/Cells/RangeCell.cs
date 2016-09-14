@@ -27,12 +27,12 @@ namespace ATMobile.Cells
             m_lblRangeLocation.SetBinding (Label.TextProperty, "Location");
             m_Layout.Children.Add (m_lblRangeLocation);
 
-            View = m_Layout;
-
             var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
             deleteAction.SetBinding (MenuItem.CommandParameterProperty, new Binding ("."));
             deleteAction.Clicked += DeleteClicked;
             ContextActions.Add (deleteAction);
+
+            View = m_Layout;
         }
 
         void DeleteClicked (object sender, EventArgs e)
