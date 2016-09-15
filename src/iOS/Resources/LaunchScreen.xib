@@ -11,7 +11,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ArcheryTrack" lineBreakMode="clip" minimumFontSize="10" id="12" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES" textAlignment="center">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="76" translatesAutoresizingMaskIntoConstraints="NO" image="600px-Archery_Target_80cm.png" misplaced="YES">
+                    <rect key="frame" x="37" y="169" width="246" height="254"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ArcheryTrack" lineBreakMode="clip" minimumFontSize="10" id="12" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
                     <rect key="frame" x="20" y="52" width="280" height="67"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="48"/>
@@ -23,10 +26,11 @@
                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                         <rect key="frame" x="20" y="28" width="460" height="67"/>
                     </variation>
+                    <constraints>
+                        <constraint id="97" firstAttribute="width" constant="280"/>
+                        <constraint id="98" firstAttribute="height" constant="67"/>
+                    </constraints>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="76" translatesAutoresizingMaskIntoConstraints="NO" image="600px-Archery_Target_80cm.png" misplaced="YES">
-                    <rect key="frame" x="37" y="169" width="246" height="254"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" customColorSpace="calibratedWhite" colorSpace="calibratedWhite" white="0" alpha="1"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -35,10 +39,10 @@
                 <constraint id="80" firstItem="76" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="37"/>
                 <constraint id="81" firstItem="iN0-l3-epB" firstAttribute="bottom" secondItem="76" secondAttribute="bottom" constant="70"/>
                 <constraint id="82" firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="76" secondAttribute="trailing" constant="37"/>
-                <constraint id="85" firstItem="76" firstAttribute="top" secondItem="12" secondAttribute="bottom" constant="41"/>
-                <constraint id="88" firstItem="12" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="52"/>
-                <constraint id="89" firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="12" secondAttribute="trailing" constant="20"/>
-                <constraint id="90" firstItem="12" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20"/>
+                <constraint id="95" firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="12" secondAttribute="trailing" constant="20"/>
+                <constraint id="96" firstItem="12" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="52"/>
+                <constraint id="101" firstItem="12" firstAttribute="width" secondItem="76" secondAttribute="width"/>
+                <constraint id="102" firstItem="12" firstAttribute="width" secondItem="76" secondAttribute="width"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
