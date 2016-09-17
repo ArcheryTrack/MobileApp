@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ATMobile.Cells;
-using ATMobile.Objects;
+﻿using ATMobile.Cells;
 using Xamarin.Forms;
 
 namespace ATMobile.Controls

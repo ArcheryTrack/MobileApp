@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ATMobile.Cells;
 using ATMobile.Constants;
-using ATMobile.Data;
 using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;

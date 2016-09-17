@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ATMobile.Cells;
-using ATMobile.Delegates;
-using ATMobile.Managers;
 using ATMobile.Objects;
 using Xamarin.Forms;
-using System.Linq;
 
 namespace ATMobile.Controls
 {
@@ -57,7 +53,7 @@ namespace ATMobile.Controls
                 m_Arrows.RemoveAt (arrayItem);
             }
 
-            this.Focus ();
+            Focus ();
         }
 
         public void Dispose ()

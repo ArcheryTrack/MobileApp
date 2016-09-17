@@ -1,5 +1,4 @@
-﻿using System;
-namespace ATMobile.Cells
+﻿namespace ATMobile.Cells
 {
     public class RangePickerCell : AbstractBaseCell
     {

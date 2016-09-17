@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ATMobile.Cells;
 using ATMobile.Managers;
 using ATMobile.Objects;

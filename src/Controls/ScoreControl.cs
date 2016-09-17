@@ -13,18 +13,18 @@ namespace ATMobile.Controls
 
         private Grid m_EntryGrid;
 
-        private TextButton m_btnX;
-        private TextButton m_btn10;
-        private TextButton m_btn9;
-        private TextButton m_btn8;
-        private TextButton m_btn7;
-        private TextButton m_btn6;
-        private TextButton m_btn5;
-        private TextButton m_btn4;
-        private TextButton m_btn3;
-        private TextButton m_btn2;
-        private TextButton m_btn1;
-        private TextButton m_btnM;
+        private readonly TextButton m_btnX;
+        private readonly TextButton m_btn10;
+        private readonly TextButton m_btn9;
+        private readonly TextButton m_btn8;
+        private readonly TextButton m_btn7;
+        private readonly TextButton m_btn6;
+        private readonly TextButton m_btn5;
+        private readonly TextButton m_btn4;
+        private readonly TextButton m_btn3;
+        private readonly TextButton m_btn2;
+        private readonly TextButton m_btn1;
+        private readonly TextButton m_btnM;
 
         public ScoreClickedDelegate ScoreClicked;
 

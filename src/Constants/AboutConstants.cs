@@ -1,5 +1,4 @@
-﻿using System;
-namespace ATMobile.Constants
+﻿namespace ATMobile.Constants
 {
     public static class AboutConstants
     {

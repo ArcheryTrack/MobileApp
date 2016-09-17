@@ -1,5 +1,4 @@
-﻿using System;
-using ATMobile.Controls;
+﻿using ATMobile.Controls;
 using Xamarin.Forms;
 
 namespace ATMobile.Cells
